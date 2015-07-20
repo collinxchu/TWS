@@ -1,0 +1,262 @@
+"aa" = (/turf/space,/area/space)
+"ab" = (/turf/unsimulated/wall,/area/space)
+"ac" = (/obj/structure/flora/pottedplant,/turf/simulated/floor/wood,/area/space)
+"ad" = (/turf/simulated/floor/wood,/area/space)
+"ae" = (/obj/machinery/constructable_frame/machine_frame{desc = "A console tower featuring a series of server racks, used for storing vast amounts of digital information"; icon = 'icons/obj/stationobjs.dmi'; icon_state = "hub"; name = "Server rack"},/turf/simulated/floor{icon_state = "dark"},/area/space)
+"af" = (/mob/living/silicon/ai{name = "ntOS-Leviett"},/turf/simulated/floor/bluegrid{name = "Mainframe Base"; nitrogen = 100; oxygen = 0; temperature = 80},/area/space)
+"ag" = (/turf/simulated/floor/carpet,/area/space)
+"ah" = (/obj/structure/bed/chair/comfy/brown{dir = 4},/turf/simulated/floor/carpet,/area/space)
+"ai" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen/fluff/multi,/turf/simulated/floor/carpet,/area/space)
+"aj" = (/obj/structure/table/woodentable,/obj/item/weapon/storage/fancy/cigar,/obj/item/weapon/storage/box/matches,/turf/simulated/floor/carpet,/area/space)
+"ak" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor/wood,/area/space)
+"al" = (/turf/simulated/floor{icon_state = "dark"},/area/space)
+"am" = (/obj/machinery/constructable_frame/machine_frame{desc = "A console tower featuring a series of server racks, used for storing vast amounts of digital information"; icon = 'icons/obj/stationobjs.dmi'; icon_state = "hub"; name = "Server rack"},/turf/simulated/floor/greengrid,/area/space)
+"an" = (/obj/machinery/door/window/brigdoor/northright{name = "ntOS Access"; req_access_txt = "58"},/turf/simulated/floor/greengrid,/area/space)
+"ao" = (/obj/structure/safe,/turf/simulated/floor/wood,/area/space)
+"ap" = (/obj/structure/table/woodentable,/turf/simulated/floor/carpet,/area/space)
+"aq" = (/turf/simulated/floor/carpet{icon_state = "carpetsymbol"},/area/space)
+"ar" = (/obj/structure/table/woodentable,/obj/item/weapon/pen/fluff/fountainpen,/turf/simulated/floor/carpet,/area/space)
+"as" = (/obj/structure/bed/chair/comfy/black{dir = 8},/turf/simulated/floor/carpet,/area/space)
+"at" = (/obj/machinery/door/blast/regular{icon_state = "pdoor1"; id = "mcpd_ai_access"; layer = 3.3; name = "Server Access"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"au" = (/turf/simulated/floor/bluegrid{icon_state = "dark"; name = "Server Walkway"; nitrogen = 500; oxygen = 0; temperature = 80},/area/space)
+"av" = (/turf/simulated/floor/greengrid,/area/space)
+"aw" = (/obj/structure/table/woodentable,/obj/machinery/door_control{id = "mcpd_chief"; name = "shutters control"; pixel_y = -3},/obj/machinery/door_control{id = "mcpd_ai_access"; name = "server-room access"; pixel_y = 6},/turf/simulated/floor/carpet,/area/space)
+"ax" = (/obj/structure/table/woodentable,/obj/item/weapon/phone,/turf/simulated/floor/carpet,/area/space)
+"ay" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/machinery/door/blast/shutters{dir = 2; id = "mcpd_chief"; layer = 3.1; name = "Privacy Shutters"},/turf/simulated/floor/plating,/area/space)
+"az" = (/obj/machinery/door/airlock/centcom{name = "Precinct Captain's Office"; req_one_access = 20},/turf/simulated/floor/wood,/area/space)
+"aA" = (/obj/machinery/door/window/brigdoor/southleft{name = "Weapons Locker"; req_access_txt = "3"},/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/item/weapon/gun/projectile/automatic,/obj/item/weapon/gun/projectile/automatic,/obj/item/ammo_magazine/c9mm,/obj/item/ammo_magazine/c9mm,/obj/item/ammo_magazine/c9mm,/obj/item/ammo_magazine/c9mm,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"aB" = (/obj/machinery/door/window/brigdoor/southleft{name = "Weapons Locker"; req_access_txt = "3"},/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 1},/obj/item/weapon/gun/projectile/shotgun/pump/combat,/obj/item/weapon/gun/projectile/shotgun/pump/combat,/obj/structure/window/reinforced{dir = 4},/obj/item/weapon/storage/box/shotgunammo,/obj/item/weapon/storage/box/shotgunammo,/obj/item/weapon/storage/box/shotgunammo,/obj/item/weapon/storage/box/shotgunammo,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"aC" = (/obj/machinery/door/window/brigdoor/southleft{name = "Weapons Locker"; req_access_txt = "3"},/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/item/weapon/gun/energy/sniperrifle,/obj/item/weapon/gun/energy/sniperrifle,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"aD" = (/obj/machinery/door/window/brigdoor/southleft{name = "Weapons Locker"; req_access_txt = "3"},/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 1},/obj/item/weapon/gun/energy/gun,/obj/item/weapon/gun/energy/gun,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"aE" = (/obj/machinery/door/window/brigdoor/southleft{name = "Weapons Locker"; req_access_txt = "3"},/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/item/weapon/gun/energy/xray,/obj/item/weapon/gun/energy/xray,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"aF" = (/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"aG" = (/obj/structure/showcase{name = "Arm of The Law"},/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 8},/obj/structure/window/basic,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"aH" = (/obj/structure/showcase{name = "Arm of The Law"},/obj/structure/window/basic{dir = 4},/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"aI" = (/obj/structure/window/basic{dir = 1},/obj/structure/window/basic{dir = 8},/obj/structure/flora/grass/brown,/turf/simulated/floor/grass,/area/space)
+"aJ" = (/obj/structure/window/basic{dir = 1},/obj/structure/window/basic{dir = 4},/obj/structure/flora/grass/brown,/turf/simulated/floor/grass,/area/space)
+"aK" = (/obj/structure/closet/wardrobe/tactical,/obj/item/weapon/storage/box/handcuffs,/obj/item/weapon/storage/box/flashbangs,/obj/item/weapon/storage/box/emps,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/space)
+"aL" = (/turf/simulated/floor{icon_state = "ramptop"; name = "stairs"},/area/space)
+"aM" = (/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/obj/structure/flora/grass/brown,/turf/simulated/floor/grass,/area/space)
+"aN" = (/obj/structure/window/basic{dir = 4},/obj/structure/window/basic,/obj/structure/flora/grass/brown,/turf/simulated/floor/grass,/area/space)
+"aO" = (/turf/simulated/floor{icon_state = "red"; dir = 9},/area/space)
+"aP" = (/turf/simulated/floor{icon_state = "red"; dir = 1},/area/space)
+"aQ" = (/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "red"; dir = 1},/area/space)
+"aR" = (/turf/simulated/floor{icon_state = "red"; dir = 5},/area/space)
+"aS" = (/turf/simulated/floor{icon_state = "red"; dir = 8},/area/space)
+"aT" = (/turf/simulated/floor,/area/space)
+"aU" = (/obj/structure/table,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"aV" = (/obj/structure/table,/turf/simulated/floor{dir = 8; icon_state = "bluecorner"},/area/space)
+"aW" = (/turf/simulated/floor{icon_state = "red"; dir = 4},/area/space)
+"aX" = (/obj/machinery/door/airlock/centcom{name = "Tactical Response Armory"; req_one_access = 20},/turf/simulated/floor{icon_state = "dark"},/area/space)
+"aY" = (/obj/structure/flora/pottedplant{tag = "icon-plant-10"; icon_state = "plant-10"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"aZ" = (/obj/structure/flora/pottedplant{tag = "icon-plant-21"; icon_state = "plant-21"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"ba" = (/turf/simulated/floor{dir = 4; icon_state = "bluecorner"},/area/space)
+"bb" = (/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/space)
+"bc" = (/obj/structure/closet/secure_closet/security,/obj/item/device/flashlight/flare,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/space)
+"bd" = (/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"be" = (/obj/structure/flora/ausbushes/reedbush,/obj/structure/window/basic{dir = 1},/obj/structure/window/basic{dir = 8},/turf/simulated/floor/beach/water,/area/space)
+"bf" = (/obj/structure/flora/ausbushes/reedbush,/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 1},/turf/simulated/floor/beach/water,/area/space)
+"bg" = (/obj/item/weapon/stool,/turf/simulated/floor{icon_state = "red"; dir = 8},/area/space)
+"bh" = (/obj/item/weapon/stool,/turf/simulated/floor,/area/space)
+"bi" = (/obj/item/weapon/stool,/turf/simulated/floor{icon_state = "red"; dir = 4},/area/space)
+"bj" = (/obj/structure/bed/chair/comfy/brown,/obj/machinery/light{dir = 1},/turf/simulated/floor/carpet,/area/space)
+"bk" = (/turf/simulated/floor{icon_state = "red"},/area/space)
+"bl" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"bm" = (/obj/structure/flora/ausbushes/reedbush,/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/turf/simulated/floor/beach/water,/area/space)
+"bn" = (/obj/structure/flora/ausbushes/reedbush,/obj/structure/window/basic,/obj/structure/window/basic{dir = 4},/turf/simulated/floor/beach/water,/area/space)
+"bo" = (/turf/simulated/floor{dir = 8; icon_state = "bluecorner"},/area/space)
+"bp" = (/obj/structure/table/woodentable,/obj/item/clothing/mask/smokable/cigarette/cigar/havana,/obj/item/ashtray/bronze,/turf/simulated/floor/carpet,/area/space)
+"bq" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/carpet,/area/space)
+"br" = (/obj/item/weapon/stool,/turf/simulated/floor{icon_state = "redfull"; dir = 9},/area/space)
+"bs" = (/obj/machinery/door/airlock/centcom{name = "Locker Room"; req_one_access = 20},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bt" = (/obj/machinery/door/airlock/centcom{name = "Briefing Room"; req_one_access = 20},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bu" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/carpet,/area/space)
+"bv" = (/obj/structure/reagent_dispensers/peppertank{pixel_x = 30},/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"bw" = (/obj/structure/table,/obj/structure/window/basic{dir = 1},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bx" = (/obj/structure/table,/obj/structure/window/basic{dir = 1},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"by" = (/obj/structure/table,/obj/structure/window/basic{dir = 4},/obj/structure/window/basic{dir = 1},/obj/item/weapon/phone,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bz" = (/obj/structure/table,/obj/structure/window/basic{dir = 8},/obj/structure/window/basic{dir = 1},/obj/item/weapon/phone,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bA" = (/obj/item/weapon/stool,/turf/simulated/floor{icon_state = "red"; dir = 10},/area/space)
+"bB" = (/obj/item/weapon/stool,/turf/simulated/floor{icon_state = "red"},/area/space)
+"bC" = (/obj/item/weapon/stool,/turf/simulated/floor{icon_state = "red"; dir = 6},/area/space)
+"bD" = (/obj/machinery/shower,/turf/simulated/floor,/area/space)
+"bE" = (/obj/structure/closet/secure_closet/security,/obj/item/device/flashlight/flare,/obj/structure/window/reinforced,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/space)
+"bF" = (/obj/structure/table,/obj/machinery/recharger,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bG" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bH" = (/obj/structure/window/basic{dir = 4},/obj/machinery/computer/secure_data{desc = "Used to view, edit and maintain the criminal database of the Mendell City operations area."; name = "criminal records database"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bI" = (/obj/structure/window/basic{dir = 8},/obj/machinery/computer/secure_data{desc = "Used to view, edit and maintain the criminal database of the Mendell City operations area."; name = "criminal records database"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bJ" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/turf/simulated/floor/plating,/area/space)
+"bK" = (/obj/structure/mineral_door/wood,/turf/simulated/floor/carpet,/area/space)
+"bL" = (/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor{icon_state = "redcorner"; dir = 1},/area/space)
+"bM" = (/obj/structure/flora/pottedplant{tag = "icon-plant-22"; icon_state = "plant-22"},/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"bN" = (/obj/structure/filingcabinet/chestdrawer,/obj/machinery/light{dir = 8},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bO" = (/obj/structure/filingcabinet/chestdrawer,/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bP" = (/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "dark"},/area/space)
+"bQ" = (/obj/machinery/vending/cigarette,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bR" = (/obj/machinery/door/airlock/centcom{name = "Investigations Unit"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bS" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/wood,/area/space)
+"bT" = (/obj/structure/table/woodentable,/obj/item/weapon/phone,/turf/simulated/floor/wood,/area/space)
+"bU" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/machinery/light{dir = 1},/turf/simulated/floor/wood,/area/space)
+"bV" = (/obj/machinery/light{dir = 8},/turf/simulated/floor,/area/space)
+"bW" = (/obj/machinery/door/airlock/centcom{name = "Shower Room"; req_one_access = 20},/turf/simulated/floor,/area/space)
+"bX" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/obj/machinery/vending/coffee,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"bY" = (/obj/machinery/computer/secure_data{desc = "Used to view, edit and maintain the criminal database of the Mendell City operations area."; name = "criminal records database"},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"bZ" = (/obj/structure/bed/chair/office/light{dir = 1},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"ca" = (/obj/structure/table,/obj/structure/window/basic{dir = 4},/obj/machinery/recharger,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cb" = (/obj/structure/table,/obj/structure/window/basic{dir = 8},/obj/machinery/recharger,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cc" = (/obj/structure/table/reinforced,/turf/simulated/floor{icon_state = "dark"},/area/space)
+"cd" = (/obj/structure/table/woodentable,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor/wood,/area/space)
+"ce" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood,/area/space)
+"cf" = (/obj/structure/bed/chair/office/dark,/turf/simulated/floor/wood,/area/space)
+"cg" = (/turf/simulated/floor{icon_state = "floorgrime"},/area/space)
+"ch" = (/obj/machinery/vending/security,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"ci" = (/obj/structure/table,/obj/item/weapon/phone,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cj" = (/obj/structure/table,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"ck" = (/obj/structure/table,/obj/structure/window/basic{dir = 4},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cl" = (/obj/structure/table,/obj/structure/window/basic{dir = 8},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cm" = (/obj/machinery/door/airlock/centcom{name = "Interrogation #2"},/turf/simulated/floor{icon_state = "dark"},/area/space)
+"cn" = (/obj/machinery/shower{dir = 1},/turf/simulated/floor,/area/space)
+"co" = (/obj/structure/table,/obj/item/weapon/hand_labeler,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"cp" = (/obj/structure/table,/obj/item/weapon/storage/donut_box,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"cq" = (/obj/structure/table,/obj/item/device/radio,/obj/item/device/radio,/obj/item/device/radio,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/device/flashlight,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/obj/item/weapon/crowbar,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"cr" = (/obj/machinery/recharger/wallcharger{pixel_x = 4; pixel_y = -28},/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"cs" = (/obj/structure/table,/obj/machinery/recharger/wallcharger{pixel_x = 4; pixel_y = -28},/obj/item/clothing/accessory/holobadge,/obj/item/clothing/accessory/holobadge,/obj/item/clothing/accessory/holobadge/cord,/turf/simulated/floor{dir = 2; icon_state = "redcorner"},/area/space)
+"ct" = (/obj/structure/table,/obj/structure/window/basic{dir = 1},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/obj/structure/window/basic{dir = 8},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cu" = (/obj/structure/table,/obj/structure/window/basic{dir = 1},/obj/item/weapon/phone,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cv" = (/obj/machinery/hologram/holopad,/turf/simulated/floor/wood,/area/space)
+"cw" = (/obj/structure/table/reinforced,/obj/item/weapon/folder/white,/obj/item/weapon/folder/red,/obj/item/weapon/folder/yellow,/obj/item/weapon/folder/blue,/turf/simulated/floor{icon_state = "white"},/area/space)
+"cx" = (/obj/machinery/optable,/obj/machinery/light{dir = 1},/turf/simulated/floor{icon_state = "white"},/area/space)
+"cy" = (/obj/structure/table/reinforced,/obj/item/device/reagent_scanner/adv,/obj/item/device/robotanalyzer,/obj/item/device/camera,/turf/simulated/floor{icon_state = "white"},/area/space)
+"cz" = (/obj/structure/toilet{dir = 4},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cA" = (/obj/structure/bed,/obj/item/weapon/bedsheet/yellow,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cB" = (/obj/machinery/computer/secure_data{desc = "Used to view, edit and maintain the criminal database of the Mendell City operations area."; name = "criminal records database"},/turf/simulated/floor,/area/space)
+"cC" = (/obj/machinery/computer/prisoner,/turf/simulated/floor,/area/space)
+"cD" = (/obj/structure/table/reinforced,/obj/item/weapon/storage/box/gloves,/obj/item/weapon/storage/box/masks,/turf/simulated/floor{icon_state = "white"},/area/space)
+"cE" = (/turf/simulated/floor{icon_state = "white"},/area/space)
+"cF" = (/obj/structure/table/reinforced,/obj/item/weapon/scalpel,/obj/item/weapon/autopsy_scanner,/obj/item/device/healthanalyzer,/turf/simulated/floor{icon_state = "white"},/area/space)
+"cG" = (/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cH" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cI" = (/obj/structure/table/reinforced,/obj/machinery/door_control{id = "mcpd_cell_two"; name = "Cell Two Locking Mechanism"; pixel_x = 5; pixel_y = 5},/obj/machinery/door_control{id = "mcpd_cell_one"; name = "Cell One Locking Mechanism"; pixel_x = -5; pixel_y = 5},/obj/machinery/door_control{id = "mcpd_cell_three"; name = "Cell Three Locking Mechanism"; pixel_x = -5; pixel_y = -5},/obj/machinery/door_control{id = "mcpd_cell_four"; name = "Cell Four Locking Mechanism"; pixel_x = 5; pixel_y = -5},/turf/simulated/floor,/area/space)
+"cJ" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor,/area/space)
+"cK" = (/obj/machinery/door/airlock/centcom{name = "Interrogation #1"},/turf/simulated/floor{icon_state = "dark"},/area/space)
+"cL" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/wood,/area/space)
+"cM" = (/obj/structure/window/reinforced/tinted,/obj/structure/morgue,/turf/simulated/floor{icon_state = "white"},/area/space)
+"cN" = (/obj/structure/window/reinforced/tinted,/obj/structure/closet/crate/bin,/turf/simulated/floor{icon_state = "white"},/area/space)
+"cO" = (/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 5; health = 1e+007},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cP" = (/obj/machinery/door/airlock/glass{id_tag = "mcpd_cell_four"; name = "Cell Four"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cQ" = (/obj/machinery/door/airlock/glass{id_tag = "mcpd_cell_one"; name = "Cell One"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"cR" = (/obj/structure/window/reinforced,/obj/structure/table/reinforced,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor,/area/space)
+"cS" = (/obj/structure/window/reinforced,/obj/structure/table/reinforced,/obj/item/weapon/phone,/turf/simulated/floor,/area/space)
+"cT" = (/obj/machinery/door/window/southleft,/turf/simulated/floor,/area/space)
+"cU" = (/obj/structure/table,/obj/structure/window/basic,/obj/item/weapon/phone,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cV" = (/obj/structure/table,/obj/structure/window/basic,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cW" = (/obj/structure/table,/obj/structure/window/basic,/obj/structure/window/basic{dir = 4},/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cX" = (/obj/structure/table,/obj/structure/window/basic,/obj/structure/window/basic{dir = 8},/obj/item/weapon/phone,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cY" = (/obj/structure/table,/obj/structure/window/basic,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"cZ" = (/obj/structure/noticeboard,/turf/unsimulated/wall,/area/space)
+"da" = (/obj/structure/closet/secure_closet/detective,/turf/simulated/floor/wood,/area/space)
+"db" = (/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dc" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dd" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor,/area/space)
+"de" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced,/turf/simulated/floor/plating,/area/space)
+"df" = (/obj/machinery/door/airlock/centcom{name = "Detainment Wing"; req_one_access = 20},/turf/simulated/floor,/area/space)
+"dg" = (/obj/structure/window/basic{dir = 8},/obj/machinery/vending/cola,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dh" = (/obj/machinery/vending/coffee,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"di" = (/obj/machinery/hologram/holopad,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dj" = (/obj/machinery/hologram/holopad,/turf/simulated/floor,/area/space)
+"dk" = (/obj/machinery/door/airlock/centcom{name = "Detainment Wing"; req_one_access = 20},/turf/simulated/floor,/area/space)
+"dl" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor,/area/space)
+"dm" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dn" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/wood,/area/space)
+"do" = (/obj/machinery/light,/turf/simulated/floor,/area/space)
+"dp" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/structure/window/reinforced{dir = 4},/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/plating,/area/space)
+"dq" = (/obj/structure/window/basic{dir = 8},/obj/structure/bed/chair{dir = 1},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dr" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"ds" = (/obj/structure/table/woodentable,/obj/item/weapon/phone,/obj/machinery/light,/turf/simulated/floor/wood,/area/space)
+"dt" = (/obj/structure/closet/secure_closet/detective,/obj/machinery/light,/turf/simulated/floor/wood,/area/space)
+"du" = (/obj/machinery/computer/secure_data,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dv" = (/obj/machinery/computer/forensic_scanning,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dw" = (/obj/machinery/computer/med_data,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dx" = (/obj/structure/table,/obj/item/weapon/paper_bin,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "freezerfloor"},/area/space)
+"dy" = (/obj/machinery/door/airlock/glass{id_tag = "mcpd_cell_three"; name = "Cell Three"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dz" = (/obj/machinery/door/airlock/glass{id_tag = "mcpd_cell_two"; name = "Cell Two"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dA" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dB" = (/obj/machinery/door/airlock/multi_tile/glass{name = "Operations"; req_one_access = 20},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dC" = (/turf/simulated/floor{tag = "icon-whiteblue (NORTHWEST)"; icon_state = "whiteblue"; dir = 9},/area/space)
+"dD" = (/turf/simulated/floor{tag = "icon-whiteblue (NORTH)"; icon_state = "whiteblue"; dir = 1},/area/space)
+"dE" = (/turf/simulated/floor{tag = "icon-whiteblue (NORTHEAST)"; icon_state = "whiteblue"; dir = 5},/area/space)
+"dF" = (/obj/machinery/light{tag = "icon-tube1 (NORTH)"; icon_state = "tube1"; dir = 1},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dG" = (/obj/machinery/vending/snack,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dH" = (/obj/structure/bed/chair,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dI" = (/turf/simulated/floor{tag = "icon-whiteblue (WEST)"; icon_state = "whiteblue"; dir = 8},/area/space)
+"dJ" = (/obj/machinery/computer/secure_data{desc = "Used to view, edit and maintain the criminal database of the Mendell City operations area."; name = "criminal records database"},/turf/simulated/floor{tag = "icon-whiteblue (EAST)"; icon_state = "whiteblue"; dir = 4},/area/space)
+"dK" = (/obj/structure/table/reinforced,/obj/structure/window/reinforced{dir = 4},/obj/item/weapon/paper_bin,/obj/item/weapon/phone,/obj/item/weapon/pen,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dL" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dM" = (/obj/structure/flora/pottedplant{tag = "icon-plant-06"; icon_state = "plant-06"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dN" = (/obj/machinery/light{icon_state = "tube1"; dir = 4},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dO" = (/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor{tag = "icon-whiteblue (EAST)"; icon_state = "whiteblue"; dir = 4},/area/space)
+"dP" = (/obj/structure/table/reinforced,/obj/machinery/door/window/eastright{name = "Reception counter"},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dQ" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor{dir = 10; icon_state = "whiteblue"; tag = "icon-whitehall (WEST)"},/area/space)
+"dR" = (/obj/structure/filingcabinet/security,/turf/simulated/floor{dir = 2; icon_state = "whiteblue"; tag = "icon-whitehall (WEST)"},/area/space)
+"dS" = (/obj/structure/filingcabinet/filingcabinet,/turf/simulated/floor{dir = 6; icon_state = "whiteblue"; tag = "icon-whitehall (WEST)"},/area/space)
+"dT" = (/obj/machinery/light,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dU" = (/obj/machinery/vending/cola,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dV" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/space)
+"dW" = (/turf/simulated/floor{dir = 9; icon_state = "blue"},/area/space)
+"dX" = (/turf/simulated/floor{dir = 5; icon_state = "blue"},/area/space)
+"dY" = (/turf/simulated/floor{dir = 1; icon_state = "bluecorner"},/area/space)
+"dZ" = (/turf/simulated/floor{icon_state = "blue"; dir = 8},/area/space)
+"ea" = (/turf/simulated/floor{icon_state = "blue"; dir = 4},/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabacadadadadadadadabaeabafabaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabadagahagagaiajakabalamanamalabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabaoagapaqagarasadatauamavamalabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabadagahagagawaxakabalalalalalabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaabacadadadadadadadabaeaealaeaeabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababababababayayayazazayayayabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabaAaBaCaDaEabaFaGaFaFaFaFaHaFabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabalalalalalabaFaFaFaFaFaFaFaFabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabababalabababaFaFaFaIaJaFaFaFababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabaKaKalaKaKabaLaLaLaMaNaLaLaLabaOaPaQaQaPaRabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabalalalalalabaFaFaFaFaFaFaFaFabaSaTaUaVaTaWabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaababababaXababaFaYaFaFaFaFaZaFabaSaTbabbaTaWabababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabbcbcbcaTbdabaFaFaFbebfaFaFaFabbgbhaTaTbhbiabagagbjagagabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabbkbkbkaTblabaLaLaLbmbnaLaLaLabbgbhbdbobhbiabagaxbpbqagabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaabbrbrbraSbdbsaFaFaFaFaFaFaFaFbtaSaTbabbaTaWabagagbuagagabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaababababababaPaPaPaTbvabbwbxbyaFaFbzbxbwabbAbBbkbkbBbCabagagagagapabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabbDbDbDbDabbEbEbEaTbvabbFbGbHaFaFbIbGbFabababababababababbJbKbJababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabaTaTaTaTabbLbLbLaTbMabbNaFaFaFaFaFaFbOabalbPalabbQaFbRbSadadbTbUabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabbVaTaTaTbWaTaTaTaTbXabbYbZcaaFaFcbbZbYabalccalabaFaFbJcdbTadcecfabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabaTaTaTaTabcgaTaTaTchabcicjckaFaFclcjcjabalalalcmaFaFbJcfceadceadabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaabcncncncnabcocpcqcrcsabbwbxbyaFaFctbxcuabababababaFaFbJadceadadadabababababaaaaaaaaaaaaaaaaaaaaaa
+aaababababababababababababcjbGbHaFaFcbbGbYabalbPalabaFaFbJadadcvadadabcwcxcyabaaaaaaaaaaaaaaaaaaaaaa
+aaaaabczcAabczcAabaTcBcCabbNaFaFaFaFaFaFbOabalccalabaFaFbJadadbTceceabcDcEcFabaaaaaaaaaaaaaaaaaaaaaa
+aaaaabcGcHabcGcHabcIcJaTabbYbZcaaFaFbIbZbFabalalalcKaFaFbJadadcdadcLabcMcEcNabababaaaaaaaaaaaaaaaaaa
+abababcOcPabcOcQabcRcScTabcUcVcWaFaFcXcVcYcZababababaFababdaadadadaddbaFaFaFaFdcabaaaaaaaaaaaaaaaaaa
+abaTddaTaTddaTaTdeaTaTaTdfaFaFaFaFaFaFaFaFaFaFaFdgdhaFaFabdaadadadadaFaFdiaFcjaFabaaaaaaaaaaaaaaaaaa
+abaTaTaTaTdjaTaTdkaTdjdlabaFaFaFaFaFdiaFaFaFaFaFaFaFaFdmabcddnadadaddbaFbGaFcibGabaaaaaaaaaaaaaaaaaa
+abaTdoaTaTdoaTaTdpaTaTaTdfaFaFaFaFaFaFaFaFaFaFaFdqdrdrdrabdscecedadtabdudvdwdxcjabaaaaaaaaaaaaaaaaaa
+abababcOdyabcOdzabababababababaFababababdAdBcGdAabababababababababababababababababaaaaaaaaaaaaaaaaaa
+aaaaabcGcHabcGcHabaaaaaaaaabdCdDdEdAdFcGcGcGcGdGdHdHdHabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaabczcAabczcAabaaaaaaaaabdIcEdJdKcGdLdMcGcGcGcGcGdNabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaabababababababaaaaaaaaabdIcEdOdPcGdLdMcGcGcGcGcGdNabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaabdQdRdSdAdTcGcGcGcGdUdVdVdVabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaababababababababdWdXabababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadWdYbadXaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadZaTaTeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadZaTaTeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadZaTaTeaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
