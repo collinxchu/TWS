@@ -7,6 +7,7 @@
 	var/mutantrace = null  //The type of mutant race the player is if applicable (i.e. potato-man)
 	var/real_name //Stores the real name of the person who originally got this dna datum. Used primarely for changelings,
 
+/*
 /datum/dna/proc/check_integrity(var/mob/living/carbon/human/character)
 	if(character)
 		if(length(uni_identity) != 39)
@@ -67,6 +68,7 @@
 	else
 		if(length(uni_identity) != 39) uni_identity = "00600200A00E0110148FC01300B0095BD7FD3F4"
 		if(length(struc_enzymes)!= 3*STRUCDNASIZE) struc_enzymes = "43359156756131E13763334D1C369012032164D4FE4CD61544B6C03F251B6C60A42821D26BA3B0FD6"
+*/
 
 /datum/dna/proc/ready_dna(mob/living/carbon/human/character)
 	var/temp

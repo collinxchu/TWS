@@ -308,11 +308,34 @@ proc/checkhtml(var/t)
 			count++
 	return count
 
+var/list/zero_character_only = list("0")
+var/list/hex_characters = list("0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f")
+var/list/alphabet = list("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z")
+var/list/binary = list("0","1")
+
 /proc/reverse_text(var/text = "")
 	var/new_text = ""
 	for(var/i = length(text); i > 0; i--)
 		new_text += copytext(text, i, i+1)
 	return new_text
+
+//color randomization
+
+/proc/random_short_color()
+	return random_string(3, hex_characters)
+
+/proc/random_color()
+	return random_string(6, hex_characters)
+
+/proc/random_string(length, list/characters)
+	. = ""
+	for(var/i=1, i<=length, i++)
+		. += pick(characters)
+
+/proc/repeat_string(times, string="")
+	. = ""
+	for(var/i=1, i<=times, i++)
+		. += string
 
 //Used in preferences' SetFlavorText and human's set_flavor verb
 //Previews a string of len or less length

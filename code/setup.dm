@@ -619,6 +619,32 @@ var/list/be_special_flags = list(
 
 #define AGE_MIN 13			//youngest a character can be
 #define AGE_MAX 250			//oldest a character can be
+//NPC
+
+
+//NPC DEFINES
+#define INTERACTING 2
+#define TRAVEL 4
+#define FIGHTING 8
+
+//TRAITS
+
+#define TRAIT_ROBUST 2
+#define TRAIT_UNROBUST 4
+#define TRAIT_SMART 8
+#define TRAIT_DUMB 16
+#define TRAIT_MEAN 32
+#define TRAIT_FRIENDLY 64
+#define TRAIT_THIEVING 128
+
+//defines
+#define MAX_RANGE_FIND 32
+#define MIN_RANGE_FIND 16
+#define FUZZY_CHANCE_HIGH 85
+#define FUZZY_CHANCE_LOW 50
+#define CHANCE_TALK 15
+#define MAXCOIL 30
+#define RESIZE_DEFAULT_SIZE 1
 
 //Languages!
 #define LANGUAGE_HUMAN		1

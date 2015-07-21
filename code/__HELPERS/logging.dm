@@ -81,3 +81,16 @@
 
 /proc/log_misc(text)
 	diary << "\[[time_stamp()]]MISC: [text][log_end]"
+
+/**
+ * logTheThing
+ *
+ * In goonstation, this proc writes a message to either the world log or diary.
+ *
+ * Blame Keelin.
+ */
+/proc/logTheThing(type, source, target, text, diaryType)
+	if(diaryType)
+		world << "Diary: \[[diaryType]:[type]] [text]"
+	else
+		world << "Log: \[[type]] [text]"

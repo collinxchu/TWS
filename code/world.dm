@@ -60,6 +60,11 @@ var/global/datum/global_init/init = new ()
 	// Create autolathe recipes, as above.
 	populate_lathe_recipes()
 
+	//goonstation's process scheduler
+	processScheduler = new
+	processScheduler.setup()
+	processScheduler.start()
+
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
 		master_controller.setup()

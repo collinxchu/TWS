@@ -113,6 +113,48 @@
 	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
+/mob/proc/get_item_by_slot(slot_id)
+	switch(slot_id)
+		if(slot_l_hand)
+			return l_hand
+		if(slot_r_hand)
+			return r_hand
+	return null
+
+
+/mob/proc/ret_grab(obj/effect/list_container/mobl/L, flag)
+	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
+		if (!( L ))
+			return null
+		else
+			return L.container
+	else
+		if (!( L ))
+			L = new /obj/effect/list_container/mobl( null )
+			L.container += src
+			L.master = src
+		if (istype(l_hand, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/G = l_hand
+			if (!( L.container.Find(G.affecting) ))
+				L.container += G.affecting
+				if (G.affecting)
+					G.affecting.ret_grab(L, 1)
+		if (istype(r_hand, /obj/item/weapon/grab))
+			var/obj/item/weapon/grab/G = r_hand
+			if (!( L.container.Find(G.affecting) ))
+				L.container += G.affecting
+				if (G.affecting)
+					G.affecting.ret_grab(L, 1)
+		if (!( flag ))
+			if (L.master == src)
+				var/list/temp = list(  )
+				temp += L.container
+				//L = null
+				del(L)
+				return temp
+			else
+				return L.container
+	return
 
 /mob/proc/restrained()
 	return
@@ -254,41 +296,6 @@ var/list/slot_equipment_priority = list( \
 
 	face_atom(A)
 	return 1
-
-
-/mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
-	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
-		if (!( L ))
-			return null
-		else
-			return L.container
-	else
-		if (!( L ))
-			L = new /obj/effect/list_container/mobl( null )
-			L.container += src
-			L.master = src
-		if (istype(l_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = l_hand
-			if (!( L.container.Find(G.affecting) ))
-				L.container += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L, 1)
-		if (istype(r_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = r_hand
-			if (!( L.container.Find(G.affecting) ))
-				L.container += G.affecting
-				if (G.affecting)
-					G.affecting.ret_grab(L, 1)
-		if (!( flag ))
-			if (L.master == src)
-				var/list/temp = list(  )
-				temp += L.container
-				//L = null
-				del(L)
-				return temp
-			else
-				return L.container
-	return
 
 /mob/verb/mode()
 	set name = "Activate Held Object"
