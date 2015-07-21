@@ -50,7 +50,7 @@
 	var/attitude = 50
 	var/slyness = 50
 	var/graytide = 0
-	var/chattyness = CHANCE_TALK
+	var/chattyness = 0 //CHANCE_TALK chattiness disabled for now
 	//modules
 	var/list/functions = list("nearbyscan","combat","doorscan","shitcurity","chatter")
 
