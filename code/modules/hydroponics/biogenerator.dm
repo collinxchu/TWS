@@ -160,6 +160,7 @@
 		use_power(S*30)
 		sleep(S+15)
 		processing = 0
+		i = 0
 		update_icon()
 	else
 		menustat = "void"
