@@ -66,6 +66,7 @@
 	var/ToRban = 0
 	var/automute_on = 0					//enables automuting/spam prevention
 	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+	var/minimal_access_threshold = 0	//If the number of players is larger than this threshold, minimal access will be turned on.
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -139,6 +140,21 @@
 	var/use_age_restriction_for_jobs = 0 //Do jobs use account age restrictions? --requires database
 
 	var/simultaneous_pm_warning_timeout = 100
+
+	//Population cap vars
+	var/soft_popcap				= 0
+	var/hard_popcap				= 0
+	var/extreme_popcap			= 0
+	var/soft_popcap_message		= "Be warned that the server is currently serving a high number of users, consider using alternative game servers."
+	var/hard_popcap_message		= "The server is currently serving a high number of users, You cannot currently join. You may wait for the number of living crew to decline, observe, or find alternative servers."
+	var/extreme_popcap_message	= "The server is currently serving a high number of users, find alternative servers."
+
+	var/traitor_scaling_coeff = 6		//how much does the amount of players get divided by to determine traitors
+	var/changeling_scaling_coeff = 6	//how much does the amount of players get divided by to determine changelings
+	var/security_scaling_coeff = 8		//how much does the amount of players get divided by to determine open security officer positions
+	var/abductor_scaling_coeff = 15 	//how many players per abductor team
+
+	var/enforce_human_authority = 0	//If non-human species are barred from joining as a head of staff
 
 	var/use_recursive_explosions //Defines whether the server uses recursive or circular explosions.
 

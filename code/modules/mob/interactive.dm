@@ -82,11 +82,24 @@
 /mob/living/carbon/human/interactive/proc/random()
 	//this is here because this has no client/prefs/brain whatever.
 	s_tone = random_skin_tone()
-	h_style = random_hair_style(gender, species)
-	f_style = random_facial_hair_style(gender, species)
-	//random_hair_color("hair")
-	//random_hair_color("facial")
-	//random_eyes_color()
+	h_style = random_hair_style(gender, "Human")
+	f_style = random_facial_hair_style(gender, "Human")
+
+	var/hair_color = randomize_hair_color("hair")
+	r_hair = hair_color[1]
+	g_hair = hair_color[2]
+	b_hair = hair_color[3]
+
+	var/facial_hair_color = randomize_hair_color("facial")
+	r_facial = facial_hair_color[1]
+	g_facial = facial_hair_color[2]
+	b_facial = facial_hair_color[3]
+
+	var/eye_color = randomize_eyes_color()
+	r_eyes = eye_color[1]
+	g_eyes = eye_color[2]
+	b_eyes = eye_color[3]
+
 	random_skin_tone()
 	underwear = rand(1,underwear_m.len)
 	undershirt = rand(1,undershirt_t.len)
@@ -94,8 +107,9 @@
 	age = rand(AGE_MIN,AGE_MAX)
 	//ready_dna(src,random_blood_type())
 
-	//job handling
-/*	var/list/jobs = SSjob.occupations
+/*
+	//job handling - NO, take your job and shove it
+	var/list/jobs = SSjob.occupations
 	for(var/datum/job/J in jobs)
 		if(J.title == "Cyborg" || J.title == "AI" || J.title == "Chaplain" || J.title == "Mime")
 			jobs -= J
@@ -103,7 +117,153 @@
 	src.job = myjob.title
 	if(!graytide)
 		myjob.equip(src)
-	myjob.apply_fingerprints(src)  */
+	myjob.apply_fingerprints(src)
+*/
+
+//randomizer
+proc/randomize_hair_color(var/target = "hair")
+	//Hair colour and style
+	var/r_hair = 0
+	var/g_hair = 0
+	var/b_hair = 0
+	var/hair_color = list(0,0,0)
+
+	//Facial hair colour and style
+	var/r_facial = 0
+	var/g_facial = 0
+	var/b_facial = 0
+
+	if(prob (75) && target == "facial") // Chance to inherit hair color
+		r_facial = r_hair
+		g_facial = g_hair
+		b_facial = b_hair
+		return
+
+	var/red
+	var/green
+	var/blue
+
+	var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
+	switch(col)
+		if("blonde")
+			red = 255
+			green = 255
+			blue = 0
+		if("black")
+			red = 0
+			green = 0
+			blue = 0
+		if("chestnut")
+			red = 153
+			green = 102
+			blue = 51
+		if("copper")
+			red = 255
+			green = 153
+			blue = 0
+		if("brown")
+			red = 102
+			green = 51
+			blue = 0
+		if("wheat")
+			red = 255
+			green = 255
+			blue = 153
+		if("old")
+			red = rand (100, 255)
+			green = red
+			blue = red
+		if("punk")
+			red = rand (0, 255)
+			green = rand (0, 255)
+			blue = rand (0, 255)
+
+	red = max(min(red + rand (-25, 25), 255), 0)
+	green = max(min(green + rand (-25, 25), 255), 0)
+	blue = max(min(blue + rand (-25, 25), 255), 0)
+
+	switch(target)
+		if("hair")
+			r_hair = red
+			g_hair = green
+			b_hair = blue
+			hair_color = list(
+				r_hair ? r_hair : 0,
+				g_hair ? g_hair : 0,
+				b_hair ? b_hair : 0
+				)
+		if("facial")
+			r_facial = red
+			g_facial = green
+			b_facial = blue
+			hair_color = list(
+				r_facial ? r_facial : 0,
+				g_facial ? g_facial : 0,
+				b_facial ? b_facial : 0
+				)
+
+	return hair_color
+
+proc/randomize_eyes_color()
+	var/red
+	var/green
+	var/blue
+	var/eye_color = list(0,0,0)
+	//Eye colour
+	var/r_eyes = 0
+	var/g_eyes = 0
+	var/b_eyes = 0
+
+	var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
+	switch(col)
+		if("black")
+			red = 0
+			green = 0
+			blue = 0
+		if("grey")
+			red = rand (100, 200)
+			green = red
+			blue = red
+		if("brown")
+			red = 102
+			green = 51
+			blue = 0
+		if("chestnut")
+			red = 153
+			green = 102
+			blue = 0
+		if("blue")
+			red = 51
+			green = 102
+			blue = 204
+		if("lightblue")
+			red = 102
+			green = 204
+			blue = 255
+		if("green")
+			red = 0
+			green = 102
+			blue = 0
+		if("albino")
+			red = rand (200, 255)
+			green = rand (0, 150)
+			blue = rand (0, 150)
+
+	red = max(min(red + rand (-25, 25), 255), 0)
+	green = max(min(green + rand (-25, 25), 255), 0)
+	blue = max(min(blue + rand (-25, 25), 255), 0)
+
+	r_eyes = red
+	g_eyes = green
+	b_eyes = blue
+
+	eye_color = list(
+		r_eyes ? r_eyes : 0,
+		g_eyes ? g_eyes : 0,
+		b_eyes ? b_eyes : 0
+		)
+
+	return eye_color
 
 /mob/living/carbon/human/interactive/attacked_by(obj/item/I, mob/living/user, def_zone)
 	..()

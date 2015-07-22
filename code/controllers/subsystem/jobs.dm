@@ -86,9 +86,10 @@ var/datum/subsystem/job/SSjob
 		if(player.mind && job.title in player.mind.restricted_roles)
 			Debug("FOC incompatible with antagonist role, Player: [player]")
 			continue
-		if(config.enforce_human_authority && !player.client.prefs.pref_species.qualifies_for_rank(job.title, player.client.prefs.features))
+/*		if(config.enforce_human_authority && !player.client.prefs.pref_species.qualifies_for_rank(job.title, player.client.prefs.features))
 			Debug("FOC non-human failed, Player: [player]")
 			continue
+*/
 		if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
 			Debug("FOC pass, Player: [player], Level:[level]")
 			candidates += player
@@ -118,10 +119,10 @@ var/datum/subsystem/job/SSjob
 			Debug("GRJ incompatible with antagonist role, Player: [player], Job: [job.title]")
 			continue
 
-		if(config.enforce_human_authority && !player.client.prefs.pref_species.qualifies_for_rank(job.title, player.client.prefs.features))
+/*		if(config.enforce_human_authority && !player.client.prefs.pref_species.qualifies_for_rank(job.title, player.client.prefs.features))
 			Debug("GRJ non-human failed, Player: [player]")
 			continue
-
+*/
 
 		if((job.current_positions < job.spawn_positions) || job.spawn_positions == -1)
 			Debug("GRJ Random job given, Player: [player], Job: [job]")
@@ -291,9 +292,10 @@ var/datum/subsystem/job/SSjob
 					Debug("DO incompatible with antagonist role, Player: [player], Job:[job.title]")
 					continue
 
-				if(config.enforce_human_authority && !player.client.prefs.pref_species.qualifies_for_rank(job.title, player.client.prefs.features))
+/*				if(config.enforce_human_authority && !player.client.prefs.pref_species.qualifies_for_rank(job.title, player.client.prefs.features))
 					Debug("DO non-human failed, Player: [player], Job:[job.title]")
 					continue
+*/
 
 
 				// If the player wants that job on this level, then try give it to him.
@@ -317,8 +319,9 @@ var/datum/subsystem/job/SSjob
 	for(var/mob/new_player/player in unassigned)
 		if(PopcapReached())
 			RejectPlayer(player)
-		else if(player.client.prefs.userandomjob)
+		//else if(player.client.prefs.GET_RANDOM_JOB)
 			GiveRandomJob(player)
+
 
 	Debug("DO, Standard Check end")
 

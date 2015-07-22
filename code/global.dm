@@ -116,6 +116,7 @@ var/airtunnel_bottom = 72 // default
 var/list/monkeystart = list()
 var/list/wizardstart = list()
 var/list/newplayer_start = list()
+var/start_landmarks_list
 
 //Spawnpoints.
 var/list/latejoin = list()
@@ -134,6 +135,7 @@ var/list/tdomeadmin = list()
 var/list/prisonsecuritywarp = list()	//prison security goes to these
 var/list/prisonwarped = list()	//list of players already warped
 var/list/blobstart = list()
+var/list/secequipment = list()
 var/list/ninjastart = list()
 //	list/traitors = list()	//traitor list
 var/list/cardinal = list( NORTH, SOUTH, EAST, WEST )
