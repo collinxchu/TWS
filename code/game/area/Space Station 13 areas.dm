@@ -359,7 +359,7 @@ var/list/ghostteleportlocs = list()
 
 /area/planets
 	name = "\improper Planet"
-	icon_state = "centcom"
+	icon_state = "planet"
 	unlimited_power = 1
 	lighting_use_dynamic = 1
 	luminosity = 1
@@ -367,12 +367,12 @@ var/list/ghostteleportlocs = list()
 
 /area/planets/biezel
 	name = "\improper Biezel"
-	icon_state = "centcom"
+	icon_state = "planet"
 
 
 /area/planets/sol
 	name = "\improper Sol"
-	icon_state = "centcom"
+	icon_state = "planet"
 
 
 
