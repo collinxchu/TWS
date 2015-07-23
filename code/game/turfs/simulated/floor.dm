@@ -80,14 +80,14 @@ var/list/wood_icons = list("wood","wood-broken")
 	//set src in oview(1)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(/turf/simulated/floor/holofloor/desert) //for now, explosions will replace floor with dirt.
 		if(2.0)
 			switch(pick(1,2;75,3))
 				if (1)
-					src.ReplaceWithLattice()
+					//src.ReplaceWithLattice()
 					if(prob(33)) new /obj/item/stack/sheet/metal(src)
 				if(2)
-					src.ChangeTurf(/turf/space)
+					src.ChangeTurf(/turf/simulated/floor/holofloor/desert) //replace with dirt
 				if(3)
 					if(prob(80))
 						src.break_tile_to_plating()
@@ -261,6 +261,12 @@ turf/simulated/floor/proc/update_icon()
 	else
 		return 0
 
+/turf/simulated/floor/is_road_floor()
+	if(ispath(floor_type, /obj/item/stack/tile/wood)) //placeholder
+		return 1
+	else
+		return 0
+
 /turf/simulated/floor/is_carpet_floor()
 	if(ispath(floor_type, /obj/item/stack/tile/carpet))
 		return 1
@@ -288,6 +294,9 @@ turf/simulated/floor/proc/update_icon()
 		broken = 1
 	else if(is_wood_floor())
 		src.icon_state = "wood-broken"
+		broken = 1
+	else if(is_road_floor())
+		src.icon_state = "road"
 		broken = 1
 	else if(is_carpet_floor())
 		src.icon_state = "carpet-broken"

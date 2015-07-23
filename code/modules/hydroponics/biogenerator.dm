@@ -11,7 +11,7 @@
 	var/obj/item/weapon/reagent_containers/glass/beaker = null
 	var/points = 0
 	var/menustat = "menu"
-	var/i = 0
+	var/plants_in_biogenerator = 0
 
 	New()
 		..()
@@ -46,24 +46,24 @@
 	else if(istype(O, /obj/item/weapon/storage/bag/plants))
 		var/obj/item/weapon/storage/bag/plants/P = O
 
-		if(i >= 10)
+		if(plants_in_biogenerator >= 10)
 			if(O.contents.len > 0)
 				user << "\red The biogenerator is already full! Activate it."
 				return
 			else if(O.contents.len == 0)
 				return
-		else if(i<10 && O.contents.len == 0)
+		else if(plants_in_biogenerator < 10 && O.contents.len == 0)
 			return
 
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in P.contents)
-			if(i >= 10)
+			if(plants_in_biogenerator >= 10)
 				break
 			else
 				G.loc = src
 				P.remove_from_storage(G,src)
-				i++
+				plants_in_biogenerator++
 
-		if(i<10)
+		if(plants_in_biogenerator < 10)
 			if(O.contents.len == 0)
 				user << "<span class='info'>You empty the plant bag into the biogenerator.</span>"
 				return
@@ -78,10 +78,10 @@
 	else if(!istype(O, /obj/item/weapon/reagent_containers/food/snacks/grown))
 		user << "\red You cannot put this in [src.name]"
 	else
-		var/i = 0
+		var/plants_in_biogenerator = 0
 		for(var/obj/item/weapon/reagent_containers/food/snacks/grown/G in contents)
-			i++
-		if(i >= 10)
+			plants_in_biogenerator++
+		if(plants_in_biogenerator >= 10)
 			user << "\red The biogenerator is full! Activate it."
 		else
 			user.before_take_item(O)
@@ -160,7 +160,7 @@
 		use_power(S*30)
 		sleep(S+15)
 		processing = 0
-		i = 0
+		plants_in_biogenerator = 0
 		update_icon()
 	else
 		menustat = "void"

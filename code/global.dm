@@ -116,7 +116,6 @@ var/airtunnel_bottom = 72 // default
 var/list/monkeystart = list()
 var/list/wizardstart = list()
 var/list/newplayer_start = list()
-var/start_landmarks_list
 
 //Spawnpoints.
 var/list/latejoin = list()

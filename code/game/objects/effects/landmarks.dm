@@ -77,10 +77,6 @@
 			blobstart += loc
 			del(src)
 
-		if("secequipment")
-			secequipment += loc
-			del(src)
-
 		if("xeno_spawn")
 			xeno_spawn += loc
 			del(src)
@@ -114,13 +110,8 @@
 	..()
 	tag = "start*[name]"
 	invisibility = 101
-	start_landmarks_list += src
 
 	return 1
-
-/obj/effect/landmark/start/Del()
-	..()
-	start_landmarks_list -= src
 
 //Costume spawner landmarks
 

@@ -722,6 +722,10 @@ proc/randomize_eyes_color()
 					walk_to(src,get_step(src,towalk),0,5)
 
 /mob/living/carbon/human/interactive/proc/combat(obj)
+/*
+
+//Combat is very buggy and dangerous right now- angry NPCs will straight up murder you for no reason. Disabling it for now.
+
 	set background = 1
 	enforce_hands()
 	if(canmove)
@@ -788,6 +792,8 @@ proc/randomize_eyes_color()
 				retal_target = null
 		else
 			timeout++
+
+*/
 
 /mob/living/carbon/human/interactive/proc/doorscan(obj)
 	for(var/dir in cardinal)

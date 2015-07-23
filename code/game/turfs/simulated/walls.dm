@@ -174,7 +174,7 @@
 /turf/simulated/wall/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(/turf/space)
+			src.ChangeTurf(/turf/simulated/floor/holofloor/desert) // for now, explosions will replace with dirt when destroying walls
 			return
 		if(2.0)
 			if(prob(75))

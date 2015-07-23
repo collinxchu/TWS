@@ -361,9 +361,9 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Planet"
 	icon_state = "planet"
 	unlimited_power = 1
-	lighting_use_dynamic = 1
+	lighting_use_dynamic = 0
 	luminosity = 1
-	power_light = 0
+	power_light = 1
 
 /area/planets/biezel
 	name = "\improper Biezel"
