@@ -617,8 +617,8 @@ var/list/be_special_flags = list(
 	"pAI" = BE_PAI
 	)
 
-#define AGE_MIN 13			//youngest a character can be
-#define AGE_MAX 250			//oldest a character can be
+#define AGE_MIN 16			//youngest a character can be
+#define AGE_MAX 99			//oldest a character can be
 //NPC
 
 

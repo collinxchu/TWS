@@ -80,32 +80,34 @@
 //end pool funcs
 
 /mob/living/carbon/human/interactive/proc/random()
-	//this is here because this has no client/prefs/brain whatever.
+
 	s_tone = random_skin_tone()
 	h_style = random_hair_style(gender, "Human")
 	f_style = random_facial_hair_style(gender, "Human")
 
-	var/hair_color = randomize_hair_color("hair")
+	//randomize hair color
+	var/hair_color = random_hair_color("hair")
 	r_hair = hair_color[1]
 	g_hair = hair_color[2]
 	b_hair = hair_color[3]
 
-	var/facial_hair_color = randomize_hair_color("facial")
-	r_facial = facial_hair_color[1]
-	g_facial = facial_hair_color[2]
-	b_facial = facial_hair_color[3]
+	//randomize facial hair color
+	r_facial = r_hair
+	g_facial = g_hair
+	b_facial = b_hair
 
-	var/eye_color = randomize_eyes_color()
+	//randomize eye color
+	var/eye_color = random_eye_color()
 	r_eyes = eye_color[1]
 	g_eyes = eye_color[2]
 	b_eyes = eye_color[3]
 
 	random_skin_tone()
-	underwear = rand(1,underwear_m.len)
 	undershirt = rand(1,undershirt_t.len)
-	backbag = 2
 	age = rand(AGE_MIN,AGE_MAX)
-	//ready_dna(src,random_blood_type())
+	random_outfit(src)
+	underwear = rand(1,underwear_m.len)
+	backbag = 2
 
 /*
 	//job handling - NO, take your job and shove it
@@ -119,151 +121,6 @@
 		myjob.equip(src)
 	myjob.apply_fingerprints(src)
 */
-
-//randomizer
-proc/randomize_hair_color(var/target = "hair")
-	//Hair colour and style
-	var/r_hair = 0
-	var/g_hair = 0
-	var/b_hair = 0
-	var/hair_color = list(0,0,0)
-
-	//Facial hair colour and style
-	var/r_facial = 0
-	var/g_facial = 0
-	var/b_facial = 0
-
-	if(prob (75) && target == "facial") // Chance to inherit hair color
-		r_facial = r_hair
-		g_facial = g_hair
-		b_facial = b_hair
-		return
-
-	var/red
-	var/green
-	var/blue
-
-	var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
-	switch(col)
-		if("blonde")
-			red = 255
-			green = 255
-			blue = 0
-		if("black")
-			red = 0
-			green = 0
-			blue = 0
-		if("chestnut")
-			red = 153
-			green = 102
-			blue = 51
-		if("copper")
-			red = 255
-			green = 153
-			blue = 0
-		if("brown")
-			red = 102
-			green = 51
-			blue = 0
-		if("wheat")
-			red = 255
-			green = 255
-			blue = 153
-		if("old")
-			red = rand (100, 255)
-			green = red
-			blue = red
-		if("punk")
-			red = rand (0, 255)
-			green = rand (0, 255)
-			blue = rand (0, 255)
-
-	red = max(min(red + rand (-25, 25), 255), 0)
-	green = max(min(green + rand (-25, 25), 255), 0)
-	blue = max(min(blue + rand (-25, 25), 255), 0)
-
-	switch(target)
-		if("hair")
-			r_hair = red
-			g_hair = green
-			b_hair = blue
-			hair_color = list(
-				r_hair ? r_hair : 0,
-				g_hair ? g_hair : 0,
-				b_hair ? b_hair : 0
-				)
-		if("facial")
-			r_facial = red
-			g_facial = green
-			b_facial = blue
-			hair_color = list(
-				r_facial ? r_facial : 0,
-				g_facial ? g_facial : 0,
-				b_facial ? b_facial : 0
-				)
-
-	return hair_color
-
-proc/randomize_eyes_color()
-	var/red
-	var/green
-	var/blue
-	var/eye_color = list(0,0,0)
-	//Eye colour
-	var/r_eyes = 0
-	var/g_eyes = 0
-	var/b_eyes = 0
-
-	var/col = pick ("black", "grey", "brown", "chestnut", "blue", "lightblue", "green", "albino")
-	switch(col)
-		if("black")
-			red = 0
-			green = 0
-			blue = 0
-		if("grey")
-			red = rand (100, 200)
-			green = red
-			blue = red
-		if("brown")
-			red = 102
-			green = 51
-			blue = 0
-		if("chestnut")
-			red = 153
-			green = 102
-			blue = 0
-		if("blue")
-			red = 51
-			green = 102
-			blue = 204
-		if("lightblue")
-			red = 102
-			green = 204
-			blue = 255
-		if("green")
-			red = 0
-			green = 102
-			blue = 0
-		if("albino")
-			red = rand (200, 255)
-			green = rand (0, 150)
-			blue = rand (0, 150)
-
-	red = max(min(red + rand (-25, 25), 255), 0)
-	green = max(min(green + rand (-25, 25), 255), 0)
-	blue = max(min(blue + rand (-25, 25), 255), 0)
-
-	r_eyes = red
-	g_eyes = green
-	b_eyes = blue
-
-	eye_color = list(
-		r_eyes ? r_eyes : 0,
-		g_eyes ? g_eyes : 0,
-		b_eyes ? b_eyes : 0
-		)
-
-	return eye_color
 
 /mob/living/carbon/human/interactive/attacked_by(obj/item/I, mob/living/user, def_zone)
 	..()
@@ -287,16 +144,6 @@ proc/randomize_eyes_color()
 		name = "[pick(first_names_female)] [pick(last_names)]"
 		real_name = name
 	random()
-	MYID = new(src)
-	MYID.name = "[src.real_name]'s ID Card ([myjob.title])"
-	MYID.assignment = "[myjob.title]"
-	MYID.registered_name = src.real_name
-	MYID.access = myjob.access
-	src.equip_to_slot_or_del(MYID, slot_wear_id)
-	MYPDA = new(src)
-	MYPDA.owner = src.real_name
-	MYPDA.ownjob = "Crew"
-	MYPDA.name = "PDA-[src.real_name] ([myjob.title])"
 	src.equip_to_slot_or_del(MYPDA, slot_belt)
 	zone_sel = new /obj/screen/zone_sel()
 	zone_sel.selecting = "chest"
@@ -582,8 +429,8 @@ proc/randomize_eyes_color()
 			//else, target whatever, or go to our department
 			if(prob((FUZZY_CHANCE_LOW+FUZZY_CHANCE_HIGH)/2))
 				TARGET = pick(target_filter(orange(MIN_RANGE_FIND,src)))
-			else
-				TARGET = pick(get_area_turfs(job2area(myjob)))
+		//	else
+				//TARGET = pick(get_area_turfs(job2area(myjob)))
 		tryWalk(TARGET)
 	LAST_TARGET = TARGET
 
@@ -611,7 +458,7 @@ proc/randomize_eyes_color()
 	else
 		doing = doing & ~TRAVEL
 		return 0
-
+/*
 /mob/living/carbon/human/interactive/proc/job2area(target)
 	var/datum/job/T = target
 	if(T.title == "Assistant")
@@ -630,6 +477,7 @@ proc/randomize_eyes_color()
 		return /area/security
 	else
 		return pick(/area/hallway,/area/crew_quarters)
+		*/
 
 /mob/living/carbon/human/interactive/proc/target_filter(target)
 	var/list/L = target

@@ -1,4 +1,4 @@
-#define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover();del(varname);}varname = src;}
+#define NEW_SS_GLOBAL(varname) if(varname != src){if(istype(varname)){Recover();qdel(varname);}varname = src;}
 
 /datum/subsystem
 	//things you will want to define
