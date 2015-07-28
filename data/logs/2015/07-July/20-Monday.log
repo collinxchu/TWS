@@ -1,0 +1,230 @@
+
+
+Starting up. 21:10.53
+---------------------
+[21:10:53]MISC: Saved mode is 'extended'
+[21:11:00]MISC: Failed to connect to database in load_admins(). Reverting to legacy system.
+[21:11:00]MISC: Database connection failed. Reverting to the legacy ban system.
+[21:11:03]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 21:12.01
+---------------------
+[21:12:01]MISC: Saved mode is 'extended'
+[21:12:10]MISC: Failed to connect to database in load_admins(). Reverting to legacy system.
+[21:12:10]MISC: Database connection failed. Reverting to the legacy ban system.
+[21:12:14]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 21:50.39
+---------------------
+[21:50:39]MISC: Saved mode is 'extended'
+[21:50:45]MISC: Failed to connect to database in load_admins(). Reverting to legacy system.
+[21:50:45]MISC: Database connection failed. Reverting to the legacy ban system.
+[21:50:47]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 21:59.33
+---------------------
+[21:59:33]MISC: Saved mode is 'extended'
+[21:59:39]MISC: Failed to connect to database in load_admins(). Reverting to legacy system.
+[21:59:39]MISC: Database connection failed. Reverting to the legacy ban system.
+[21:59:41]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 22:05.56
+---------------------
+[22:05:56]MISC: Saved mode is 'extended'
+[22:06:01]MISC: Failed to connect to database in load_admins(). Reverting to legacy system.
+[22:06:01]MISC: Database connection failed. Reverting to the legacy ban system.
+[22:06:04]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 22:14.23
+---------------------
+[22:14:23]MISC: Saved mode is 'extended'
+[22:14:29]MISC: Failed to connect to database in load_admins(). Reverting to legacy system.
+[22:14:29]MISC: Database connection failed. Reverting to the legacy ban system.
+[22:14:31]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 22:21.34
+---------------------
+[22:21:34]MISC: Saved mode is 'extended'
+[22:21:40]MISC: Failed to load config/alienwhitelist.txt
+[22:21:40]ADMIN: Loading jobban_rank
+[22:21:40]ADMIN: jobban_keylist was empty
+[22:21:40]ADMIN: Loading Banlist
+[22:21:42]DEBUG: Rebuilding Master Controller
+[22:21:47]ACCESS: Login: Quarkfork/(Quarkfork) from 127.0.0.1-4218557159 || BYOND v501
+[22:22:11]ACCESS: Logout: Quarkfork/(Quarkfork)
+[22:23:40]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[22:24:52]VOTE: Gamemode vote started by the server.
+[22:24:52]DEBUG: The server has called a gamemode vote
+[22:25:01]ACCESS: Logout: Cakebatter/(Cakebatter)
+[22:25:20]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[22:25:26]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 22:33.26
+---------------------
+[22:33:26]MISC: Saved mode is 'extended'
+[22:33:31]MISC: Failed to load config/alienwhitelist.txt
+[22:33:31]ADMIN: Loading jobban_rank
+[22:33:31]ADMIN: jobban_keylist was empty
+[22:33:31]ADMIN: Loading Banlist
+[22:33:33]DEBUG: Rebuilding Master Controller
+[22:35:09]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[22:37:07]ADMIN: Cakebatter has started the game.
+[22:37:08]ACCESS: Logout: *no key*/(Cakebatter)
+[22:37:08]ACCESS: Login: Cakebatter/(Grandpa Alliman) from 127.0.0.1-4218557159 || BYOND v501
+[22:37:09]EMOTE: mouse (528)/ : <B>The mouse (528)</B> scritches at something.
+[22:37:10]DEBUG: Next event of severity Mundane in 16.156 minutes.
+[22:37:10]DEBUG: Next event of severity Moderate in 49.17 minutes.
+[22:37:10]DEBUG: Next event of severity Major in 83.8233 minutes.
+[22:37:13]SAY: Squeaky (650)/ : Squeek?
+[22:37:21]SAY: grey baby slime (303)/ : Blop...
+[22:37:21]EMOTE: cat/ : <B>The cat</B> toys with the mouse (982).
+[22:37:21]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[22:37:23]SAY: Poly/ : Poly wanna cracker!
+[22:37:32]EMOTE: Ian/ : <B>Ian</B> chases their tail
+[22:37:38]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[22:37:43]SAY: mouse (528)/ : SQUEEK!
+[22:37:47]GAME: <a href='?priv_msg=[0x5000000]'>Cakebatter</a>/(Grandpa Alliman) has ghosted.
+[22:37:48]ACCESS: Logout: *no key*/(Grandpa Alliman)
+[22:37:48]ACCESS: Login: Cakebatter/(Grandpa Alliman) from 127.0.0.1-4218557159 || BYOND v501
+[22:38:08]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[22:38:14]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[22:38:24]SAY: Runtime/ : HSSSSS
+[22:38:30]EMOTE: Ian/ : <B>Ian</B> dances around
+[22:38:32]EMOTE: mouse (62)/ : <B>The mouse (62)</B> shakes.
+[22:38:44]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[22:38:52]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[22:38:54]EMOTE: cat/ : <B>The cat</B> shivers.
+[22:38:58]EMOTE: mouse (609)/ : <B>The mouse (609)</B> runs in a circle.
+[22:38:58]SAY: Wittley/ : HSSSSS
+[22:39:00]SAY: Nini/ : YAP
+[22:39:00]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[22:39:00]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:39:02]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[22:39:08]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[22:39:26]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:39:26]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[22:39:42]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[22:39:44]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:40:06]SAY: Bones/ : Esp!
+[22:40:10]SAY: grey baby slime (303)/ : Blorble...
+[22:40:12]SAY: mouse (580)/ : SQUEEK!
+[22:40:16]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[22:40:20]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:40:24]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:40:30]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:40:44]SAY: grey baby slime (45)/ : Blorble...
+[22:40:52]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[22:41:04]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[22:41:06]SAY: Iqui/ : Cracker?
+[22:41:17]EMOTE: mouse (62)/ : <B>The mouse (62)</B> squeeks.
+[22:41:25]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[22:41:27]SAY: Tiger/ : Meow!
+[22:41:47]EMOTE: kitten/ : <B>The kitten</B> mews.
+[22:41:49]SAY: Tiger/ : Meow!
+[22:41:53]EMOTE: Experiment 68a/ : <B>Experiment 68a</B> clacks.
+[22:41:55]SAY: Bones/ : HSSSSS
+[22:41:57]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[22:41:59]SAY: Dr. NibbleFluff/ : Purr!
+[22:42:01]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:42:11]SAY: kitten/ : HSSSSS
+[22:42:15]SAY: Poly/ : Wire the solars, you lazy bums!
+[22:42:17]EMOTE: crab/ : <B>The crab</B> clacks.
+[22:42:17]EMOTE: kitten/ : <B>The kitten</B> meows.
+[22:42:21]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:42:21]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[22:42:23]EMOTE: Tiger/ : <B>Tiger</B> mews.
+[22:42:33]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[22:42:50]ACCESS: Logout: Cakebatter/(Grandpa Alliman)
+
+
+Starting up. 22:48.59
+---------------------
+[22:48:59]MISC: Saved mode is 'extended'
+[22:48:59]MISC: Failed to load config/alienwhitelist.txt
+[22:48:59]ADMIN: Loading jobban_rank
+[22:48:59]ADMIN: jobban_keylist was empty
+[22:48:59]ADMIN: Loading Banlist
+[22:49:00]DEBUG: Rebuilding Master Controller
+[22:49:40]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[22:50:44]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 23:02.34
+---------------------
+[23:02:34]MISC: Saved mode is 'extended'
+[23:02:34]MISC: Failed to load config/alienwhitelist.txt
+[23:02:34]ADMIN: Loading jobban_rank
+[23:02:34]ADMIN: jobban_keylist was empty
+[23:02:34]ADMIN: Loading Banlist
+[23:02:34]DEBUG: Rebuilding Master Controller
+[23:02:45]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:04:08]VOTE: Gamemode vote started by the server.
+[23:04:08]DEBUG: The server has called a gamemode vote
+[23:04:25]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 23:18.32
+---------------------
+[23:18:32]MISC: Saved mode is 'extended'
+[23:18:33]MISC: Failed to load config/alienwhitelist.txt
+[23:18:33]ADMIN: Loading jobban_rank
+[23:18:33]ADMIN: jobban_keylist was empty
+[23:18:33]ADMIN: Loading Banlist
+[23:18:33]DEBUG: Rebuilding Master Controller
+[23:18:39]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:19:40]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 23:23.26
+---------------------
+[23:23:26]MISC: Saved mode is 'extended'
+[23:23:26]MISC: Failed to load config/alienwhitelist.txt
+[23:23:26]ADMIN: Loading jobban_rank
+[23:23:26]ADMIN: jobban_keylist was empty
+[23:23:26]ADMIN: Loading Banlist
+[23:23:26]DEBUG: Rebuilding Master Controller
+[23:25:51]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:26:30]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 23:39.46
+---------------------
+[23:39:46]MISC: Saved mode is 'extended'
+[23:39:46]MISC: Failed to load config/alienwhitelist.txt
+[23:39:46]ADMIN: Loading jobban_rank
+[23:39:46]ADMIN: jobban_keylist was empty
+[23:39:46]ADMIN: Loading Banlist
+[23:39:46]DEBUG: Rebuilding Master Controller
+[23:40:27]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:41:11]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 23:47.22
+---------------------
+[23:47:22]MISC: Saved mode is 'extended'
+[23:47:22]MISC: Failed to load config/alienwhitelist.txt
+[23:47:22]ADMIN: Loading jobban_rank
+[23:47:22]ADMIN: jobban_keylist was empty
+[23:47:22]ADMIN: Loading Banlist
+[23:47:22]DEBUG: Rebuilding Master Controller
+[23:47:44]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:48:23]ACCESS: Logout: Cakebatter/(Cakebatter)
+
+
+Starting up. 23:57.13
+---------------------
+[23:57:13]MISC: Saved mode is 'extended'
+[23:57:13]MISC: Failed to load config/alienwhitelist.txt
+[23:57:13]ADMIN: Loading jobban_rank
+[23:57:13]ADMIN: jobban_keylist was empty
+[23:57:13]ADMIN: Loading Banlist
+[23:57:14]DEBUG: Rebuilding Master Controller
+[23:57:31]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:58:26]ACCESS: Logout: Cakebatter/(Cakebatter)

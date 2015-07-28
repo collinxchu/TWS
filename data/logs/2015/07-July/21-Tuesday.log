@@ -1,0 +1,1755 @@
+
+
+Starting up. 16:01.46
+---------------------
+[16:01:46]MISC: Saved mode is 'extended'
+[16:01:47]MISC: Failed to load config/alienwhitelist.txt
+[16:01:47]ADMIN: Loading jobban_rank
+[16:01:47]ADMIN: jobban_keylist was empty
+[16:01:47]ADMIN: Loading Banlist
+[16:01:47]DEBUG: Rebuilding Master Controller
+[16:02:54]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[16:03:24]ADMIN: Cakebatter has started the game.
+[16:03:24]ACCESS: Logout: *no key*/(Cakebatter)
+[16:03:24]ACCESS: Login: Cakebatter/(Ryker Kellogg) from 127.0.0.1-4218557159 || BYOND v501
+[16:03:27]DEBUG: Next event of severity Mundane in 17.934 minutes.
+[16:03:27]DEBUG: Next event of severity Moderate in 52.074 minutes.
+[16:03:27]DEBUG: Next event of severity Major in 96.1433 minutes.
+[16:03:35]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Dr. Gibb
+[16:04:00]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (432)!
+[16:04:10]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[16:04:16]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[16:04:48]SAY: Bones/ : Esp!
+[16:04:51]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[16:05:11]EMOTE: cat/ : <B>The cat</B> meows.
+[16:05:17]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[16:05:19]SAY: fox/ : Awoo
+[16:05:21]SAY: Iqui/ : Hello!
+[16:05:27]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:05:31]SAY: Wittley/ : Purr!
+[16:05:34]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[16:05:44]SAY: Oscar Bash/ : Well , this is a  situation.
+[16:05:45]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/greytide
+[16:05:47]SAY: Oscar Bash/ : Innocent until proven !
+[16:06:04]SAY: Oscar Bash/ : This  is a little .
+[16:06:04]SAY: Oscar Bash/ : Hey , why dont you go      , you !
+[16:06:07]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:07]SAY: Mauricio Wentzel/ : I want to  that  when I find them.
+[16:06:09]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:11]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:13]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:15]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:16]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:16]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:06:17]SAY: Keegan Weeter/ : Oh , that  was one hell of an  .
+[16:06:20]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:06:20]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:06:21]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:06:21]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:06:22]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:06:22]SAY: Jacob Spock/ : I want to  that  when I find them.
+[16:06:22]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/friendly
+[16:06:24]SAY: cat/ : Meow!
+[16:06:24]SAY: Mya Isemann/ : Hey , why dont you go      , you !
+[16:06:27]SAY: Marjory Bousum/ : Well , this is a  situation.
+[16:06:29]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[16:06:30]SAY: Dakota Leichter/ : Honk until proven !
+[16:06:32]SAY: Mauricio Wentzel/ : Traitorous until proven !
+[16:06:33]SAY: Keegan Weeter/ : Hey , why dont you go      , you !
+[16:06:39]SAY: Dakota Leichter/ : Oh , that  was one hell of an  .
+[16:06:41]SAY: Arnie Poehl/ : Traitorous until proven !
+[16:06:41]SAY: Marion Webb/ : Innocent until proven !
+[16:06:41]SAY: Dakota Leichter/ : Traitorous until proven !
+[16:06:43]SAY: Marion Webb/ : I want to  that  when I find them.
+[16:06:43]SAY: Dakota Leichter/ : Hey , why dont you go      , you !
+[16:06:46]SAY: Keegan Weeter/ : Traitorous until proven !
+[16:06:48]SAY: Marion Webb/ : I want to  that  when I find them.
+[16:06:51]SAY: Keegan Weeter/ : Well , this is a  situation.
+[16:06:53]SAY: Rain Wentzel/ : Innocent until proven !
+[16:06:53]SAY: Marion Webb/ : Innocent until proven !
+[16:06:53]SAY: Dakota Leichter/ : Oh , that  was one hell of an  .
+[16:06:53]SAY: Mya Isemann/ : Oh , that  was one hell of an  .
+[16:06:56]SAY: Oscar Bash/ : I want to  that  when I find them.
+[16:06:56]SAY: Arnie Poehl/ : Well , this is a  situation.
+[16:06:59]SAY: Jacob Spock/ : I want to  that  when I find them.
+[16:07:01]SAY: Bryce Patel/ : , what am I meant to do with this  .
+[16:07:04]SAY: Arnie Poehl/ : Well , this is a  situation.
+[16:07:04]SAY: Jacob Spock/ : Hey , why dont you go      , you !
+[16:07:06]SAY: Mauricio Wentzel/ : Well , this is a  situation.
+[16:07:08]SAY: Marjory Bousum/ : I want to  that  when I find them.
+[16:07:10]SAY: Arnie Poehl/ : Oh , that  was one hell of an  .
+[16:07:10]SAY: Jacob Spock/ : Well , this is a  situation.
+[16:07:12]SAY: Mauricio Wentzel/ : Well , this is a  situation.
+[16:07:12]SAY: Marion Webb/ : Honk until proven !
+[16:07:17]SAY: Marion Webb/ : Hey , why dont you go      , you !
+[16:07:21]SAY: Rain Wentzel/ : I want to  that  when I find them.
+[16:07:21]SAY: Miley Sommer/ : Honk until proven !
+[16:07:23]SAY: Astor Burkett/ : I want to  that  when I find them.
+[16:07:23]SAY: Jacob Spock/ : Oh , that  was one hell of an  .
+[16:07:29]SAY: Oscar Bash/ : Oh , that  was one hell of an  .
+[16:07:29]SAY: Donny Rifler/ : Well , this is a  situation.
+[16:07:29]SAY: Mya Isemann/ : Oh , that  was one hell of an  .
+[16:07:34]SAY: Arnie Poehl/ : Traitorous until proven !
+[16:07:37]SAY: Oscar Bash/ : Hey , why dont you go      , you !
+[16:07:37]SAY: Mauricio Wentzel/ : I want to  that  when I find them.
+[16:07:39]SAY: Dakota Leichter/ : Oh , that  was one hell of an  .
+[16:07:43]SAY: Hunter Field/ : Hey , why dont you go      , you !
+[16:07:46]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[16:07:46]SAY: Mya Isemann/ : Hey , why dont you go      , you !
+[16:07:50]SAY: Donny Rifler/ : Oh , that  was one hell of an  .
+[16:07:50]SAY: Keegan Weeter/ : Well , this is a  situation.
+[16:07:50]SAY: Rain Wentzel/ : Oh , that  was one hell of an  .
+[16:07:55]SAY: Bryce Patel/ : Well , this is a  situation.
+[16:07:57]SAY: Donny Rifler/ : Hey , why dont you go      , you !
+[16:07:59]SAY: Marjory Bousum/ : This  is a little .
+[16:08:02]EMOTE: Cat/ : <B>Cat</B> meows.
+[16:08:05]SAY: Keegan Weeter/ : I want to  that  when I find them.
+[16:08:05]SAY: Dakota Leichter/ : I want to  that  when I find them.
+[16:08:07]SAY: Mya Isemann/ : I want to  that  when I find them.
+[16:08:08]EMOTE: Lisa/ : <B>Lisa</B> shivers.
+[16:08:09]SAY: Astor Burkett/ : Guilty until proven !
+[16:08:17]SAY: Oscar Bash/ : Well  my , this  is pretty .
+[16:08:18]SAY: Miley Sommer/ : Hey , why dont you go      , you !
+[16:08:18]SAY: Mya Isemann/ : Innocent until proven !
+[16:08:23]SAY: Arnie Poehl/ : Innocent until proven !
+[16:08:23]SAY: Mya Isemann/ : Traitorous until proven !
+[16:08:25]SAY: Mya Isemann/ : Hey , why dont you go      , you !
+[16:08:27]SAY: Oscar Bash/ : Well , this is a  situation.
+[16:08:29]SAY: Mauricio Wentzel/ : Honk until proven !
+[16:08:35]SAY: Mauricio Wentzel/ : Hey , why dont you go      , you !
+[16:08:35]SAY: Donny Rifler/ : Hey , why dont you go      , you !
+[16:08:35]SAY: Marion Webb/ : Guilty until proven !
+[16:08:37]SAY: Astor Burkett/ : I want to  that  when I find them.
+[16:08:37]SAY: Marjory Bousum/ : Hey , why dont you go      , you !
+[16:08:39]SAY: Hunter Field/ : Oh , that  was one hell of an  .
+[16:08:42]SAY: Donny Rifler/ : I want to  that  when I find them.
+[16:08:42]SAY: Miley Sommer/ : I want to  that  when I find them.
+[16:08:44]SAY: Miley Sommer/ : Guilty until proven !
+[16:08:47]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[16:08:48]SAY: Marion Webb/ : Hey , why dont you go      , you !
+[16:08:50]SAY: Keegan Weeter/ : Innocent until proven !
+[16:08:50]SAY: Unknown/ : Hey , why dont you go      , you !
+[16:08:52]SAY: Oscar Bash/ : Oh , that  was one hell of an  .
+[16:08:52]SAY: Arnie Poehl/ : Hey , why dont you go      , you !
+[16:08:52]SAY: Miley Sommer/ : Hey , why dont you go      , you !
+[16:08:52]SAY: Dakota Leichter/ : Oh , that  was one hell of an  .
+[16:08:53]SAY: Mya Isemann/ : Honk until proven !
+[16:08:55]SAY: Arnie Poehl/ : Oh , that  was one hell of an  .
+[16:08:57]SAY: Arnie Poehl/ : I want to  that  when I find them.
+[16:08:59]SAY: Mauricio Wentzel/ : Well , this is a  situation.
+[16:09:03]SAY: Rain Wentzel/ : I want to  that  when I find them.
+[16:09:05]SAY: Tiger/ : Purr!
+[16:09:06]SAY: Mya Isemann/ : Hey , why dont you go      , you !
+[16:09:08]SAY: Donny Rifler/ : Honk until proven !
+[16:09:08]SAY: Unknown/ : This  is a little .
+[16:09:09]SAY: Rain Wentzel/ : Oh , that  was one hell of an  .
+[16:09:09]SAY: Dakota Leichter/ : Hey , why dont you go      , you !
+[16:09:11]SAY: Unknown/ : Honk until proven !
+[16:09:15]SAY: Unknown/ : Oh , that  was one hell of an  .
+[16:09:17]SAY: Oscar Bash/ : Oh , that  was one hell of an  .
+[16:09:17]SAY: Astor Burkett/ : Hey , why dont you go      , you !
+[16:09:17]SAY: Mya Isemann/ : Hey , why dont you go      , you !
+[16:09:19]SAY: Unknown/ : Oh , that  was one hell of an  .
+[16:09:27]SAY: Astor Burkett/ : Well , this is a  situation.
+[16:09:27]SAY: Miley Sommer/ : Hey , why dont you go      , you !
+[16:09:27]SAY: Marion Webb/ : Hey , why dont you go      , you !
+[16:09:32]SAY: Donny Rifler/ : Well , this is a  situation.
+[16:09:32]SAY: Keegan Weeter/ : Guilty until proven !
+[16:09:34]SAY: Hunter Field/ : I want to  that  when I find them.
+[16:09:34]SAY: Bryce Patel/ : Hey , why dont you go      , you !
+[16:09:34]SAY: Dakota Leichter/ : Oh , that  was one hell of an  .
+[16:09:36]SAY: Donny Rifler/ : Oh , that  was one hell of an  .
+[16:09:38]SAY: Donny Rifler/ : Hey , why dont you go      , you !
+[16:09:39]SAY: Bryce Patel/ : Well  my , this  is pretty .
+[16:09:42]SAY: Marjory Bousum/ : Oh , that  was one hell of an  .
+[16:09:44]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[16:09:46]SAY: Mauricio Wentzel/ : I want to  that  when I find them.
+[16:09:46]SAY: Mya Isemann/ : Well , this is a  situation.
+[16:09:48]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[16:09:48]SAY: Mauricio Wentzel/ : Innocent until proven !
+[16:09:50]SAY: Astor Burkett/ : Well , this is a  situation.
+[16:09:53]SAY: Mya Isemann/ : Well , this is a  situation.
+[16:09:56]SAY: Bryce Patel/ : Honk until proven !
+[16:09:58]SAY: Unknown/ : Oh , that  was one hell of an  .
+[16:09:58]SAY: Hunter Field/ : Hey , why dont you go      , you !
+[16:09:59]EMOTE: mouse (812)/ : <B>The mouse (812)</B> squeeks.
+[16:09:59]SAY: Keegan Weeter/ : Hey , why dont you go      , you !
+[16:09:59]SAY: Bryce Patel/ : Traitorous until proven !
+[16:10:01]SAY: fox/ : Awoo
+[16:10:04]SAY: Mauricio Wentzel/ : Hey , why dont you go      , you !
+[16:10:05]SAY: Donny Rifler/ : Hey , why dont you go      , you !
+[16:10:06]SAY: Donny Rifler/ : Oh , that  was one hell of an  .
+[16:10:08]SAY: Rain Wentzel/ : Innocent until proven !
+[16:10:08]SAY: Marion Webb/ : Hey , why dont you go      , you !
+[16:10:13]SAY: Dakota Leichter/ : Hey , why dont you go      , you !
+[16:10:16]SAY: Mya Isemann/ : Oh , that  was one hell of an  .
+[16:10:19]SAY: Rain Wentzel/ : Well , this is a  situation.
+[16:10:21]SAY: Oscar Bash/ : Innocent until proven !
+[16:10:24]SAY: Unknown/ : I want to  that  when I find them.
+[16:10:24]SAY: Marion Webb/ : Traitorous until proven !
+[16:10:24]SAY: Mya Isemann/ : I want to  that  when I find them.
+[16:10:24]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Astor Burkett)
+[16:10:26]SAY: Donny Rifler/ : Hey , why dont you go      , you !
+[16:10:26]SAY: Keegan Weeter/ : Hey , why dont you go      , you !
+[16:10:26]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Astor Burkett)
+[16:10:27]SAY: Mya Isemann/ : , what am I meant to do with this  .
+[16:10:30]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Donny Rifler)
+[16:10:31]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Donny Rifler)
+[16:10:33]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Rain Wentzel)
+[16:10:33]SAY: Mya Isemann/ : Honk until proven !
+[16:10:34]ATTACK: Cakebatter/(Ryker Kellogg) has kneed *no key*/(Rain Wentzel)
+[16:10:35]SAY: Rain Wentzel/ : Oh , that  was one hell of an  .
+[16:10:35]SAY: Miley Sommer/ : I want to  that  when I find them.
+[16:10:37]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Marion Webb)
+[16:10:38]ATTACK: Cakebatter/(Ryker Kellogg) has kneed *no key*/(Marion Webb)
+[16:10:39]SAY: Hunter Field/ : Well , this is a  situation.
+[16:10:40]SAY: fox/ : Geckers
+[16:10:40]ATTACK: Cakebatter/(Ryker Kellogg) has missed *no key*/(Marjory Bousum)
+[16:10:41]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Marjory Bousum)
+[16:10:42]EMOTE: Tiger/ : <B>Tiger</B> shivers.
+[16:10:42]SAY: Arnie Poehl/ : Oh , that  was one hell of an  .
+[16:10:43]ATTACK: Cakebatter/(Ryker Kellogg) has punched *no key*/(Marjory Bousum)
+[16:10:44]SAY: Mya Isemann/ : I want to  that  when I find them.
+[16:10:45]ATTACK: Cakebatter/(Ryker Kellogg) has kicked *no key*/(Bryce Patel)
+[16:10:48]SAY: Mauricio Wentzel/ : Oh , that  was one hell of an  .
+[16:10:48]SAY: Arnie Poehl/ : Hey , why dont you go      , you !
+[16:10:48]SAY: Unknown/ : I want to  that  when I find them.
+[16:10:49]ATTACK: Cakebatter/(Ryker Kellogg) has kicked *no key*/(Mya Isemann)
+[16:10:52]ATTACK: Cakebatter/(Ryker Kellogg) has kicked *no key*/(Mya Isemann)
+[16:10:53]SAY: cat/ : Purr!
+[16:10:57]SAY: Mauricio Wentzel/ : Oh , that  was one hell of an  .
+[16:10:59]ADMIN: Cakebatter/(Ryker Kellogg) created a /mob/living/carbon/human/interactive/angry
+[16:11:02]SAY: Arnie Poehl/ : Traitorous until proven !
+[16:11:04]ATTACK: Cakebatter/(Ryker Kellogg) has  *no key*/(Quinton Ray)
+[16:11:05]SAY: Astor Burkett/ : Well , this is a  situation.
+[16:11:05]SAY: Unknown/ : Hey , why dont you go      , you !
+[16:11:05]SAY: Miley Sommer/ : Hey , why dont you go      , you !
+[16:11:05]SAY: Marion Webb/ : Well , this is a  situation.
+[16:11:07]SAY: Dakota Leichter/ : Hey , why dont you go      , you !
+[16:11:09]SAY: Donny Rifler/ : Oh , that  was one hell of an  .
+[16:11:09]SAY: Dakota Leichter/ : Well , this is a  situation.
+[16:11:09]ATTACK: Cakebatter/(Ryker Kellogg) has missed *no key*/(Quinton Ray)
+[16:11:11]SAY: Keegan Weeter/ : Oh , that  was one hell of an  .
+[16:11:11]SAY: Hunter Field/ : Well , this is a  situation.
+[16:11:12]ACCESS: Logout: Cakebatter/(Ryker Kellogg)
+
+
+Starting up. 16:28.04
+---------------------
+[16:28:04]MISC: Saved mode is 'extended'
+[16:28:04]MISC: Failed to load config/alienwhitelist.txt
+[16:28:04]ADMIN: Loading jobban_rank
+[16:28:04]ADMIN: jobban_keylist was empty
+[16:28:04]ADMIN: Loading Banlist
+[16:28:04]DEBUG: Rebuilding Master Controller
+[16:42:48]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[16:43:17]ADMIN: Cakebatter has started the game.
+[16:43:18]ACCESS: Logout: *no key*/(Cakebatter)
+[16:43:18]ACCESS: Login: Cakebatter/(Monty Thorley) from 127.0.0.1-4218557159 || BYOND v501
+[16:43:21]DEBUG: Next event of severity Mundane in 12.906 minutes.
+[16:43:21]DEBUG: Next event of severity Moderate in 36.33 minutes.
+[16:43:21]DEBUG: Next event of severity Major in 95.565 minutes.
+[16:43:21]EMOTE: Koira/ : <B>Koira</B> yaps..
+[16:43:29]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Robust Coffee
+[16:43:31]EMOTE: cat/ : <B>The cat</B> bites the mouse (159)!
+[16:43:35]SAY: kitten/ : Purr!
+[16:43:39]SAY: kitten/ : Esp!
+[16:43:51]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[16:44:42]SAY: Wittley/ : Esp!
+[16:44:46]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[16:44:48]SAY: Iqui/ : BAWWWWK george mellons griffing me
+[16:44:49]ACCESS: Logout: Cakebatter/(Monty Thorley)
+
+
+Starting up. 17:00.45
+---------------------
+[17:00:45]MISC: Saved mode is 'extended'
+[17:00:45]MISC: Failed to load config/alienwhitelist.txt
+[17:00:45]ADMIN: Loading jobban_rank
+[17:00:45]ADMIN: jobban_keylist was empty
+[17:00:45]ADMIN: Loading Banlist
+[17:00:46]DEBUG: Rebuilding Master Controller
+[17:00:48]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[17:01:13]ADMIN: Cakebatter has started the game.
+[17:01:13]ACCESS: Logout: *no key*/(Cakebatter)
+[17:01:13]ACCESS: Login: Cakebatter/(Brodie Schmidt) from 127.0.0.1-4218557159 || BYOND v501
+[17:01:15]SAY: mouse (3)/ : SQUEEK!
+[17:01:17]DEBUG: Next event of severity Mundane in 17.138 minutes.
+[17:01:17]DEBUG: Next event of severity Moderate in 51.264 minutes.
+[17:01:17]DEBUG: Next event of severity Major in 86.215 minutes.
+[17:01:21]SAY: kitten/ : Esp!
+[17:01:27]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (954)!
+[17:01:27]SAY: Cat/ : Esp!
+[17:01:35]SAY: Lisa/ : Bark!
+[17:01:41]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Robust Coffee
+[17:01:41]EMOTE: fox/ : <B>The fox</B> howls.
+[17:01:43]SAY: Bones/ : Purr!
+[17:01:47]ACCESS: Logout: Cakebatter/(Brodie Schmidt)
+
+
+Starting up. 17:09.20
+---------------------
+[17:09:20]MISC: Saved mode is 'extended'
+[17:09:21]MISC: Failed to load config/alienwhitelist.txt
+[17:09:21]ADMIN: Loading jobban_rank
+[17:09:21]ADMIN: jobban_keylist was empty
+[17:09:21]ADMIN: Loading Banlist
+[17:09:21]DEBUG: Rebuilding Master Controller
+[17:09:35]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[17:10:17]ADMIN: Cakebatter has started the game.
+[17:10:18]ACCESS: Logout: *no key*/(Cakebatter)
+[17:10:18]ACCESS: Login: Cakebatter/(Eli Carmichael) from 127.0.0.1-4218557159 || BYOND v501
+[17:10:18]ACCESS: Logout: *no key*/(Eli Carmichael)
+[17:10:18]ACCESS: Login: Cakebatter/(Default Cyborg-944) from 127.0.0.1-4218557159 || BYOND v501
+[17:10:20]EMOTE: mouse (732)/ : <B>The mouse (732)</B> squeeks.
+[17:10:21]DEBUG: Next event of severity Mundane in 13.444 minutes.
+[17:10:21]DEBUG: Next event of severity Moderate in 40.332 minutes.
+[17:10:21]DEBUG: Next event of severity Major in 92.0717 minutes.
+[17:10:22]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[17:10:28]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:10:30]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:10:32]EMOTE: cat/ : <B>The cat</B> bites the mouse (793)!
+[17:10:34]SAY: Koira/ : Woof!
+[17:10:35]ACCESS: Logout: *no key*/(uhh)
+[17:10:35]ACCESS: Login: Cakebatter/(Eli Carmichael) from 127.0.0.1-4218557159 || BYOND v501
+[17:10:38]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Robust Coffee
+[17:10:38]SAY: mouse (732)/ : SQUEEK!
+[17:10:40]SAY: cat/ : Meow!
+[17:10:41]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:10:44]SAY: cat/ : Esp!
+[17:10:48]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:10:48]ACCESS: Logout: *no key*/(Eli Carmichael)
+[17:10:48]ACCESS: Login: Cakebatter/(uhh) from 127.0.0.1-4218557159 || BYOND v501
+[17:10:51]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[17:10:51]EMOTE: Ginger/ : <B>Ginger</B> barks!.
+[17:10:51]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:10:53]GAME: <a href='?priv_msg=[0x5000000]'>Cakebatter</a>/(uhh) has ghosted.
+[17:10:53]ACCESS: Logout: *no key*/(uhh)
+[17:10:53]ACCESS: Login: Cakebatter/(Eli Carmichael) from 127.0.0.1-4218557159 || BYOND v501
+[17:10:56]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[17:11:19]SAY: fox/ : Geckers
+[17:11:21]SAY: Poly/ : Wire the solars, you lazy bums!
+[17:11:22]ADMIN: Cakebatter/(Eli Carmichael) created a /mob/living/carbon/human
+[17:11:35]ADMIN: Cakebatter/(Eli Carmichael) told *no key*/(unknown) that ERP has been detected, and spiders will be on their way.
+[17:11:49]SAY: Bones/ : Esp!
+[17:11:51]EMOTE: Cat/ : <B>Cat</B> meows.
+[17:11:51]SAY: kitten/ : Meow!
+[17:11:53]EMOTE: Koira/ : <B>Koira</B> woofs!.
+[17:11:57]EMOTE: cat/ : <B>The cat</B> meows.
+[17:12:01]SAY: fox/ : Geckers
+[17:12:11]ACCESS: Logout: *no key*/(Eli Carmichael)
+[17:12:11]ACCESS: Login: Cakebatter/(unknown) from 127.0.0.1-4218557159 || BYOND v501
+[17:12:11]ADMIN: Cakebatter/(unknown) modified unknown's ckey to cakebatter
+[17:12:15]EMOTE: mouse (332)/ : <B>The mouse (332)</B> squeeks.
+[17:12:30]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:12:34]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:12:36]ACCESS: Logout: Cakebatter/(unknown)
+
+
+Starting up. 17:33.49
+---------------------
+[17:33:49]MISC: Saved mode is 'extended'
+[17:33:54]MISC: Failed to load config/alienwhitelist.txt
+[17:33:54]ADMIN: Loading jobban_rank
+[17:33:54]ADMIN: jobban_keylist was empty
+[17:33:54]ADMIN: Loading Banlist
+[17:33:57]DEBUG: Rebuilding Master Controller
+[17:34:02]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[17:35:36]ADMIN: Cakebatter has started the game.
+[17:35:48]DEBUG: Next event of severity Mundane in 13.666 minutes.
+[17:35:48]DEBUG: Next event of severity Moderate in 47.79 minutes.
+[17:35:48]DEBUG: Next event of severity Major in 86.0833 minutes.
+[17:35:57]ACCESS: Logout: *no key*/(Cakebatter)
+[17:35:57]ACCESS: Login: Cakebatter/(Sloan Werner) from 127.0.0.1-4218557159 || BYOND v501
+[17:36:01]EMOTE: mouse (413)/ : <B>The mouse (413)</B> squeeks.
+[17:36:01]SAY: Poly/ : Wire the solars, you lazy bums!
+[17:36:03]EMOTE: cat/ : <B>The cat</B> toys with the mouse (101).
+[17:36:11]SAY: Poly/ : WHO TOOK THE DAMN HARDSUITS?
+[17:36:12]ACCESS: Logout: Cakebatter/(Sloan Werner)
+
+
+Starting up. 17:54.13
+---------------------
+[17:54:13]MISC: Saved mode is 'extended'
+[17:54:13]MISC: Failed to load config/alienwhitelist.txt
+[17:54:13]ADMIN: Loading jobban_rank
+[17:54:13]ADMIN: jobban_keylist was empty
+[17:54:13]ADMIN: Loading Banlist
+[17:54:14]DEBUG: Rebuilding Master Controller
+[17:54:23]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[17:54:59]ADMIN: Cakebatter has started the game.
+[17:54:59]ACCESS: Logout: *no key*/(Cakebatter)
+[17:54:59]ACCESS: Login: Cakebatter/(Josue Whittier) from 127.0.0.1-4218557159 || BYOND v501
+[17:55:02]DEBUG: Next event of severity Mundane in 14.254 minutes.
+[17:55:02]DEBUG: Next event of severity Moderate in 42.95 minutes.
+[17:55:02]DEBUG: Next event of severity Major in 90.3667 minutes.
+[17:55:02]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[17:55:06]EMOTE: Squeaky (916)/ : <B>Squeaky (916)</B> squiks.
+[17:55:10]SAY: Ginger/ : Bark!
+[17:55:12]EMOTE: cat/ : <B>The cat</B> toys with the mouse (827).
+[17:55:14]SAY: Bones/ : Esp!
+[17:55:18]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[17:55:21]ACCESS: Logout: Cakebatter/(Josue Whittier)
+
+
+Starting up. 17:56.46
+---------------------
+[17:56:46]MISC: Saved mode is 'extended'
+[17:56:47]MISC: Failed to load config/alienwhitelist.txt
+[17:56:47]ADMIN: Loading jobban_rank
+[17:56:47]ADMIN: jobban_keylist was empty
+[17:56:47]ADMIN: Loading Banlist
+[17:56:47]DEBUG: Rebuilding Master Controller
+[17:57:25]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[17:59:02]VOTE: Gamemode vote started by the server.
+[17:59:02]DEBUG: The server has called a gamemode vote
+[17:59:40]ADMIN: Cakebatter has started the game.
+[17:59:41]ACCESS: Logout: *no key*/(Cakebatter)
+[17:59:41]ACCESS: Login: Cakebatter/(Edward Aultman) from 127.0.0.1-4218557159 || BYOND v501
+[17:59:44]DEBUG: Next event of severity Mundane in 12.866 minutes.
+[17:59:44]DEBUG: Next event of severity Moderate in 45.592 minutes.
+[17:59:44]DEBUG: Next event of severity Major in 86.3267 minutes.
+[17:59:47]EMOTE: Cat/ : <B>Cat</B> meows.
+[17:59:49]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:59:49]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:59:53]EMOTE: Ginger/ : <B>Ginger</B> shakes its head..
+[17:59:53]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Dr. Gibb
+[17:59:54]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (965)!
+[18:00:02]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[18:00:06]SAY: Poly/ : Wire the solars, you lazy bums!
+[18:00:38]EMOTE: Lisa/ : <B>Lisa</B> shivers.
+[18:00:54]EMOTE: Ginger/ : <B>Ginger</B> shakes its head..
+[18:00:57]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:00:57]SAY: kitten/ : Esp!
+[18:01:11]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:01:15]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:01:19]SAY: Dr. NibbleFluff/ : Meow!
+[18:01:19]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:01:21]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:01:35]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:01:35]EMOTE: Tiger/ : <B>Tiger</B> mews.
+[18:01:40]SAY: Cat/ : Purr!
+[18:02:18]EMOTE: Emi/ : <B>Emi</B> meows.
+[18:02:22]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[18:02:26]EMOTE: Milka/ : <B>Milka</B> shivers.
+[18:02:26]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:02:49]EMOTE: Lisa/ : <B>Lisa</B> shakes its head.
+[18:02:51]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[18:03:03]SAY: Cat/ : Esp!
+[18:03:03]EMOTE: kitten/ : <B>The kitten</B> meows.
+[18:03:11]SAY: Koira/ : Woof!
+[18:03:21]EMOTE: Cat/ : <B>Cat</B> meows.
+[18:03:55]SAY: Bones/ : Meow!
+[18:04:07]EMOTE: Ginger/ : <B>Ginger</B> shivers..
+[18:04:15]ADMIN: Cakebatter/(Edward Aultman) created a /mob/living/carbon/human/interactive/angry
+[18:04:16]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:04:16]EMOTE: Poly/ : <B>Poly</B> squawks.
+[18:04:24]EMOTE: cat/ : <B>The cat</B> shivers.
+[18:04:28]SAY: Cat/ : Purr!
+[18:04:50]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[18:04:52]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:04:56]SAY: Iqui/ : Hello!
+[18:05:04]SAY: kitten/ : HSSSSS
+[18:05:06]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:05:15]EMOTE: Bones/ : <B>Bones</B> mews.
+[18:05:35]SAY: Poly/ : Wire the solars, you lazy bums!
+[18:05:41]ADMIN: Cakebatter/(Edward Aultman) created a /mob/living/carbon/human/interactive/angry
+[18:05:49]SAY: Koira/ : AUUUUUU
+[18:05:56]SAY: kitten/ : Esp!
+[18:06:03]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[18:06:07]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:06:17]ATTACK: Cakebatter/(Edward Aultman) has punched *no key*/(Dalya Roadman)
+[18:06:19]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:06:38]SAY: kitten/ : Esp!
+[18:06:41]ATTACK: Cakebatter/(Edward Aultman) disarmed Huffie Bash ()
+[18:06:47]ATTACK: Cakebatter/(Edward Aultman) has kicked *no key*/(Huffie Bash)
+[18:06:48]ATTACK: Cakebatter/(Edward Aultman) has punched *no key*/(Huffie Bash)
+[18:06:50]SAY: Wittley/ : Purr!
+[18:06:50]ATTACK: Cakebatter/(Edward Aultman) has  *no key*/(Dalya Roadman)
+[18:06:51]ATTACK: Cakebatter/(Edward Aultman) has kicked *no key*/(Dalya Roadman)
+[18:06:52]ATTACK: Cakebatter/(Edward Aultman) has punched *no key*/(Dalya Roadman)
+[18:06:53]ATTACK: Cakebatter/(Edward Aultman) has punched *no key*/(Dalya Roadman)
+[18:06:55]ATTACK: Cakebatter/(Edward Aultman) has missed *no key*/(Dalya Roadman)
+[18:06:56]ATTACK: Cakebatter/(Edward Aultman) has punched *no key*/(Huffie Bash)
+[18:07:09]ACCESS: Logout: Cakebatter/(Edward Aultman)
+
+
+Starting up. 18:09.24
+---------------------
+[18:09:24]MISC: Saved mode is 'extended'
+[18:09:24]MISC: Failed to load config/alienwhitelist.txt
+[18:09:24]ADMIN: Loading jobban_rank
+[18:09:24]ADMIN: jobban_keylist was empty
+[18:09:24]ADMIN: Loading Banlist
+[18:09:25]DEBUG: Rebuilding Master Controller
+[18:09:46]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[18:11:23]VOTE: Gamemode vote started by the server.
+[18:11:23]DEBUG: The server has called a gamemode vote
+[18:12:23]VOTE: <b>Vote Result: Inconclusive - No Votes!</b>
+[18:13:54]EMOTE: Milka/ : <B>Milka</B> shakes their head.
+[18:13:55]DEBUG: Next event of severity Mundane in 16.692 minutes.
+[18:13:55]DEBUG: Next event of severity Moderate in 51.618 minutes.
+[18:13:55]DEBUG: Next event of severity Major in 99.88 minutes.
+[18:13:56]EMOTE: Wittley/ : <B>Wittley</B> shakes their head.
+[18:14:00]EMOTE: fox/ : <B>The fox</B> shivers.
+[18:14:06]EMOTE: Milka/ : <B>Milka</B> meows.
+[18:14:06]EMOTE: cat/ : <B>The cat</B> toys with the mouse (398).
+[18:14:08]ACCESS: Logout: *no key*/(Cakebatter)
+[18:14:08]ACCESS: Login: Cakebatter/(Matthew Burns) from 127.0.0.1-4218557159 || BYOND v501
+[18:14:12]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Robust Coffee
+[18:14:14]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[18:14:17]ADMIN: Cakebatter/(Matthew Burns) created a /mob/living/carbon/human/interactive/angry
+[18:14:18]ADMIN: Cakebatter/(Matthew Burns) created a /mob/living/carbon/human/interactive/friendly
+[18:14:34]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:14:39]SAY: Nini/ : YAP
+[18:14:45]SAY: mouse (403)/ : Squeek?
+[18:14:49]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:14:51]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:14:56]SAY: mouse (907)/ : Squeek!
+[18:15:10]ATTACK: Cakebatter/(Matthew Burns) has kneed *no key*/(Melanie Davis)
+[18:15:10]SAY: Milka/ : Meow!
+[18:15:11]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Melanie Davis)
+[18:15:12]ATTACK: Cakebatter/(Matthew Burns) has kicked *no key*/(Melanie Davis)
+[18:15:13]ATTACK: Cakebatter/(Matthew Burns) has kneed *no key*/(Melanie Davis)
+[18:15:14]EMOTE: Iqui/ : <B>Iqui</B> squawks.
+[18:15:15]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Melanie Davis)
+[18:15:16]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Melanie Davis)
+[18:15:17]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Melanie Davis)
+[18:15:41]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:15:42]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:15:45]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:15:46]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:15:47]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:15:48]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:15:49]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:15:50]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:15:52]SAY: Bones/ : HSSSSS
+[18:15:52]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:15:52]SAY: kitten/ : HSSSSS
+[18:15:56]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:15:57]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:15:59]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:00]EMOTE: Danny Agg/ : <B>Danny Agg</B> screams!
+[18:16:04]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:04]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:05]ATTACK: Cakebatter/(Matthew Burns) has kicked *no key*/(Danny Agg)
+[18:16:05]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:06]ATTACK: Cakebatter/(Matthew Burns) has kicked *no key*/(Danny Agg)
+[18:16:07]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:07]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:09]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:09]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:10]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:12]EMOTE: Wittley/ : <B>Wittley</B> shakes their head.
+[18:16:19]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Danny Agg) with leather satchel (INTENT: HURT) (DAMTYE: BRUTE)
+[18:16:29]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:29]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:30]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:30]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:31]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:31]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:32]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:32]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:34]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:34]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:35]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:36]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:36]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:37]ATTACK: Cakebatter/(Matthew Burns) has kicked *no key*/(Danny Agg)
+[18:16:38]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:16:39]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:40]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:41]ATTACK: Cakebatter/(Matthew Burns) has missed *no key*/(Danny Agg)
+[18:16:41]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:16:42]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:42]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:43]ATTACK: Cakebatter/(Matthew Burns) has punched *no key*/(Danny Agg)
+[18:16:43]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:46]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:47]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:48]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:48]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:49]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:49]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:49]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:51]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[18:16:51]EMOTE: Cat/ : <B>Cat</B> meows.
+[18:16:51]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:51]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:51]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:52]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:52]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:53]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:54]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:54]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:56]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:56]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:56]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:57]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:57]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:57]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:16:58]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:16:58]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[18:16:58]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:59]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:16:59]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:17:01]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:02]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:02]SAY: Bones/ : Purr!
+[18:17:02]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:17:03]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:03]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:17:04]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:04]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[18:17:05]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:06]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:08]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:10]EMOTE: Nini/ : <B>Nini</B> woofs.
+[18:17:10]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[18:17:17]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:18]SAY: fox/ : Tchoff
+[18:17:19]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:21]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:22]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:23]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:23]EMOTE: cat/ : <B>The cat</B> shivers.
+[18:17:24]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:25]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:27]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:28]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:29]ATTACK: Cakebatter/(Matthew Burns) has  *no key*/(Danny Agg)
+[18:17:33]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:17:41]SAY: kitten/ : Meow!
+[18:17:43]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:17:51]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:17:51]SAY: mouse (403)/ : SQUEEK!
+[18:17:55]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:17:57]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/camera/emp_proof and /obj/machinery/camera/motion
+[18:18:11]SAY: Wittley/ : HSSSSS
+[18:18:13]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:18:17]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[18:18:24]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/camera/emp_proof and /obj/item/weapon/holder/cat/fluff/bones
+[18:18:27]SAY: Dr. NibbleFluff/ : Purr!
+[18:18:30]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/camera/emp_proof and /obj/item/weapon/holder/cat/fluff/bones
+[18:18:38]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:18:38]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:18:59]SAY: Nini/ : AUUUUUU
+[18:19:07]SAY: kitten/ : Meow!
+[18:19:13]SAY: kitten/ : Meow!
+[18:19:29]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[18:19:31]SAY: kitten/ : Esp!
+[18:19:33]EMOTE: cat/ : <B>The cat</B> meows.
+[18:19:36]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/robot_module/standard
+[18:19:50]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/pen/fluff/eugene_bissegger_1
+[18:19:59]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/pen/fluff/fancypen
+[18:20:02]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/folder/red
+[18:20:04]SAY: Iqui/ : BAWWWWK george mellons griffing me
+[18:20:05]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/folder/blue/fluff/matthew_riebhardt
+[18:20:07]SAY: cat/ : Esp!
+[18:20:11]EMOTE: fox/ : <B>The fox</B> barks.
+[18:20:15]EMOTE: mouse (907)/ : <B>The mouse (907)</B> squiks.
+[18:20:18]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/temperature
+[18:20:21]SAY: kitten/ : Meow!
+[18:20:23]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:20:25]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:20:32]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the freeze beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=100;Y=162;Z=4'>JMP</a>)
+[18:20:53]SAY: Dr. NibbleFluff/ : Esp!
+[18:20:57]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:21:01]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/temperature
+[18:21:03]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the freeze beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=107;Y=159;Z=4'>JMP</a>)
+[18:21:07]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:21:12]ATTACK: Cakebatter/(Matthew Burns) has kicked *no key*/(Melanie Davis)
+[18:21:17]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/crossbow
+[18:21:18]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[18:21:20]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:22]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:24]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:24]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:30]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:21:31]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/crossbow/ninja
+[18:21:34]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[18:21:35]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the dart (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:36]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the dart (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:38]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the dart (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:38]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the dart (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=161;Z=4'>JMP</a>)
+[18:21:46]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/toxgun
+[18:21:50]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:51]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:54]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:55]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:56]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:57]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:58]EMOTE: Poly/ : <B>Poly</B> flutters its wings.
+[18:21:59]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:21:59]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:00]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the phoron bolt (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:05]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/floragun
+[18:22:11]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the alpha somatoray (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:12]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the alpha somatoray (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:14]EMOTE: cat/ : <B>The cat</B> shivers.
+[18:22:14]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the alpha somatoray (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:15]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the alpha somatoray (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:17]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the alpha somatoray (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:19]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the alpha somatoray (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=162;Z=4'>JMP</a>)
+[18:22:21]SAY: Lisa/ : Bark!
+[18:22:21]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:22:25]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/staff/animate
+[18:22:25]SAY: fox/ : Ack-Ack
+[18:22:29]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=110;Y=160;Z=4'>JMP</a>)
+[18:22:29]SAY: fox/ : Ack-Ack
+[18:22:29]EMOTE: kitten/ : <B>The kitten</B> meows.
+[18:22:31]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[18:22:37]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:22:40]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=108;Y=159;Z=4'>JMP</a>)
+[18:22:43]ATTACK: Matthew Burns (cakebatter) shot the leather satchel () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=108;Y=159;Z=4'>JMP</a>)
+[18:22:44]ATTACK: Matthew Burns (cakebatter) shot the leather satchel () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=108;Y=159;Z=4'>JMP</a>)
+[18:22:45]EMOTE: Milka/ : <B>Milka</B> shivers.
+[18:22:49]EMOTE: cat/ : <B>The cat</B> shivers.
+[18:23:05]SAY: Lisa/ : AUUUUUU
+[18:23:15]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:17]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/decloner
+[18:23:20]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:23:22]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[18:23:24]SAY: Poly/ : Check the singlo, you chucklefucks!
+[18:23:26]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:27]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:28]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:29]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:30]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:30]SAY: cat/ : Esp!
+[18:23:32]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:32]SAY: Wittley/ : Purr!
+[18:23:33]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the declone (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=94;Y=158;Z=4'>JMP</a>)
+[18:23:40]EMOTE: Koira/ : <B>Koira</B> yaps..
+[18:23:41]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/xray
+[18:23:44]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[18:23:52]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[18:23:53]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the xray beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=104;Y=162;Z=4'>JMP</a>)
+[18:23:54]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the xray beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=104;Y=162;Z=4'>JMP</a>)
+[18:23:55]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the xray beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=104;Y=162;Z=4'>JMP</a>)
+[18:23:56]ATTACK: Matthew Burns (cakebatter) shot Melanie Davis () with a the xray beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=104;Y=162;Z=4'>JMP</a>)
+[18:23:58]ATTACK: Matthew Burns (cakebatter) shot Unknown () with a the xray beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=104;Y=162;Z=4'>JMP</a>)
+[18:23:58]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:23:59]ATTACK: Matthew Burns (cakebatter) shot the energy () with a the xray beam (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=104;Y=162;Z=4'>JMP</a>)
+[18:24:02]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[18:24:10]EMOTE: Poly/ : <B>Poly</B> squawks.
+[18:24:12]SAY: Lisa/ : Bark!
+[18:24:15]ATTACK: Cakebatter/(Matthew Burns) has punched Cakebatter/(Matthew Burns)
+[18:24:16]SAY: Cat/ : Esp!
+[18:24:25]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:24:33]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/gun/energy/laser/retro
+[18:24:39]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:24:43]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> meows.
+[18:24:51]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/grenade/spawnergrenade
+[18:24:53]SAY: Koira/ : Bark!
+[18:24:55]ATTACK: Matthew Burns (cakebatter) primed an energy (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=105;Y=161;Z=4'>JMP</a>)
+[18:24:57]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:25:01]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[18:25:03]EMOTE: Cat/ : <B>Cat</B> meows.
+[18:25:10]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/grenade/spawnergrenade
+[18:25:10]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/grenade/spawnergrenade
+[18:25:13]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[18:25:16]ATTACK: Matthew Burns (cakebatter) primed an energy (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=95;Y=158;Z=4'>JMP</a>)
+[18:25:19]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[18:25:22]ATTACK: Matthew Burns (cakebatter) primed an energy (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=158;Z=4'>JMP</a>)
+[18:25:27]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/grenade/spawnergrenade/manhacks
+[18:25:32]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:25:33]ATTACK: Matthew Burns (cakebatter) primed an energy (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=159;Z=4'>JMP</a>)
+[18:25:35]EMOTE: Koira/ : <B>Koira</B> yaps..
+[18:25:35]EMOTE: Emi/ : <B>Emi</B> meows.
+[18:25:39]EMOTE: Milka/ : <B>Milka</B> shakes their head.
+[18:25:39]SAY: Koira/ : Woof!
+[18:25:39]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:25:39]EMOTE: suspenders/ : <B>The suspenders</B> growls at the viscerator
+[18:25:39]EMOTE: retired dress uniform/ : <B>The retired dress uniform</B> growls at the viscerator
+[18:25:39]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:25:42]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:25:42]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:25:46]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:25:48]EMOTE: Cat/ : <B>Cat</B> meows.
+[18:25:52]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:25:52]EMOTE: suspenders/ : <B>The suspenders</B> growls at the viscerator
+[18:25:52]EMOTE: retired dress uniform/ : <B>The retired dress uniform</B> growls at the viscerator
+[18:26:00]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:26:00]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:26:02]EMOTE: rainbow cap/ : <B>The rainbow cap</B> growls at the viscerator
+[18:26:04]EMOTE: Wittley/ : <B>Wittley</B> meows.
+[18:26:04]EMOTE: ushanka/ : <B>The ushanka</B> growls at the viscerator
+[18:26:07]ATTACK: Matthew Burns (cakebatter) shot the ushanka () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=156;Z=4'>JMP</a>)
+[18:26:07]ATTACK: Matthew Burns (cakebatter) shot the ushanka () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=156;Z=4'>JMP</a>)
+[18:26:08]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[18:26:08]EMOTE: leather satchel/ : <B>The leather satchel</B> growls at the viscerator
+[18:26:09]ATTACK: Matthew Burns (cakebatter) shot the leather satchel () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=156;Z=4'>JMP</a>)
+[18:26:11]ATTACK: Matthew Burns (cakebatter) shot the leather satchel () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=156;Z=4'>JMP</a>)
+[18:26:12]EMOTE: leather satchel/ : <B>The leather satchel</B> growls at the viscerator
+[18:26:13]ATTACK: Matthew Burns (cakebatter) shot the leather satchel () with a the bolt of animation (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=97;Y=156;Z=4'>JMP</a>)
+[18:26:14]EMOTE: suspenders/ : <B>The suspenders</B> growls at the viscerator
+[18:26:14]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:26:16]EMOTE: energy/ : <B>The energy</B> growls at the viscerator
+[18:26:22]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:26:30]SAY: fox/ : Tchoff
+[18:26:38]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/twohanded/dualsaber
+[18:26:40]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/twohanded/spear
+[18:26:44]EMOTE: Lisa/ : <B>Lisa</B> shakes its head.
+[18:26:49]SAY: cat/ : Meow!
+[18:26:51]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with double-bladed energy sword (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:26:53]EMOTE: Tiger/ : <B>Tiger</B> meows.
+[18:26:59]SAY: Nini/ : Woof!
+[18:26:59]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:27:05]EMOTE: cat/ : <B>The cat</B> mews.
+[18:27:07]SAY: Cat/ : Esp!
+[18:27:11]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:27:13]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/twohanded/fireaxe
+[18:27:17]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:27:19]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Danny Agg) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:20]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Danny Agg) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:25]SAY: Dr. NibbleFluff/ : Esp!
+[18:27:33]SAY: cat/ : HSSSSS
+[18:27:35]SAY: fox/ : Awoo
+[18:27:41]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:43]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:44]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:45]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:46]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:47]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:48]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:50]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:51]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:52]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:53]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:54]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:57]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:27:58]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:00]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:01]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:02]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:03]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:04]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:06]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:07]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:08]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:28:20]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/twohanded/fireaxe
+[18:28:22]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:28:25]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:26]EMOTE: Koira/ : <B>Koira</B> yaps..
+[18:28:26]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:28]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with fire axe (Wielded) (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:28:32]SAY: Milka/ : Esp!
+[18:28:43]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/crowbar/fluff/zelda_creedy_1
+[18:28:43]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:28:47]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[18:28:47]SAY: Milka/ : Meow!
+[18:28:47]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/wirecutters/clippers
+[18:28:51]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/FixOVein
+[18:28:53]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[18:28:58]ATTACK: Cakebatter/(Matthew Burns) attacked *no key*/(Melanie Davis) with energy (INTENT: GRAB) (DAMTYE: BRUTE)
+[18:29:03]SAY: Nini/ : AUUUUUU
+[18:29:05]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/toy/xmas_cracker
+[18:29:08]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/book/fluff
+[18:29:11]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/book/manual/materials_chemistry_analysis
+[18:29:15]EMOTE: Nini/ : <B>Nini</B> pants.
+[18:29:19]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/book/tome/imbued
+[18:29:27]SAY: Ginger/ : Woof!
+[18:29:32]ADMIN: Cakebatter/(Matthew Burns) created a /obj/item/weapon/paper/talisman/supply
+[18:29:44]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/readybutton
+[18:29:44]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:29:50]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/washing_machine
+[18:29:54]SAY: Nini/ : YAP
+[18:29:54]EMOTE: cat/ : <B>The cat</B> mews.
+[18:29:59]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/atmospherics/pipe/cap/hidden/scrubbers
+[18:30:02]ADMIN: Cakebatter/(Matthew Burns) created a /obj/machinery/atmospherics/pipe/manifold/visible/purple
+[18:30:03]ACCESS: Logout: Cakebatter/(Matthew Burns)
+
+
+Starting up. 18:34.55
+---------------------
+[18:34:55]MISC: Saved mode is 'extended'
+[18:34:55]MISC: Failed to load config/alienwhitelist.txt
+[18:34:55]ADMIN: Loading jobban_rank
+[18:34:55]ADMIN: jobban_keylist was empty
+[18:34:55]ADMIN: Loading Banlist
+[18:34:56]DEBUG: Rebuilding Master Controller
+[18:36:23]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[18:37:03]ADMIN: Cakebatter has started the game.
+[18:37:03]ACCESS: Logout: *no key*/(Cakebatter)
+[18:37:03]ACCESS: Login: Cakebatter/(Porter Ashbaugh) from 127.0.0.1-4218557159 || BYOND v501
+[18:37:05]DEBUG: Next event of severity Mundane in 15.74 minutes.
+[18:37:05]DEBUG: Next event of severity Moderate in 50.324 minutes.
+[18:37:05]DEBUG: Next event of severity Major in 84.6867 minutes.
+[18:37:08]EMOTE: kitten/ : <B>The kitten</B> mews.
+[18:37:10]ADMIN: Cakebatter/(Porter Ashbaugh) created a /mob/living/carbon/human/interactive/angry
+[18:37:12]SAY: fox/ : Ack-Ack
+[18:37:15]ADMIN: Cakebatter/(Porter Ashbaugh) created a /mob/living/carbon/human/interactive/angry
+[18:37:15]EMOTE: cat/ : <B>The cat</B> bites the mouse (364)!
+[18:37:18]ADMIN: Cakebatter/(Porter Ashbaugh) created a /mob/living/carbon/human/interactive/angry
+[18:37:18]ADMIN: Cakebatter/(Porter Ashbaugh) created a /mob/living/carbon/human/interactive/angry
+[18:37:25]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[18:37:26]ADMIN: Cakebatter/(Porter Ashbaugh) created a /mob/living/carbon/human/interactive/angry
+[18:37:28]ADMIN: Cakebatter/(Porter Ashbaugh) created a /mob/living/carbon/human/interactive/angry
+[18:37:29]EMOTE: Tiger/ : <B>Tiger</B> shakes their head.
+[18:37:29]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Robust Coffee
+[18:37:32]EMOTE: Iqui/ : <B>Iqui</B> flutters its wings.
+[18:37:38]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:37:41]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:38:06]SAY: Milka/ : Purr!
+[18:38:06]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[18:38:09]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:38:14]SAY: Wittley/ : Purr!
+[18:38:18]SAY: Squeaky (848)/ : SQUEEK!
+[18:38:22]SAY: Dr. NibbleFluff/ : HSSSSS
+[18:38:22]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[18:38:26]SAY: cat/ : Esp!
+[18:38:28]EMOTE: fox/ : <B>The fox</B> barks.
+[18:38:33]SAY: cat/ : Esp!
+[18:38:48]ACCESS: Logout: Cakebatter/(Porter Ashbaugh)
+
+
+Starting up. 18:49.11
+---------------------
+[18:49:11]MISC: Saved mode is 'extended'
+[18:49:11]MISC: Failed to load config/alienwhitelist.txt
+[18:49:11]ADMIN: Loading jobban_rank
+[18:49:11]ADMIN: jobban_keylist was empty
+[18:49:11]ADMIN: Loading Banlist
+[18:49:12]DEBUG: Rebuilding Master Controller
+[18:49:15]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[18:49:51]ADMIN: Cakebatter has started the game.
+[18:49:51]ACCESS: Logout: *no key*/(Cakebatter)
+[18:49:51]ACCESS: Login: Cakebatter/(Camron Stahl) from 127.0.0.1-4218557159 || BYOND v501
+[18:49:54]DEBUG: Next event of severity Mundane in 15.826 minutes.
+[18:49:54]DEBUG: Next event of severity Moderate in 41.624 minutes.
+[18:49:54]DEBUG: Next event of severity Major in 82.0617 minutes.
+[18:49:57]SAY: Iqui/ : Hi
+[18:49:57]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:49:59]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:00]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:00]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:01]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:01]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:03]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:03]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:04]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:04]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:04]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:05]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:05]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:06]EMOTE: cat/ : <B>The cat</B> bites the mouse (641)!
+[18:50:06]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:06]ADMIN: Cakebatter/(Camron Stahl) created a /mob/living/carbon/human/interactive/angry
+[18:50:12]SAY: Nini/ : Bark!
+[18:50:26]SAY: Ginger/ : Bark!
+[18:50:26]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[18:50:30]EMOTE: Wittley/ : <B>Wittley</B> meows.
+[18:50:37]SAY: Wittley/ : Meow!
+[18:50:46]SAY: Koira/ : Bark!
+[18:50:46]EMOTE: Ginger/ : <B>Ginger</B> barks!.
+[18:50:48]ACCESS: Logout: Cakebatter/(Camron Stahl)
+
+
+Starting up. 19:37.47
+---------------------
+[19:37:47]MISC: Saved mode is 'extended'
+[19:37:48]MISC: Failed to load config/alienwhitelist.txt
+[19:37:48]ADMIN: Loading jobban_rank
+[19:37:48]ADMIN: jobban_keylist was empty
+[19:37:48]ADMIN: Loading Banlist
+[19:37:48]DEBUG: Rebuilding Master Controller
+[19:37:54]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[19:38:30]ADMIN: Cakebatter has started the game.
+[19:38:31]ACCESS: Logout: *no key*/(Cakebatter)
+[19:38:31]ACCESS: Login: Cakebatter/(Alex Morgan) from 127.0.0.1-4218557159 || BYOND v501
+[19:38:31]EMOTE: Koira/ : <B>Koira</B> woofs!.
+[19:38:33]DEBUG: Next event of severity Mundane in 13.822 minutes.
+[19:38:33]DEBUG: Next event of severity Moderate in 48.646 minutes.
+[19:38:33]DEBUG: Next event of severity Major in 95.6967 minutes.
+[19:38:41]SAY: mouse (738)/ : SQUEEK!
+[19:38:43]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:44]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:45]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:45]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:45]EMOTE: kitten/ : <B>The kitten</B> meows.
+[19:38:47]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:47]SAY: Koira/ : AUUUUUU
+[19:38:47]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:48]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:48]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:49]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:50]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:50]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:50]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:51]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:52]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:53]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:53]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:56]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:57]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:58]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:38:59]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:39:00]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:39:01]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:39:01]ADMIN: Cakebatter/(Alex Morgan) created a /mob/living/carbon/human/interactive/angry
+[19:39:03]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[19:39:07]EMOTE: Cat/ : <B>Cat</B> shivers.
+[19:39:20]ACCESS: Logout: Cakebatter/(Alex Morgan)
+
+
+Starting up. 20:23.19
+---------------------
+[20:23:19]MISC: Saved mode is 'extended'
+[20:23:19]MISC: Failed to load config/alienwhitelist.txt
+[20:23:19]ADMIN: Loading jobban_rank
+[20:23:19]ADMIN: jobban_keylist was empty
+[20:23:19]ADMIN: Loading Banlist
+[20:23:19]DEBUG: Rebuilding Master Controller
+[20:23:30]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[20:24:13]ADMIN: Cakebatter has started the game.
+[20:24:14]ACCESS: Logout: *no key*/(Cakebatter)
+[20:24:14]ACCESS: Login: Cakebatter/(Ezra Hawking) from 127.0.0.1-4218557159 || BYOND v501
+[20:24:16]DEBUG: Next event of severity Mundane in 13.49 minutes.
+[20:24:16]DEBUG: Next event of severity Moderate in 38.64 minutes.
+[20:24:16]DEBUG: Next event of severity Major in 96.6983 minutes.
+[20:24:19]SAY: Ginger/ : Bark!
+[20:24:19]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:24:27]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[20:24:27]EMOTE: cat/ : <B>The cat</B> bites the mouse (542)!
+[20:24:28]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:29]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:29]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:30]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:30]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:30]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:31]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:31]SAY: Lisa/ : AUUUUUU
+[20:24:31]SAY: Tiger/ : Purr!
+[20:24:31]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/angry
+[20:24:33]EMOTE: fox/ : <B>The fox</B> barks.
+[20:24:35]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/friendly
+[20:24:35]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/friendly
+[20:24:36]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/friendly
+[20:24:39]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:24:39]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[20:24:46]SAY: fox/ : Awoo
+[20:24:48]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[20:24:53]SAY: Cat/ : HSSSSS
+[20:25:08]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[20:25:31]SAY: fox/ : Geckers
+[20:25:37]EMOTE: Koira/ : <B>Koira</B> woofs!.
+[20:25:44]SAY: Poly/ : Check the singlo, you chucklefucks!
+[20:25:46]EMOTE: Squeaky (831)/ : <B>Squeaky (831)</B> runs in a circle.
+[20:25:54]EMOTE: Iqui/ : <B>Iqui</B> flutters its wings.
+[20:25:57]SAY: Poly/ : Check the singlo, you chucklefucks!
+[20:26:02]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:26:17]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[20:26:25]SAY: Wittley/ : HSSSSS
+[20:26:32]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:26:34]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:26:40]EMOTE: fox/ : <B>The fox</B> howls.
+[20:27:01]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/friendly
+[20:27:01]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/friendly
+[20:27:02]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/friendly
+[20:27:05]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/interactive/greytide
+[20:27:09]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/unathi
+[20:27:09]ADMIN: Cakebatter/(Ezra Hawking) created a /mob/living/carbon/human/unathi
+[20:27:10]SAY: Milka/ : Esp!
+[20:27:10]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:27:12]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[20:27:27]EMOTE: Bones/ : <B>Bones</B> mews.
+[20:27:48]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[20:27:48]SAY: Dr. NibbleFluff/ : Meow!
+[20:27:59]EMOTE: Ginger/ : <B>Ginger</B> shivers..
+[20:28:19]EMOTE: mouse (375)/ : <B>The mouse (375)</B> squiks.
+[20:28:21]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:28:23]ACCESS: Logout: Cakebatter/(Ezra Hawking)
+
+
+Starting up. 20:35.21
+---------------------
+[20:35:21]MISC: Saved mode is 'extended'
+[20:35:22]MISC: Failed to load config/alienwhitelist.txt
+[20:35:22]ADMIN: Loading jobban_rank
+[20:35:22]ADMIN: jobban_keylist was empty
+[20:35:22]ADMIN: Loading Banlist
+[20:35:22]DEBUG: Rebuilding Master Controller
+[20:36:03]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[20:36:29]ADMIN: Cakebatter has started the game.
+[20:36:33]DEBUG: Next event of severity Mundane in 13.134 minutes.
+[20:36:33]DEBUG: Next event of severity Moderate in 45.754 minutes.
+[20:36:33]DEBUG: Next event of severity Major in 82.6733 minutes.
+[20:36:34]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:36:34]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:36:36]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[20:36:44]EMOTE: Cat/ : <B>Cat</B> meows.
+[20:36:44]EMOTE: mouse (579)/ : <B>The mouse (579)</B> squiks.
+[20:36:45]EMOTE: cat/ : <B>The cat</B> eyes the mouse (579) hungrily.
+[20:36:47]EMOTE: Koira/ : <B>Koira</B> shakes its head..
+[20:36:49]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:36:51]ACCESS: Logout: *no key*/(Cakebatter)
+[20:36:51]ACCESS: Login: Cakebatter/(Gary Armstrong) from 127.0.0.1-4218557159 || BYOND v501
+[20:36:52]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:36:55]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:36:57]SAY: fox/ : Ack-Ack
+[20:37:01]SAY: Bones/ : Esp!
+[20:37:03]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[20:37:11]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:37:13]SAY: Ginger/ : Bark!
+[20:37:15]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shivers.
+[20:37:17]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:37:17]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[20:37:21]SAY: Milka/ : HSSSSS
+[20:37:23]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:37:25]SAY: Emi/ : Esp!
+[20:37:37]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:37:47]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:37:55]EMOTE: Nini/ : <B>Nini</B> pants.
+[20:37:55]EMOTE: cat/ : <B>The cat</B> mrowls fiercely!
+[20:38:01]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:38:07]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/friendly
+[20:38:09]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/friendly
+[20:38:12]EMOTE: cat/ : <B>The cat</B> mrowls fiercely!
+[20:38:16]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:16]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:17]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:17]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:18]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:18]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:18]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:18]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[20:38:18]EMOTE: cat/ : <B>The cat</B> mrowls fiercely!
+[20:38:19]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:19]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:20]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:20]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:20]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:38:20]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:21]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:21]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:22]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:22]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:22]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/greytide
+[20:38:30]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:31]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:31]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:32]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:32]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:38:32]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:33]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:33]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:38:37]EMOTE: Emi/ : <B>Emi</B> mews.
+[20:38:53]SAY: Nini/ : AUUUUUU
+[20:38:56]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[20:39:00]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:39:10]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:39:20]EMOTE: cat/ : <B>The cat</B> mrowls fiercely!
+[20:39:43]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[20:39:46]EMOTE: cat/ : <B>The cat</B> meows.
+[20:39:59]EMOTE: Iqui/ : <B>Iqui</B> flutters its wings.
+[20:40:04]EMOTE: Emi/ : <B>Emi</B> shivers.
+[20:40:09]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:40:15]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:40:15]SAY: Bones/ : Purr!
+[20:40:15]SAY: Ginger/ : YAP
+[20:40:22]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:40:23]EMOTE: cat/ : <B>The cat</B> mrowls fiercely!
+[20:40:23]EMOTE: Cat/ : <B>Cat</B> shivers.
+[20:40:28]EMOTE: cat/ : <B>The cat</B> eyes the mouse (579) hungrily.
+[20:40:33]EMOTE: cat/ : <B>The cat</B> mrowls fiercely!
+[20:40:37]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:40:40]EMOTE: cat/ : <B>The cat</B> hisses and spits!
+[20:40:42]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:40:42]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (579)!
+[20:41:08]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:41:12]EMOTE: fox/ : <B>The fox</B> howls.
+[20:41:21]EMOTE: Squeaky (586)/ : <B>Squeaky (586)</B> squeeks.
+[20:42:02]SAY: Iqui/ : Cracker?
+[20:42:19]SAY: Ginger/ : YAP
+[20:42:19]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[20:42:57]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:43:00]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[20:43:08]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:43:56]EMOTE: Nini/ : <B>Nini</B> shakes its head.
+[20:44:01]EMOTE: Milka/ : <B>Milka</B> mews.
+[20:44:03]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:44:05]EMOTE: fox/ : <B>The fox</B> howls.
+[20:44:11]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:44:13]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[20:44:13]EMOTE: Koira/ : <B>Koira</B> shivers..
+[20:44:18]SAY: Koira/ : Woof!
+[20:44:33]SAY: cat/ : Meow!
+[20:44:35]EMOTE: kitten/ : <B>The kitten</B> meows.
+[20:44:40]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:44:48]EMOTE: Milka/ : <B>Milka</B> shivers.
+[20:44:52]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:45:00]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[20:45:10]EMOTE: Ginger/ : <B>Ginger</B> shakes its head..
+[20:45:22]SAY: Dr. NibbleFluff/ : HSSSSS
+[20:45:36]EMOTE: cat/ : <B>The cat</B> shivers.
+[20:45:36]SAY: Poly/ : WHO TOOK THE DAMN HARDSUITS?
+[20:45:46]SAY: Emi/ : Meow!
+[20:45:51]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:51]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:51]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:52]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:52]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:52]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:53]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:53]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:53]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:53]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:54]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:54]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:54]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:55]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:55]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:55]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:56]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:57]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:57]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:57]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:58]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:58]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:58]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:59]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:59]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:45:59]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:00]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:00]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:01]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:01]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:01]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:01]ADMIN: Cakebatter/(Gary Armstrong) created a /mob/living/carbon/human/interactive/angry
+[20:46:33]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[20:47:05]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:47:18]EMOTE: Nini/ : <B>Nini</B> yaps.
+[20:47:18]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:47:48]EMOTE: Koira/ : <B>Koira</B> shakes its head..
+[20:48:01]EMOTE: Iqui/ : <B>Iqui</B> flutters its wings.
+[20:48:08]SAY: fox/ : Awoo
+[20:48:36]EMOTE: cat/ : <B>The cat</B> meows.
+[20:48:36]SAY: cat/ : HSSSSS
+[20:49:33]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:49:38]SAY: Cat/ : Meow!
+[20:49:38]SAY: Milka/ : Meow!
+[20:50:13]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Kira Faqua) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:14]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Innocent Hawkins) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:15]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Innocent Hawkins) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:17]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Innocent Hawkins) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:18]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tel Reichard) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:22]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Shannon Picard) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:25]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Brenden Hooker) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:26]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Brenden Hooker) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:29]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:32]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:33]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(River Hoopengarner) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:36]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:37]DEBUG: Next event of severity Mundane in 15.834 minutes.
+[20:50:37]DEBUG: Starting event 'Economic News' of severity Mundane.
+[20:50:42]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Shannon Picard) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:42]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:50:43]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Shannon Picard) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:45]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Shannon Picard) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:47]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Shannon Picard) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:48]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:49]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:51]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:54]EMOTE: Bones/ : <B>Bones</B> shakes their head.
+[20:50:57]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:50:59]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Innocent Hawkins) with wrench (INTENT: HELP) (DAMTYE: BRUTE)
+[20:51:02]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:51:12]SAY: Ginger/ : YAP
+[20:51:18]SAY: Poly/ : Wire the solars, you lazy bums!
+[20:51:32]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:51:36]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[20:52:01]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/claymore
+[20:52:02]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/sord
+[20:52:03]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/sord
+[20:52:03]SAY: fox/ : Ack-Ack
+[20:52:05]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/twohanded
+[20:52:07]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/claymore
+[20:52:08]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/katana
+[20:52:10]ADMIN: Cakebatter/(Gary Armstrong) created a /obj/item/weapon/baseballbat/metal
+[20:52:14]SAY: Cat/ : Esp!
+[20:52:19]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with metal bat (INTENT: HELP) (DAMTYE: BRUTE)
+[20:52:21]SAY: cat/ : HSSSSS
+[20:52:31]ATTACK: Cakebatter/(Gary Armstrong) has kicked *no key*/(River Hoopengarner)
+[20:52:37]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:52:39]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Edgar Faust)
+[20:52:39]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[20:52:40]ATTACK: Cakebatter/(Gary Armstrong) has kicked *no key*/(Edgar Faust)
+[20:52:41]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Edgar Faust)
+[20:52:43]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Edgar Faust)
+[20:52:44]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Edgar Faust)
+[20:52:45]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Edgar Faust)
+[20:52:47]ATTACK: Cakebatter/(Gary Armstrong) has kneed *no key*/(Edgar Faust)
+[20:52:48]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Edgar Faust)
+[20:52:50]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Isaiah Bicknell)
+[20:52:51]ATTACK: Cakebatter/(Gary Armstrong) has  *no key*/(Isaiah Bicknell)
+[20:52:53]ATTACK: Cakebatter/(Gary Armstrong) has  *no key*/(Isaiah Bicknell)
+[20:52:53]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:52:53]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shivers.
+[20:52:53]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[20:53:03]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Innocent Hawkins) with katana (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:04]EMOTE: Innocent Hawkins/ : <B>Innocent Hawkins</B> screams!
+[20:53:08]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[20:53:17]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:18]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:18]EMOTE: Tatiana Easter/ : <B>Tatiana Easter</B> screams!
+[20:53:20]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:21]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:24]EMOTE: Koira/ : <B>Koira</B> woofs!.
+[20:53:26]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:28]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:30]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:31]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:32]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Lyndsey Costello) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:33]SAY: kitten/ : Meow!
+[20:53:33]EMOTE: Lyndsey Costello/ : <B>Lyndsey Costello</B> screams!
+[20:53:34]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Edgar Faust) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:36]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Edgar Faust) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:38]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shivers.
+[20:53:46]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:49]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:50]EMOTE: Francisco Demuth/ : <B>Francisco Demuth</B> screams!
+[20:53:51]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:52]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Francisco Demuth) with metal bat (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:57]ATTACK: Cakebatter/(Gary Armstrong) attacked *no key*/(Tatiana Easter) with claymore (INTENT: HURT) (DAMTYE: BRUTE)
+[20:53:58]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Tatiana Easter)
+[20:54:00]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Tatiana Easter)
+[20:54:00]SAY: fox/ : Tchoff
+[20:54:00]EMOTE: Tatiana Easter/ : <B>Tatiana Easter</B> screams!
+[20:54:01]ATTACK: Cakebatter/(Gary Armstrong) has punched *no key*/(Tatiana Easter)
+[20:54:01]EMOTE: Unknown/ : <B>Unknown</B> screams!
+[20:54:02]SAY: Ginger/ : AUUUUUU
+[20:54:02]ATTACK: Cakebatter/(Gary Armstrong) has missed *no key*/(Tatiana Easter)
+[20:54:09]SAY: kitten/ : Esp!
+[20:54:15]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:54:17]EMOTE: Cat/ : <B>Cat</B> shivers.
+[20:54:19]SAY: Ginger/ : Bark!
+[20:54:21]EMOTE: cat/ : <B>The cat</B> meows.
+[20:54:24]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:54:30]EMOTE: Innocent Hawkins/ : <B>Innocent Hawkins</B> is having trouble keeping their eyes open.
+[20:54:35]EMOTE: Bones/ : <B>Bones</B> shakes their head.
+[20:54:56]EMOTE: Lyndsey Costello/ : <B>Lyndsey Costello</B> is having trouble keeping their eyes open.
+[20:55:05]SAY: cat/ : Meow!
+[20:55:12]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[20:55:12]SAY: Poly/ : YAP
+[20:55:27]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[20:55:34]SAY: Emi/ : Purr!
+[20:55:34]SAY: cat/ : Meow!
+[20:55:52]EMOTE: Innocent Hawkins/ : <B>Innocent Hawkins</B> 's body becomes limp.
+[20:56:07]EMOTE: fox/ : <B>The fox</B> shivers.
+[20:56:17]EMOTE: Lyndsey Costello/ : <B>Lyndsey Costello</B> 's body becomes limp.
+[20:56:24]SAY: Cat/ : HSSSSS
+[20:56:29]EMOTE: Ginger/ : <B>Ginger</B> shivers..
+[20:56:31]EMOTE: cat/ : <B>The cat</B> mews.
+[20:56:34]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:56:46]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:56:53]ADMIN: Cakebatter/(Gary Armstrong) changed the equipment of *no key*/(Jalen Watson) to tournament standard red.
+[20:56:55]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:56:59]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[20:57:02]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:57:11]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[20:57:18]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:57:23]SAY: kitten/ : Esp!
+[20:57:27]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[20:57:45]EMOTE: Emi/ : <B>Emi</B> shivers.
+[20:57:58]EMOTE: Unknown/ : <B>Unknown</B> can no longer stand, collapsing!
+[20:58:12]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:58:52]EMOTE: kitten/ : <B>The kitten</B> meows.
+[20:58:54]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[20:58:54]EMOTE: Poly/ : <B>Poly</B> squawks.
+[20:59:25]EMOTE: Ginger/ : <B>Ginger</B> pants..
+[20:59:29]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:59:31]SAY: cat/ : Meow!
+[20:59:45]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[20:59:49]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[20:59:49]SAY: fox/ : Geckers
+[20:59:52]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[20:59:54]EMOTE: Innocent Hawkins/ : <B>Innocent Hawkins</B> can no longer stand, collapsing!
+[20:59:55]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (79)!
+[21:00:12]EMOTE: cat/ : <B>The cat</B> shivers.
+[21:00:21]EMOTE: Lyndsey Costello/ : <B>Lyndsey Costello</B> can no longer stand, collapsing!
+[21:00:22]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[21:00:24]EMOTE: cat/ : <B>The cat</B> meows.
+[21:00:39]SAY: Milka/ : Meow!
+[21:00:41]EMOTE: Tiger/ : <B>Tiger</B> mews.
+[21:00:46]SAY: Dr. NibbleFluff/ : HSSSSS
+[21:00:51]SAY: Koira/ : YAP
+[21:01:00]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[21:01:00]EMOTE: Poly/ : <B>Poly</B> bawks.
+[21:01:27]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:01:54]SAY: Lisa/ : YAP
+[21:02:09]ACCESS: Logout: *no key*/(Gary Armstrong)
+[21:02:09]ACCESS: Login: Cakebatter/(Gary Armstrong) from 127.0.0.1-4218557159 || BYOND v501
+[21:02:29]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:02:43]EMOTE: Iqui/ : <B>Iqui</B> squawks.
+[21:03:16]EMOTE: Cat/ : <B>Cat</B> mews.
+[21:03:17]DEBUG: Event 'Economic News' has completed at 12:24.
+[21:03:29]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[21:03:29]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:03:32]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:04:05]EMOTE: Poly/ : <B>Poly</B> flutters its wings.
+[21:04:08]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[21:04:38]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:04:46]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:04:56]SAY: kitten/ : Purr!
+[21:05:18]EMOTE: Milka/ : <B>Milka</B> mews.
+[21:05:23]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[21:05:51]EMOTE: Nini/ : <B>Nini</B> yaps.
+[21:06:15]SAY: Wittley/ : Esp!
+[21:06:20]SAY: Emi/ : Esp!
+[21:06:48]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[21:06:48]EMOTE: kitten/ : <B>The kitten</B> meows.
+[21:07:00]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:07:03]EMOTE: Lisa/ : <B>Lisa</B> shakes its head.
+[21:07:24]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:07:45]DEBUG: Next event of severity Mundane in 12.834 minutes.
+[21:07:45]DEBUG: Starting event 'Nothing' of severity Mundane.
+[21:07:47]DEBUG: Event 'Nothing' has completed at 12:29.
+[21:07:52]EMOTE: Emi/ : <B>Emi</B> meows.
+[21:08:11]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[21:08:23]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:08:27]EMOTE: Emi/ : <B>Emi</B> meows.
+[21:08:33]EMOTE: Bones/ : <B>Bones</B> meows.
+[21:08:42]SAY: cat/ : Purr!
+[21:08:51]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[21:09:35]SAY: Iqui/ : Cracker?
+[21:09:42]SAY: Iqui/ : Cracker?
+[21:09:42]EMOTE: kitten/ : <B>The kitten</B> meows.
+[21:10:01]EMOTE: Lyndsey Costello/ : <B>Lyndsey Costello</B> gasps!
+[21:10:04]SAY: Lisa/ : Woof!
+[21:10:13]EMOTE: cat/ : <B>The cat</B> mews.
+[21:10:25]EMOTE: Bones/ : <B>Bones</B> meows.
+[21:10:26]EMOTE: Unknown/ : <B>Unknown</B> gasps!
+[21:10:40]EMOTE: Ginger/ : <B>Ginger</B> yaps..
+[21:10:47]EMOTE: Koira/ : <B>Koira</B> barks!.
+[21:10:47]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:11:08]EMOTE: Cat/ : <B>Cat</B> mews.
+[21:11:28]EMOTE: Cat/ : <B>Cat</B> meows.
+[21:11:46]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[21:12:30]EMOTE: Cat/ : <B>Cat</B> mews.
+[21:12:38]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[21:12:42]SAY: Milka/ : Purr!
+[21:13:32]SAY: kitten/ : Purr!
+[21:13:47]EMOTE: Milka/ : <B>Milka</B> mews.
+[21:13:51]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:14:29]SAY: Poly/ : Check the singlo, you chucklefucks!
+[21:14:32]EMOTE: Bones/ : <B>Bones</B> shivers.
+[21:14:50]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[21:15:03]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[21:15:07]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> nibbles on something.
+[21:15:24]EMOTE: Ginger/ : <B>Ginger</B> yaps..
+[21:15:26]EMOTE: Milka/ : <B>Milka</B> shivers.
+[21:15:26]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:15:29]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[21:15:40]EMOTE: Ginger/ : <B>Ginger</B> barks!.
+[21:15:48]SAY: Nini/ : Bark!
+[21:15:54]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[21:16:16]SAY: Tiger/ : Meow!
+[21:16:29]EMOTE: Tiger/ : <B>Tiger</B> shivers.
+[21:16:29]SAY: Poly/ : Esp!
+[21:16:34]SAY: Dr. NibbleFluff/ : Purr!
+[21:16:53]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:17:01]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:17:14]SAY: Lisa/ : YAP
+[21:17:14]SAY: Wittley/ : Purr!
+[21:17:16]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (632)!
+[21:17:19]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[21:17:26]ACCESS: Logout: Cakebatter/(Gary Armstrong)
+
+
+Starting up. 22:43.04
+---------------------
+[22:43:04]MISC: Saved mode is 'extended'
+[22:43:04]MISC: Failed to load config/alienwhitelist.txt
+[22:43:04]ADMIN: Loading jobban_rank
+[22:43:04]ADMIN: jobban_keylist was empty
+[22:43:04]ADMIN: Loading Banlist
+[22:43:05]DEBUG: Rebuilding Master Controller
+[22:43:07]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[22:43:47]ADMIN: Cakebatter has started the game.
+[22:43:47]ACCESS: Logout: *no key*/(Cakebatter)
+[22:43:47]ACCESS: Login: Cakebatter/(Simon Howard) from 127.0.0.1-4218557159 || BYOND v501
+[22:43:50]DEBUG: Next event of severity Mundane in 12.558 minutes.
+[22:43:50]DEBUG: Next event of severity Moderate in 44.422 minutes.
+[22:43:50]DEBUG: Next event of severity Major in 93.33 minutes.
+[22:43:53]SAY: cat/ : HSSSSS
+[22:43:57]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[22:44:01]EMOTE: cat/ : <B>The cat</B> bites the mouse (222)!
+[22:44:13]SAY: Nini/ : AUUUUUU
+[22:44:23]EMOTE: Bones/ : <B>Bones</B> meows.
+[22:44:25]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:44:38]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[22:44:56]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:44:56]SAY: Koira/ : YAP
+[22:45:02]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[22:45:20]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[22:45:22]ADMIN: Cakebatter/(Simon Howard) created a /obj/machinery/biogenerator
+[22:45:25]ADMIN: Cakebatter/(Simon Howard) created a /obj/machinery/biogenerator
+[22:45:26]SAY: Poly/ : WHO TOOK THE DAMN HARDSUITS?
+[22:45:33]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/storage/backpack/satchel_hyd
+[22:45:38]EMOTE: Tiger/ : <B>Tiger</B> shakes their head.
+[22:45:48]SAY: Cat/ : Esp!
+[22:45:50]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> meows.
+[22:45:52]SAY: Bones/ : HSSSSS
+[22:45:58]EMOTE: Tiger/ : <B>Tiger</B> mews.
+[22:45:58]ADMIN: Cakebatter/(Simon Howard) created a /obj/machinery/seed_extractor and /obj/item/seeds/watermelonseed
+[22:45:59]SAY: Emi/ : HSSSSS
+[22:45:59]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:46:05]SAY: Ginger/ : YAP
+[22:46:05]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[22:46:05]EMOTE: Nini/ : <B>Nini</B> woofs.
+[22:46:09]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/cabbage
+[22:46:09]SAY: Bones/ : HSSSSS
+[22:46:19]SAY: Milka/ : Purr!
+[22:46:21]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/storage/bag/sheetsnatcher
+[22:46:27]EMOTE: Ginger/ : <B>Ginger</B> shivers..
+[22:46:45]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/storage/bag/plants
+[22:46:45]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[22:46:54]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:54]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:55]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:55]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:55]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:56]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:56]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:56]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:57]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:57]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:57]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:58]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:58]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:58]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:59]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:46:59]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:00]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:01]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:01]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:01]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:02]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:02]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:02]ADMIN: Cakebatter/(Simon Howard) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:47:04]SAY: Dr. NibbleFluff/ : Meow!
+[22:47:14]SAY: Dr. NibbleFluff/ : Meow!
+[22:47:14]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[22:47:20]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[22:47:28]EMOTE: Bones/ : <B>Bones</B> shivers.
+[22:47:32]ACCESS: Logout: Cakebatter/(Simon Howard)
+
+
+Starting up. 22:52.59
+---------------------
+[22:52:59]MISC: Saved mode is 'extended'
+[22:52:59]MISC: Failed to load config/alienwhitelist.txt
+[22:52:59]ADMIN: Loading jobban_rank
+[22:52:59]ADMIN: jobban_keylist was empty
+[22:52:59]ADMIN: Loading Banlist
+[22:53:00]DEBUG: Rebuilding Master Controller
+[22:54:28]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[22:56:04]ADMIN: Cakebatter has started the game.
+[22:56:04]ACCESS: Logout: *no key*/(Cakebatter)
+[22:56:05]ACCESS: Login: Cakebatter/(Leroy Rosensteel) from 127.0.0.1-4218557159 || BYOND v501
+[22:56:07]DEBUG: Next event of severity Mundane in 12.06 minutes.
+[22:56:07]DEBUG: Next event of severity Moderate in 50.746 minutes.
+[22:56:07]DEBUG: Next event of severity Major in 87.355 minutes.
+[22:56:07]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[22:56:17]EMOTE: cat/ : <B>The cat</B> toys with the mouse (134).
+[22:56:31]SAY: Dr. NibbleFluff/ : Esp!
+[22:56:35]EMOTE: Ginger/ : <B>Ginger</B> pants..
+[22:56:40]EMOTE: Milka/ : <B>Milka</B> shakes their head.
+[22:56:46]SAY: kitten/ : Purr!
+[22:56:48]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:56:50]EMOTE: mouse (46)/ : <B>The mouse (46)</B> runs in a circle.
+[22:56:55]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/structure/flora/pottedplant
+[22:57:02]SAY: Tiger/ : Esp!
+[22:57:06]SAY: Wittley/ : Esp!
+[22:57:20]EMOTE: Lisa/ : <B>Lisa</B> shakes its head.
+[22:57:21]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/storage/bag/plants
+[22:57:22]SAY: Milka/ : Meow!
+[22:57:29]SAY: Lisa/ : YAP
+[22:57:35]SAY: Bones/ : Purr!
+[22:57:36]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/machinery/biogenerator
+[22:57:43]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:44]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:44]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:44]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:44]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:45]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:45]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:45]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:46]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:46]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:46]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:47]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:47]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:47]EMOTE: fox/ : <B>The fox</B> howls.
+[22:57:47]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:48]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:48]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:48]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:49]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:49]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:49]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:49]EMOTE: mouse (46)/ : <B>The mouse (46)</B> runs in a circle.
+[22:57:50]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:50]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:50]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:51]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:51]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:51]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:57:52]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiadeus
+[22:58:01]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[22:58:03]SAY: cat/ : Meow!
+[22:58:25]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:58:25]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:58:26]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:58:26]ADMIN: Cakebatter/(Leroy Rosensteel) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[22:58:29]EMOTE: Wittley/ : <B>Wittley</B> mews.
+[22:58:48]SAY: Milka/ : HSSSSS
+[22:58:50]SAY: fox/ : Awoo
+[22:59:14]SAY: Tiger/ : Meow!
+[22:59:43]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[23:00:07]SAY: fox/ : Tchoff
+[23:00:23]SAY: Milka/ : HSSSSS
+[23:00:27]EMOTE: kitten/ : <B>The kitten</B> meows.
+[23:00:36]EMOTE: kitten/ : <B>The kitten</B> meows.
+[23:00:44]EMOTE: Ginger/ : <B>Ginger</B> shakes its head..
+[23:00:50]EMOTE: Iqui/ : <B>Iqui</B> flutters its wings.
+[23:01:02]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[23:01:06]SAY: cat/ : Esp!
+[23:01:08]EMOTE: Emi/ : <B>Emi</B> shivers.
+[23:01:16]EMOTE: Emi/ : <B>Emi</B> mews.
+[23:01:16]EMOTE: Emi/ : <B>Emi</B> meows.
+[23:01:22]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[23:01:26]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[23:01:42]ACCESS: Logout: Cakebatter/(Leroy Rosensteel)
+
+
+Starting up. 23:04.17
+---------------------
+[23:04:17]MISC: Saved mode is 'extended'
+[23:04:17]MISC: Failed to load config/alienwhitelist.txt
+[23:04:17]ADMIN: Loading jobban_rank
+[23:04:17]ADMIN: jobban_keylist was empty
+[23:04:17]ADMIN: Loading Banlist
+[23:04:18]DEBUG: Rebuilding Master Controller
+[23:04:22]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[23:05:08]ADMIN: Cakebatter has started the game.
+[23:05:09]ACCESS: Logout: *no key*/(Cakebatter)
+[23:05:09]ACCESS: Login: Cakebatter/(Zack Nehling) from 127.0.0.1-4218557159 || BYOND v501
+[23:05:13]DEBUG: Next event of severity Mundane in 17.394 minutes.
+[23:05:13]DEBUG: Next event of severity Moderate in 41.43 minutes.
+[23:05:13]DEBUG: Next event of severity Major in 96.985 minutes.
+[23:05:13]SAY: Milka/ : Meow!
+[23:05:16]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[23:05:31]EMOTE: Nini/ : <B>Nini</B> shakes its head.
+[23:05:33]EMOTE: mouse (862)/ : <B>The mouse (862)</B> scritches at something.
+[23:05:35]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (862)!
+[23:05:37]EMOTE: Milka/ : <B>Milka</B> mews.
+[23:05:39]EMOTE: Emi/ : <B>Emi</B> meows.
+[23:05:53]SAY: Lisa/ : YAP
+[23:05:53]EMOTE: Emi/ : <B>Emi</B> meows.
+[23:05:55]EMOTE: Milka/ : <B>Milka</B> mews.
+[23:06:01]SAY: Cat/ : HSSSSS
+[23:06:07]SAY: Tiger/ : Esp!
+[23:06:36]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[23:06:50]EMOTE: cat/ : <B>The cat</B> meows.
+[23:06:58]SAY: Koira/ : AUUUUUU
+[23:07:04]ADMIN: Cakebatter/(Zack Nehling) created a /obj/machinery/biogenerator
+[23:07:11]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/storage/bag/plants
+[23:07:17]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[23:07:18]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:19]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:19]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:19]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:19]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:19]EMOTE: Squeaky (631)/ : <B>Squeaky (631)</B> squeeks.
+[23:07:20]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:20]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:20]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:20]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:21]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:21]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:21]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:21]SAY: Emi/ : Esp!
+[23:07:22]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:22]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:22]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:23]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:23]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:23]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:23]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:24]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:24]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:24]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:25]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:25]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:26]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:26]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:26]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:27]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:27]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:28]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:28]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:28]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:29]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:29]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:30]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:30]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:30]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:31]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:31]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:32]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:32]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:32]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:33]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:33]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:34]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:34]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:41]SAY: fox/ : Tchoff
+[23:07:45]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:45]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:45]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:46]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:46]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:47]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:47]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:47]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:07:59]EMOTE: fox/ : <B>The fox</B> shivers.
+[23:08:05]EMOTE: cat/ : <B>The cat</B> shivers.
+[23:08:26]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[23:08:32]SAY: Emi/ : Meow!
+[23:08:34]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[23:08:38]SAY: Iqui/ : Hello!
+[23:08:40]EMOTE: Emi/ : <B>Emi</B> shivers.
+[23:08:48]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[23:09:40]EMOTE: Tiger/ : <B>Tiger</B> mews.
+[23:09:40]SAY: Milka/ : HSSSSS
+[23:09:47]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:47]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:48]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:48]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:48]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:49]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:49]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:50]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:50]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:50]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:51]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:51]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:52]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:52]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:52]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:53]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:53]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:54]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:09:54]ADMIN: Cakebatter/(Zack Nehling) created a /obj/item/weapon/reagent_containers/food/snacks/grown/ambrosiavulgaris
+[23:10:00]SAY: kitten/ : Purr!
+[23:10:12]EMOTE: kitten/ : <B>The kitten</B> meows.
+[23:10:17]EMOTE: Cat/ : <B>Cat</B> mews.
+[23:10:45]EMOTE: Nini/ : <B>Nini</B> woofs.
+[23:10:45]EMOTE: Koira/ : <B>Koira</B> shakes its head..
+[23:10:51]SAY: Emi/ : Meow!
+[23:11:03]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[23:11:03]SAY: Poly/ : Wire the solars, you lazy bums!
+[23:11:13]EMOTE: Poly/ : <B>Poly</B> bawks.
+[23:11:22]ACCESS: Logout: Cakebatter/(Zack Nehling)

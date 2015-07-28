@@ -1,0 +1,817 @@
+
+
+Starting up. 03:22.45
+---------------------
+[03:22:45]MISC: Saved mode is 'extended'
+[03:22:46]MISC: Failed to load config/alienwhitelist.txt
+[03:22:46]ADMIN: Loading jobban_rank
+[03:22:46]ADMIN: jobban_keylist was empty
+[03:22:46]ADMIN: Loading Banlist
+[03:22:46]DEBUG: Rebuilding Master Controller
+[03:22:48]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[03:24:28]VOTE: Gamemode vote started by the server.
+[03:24:28]DEBUG: The server has called a gamemode vote
+[03:25:28]VOTE: <b>Vote Result: Inconclusive - No Votes!</b>
+[03:26:21]ADMIN: Cakebatter has started the game.
+[03:26:22]ACCESS: Logout: *no key*/(Cakebatter)
+[03:26:22]ACCESS: Login: Cakebatter/(Mauricio Field) from 127.0.0.1-4218557159 || BYOND v501
+[03:26:24]DEBUG: Next event of severity Mundane in 13.422 minutes.
+[03:26:24]DEBUG: Next event of severity Moderate in 49.918 minutes.
+[03:26:24]DEBUG: Next event of severity Major in 84.875 minutes.
+[03:26:29]SAY: Emi/ : Esp!
+[03:26:33]EMOTE: Ginger/ : <B>Ginger</B> chases its tail..
+[03:26:39]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:26:42]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Dr. Gibb
+[03:26:46]ADMIN: Cakebatter/(Mauricio Field) created a /mob/living/carbon/human/interactive/angry
+[03:26:50]EMOTE: Lisa/ : <B>Lisa</B> shakes its head.
+[03:27:00]EMOTE: mouse (205)/ : <B>The mouse (205)</B> shakes.
+[03:27:02]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:27:10]EMOTE: Nini/ : <B>Nini</B> yaps.
+[03:27:13]SAY: Squeaky (907)/ : Squeek?
+[03:27:17]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:27:21]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:27:23]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (65)!
+[03:27:23]EMOTE: Poly/ : <B>Poly</B> bawks.
+[03:27:25]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> nibbles on something.
+[03:27:29]SAY: Poly/ : Poly wanna cracker!
+[03:27:33]EMOTE: Koira/ : <B>Koira</B> yaps..
+[03:27:40]EMOTE: Ginger/ : <B>Ginger</B> chases its tail..
+[03:27:40]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[03:27:48]SAY: Emi/ : HSSSSS
+[03:27:52]EMOTE: Nini/ : <B>Nini</B> shakes its head.
+[03:28:00]EMOTE: Bones/ : <B>Bones</B> shivers.
+[03:28:12]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:28:16]ADMIN: Cakebatter/(Mauricio Field) deleted John Batten at (110,153,4)
+[03:28:18]SAY: Poly/ : Poly wanna cracker!
+[03:28:24]SAY: Emi/ : Meow!
+[03:28:43]EMOTE: Iqui/ : <B>Iqui</B> flutters its wings.
+[03:28:45]EMOTE: fox/ : <B>The fox</B> barks.
+[03:28:49]EMOTE: Ginger/ : <B>Ginger</B> yaps..
+[03:28:49]EMOTE: Cat/ : <B>Cat</B> mews.
+[03:28:53]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:29:19]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:29:29]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shivers.
+[03:29:31]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[03:29:33]EMOTE: Koira/ : <B>Koira</B> woofs!.
+[03:29:37]EMOTE: kitten/ : <B>The kitten</B> mews.
+[03:29:39]SAY: Emi/ : HSSSSS
+[03:29:57]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[03:30:01]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:30:02]SAY: Milka/ : Meow!
+[03:30:04]SAY: Bones/ : Meow!
+[03:30:04]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:30:14]EMOTE: Bones/ : <B>Bones</B> meows.
+[03:30:28]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:30:30]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[03:30:32]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shivers.
+[03:30:42]SAY: Dr. NibbleFluff/ : Meow!
+[03:30:50]EMOTE: Squeaky (907)/ : <B>Squeaky (907)</B> scritches at something.
+[03:31:02]SAY: cat/ : Purr!
+[03:31:04]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[03:31:06]SAY: fox/ : Ack-Ack
+[03:31:37]SAY: Poly/ : WHO TOOK THE DAMN HARDSUITS?
+[03:31:47]EMOTE: Ginger/ : <B>Ginger</B> shivers..
+[03:31:59]SAY: Emi/ : Meow!
+[03:32:07]SAY: Dr. NibbleFluff/ : Purr!
+[03:32:11]SAY: Dr. NibbleFluff/ : Purr!
+[03:32:27]SAY: Squeaky (907)/ : Squeek!
+[03:32:35]SAY: Koira/ : AUUUUUU
+[03:32:50]EMOTE: fox/ : <B>The fox</B> barks.
+[03:32:52]EMOTE: Nini/ : <B>Nini</B> woofs.
+[03:32:54]SAY: Dr. NibbleFluff/ : Meow!
+[03:33:00]EMOTE: kitten/ : <B>The kitten</B> shivers.
+[03:33:04]SAY: Emi/ : Esp!
+[03:33:06]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[03:33:10]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[03:33:16]EMOTE: fox/ : <B>The fox</B> shivers.
+[03:33:22]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:33:24]EMOTE: Tiger/ : <B>Tiger</B> meows.
+[03:33:28]SAY: Nini/ : YAP
+[03:33:47]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[03:33:54]EMOTE: Nini/ : <B>Nini</B> shivers.
+[03:34:07]EMOTE: Ginger/ : <B>Ginger</B> yaps..
+[03:34:27]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:34:29]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[03:34:37]SAY: Poly/ : Poly wanna cracker!
+[03:34:41]EMOTE: cat/ : <B>The cat</B> shivers.
+[03:35:00]EMOTE: Ginger/ : <B>Ginger</B> pants..
+[03:35:12]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[03:35:18]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[03:35:28]EMOTE: Milka/ : <B>Milka</B> mews.
+[03:35:42]SAY: Squeaky (907)/ : Squeek!
+[03:35:46]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:35:46]SAY: kitten/ : Esp!
+[03:35:48]SAY: Bones/ : HSSSSS
+[03:35:54]SAY: Lisa/ : AUUUUUU
+[03:36:27]EMOTE: Squeaky (907)/ : <B>Squeaky (907)</B> squeeks.
+[03:36:45]SAY: Milka/ : Purr!
+[03:36:47]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:36:55]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:36:55]EMOTE: fox/ : <B>The fox</B> barks.
+[03:36:55]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:36:57]EMOTE: Squeaky (907)/ : <B>Squeaky (907)</B> runs in a circle.
+[03:37:05]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:37:06]SAY: Nini/ : AUUUUUU
+[03:37:16]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:37:26]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:37:50]EMOTE: fox/ : <B>The fox</B> shivers.
+[03:37:59]EMOTE: Milka/ : <B>Milka</B> shivers.
+[03:38:13]SAY: Poly/ : YAP
+[03:38:15]SAY: kitten/ : Esp!
+[03:38:27]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[03:38:37]SAY: Nini/ : Bark!
+[03:38:43]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[03:38:49]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:38:51]EMOTE: Cat/ : <B>Cat</B> mews.
+[03:38:57]EMOTE: cat/ : <B>The cat</B> shivers.
+[03:38:58]SAY: kitten/ : Esp!
+[03:39:04]EMOTE: fox/ : <B>The fox</B> barks.
+[03:39:14]EMOTE: Koira/ : <B>Koira</B> shakes its head..
+[03:39:24]SAY: Emi/ : Esp!
+[03:39:28]SAY: Lisa/ : Woof!
+[03:39:28]SAY: kitten/ : Purr!
+[03:39:30]SAY: Emi/ : Purr!
+[03:39:30]SAY: Nini/ : YAP
+[03:39:38]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[03:40:07]DEBUG: Next event of severity Mundane in 15.524 minutes.
+[03:40:07]DEBUG: Starting event 'Trivial News' of severity Mundane.
+[03:40:09]SAY: Emi/ : Purr!
+[03:40:25]EMOTE: Iqui/ : <B>Iqui</B> squawks.
+[03:40:29]DEBUG: Event 'Trivial News' has completed at 12:17.
+[03:40:29]EMOTE: fox/ : <B>The fox</B> shakes its head.
+[03:40:35]EMOTE: fox/ : <B>The fox</B> shivers.
+[03:40:35]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:40:37]EMOTE: Koira/ : <B>Koira</B> shakes its head..
+[03:40:37]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[03:40:43]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:40:47]SAY: Milka/ : Purr!
+[03:40:51]SAY: Nini/ : AUUUUUU
+[03:40:55]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:41:03]SAY: Ginger/ : YAP
+[03:41:13]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:41:21]SAY: Wittley/ : HSSSSS
+[03:41:21]SAY: Poly/ : Meow!
+[03:41:23]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:41:25]SAY: cat/ : Meow!
+[03:41:31]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:41:34]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[03:41:37]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[03:41:46]SAY: Poly/ : Esp!
+[03:42:12]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[03:42:26]SAY: Cat/ : Esp!
+[03:42:42]EMOTE: Emi/ : <B>Emi</B> mews.
+[03:42:42]EMOTE: Koira/ : <B>Koira</B> shivers..
+[03:42:48]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[03:42:48]SAY: fox/ : Tchoff
+[03:43:00]EMOTE: fox/ : <B>The fox</B> barks.
+[03:43:37]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:43:49]SAY: Dr. NibbleFluff/ : HSSSSS
+[03:43:53]SAY: Bones/ : Purr!
+[03:44:01]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[03:44:07]EMOTE: Ginger/ : <B>Ginger</B> shivers..
+[03:44:09]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:44:11]EMOTE: Nini/ : <B>Nini</B> yaps.
+[03:44:37]SAY: kitten/ : Meow!
+[03:44:38]SAY: Lisa/ : Bark!
+[03:44:44]SAY: Emi/ : HSSSSS
+[03:44:52]SAY: cat/ : Purr!
+[03:45:02]SAY: Lisa/ : Woof!
+[03:45:24]SAY: kitten/ : Meow!
+[03:45:43]SAY: Poly/ : Esp!
+[03:45:55]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:45:59]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:46:01]EMOTE: Lisa/ : <B>Lisa</B> pants.
+[03:46:03]EMOTE: Milka/ : <B>Milka</B> shivers.
+[03:46:09]EMOTE: Bones/ : <B>Bones</B> shivers.
+[03:46:21]SAY: Nini/ : YAP
+[03:46:22]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:46:28]SAY: Milka/ : Meow!
+[03:46:36]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:46:44]SAY: Nini/ : YAP
+[03:46:50]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:46:52]EMOTE: Wittley/ : <B>Wittley</B> meows.
+[03:47:17]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[03:47:17]SAY: Iqui/ : BAWWWWK george mellons griffing me
+[03:47:23]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:47:31]EMOTE: kitten/ : <B>The kitten</B> meows.
+[03:47:37]EMOTE: Nini/ : <B>Nini</B> shivers.
+[03:47:39]SAY: Tiger/ : Esp!
+[03:47:51]EMOTE: Nini/ : <B>Nini</B> shivers.
+[03:48:03]SAY: Bones/ : Purr!
+[03:48:07]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[03:48:09]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[03:48:19]EMOTE: Nini/ : <B>Nini</B> woofs.
+[03:48:33]EMOTE: Poly/ : <B>Poly</B> flutters its wings.
+[03:48:40]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[03:48:42]SAY: Emi/ : HSSSSS
+[03:48:58]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[03:48:58]EMOTE: Milka/ : <B>Milka</B> shakes their head.
+[03:49:03]ACCESS: Logout: Cakebatter/(Mauricio Field)
+
+
+Starting up. 03:51.15
+---------------------
+[03:51:15]MISC: Saved mode is 'extended'
+[03:51:15]MISC: Failed to load config/alienwhitelist.txt
+[03:51:15]ADMIN: Loading jobban_rank
+[03:51:15]ADMIN: jobban_keylist was empty
+[03:51:15]ADMIN: Loading Banlist
+[03:51:16]DEBUG: Rebuilding Master Controller
+[03:52:14]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[03:53:50]ADMIN: Cakebatter has started the game.
+[03:53:50]ACCESS: Logout: *no key*/(Cakebatter)
+[03:53:50]ACCESS: Login: Cakebatter/(Jesus Rosensteel) from 127.0.0.1-4218557159 || BYOND v501
+[03:53:51]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[03:53:52]DEBUG: Next event of severity Mundane in 17.12 minutes.
+[03:53:52]DEBUG: Next event of severity Moderate in 36.33 minutes.
+[03:53:52]DEBUG: Next event of severity Major in 97.52 minutes.
+[03:53:57]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[03:54:03]EMOTE: cat/ : <B>The cat</B> bites the mouse (292)!
+[03:54:30]ADMIN: Cakebatter/(Jesus Rosensteel) created a /mob/living/carbon/human/interactive/angry
+[03:54:34]SAY: Cat/ : Purr!
+[03:54:42]EMOTE: mouse (245)/ : <B>The mouse (245)</B> shakes.
+[03:54:42]EMOTE: cat/ : <B>The cat</B> meows.
+[03:55:13]ATTACK: Cakebatter/(Jesus Rosensteel) has punched *no key*/(Charles Logue)
+[03:55:14]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[03:55:18]SAY: Emi/ : Esp!
+[03:55:18]ATTACK: Cakebatter/(Jesus Rosensteel) has punched *no key*/(Charles Logue)
+[03:55:19]ATTACK: Cakebatter/(Jesus Rosensteel) has punched *no key*/(Charles Logue)
+[03:55:20]ATTACK: Cakebatter/(Jesus Rosensteel) has punched *no key*/(Charles Logue)
+[03:55:29]SAY: Dr. NibbleFluff/ : HSSSSS
+[03:55:30]SAY: cat/ : Meow!
+[03:55:32]ACCESS: Logout: Cakebatter/(Jesus Rosensteel)
+
+
+Starting up. 04:31.46
+---------------------
+[04:31:46]MISC: Saved mode is 'extended'
+[04:31:46]MISC: Failed to load config/alienwhitelist.txt
+[04:31:46]ADMIN: Loading jobban_rank
+[04:31:46]ADMIN: jobban_keylist was empty
+[04:31:46]ADMIN: Loading Banlist
+[04:31:47]DEBUG: Rebuilding Master Controller
+[04:31:58]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[04:33:24]ADMIN: Cakebatter has started the game.
+[04:33:24]ACCESS: Logout: *no key*/(Cakebatter)
+[04:33:24]ACCESS: Login: Cakebatter/(Cassian Hoenshell) from 127.0.0.1-4218557159 || BYOND v501
+[04:33:26]DEBUG: Next event of severity Mundane in 12.514 minutes.
+[04:33:26]DEBUG: Next event of severity Moderate in 41.062 minutes.
+[04:33:26]DEBUG: Next event of severity Major in 83.8567 minutes.
+[04:33:31]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[04:33:35]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[04:33:36]ADMIN: Cakebatter/(Cassian Hoenshell) created a /mob/living/carbon/human/interactive/angry
+[04:33:37]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (416)!
+[04:33:37]EMOTE: Poly/ : <B>Poly</B> squawks.
+[04:33:41]EMOTE: Emi/ : <B>Emi</B> mews.
+[04:33:43]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> nibbles on something.
+[04:33:58]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[04:34:04]EMOTE: fox/ : <B>The fox</B> howls.
+[04:34:06]SAY: fox/ : Awoo
+[04:34:06]SAY: Cat/ : HSSSSS
+[04:34:16]SAY: Wittley/ : Meow!
+[04:34:20]SAY: Emi/ : Purr!
+[04:34:32]SAY: fox/ : Tchoff
+[04:34:32]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[04:34:36]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[04:34:48]EMOTE: Milka/ : <B>Milka</B> shakes their head.
+[04:35:06]ACCESS: Logout: Cakebatter/(Cassian Hoenshell)
+
+
+Starting up. 17:00.29
+---------------------
+[17:00:29]MISC: Saved mode is 'extended'
+[17:00:29]MISC: Failed to load config/alienwhitelist.txt
+[17:00:29]ADMIN: Loading jobban_rank
+[17:00:29]ADMIN: jobban_keylist was empty
+[17:00:29]ADMIN: Loading Banlist
+[17:00:30]DEBUG: Rebuilding Master Controller
+[17:16:32]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[17:18:11]VOTE: Gamemode vote started by the server.
+[17:18:11]DEBUG: The server has called a gamemode vote
+[17:18:22]ADMIN: Cakebatter has started the game.
+[17:18:22]ACCESS: Logout: *no key*/(Cakebatter)
+[17:18:22]ACCESS: Login: Cakebatter/(Caiden Werry) from 127.0.0.1-4218557159 || BYOND v501
+[17:18:26]DEBUG: Next event of severity Mundane in 12.19 minutes.
+[17:18:26]DEBUG: Next event of severity Moderate in 51.332 minutes.
+[17:18:26]DEBUG: Next event of severity Major in 83.6483 minutes.
+[17:18:30]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:18:35]GAME: Explosion with size (2, 3, 4) in area OOC Lobby 
+[17:18:35]ACCESS: Logout: *no key*/(Caiden Werry)
+[17:18:35]ACCESS: Login: Cakebatter/(Caiden Werry) from 127.0.0.1-4218557159 || BYOND v501
+[17:18:36]EMOTE: Wittley/ : <B>Wittley</B> shivers.
+[17:18:36]EMOTE: cat/ : <B>The cat</B> bites the mouse (397)!
+[17:18:43]ACCESS: Logout: *no key*/(Caiden Werry)
+[17:18:43]ACCESS: Login: Cakebatter/(Caiden Werry) from 127.0.0.1-4218557159 || BYOND v501
+[17:18:58]SAY: kitten/ : Esp!
+[17:19:04]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:19:08]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[17:19:16]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:19:32]SAY: Bones/ : HSSSSS
+[17:19:36]SAY: Dr. NibbleFluff/ : HSSSSS
+[17:19:57]EMOTE: Nini/ : <B>Nini</B> barks.
+[17:20:01]SAY: Emi/ : Esp!
+[17:20:01]EMOTE: Cat/ : <B>Cat</B> shivers.
+[17:20:03]SAY: fox/ : Geckers
+[17:20:05]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:20:05]GAME: Explosion with size (1, 2, 3) in area Sol 
+[17:20:07]EMOTE: fox/ : <B>The fox</B> howls.
+[17:20:10]GAME: Explosion with size (2, 3, 4) in area Sol 
+[17:20:14]GAME: Explosion with size (1, 2, 3) in area Sol 
+[17:20:19]GAME: Explosion with size (1, 2, 3) in area Sol 
+[17:20:22]GAME: Explosion with size (2, 3, 4) in area Sol 
+[17:20:27]EMOTE: Bones/ : <B>Bones</B> shivers.
+[17:20:29]GAME: Explosion with size (3, 5, 7) in area Sol 
+[17:20:34]SAY: cat/ : Meow!
+[17:20:35]GAME: Explosion with size (3, 5, 7) in area Sol 
+[17:20:36]EMOTE: fox/ : <B>The fox</B> barks.
+[17:20:40]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:21:00]SAY: Koira/ : Bark!
+[17:21:12]GAME: Explosion with size (3, 5, 7) in area Sol 
+[17:21:16]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[17:21:16]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:21:16]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:21:20]EMOTE: cat/ : <B>The cat</B> meows.
+[17:21:24]EMOTE: mouse (348)/ : <B>The mouse (348)</B> shakes.
+[17:21:36]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:21:38]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:21:48]EMOTE: Nini/ : <B>Nini</B> yaps.
+[17:21:59]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[17:22:09]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:22:15]EMOTE: Ginger/ : <B>Ginger</B> woofs!.
+[17:22:21]SAY: fox/ : Ack-Ack-Ack-Ackawoooo
+[17:22:27]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:22:29]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:22:51]EMOTE: Milka/ : <B>Milka</B> mews.
+[17:23:14]SAY: mouse (348)/ : Squeek!
+[17:23:35]ADMIN: Cakebatter/(Caiden Werry) created a /mob/living/carbon/human
+[17:23:36]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:23:46]SAY: Poly/ : WHO TOOK THE DAMN HARDSUITS?
+[17:23:54]ADMIN: Cakebatter/(Caiden Werry) has gibbed Cakebatter/(Caiden Werry)
+[17:24:10]ACCESS: Logout: *no key*/(Caiden Werry)
+[17:24:10]ACCESS: Login: cakebatter/(unknown) from 127.0.0.1-4218557159 || BYOND v501
+[17:24:10]ADMIN: Cakebatter/(unknown) modified unknown's ckey to cakebatter
+[17:24:19]ADMIN: cakebatter/(unknown) created a /mob/living/silicon/ai and /mob/living/carbon/human
+[17:24:24]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[17:24:34]EMOTE: cat/ : <B>The cat</B> shivers.
+[17:24:38]SAY: Bones/ : HSSSSS
+[17:24:42]EMOTE: Emi/ : <B>Emi</B> mews.
+[17:24:44]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:24:58]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:25:02]EMOTE: Koira/ : <B>Koira</B> chases its tail..
+[17:25:07]SAY: mouse (348)/ : SQUEEK!
+[17:25:07]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[17:25:35]SAY: Ginger/ : Bark!
+[17:25:35]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shivers.
+[17:26:07]ADMIN: cakebatter/(unknown) created a /obj/machinery/floodlight
+[17:26:17]SAY: Nini/ : Bark!
+[17:26:21]EMOTE: cat/ : <B>The cat</B> meows.
+[17:26:21]EMOTE: unknown/cakebatter : <B>The unknown</B> gasps!
+[17:26:32]ADMIN: cakebatter/(unknown) created a /obj/machinery/light
+[17:26:35]SAY: Iqui/ : Hi
+[17:26:38]ADMIN: cakebatter/(unknown) created a /obj/item/clothing/head/helmet/space/rig/light
+[17:26:48]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[17:26:48]EMOTE: Emi/ : <B>Emi</B> mews.
+[17:26:59]ADMIN: cakebatter/(unknown) created a /obj/item/device/flashlight/lamp
+[17:27:00]ADMIN: cakebatter/(unknown) created a /obj/item/device/flashlight/lamp
+[17:27:03]ADMIN: cakebatter/(unknown) created a /obj/item/device/flashlight/flare
+[17:27:07]ADMIN: cakebatter/(unknown) created a /obj/item/device/flashlight/lantern
+[17:27:12]SAY: kitten/ : HSSSSS
+[17:27:30]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[17:27:32]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[17:27:34]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[17:27:42]SAY: Bones/ : Esp!
+[17:27:48]SAY: cat/ : Purr!
+[17:27:52]ADMIN: cakebatter/(unknown) created a /obj/item/weapon/twohanded/fireaxe
+[17:27:54]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[17:27:54]SAY: kitten/ : HSSSSS
+[17:27:55]ADMIN: cakebatter/(unknown) created a /obj/item/weapon/melee/energy/axe
+[17:27:56]SAY: Emi/ : HSSSSS
+[17:27:58]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[17:28:04]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[17:28:16]SAY: Poly/ : HSSSSS
+[17:28:20]SAY: Lisa/ : AUUUUUU
+[17:28:41]SAY: cat/ : Purr!
+[17:28:43]ADMIN: cakebatter/(unknown) changed the equipment of cakebatter/(unknown) to tournament janitor.
+[17:28:45]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[17:28:51]ADMIN: cakebatter/(unknown) created a /obj/item/weapon/melee/energy/axe
+[17:28:51]EMOTE: Nini/ : <B>Nini</B> woofs.
+[17:28:53]EMOTE: Wittley/ : <B>Wittley</B> shakes their head.
+[17:28:55]SAY: fox/ : Awoo
+[17:29:03]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[17:29:09]SAY: kitten/ : Meow!
+[17:29:11]SAY: cat/ : Esp!
+[17:29:15]SAY: Poly/ : Poly wanna cracker!
+[17:29:25]SAY: Nini/ : Woof!
+[17:29:25]SAY: cat/ : Purr!
+[17:29:35]EMOTE: Wittley/ : <B>Wittley</B> meows.
+[17:29:39]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[17:29:49]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:29:57]EMOTE: Nini/ : <B>Nini</B> shivers.
+[17:30:03]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[17:30:12]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[17:30:12]EMOTE: Emi/ : <B>Emi</B> shivers.
+[17:30:14]SAY: fox/ : Tchoff
+[17:30:22]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:23]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:24]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:25]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:27]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:28]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:29]ATTACK: cakebatter/(unknown) attacked *no key*/(Delialah Bennit) with energy axe (INTENT: HURT) (DAMTYE: BRUTE)
+[17:30:49]DEBUG: Next event of severity Mundane in 12.118 minutes.
+[17:30:49]DEBUG: Starting event 'Economic News' of severity Mundane.
+[17:31:07]SAY: Emi/ : Meow!
+[17:31:13]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> meows.
+[17:31:17]SAY: Nini/ : AUUUUUU
+[17:31:47]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:31:51]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[17:31:55]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[17:31:59]EMOTE: Tiger/ : <B>Tiger</B> shakes their head.
+[17:32:01]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:32:05]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:32:16]SAY: Tiger/ : HSSSSS
+[17:32:20]EMOTE: fox/ : <B>The fox</B> shivers.
+[17:32:20]SAY: Dr. NibbleFluff/ : Meow!
+[17:32:38]SAY: Lisa/ : Bark!
+[17:32:42]EMOTE: Poly/ : <B>Poly</B> squawks.
+[17:32:46]EMOTE: fox/ : <B>The fox</B> shivers.
+[17:32:56]SAY: Bones/ : HSSSSS
+[17:33:09]SAY: Bones/ : Meow!
+[17:33:13]EMOTE: Cat/ : <B>Cat</B> meows.
+[17:33:15]SAY: Tiger/ : HSSSSS
+[17:33:17]EMOTE: fox/ : <B>The fox</B> howls.
+[17:33:17]SAY: Dr. NibbleFluff/ : HSSSSS
+[17:33:21]SAY: fox/ : Geckers
+[17:33:23]SAY: Poly/ : Wire the solars, you lazy bums!
+[17:33:27]EMOTE: Nini/ : <B>Nini</B> shakes its head.
+[17:33:29]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:33:31]EMOTE: Emi/ : <B>Emi</B> mews.
+[17:33:55]SAY: Poly/ : Wire the solars, you lazy bums!
+[17:34:03]EMOTE: Ginger/ : <B>Ginger</B> yaps..
+[17:34:07]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[17:34:15]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[17:34:23]EMOTE: Koira/ : <B>Koira</B> barks!.
+[17:34:33]SAY: kitten/ : Purr!
+[17:34:33]SAY: cat/ : HSSSSS
+[17:34:44]SAY: Wittley/ : Purr!
+[17:34:54]SAY: cat/ : Meow!
+[17:35:00]ACCESS: Logout: cakebatter/(unknown)
+
+
+Starting up. 18:17.21
+---------------------
+[18:17:21]MISC: Saved mode is 'extended'
+[18:17:21]MISC: Failed to load config/alienwhitelist.txt
+[18:17:21]ADMIN: Loading jobban_rank
+[18:17:21]ADMIN: jobban_keylist was empty
+[18:17:21]ADMIN: Loading Banlist
+[18:17:22]DEBUG: Rebuilding Master Controller
+[18:17:35]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[18:18:40]ADMIN: Cakebatter has started the game.
+[18:18:41]ACCESS: Logout: *no key*/(Cakebatter)
+[18:18:41]ACCESS: Login: Cakebatter/(Xander Shaw) from 127.0.0.1-4218557159 || BYOND v501
+[18:18:42]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[18:18:43]DEBUG: Next event of severity Mundane in 17.57 minutes.
+[18:18:43]DEBUG: Next event of severity Moderate in 41.646 minutes.
+[18:18:43]DEBUG: Next event of severity Major in 87.195 minutes.
+[18:18:48]SAY: Cat/ : Esp!
+[18:18:54]EMOTE: cat/ : <B>The cat</B> chomps on the mouse (924)!
+[18:18:56]SAY: Nini/ : Bark!
+[18:18:59]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:19:17]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:19:17]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[18:19:33]SAY: Ginger/ : Bark!
+[18:19:45]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:20:03]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:20:05]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:20:17]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[18:20:21]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:20:25]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:20:37]SAY: fox/ : Tchoff
+[18:20:47]EMOTE: Poly/ : <B>Poly</B> bawks.
+[18:20:52]GAME: Explosion with size (2, 3, 4) in area OOC Lobby 
+[18:20:52]ACCESS: Logout: *no key*/(Xander Shaw)
+[18:20:52]ACCESS: Login: Cakebatter/(Xander Shaw) from 127.0.0.1-4218557159 || BYOND v501
+[18:20:57]EMOTE: Cat/ : <B>Cat</B> shakes their head.
+[18:21:03]EMOTE: Lisa/ : <B>Lisa</B> shivers.
+[18:21:05]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> mews.
+[18:21:11]SAY: Tiger/ : HSSSSS
+[18:21:13]EMOTE: fox/ : <B>The fox</B> howls.
+[18:21:19]ACCESS: Logout: *no key*/(Xander Shaw)
+[18:21:19]ACCESS: Login: Cakebatter/(Xander Shaw) from 127.0.0.1-4218557159 || BYOND v501
+[18:21:23]EMOTE: Tiger/ : <B>Tiger</B> meows.
+[18:21:47]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:21:47]EMOTE: fox/ : <B>The fox</B> shivers.
+[18:21:57]EMOTE: kitten/ : <B>The kitten</B> mews.
+[18:22:03]SAY: cat/ : Purr!
+[18:22:04]SAY: Wittley/ : Meow!
+[18:22:28]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:22:30]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:22:41]GAME: Explosion with size (3, 5, 7) in area Sol 
+[18:22:42]EMOTE: fox/ : <B>The fox</B> barks.
+[18:22:46]GAME: Explosion with size (3, 5, 7) in area Sol 
+[18:22:48]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[18:22:48]EMOTE: Nini/ : <B>Nini</B> barks.
+[18:23:00]GAME: Explosion with size (3, 5, 7) in area Sol 
+[18:23:03]GAME: Explosion with size (3, 5, 7) in area Sol 
+[18:23:08]SAY: Dr. NibbleFluff/ : HSSSSS
+[18:23:10]EMOTE: Koira/ : <B>Koira</B> barks!.
+[18:23:11]EMOTE: Nini/ : <B>Nini</B> barks.
+[18:23:39]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[18:23:41]EMOTE: Cat/ : <B>Cat</B> mews.
+[18:23:41]SAY: Poly/ : Bark!
+[18:23:56]EMOTE: Nini/ : <B>Nini</B> pants.
+[18:24:18]EMOTE: Ginger/ : <B>Ginger</B> yaps..
+[18:24:26]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> nibbles on something.
+[18:24:53]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:24:59]SAY: Cat/ : Esp!
+[18:25:09]SAY: Nini/ : AUUUUUU
+[18:26:06]ADMIN: Cakebatter/(Xander Shaw) created a /mob/living/carbon/human
+[18:26:08]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[18:26:19]ACCESS: Logout: *no key*/(Xander Shaw)
+[18:26:19]ACCESS: Login: cakebatter/(unknown) from 127.0.0.1-4218557159 || BYOND v501
+[18:26:19]ADMIN: Cakebatter/(unknown) modified unknown's ckey to cakebatter
+[18:26:34]SAY: Lisa/ : YAP
+[18:26:44]EMOTE: Poly/ : <B>Poly</B> flutters its wings.
+[18:26:50]EMOTE: Emi/ : <B>Emi</B> meows.
+[18:26:51]SAY: fox/ : Geckers
+[18:26:53]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:26:55]SAY: Wittley/ : HSSSSS
+[18:27:01]SAY: Wittley/ : Meow!
+[18:27:12]ACCESS: Logout: cakebatter/(unknown)
+[18:45:29]ACCESS: Login: Cakebatter/(unknown) from 127.0.0.1-4218557159 || BYOND v501
+[18:45:34]SAY: Cat/ : HSSSSS
+[18:45:36]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> shakes their head.
+[18:45:42]SAY: Bones/ : Purr!
+[18:45:46]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:45:49]SAY: cat/ : Purr!
+[18:45:55]SAY: Poly/ : AUUUUUU
+[18:45:57]EMOTE: Wittley/ : <B>Wittley</B> shakes their head.
+[18:45:57]ADMIN: Cakebatter/(unknown) created an explosion (1,1,1,1) at (157,140,2)
+[18:45:57]GAME: Explosion with size (1, 1, 1) in area Sol 
+[18:45:59]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:45:59]EMOTE: Nini/ : <B>Nini</B> woofs.
+[18:46:01]EMOTE: Bones/ : <B>Bones</B> shakes their head.
+[18:46:03]EMOTE: Nini/ : <B>Nini</B> pants.
+[18:46:17]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:46:23]EMOTE: Lisa/ : <B>Lisa</B> yaps.
+[18:46:26]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:29]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[18:46:31]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:35]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:36]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:37]EMOTE: unknown/Cakebatter : <B>The unknown</B> gasps!
+[18:46:38]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:40]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:41]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:46:43]EMOTE: Emi/ : <B>Emi</B> shakes their head.
+[18:46:45]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:46:45]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:46:47]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:46:49]EMOTE: unknown/Cakebatter : <B>The unknown</B> gasps!
+[18:46:55]SAY: Milka/ : Purr!
+[18:47:01]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[18:47:03]SAY: Cat/ : Purr!
+[18:47:04]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[18:47:16]SAY: kitten/ : Meow!
+[18:47:18]EMOTE: unknown/Cakebatter : <B>The unknown</B> gasps!
+[18:47:20]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:47:22]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:47:26]EMOTE: Emi/ : <B>Emi</B> mews.
+[18:47:34]SAY: Ginger/ : Woof!
+[18:47:48]SAY: Lisa/ : Bark!
+[18:47:50]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:47:51]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:47:54]SAY: Emi/ : HSSSSS
+[18:47:58]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:00]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:01]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:02]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:03]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:04]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:06]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:07]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:09]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:09]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[18:48:09]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:10]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:11]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:12]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:13]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:13]SAY: Iqui/ : BAWWWWK george mellons griffing me
+[18:48:14]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:15]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:16]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:19]EMOTE: Milka/ : <B>Milka</B> meows.
+[18:48:24]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:25]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:28]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:29]EMOTE: unknown/Cakebatter : <B>The unknown</B> gasps!
+[18:48:30]ADMIN: Cakebatter/(unknown) created a /turf/simulated/floor/plating/snow
+[18:48:31]SAY: cat/ : Esp!
+[18:48:41]EMOTE: unknown/Cakebatter : <B>The unknown</B> gasps!
+[18:48:41]GAME: Explosion with size (3, 5, 7) in area Sol 
+[18:48:41]ACCESS: Logout: *no key*/(unknown)
+[18:48:41]ACCESS: Login: Cakebatter/(unknown) from 127.0.0.1-4218557159 || BYOND v501
+[18:48:45]SAY: Bones/ : Esp!
+[18:48:47]EMOTE: Cat/ : <B>Cat</B> mews.
+[18:48:58]SAY: fox/ : Tchoff
+[18:49:02]ACCESS: Logout: *no key*/(unknown)
+[18:49:02]ACCESS: Login: Cakebatter/(unknown) from 127.0.0.1-4218557159 || BYOND v501
+[18:49:51]SAY: cat/ : Purr!
+[18:49:57]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[18:49:58]GAME: Explosion with size (3, 5, 7) in area Sol 
+[18:50:03]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[18:50:05]ACCESS: Logout: Cakebatter/(unknown)
+
+
+Starting up. 19:14.18
+---------------------
+[19:14:18]MISC: Saved mode is 'extended'
+[19:14:18]MISC: Failed to load config/alienwhitelist.txt
+[19:14:18]ADMIN: Loading jobban_rank
+[19:14:18]ADMIN: jobban_keylist was empty
+[19:14:18]ADMIN: Loading Banlist
+[19:14:19]DEBUG: Rebuilding Master Controller
+[19:14:44]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[19:15:29]ADMIN: Cakebatter has started the game.
+[19:15:29]ACCESS: Logout: *no key*/(Cakebatter)
+[19:15:29]ACCESS: Login: Cakebatter/(Jacob Kaur) from 127.0.0.1-4218557159 || BYOND v501
+[19:15:32]SAY: cat/ : Esp!
+[19:15:33]DEBUG: Next event of severity Mundane in 12.132 minutes.
+[19:15:33]DEBUG: Next event of severity Moderate in 49.942 minutes.
+[19:15:33]DEBUG: Next event of severity Major in 94.71 minutes.
+[19:15:36]GAME: Explosion with size (2, 3, 4) in area OOC Lobby 
+[19:15:36]ACCESS: Logout: *no key*/(Jacob Kaur)
+[19:15:36]ACCESS: Login: Cakebatter/(Jacob Kaur) from 127.0.0.1-4218557159 || BYOND v501
+[19:15:39]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[19:15:43]EMOTE: cat/ : <B>The cat</B> bites the mouse (260)!
+[19:15:49]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Dr. Gibb
+[19:15:50]ACCESS: Logout: *no key*/(Jacob Kaur)
+[19:15:50]ACCESS: Login: Cakebatter/(Jacob Kaur) from 127.0.0.1-4218557159 || BYOND v501
+[19:15:57]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:16:01]EMOTE: Tiger/ : <B>Tiger</B> shakes their head.
+[19:16:05]EMOTE: Nini/ : <B>Nini</B> shakes its head.
+[19:16:09]EMOTE: Wittley/ : <B>Wittley</B> meows.
+[19:16:11]SAY: Cat/ : HSSSSS
+[19:16:13]EMOTE: mouse (205)/ : <B>The mouse (205)</B> squiks.
+[19:16:13]GAME: Explosion with size (2, 3, 4) in area Biezel 
+[19:16:19]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:16:25]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:16:25]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:16:27]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[19:16:28]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:16:29]SAY: kitten/ : Purr!
+[19:16:43]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[19:16:43]EMOTE: Iqui/ : <B>Iqui</B> bawks.
+[19:16:45]GAME: Explosion with size (3, 5, 7) in area Biezel 
+[19:16:55]EMOTE: Milka/ : <B>Milka</B> meows.
+[19:17:01]EMOTE: Cat/ : <B>Cat</B> shivers.
+[19:17:03]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:17:11]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> meows.
+[19:17:13]SAY: Nini/ : Bark!
+[19:17:15]SAY: Bones/ : Meow!
+[19:17:21]SAY: Poly/ : Wire the solars, you lazy bums!
+[19:17:31]SAY: Ginger/ : AUUUUUU
+[19:17:41]EMOTE: kitten/ : <B>The kitten</B> mews.
+[19:17:53]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[19:18:13]EMOTE: Lisa/ : <B>Lisa</B> shakes its head.
+[19:18:13]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[19:18:25]GAME: Explosion with size (2, 3, 4) in area Biezel 
+[19:18:30]EMOTE: Wittley/ : <B>Wittley</B> shakes their head.
+[19:18:32]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:18:39]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:18:41]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:18:44]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:18:44]SAY: Tiger/ : Purr!
+[19:18:47]GAME: Explosion with size (1, 2, 3) in area Biezel 
+[19:18:50]GAME: Explosion with size (3, 5, 7) in area Biezel 
+[19:18:52]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[19:19:29]SAY: Poly/ : Check the singlo, you chucklefucks!
+[19:19:39]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[19:19:51]SAY: Poly/ : Poly wanna cracker!
+[19:19:53]EMOTE: Wittley/ : <B>Wittley</B> meows.
+[19:19:59]EMOTE: Lisa/ : <B>Lisa</B> barks.
+[19:19:59]EMOTE: Lisa/ : <B>Lisa</B> shivers.
+[19:19:59]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[19:20:13]SAY: fox/ : Geckers
+[19:20:15]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[19:20:19]SAY: Milka/ : HSSSSS
+[19:20:25]EMOTE: Koira/ : <B>Koira</B> shakes its head..
+[19:20:37]SAY: Nini/ : Bark!
+[19:20:45]SAY: Emi/ : Meow!
+[19:20:52]ACCESS: Logout: Cakebatter/(Jacob Kaur)
+
+
+Starting up. 19:25.41
+---------------------
+[19:25:41]MISC: Saved mode is 'extended'
+[19:25:42]MISC: Failed to load config/alienwhitelist.txt
+[19:25:42]ADMIN: Loading jobban_rank
+[19:25:42]ADMIN: jobban_keylist was empty
+[19:25:42]ADMIN: Loading Banlist
+[19:25:42]DEBUG: Rebuilding Master Controller
+[19:26:14]ACCESS: Login: Cakebatter/(Cakebatter) from 127.0.0.1-4218557159 || BYOND v501
+[19:26:31]ADMIN: Cakebatter has started the game.
+[19:26:32]ACCESS: Logout: *no key*/(Cakebatter)
+[19:26:32]ACCESS: Login: Cakebatter/(John Harrow) from 127.0.0.1-4218557159 || BYOND v501
+[19:26:35]DEBUG: Next event of severity Mundane in 13.488 minutes.
+[19:26:35]DEBUG: Next event of severity Moderate in 43.012 minutes.
+[19:26:35]DEBUG: Next event of severity Major in 96.48 minutes.
+[19:26:37]GAME: Explosion with size (3, 5, 7) in area OOC Lobby 
+[19:26:37]ACCESS: Logout: *no key*/(John Harrow)
+[19:26:37]ACCESS: Login: Cakebatter/(John Harrow) from 127.0.0.1-4218557159 || BYOND v501
+[19:26:38]EMOTE: Milka/ : <B>Milka</B> shakes their head.
+[19:26:40]ACCESS: Logout: *no key*/(John Harrow)
+[19:26:40]ACCESS: Login: Cakebatter/(John Harrow) from 127.0.0.1-4218557159 || BYOND v501
+[19:26:42]SAY: Bones/ : Esp!
+[19:26:45]GAME: Explosion with size (2, 3, 4) in area OOC Lobby 
+[19:26:47]EMOTE: cat/ : <B>The cat</B> toys with the mouse (767).
+[19:26:51]EMOTE: Iqui/ : <B>Iqui</B> turns and flies towards Hasna Rishat's home keys
+[19:26:52]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[19:27:06]GAME: Explosion with size (3, 5, 7) in area Sol 
+[19:27:25]GAME: Explosion with size (3, 5, 7) in area Sol 
+[19:27:29]GAME: Explosion with size (3, 5, 7) in area Sol 
+[19:27:33]GAME: Explosion with size (1, 2, 3) in area Sol 
+[19:27:36]EMOTE: Lisa/ : <B>Lisa</B> dances around
+[19:27:36]GAME: Explosion with size (3, 5, 7) in area Sol 
+[19:27:44]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> meows.
+[19:27:49]GAME: Explosion with size (2, 3, 4) in area Sol 
+[19:27:50]SAY: kitten/ : Meow!
+[19:27:56]EMOTE: Dr. NibbleFluff/ : <B>Dr. NibbleFluff</B> meows.
+[19:27:58]EMOTE: Ginger/ : <B>Ginger</B> barks!.
+[19:28:06]EMOTE: Milka/ : <B>Milka</B> mews.
+[19:28:10]SAY: kitten/ : Esp!
+[19:28:15]EMOTE: cat/ : <B>The cat</B> meows.
+[19:28:31]SAY: Dr. NibbleFluff/ : Esp!
+[19:29:15]EMOTE: kitten/ : <B>The kitten</B> shakes their head.
+[19:29:19]SAY: Lisa/ : AUUUUUU
+[19:29:23]SAY: cat/ : Purr!
+[19:29:30]EMOTE: Cat/ : <B>Cat</B> mews.
+[19:29:40]EMOTE: fox/ : <B>The fox</B> shivers.
+[19:30:04]EMOTE: cat/ : <B>The cat</B> shakes their head.
+[19:30:14]SAY: Milka/ : Purr!
+[19:30:30]SAY: kitten/ : Purr!
+[19:30:39]SAY: Ginger/ : Bark!
+[19:30:51]SAY: Nini/ : YAP
+[19:30:55]SAY: Cat/ : HSSSSS
+[19:31:17]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[19:31:25]SAY: Emi/ : Esp!
+[19:31:33]SAY: Poly/ : Check the singlo, you chucklefucks!
+[19:31:47]SAY: Emi/ : Purr!
+[19:31:49]EMOTE: Milka/ : <B>Milka</B> mews.
+[19:31:51]EMOTE: Koira/ : <B>Koira</B> pants..
+[19:32:11]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:32:11]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:32:15]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:32:28]SAY: Poly/ : OH GOD ITS FREE CALL THE SHUTTLE
+[19:32:36]SAY: fox/ : Ack-Ack
+[19:32:42]SAY: kitten/ : Purr!
+[19:32:52]SAY: Koira/ : Woof!
+[19:32:54]EMOTE: fox/ : <B>The fox</B> shivers.
+[19:33:02]EMOTE: Emi/ : <B>Emi</B> shivers.
+[19:33:04]SAY: Tiger/ : Esp!
+[19:33:12]EMOTE: Ginger/ : <B>Ginger</B> chases its tail.
+[19:33:18]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:33:50]SAY: Nini/ : YAP
+[19:33:59]EMOTE: Cat/ : <B>Cat</B> meows.
+[19:34:01]EMOTE: Lisa/ : <B>Lisa</B> chases her tail
+[19:34:03]EMOTE: Nini/ : <B>Nini</B> pants.
+[19:34:07]SAY: Ginger/ : Woof!
+[19:34:31]SAY: cat/ : Meow!
+[19:34:33]SAY: kitten/ : HSSSSS
+[19:34:51]SAY: Wittley/ : Esp!
+[19:35:03]SAY: Cat/ : HSSSSS
+[19:35:11]EMOTE: Koira/ : <B>Koira</B> chases its tail.
+[19:35:16]EMOTE: Lisa/ : <B>Lisa</B> woofs.
+[19:35:20]ACCESS: Logout: Cakebatter/(John Harrow)
+
+
+Starting up. 19:59.18
+---------------------
+[19:59:18]MISC: Saved mode is 'extended'
+[19:59:18]MISC: Failed to load config/alienwhitelist.txt
+[19:59:18]ADMIN: Loading jobban_rank
+[19:59:18]ADMIN: jobban_keylist was empty
+[19:59:18]ADMIN: Loading Banlist
+[19:59:19]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 20:06.49
+---------------------
+[20:06:49]MISC: Saved mode is 'extended'
+[20:06:49]MISC: Failed to load config/alienwhitelist.txt
+[20:06:49]ADMIN: Loading jobban_rank
+[20:06:49]ADMIN: jobban_keylist was empty
+[20:06:49]ADMIN: Loading Banlist
+[20:06:50]DEBUG: Rebuilding Master Controller
+
+
+Starting up. 20:08.46
+---------------------
+[20:08:46]MISC: Saved mode is 'extended'
+[20:08:47]MISC: Failed to load config/alienwhitelist.txt
+[20:08:47]ADMIN: Loading jobban_rank
+[20:08:47]ADMIN: jobban_keylist was empty
+[20:08:47]ADMIN: Loading Banlist
+[20:08:47]DEBUG: Rebuilding Master Controller
