@@ -572,7 +572,7 @@
 /mob/living/carbon/human/interactive/proc/combat(obj)
 /*
 
-//Combat is very buggy and dangerous right now- angry NPCs will straight up murder you for no reason. Disabling it for now.
+//Combat is very buggy and dangerous right now- angry NPCs will straight up murder you for no reason. Disabling it.
 
 	set background = 1
 	enforce_hands()

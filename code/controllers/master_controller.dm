@@ -11,6 +11,8 @@ var/global/last_tick_duration = 0
 var/global/air_processing_killed = 0
 var/global/pipe_processing_killed = 0
 
+var/list/subsystems = list()
+
 datum/controller/game_controller
 	var/processing = 0
 	var/breather_ticks = 2		//a somewhat crude attempt to iron over the 'bumps' caused by high-cpu use by letting the MC have a breather for this many ticks after every loop
@@ -35,6 +37,10 @@ datum/controller/game_controller
 	var/list/shuttle_list	                    // For debugging and VV
 	var/datum/ore_distribution/asteroid_ore_map // For debugging and VV.
 
+	var/processing_interval = 1	//The minimum length of time between MC ticks (in deciseconds). The highest this can be without affecting schedules, is the GCD of all subsystem var/wait. Set to 0 to disable all processing.
+
+	var/list/subsystems = list()
+
 
 datum/controller/game_controller/New()
 	//There can be only one master_controller. Out with the old and in with the new.
@@ -43,7 +49,11 @@ datum/controller/game_controller/New()
 		if(istype(master_controller))
 			Recover()
 			del(master_controller)
+		else
+			init_subtypes(/datum/subsystem, subsystems)
+
 		master_controller = src
+	calculateGCD()
 
 	if(!job_master)
 		job_master = new /datum/controller/occupations()
@@ -56,8 +66,31 @@ datum/controller/game_controller/New()
 	if(!emergency_shuttle)			emergency_shuttle = new /datum/emergency_shuttle_controller()
 	if(!shuttle_controller)			shuttle_controller = new /datum/shuttle_controller()
 
-datum/controller/game_controller/proc/setup()
+/*
+calculate the longest number of ticks the MC can wait between each cycle without causing subsystems to not fire on schedule
+*/
+/datum/controller/game_controller/proc/calculateGCD()
+	var/GCD
+	for(var/datum/subsystem/SS in subsystems)
+		if(SS.wait)
+			GCD = Gcd(round(SS.wait*10), GCD)
+	GCD = round(GCD)
+	if(GCD < world.tick_lag*10)
+		GCD = world.tick_lag*10
+	processing_interval = GCD/10
+
+datum/controller/game_controller/proc/setup(zlevel)
 	world.tick_lag = config.Ticklag
+	if (zlevel && zlevel > 0 && zlevel <= world.maxz)
+		for(var/datum/subsystem/S in subsystems)
+			S.Initialize(world.timeofday, zlevel)
+			sleep(-1)
+		return
+	world << "<span class='boldannounce'>Initializing Subsystems...</span>"
+
+
+	//sort subsystems by priority, so they initialize in the correct order
+	sortTim(subsystems, /proc/cmp_subsystem_priority)
 
 	spawn(20)
 		createRandomZlevel()
@@ -68,6 +101,16 @@ datum/controller/game_controller/proc/setup()
 
 	if(!ticker)
 		ticker = new /datum/controller/gameticker()
+
+
+	//Eventually all this other setup stuff should be contained in subsystems and done in subsystem.Initialize()
+	for(var/datum/subsystem/S in subsystems)
+		S.Initialize(world.timeofday, zlevel)
+		sleep(-1)
+	for(var/datum/subsystem/S in subsystems)
+		S.AfterInitialize(zlevel)
+	world << "<span class='boldannounce'>Initializations complete</span>"
+	world.log << "Initializations complete"
 
 	setup_objects()
 	setupgenetics()
@@ -138,8 +181,13 @@ datum/controller/game_controller/proc/process()
 			last_tick_duration = (currenttime - last_tick_timeofday) / 10
 			last_tick_timeofday = currenttime
 
+			var/timer = world.time
+			for(var/datum/subsystem/SS in subsystems)
+				timer += processing_interval
+				SS.next_fire = timer
+
 			if(processing)
-				var/timer
+
 				var/start_time = world.timeofday
 				controller_iteration++
 
@@ -350,4 +398,6 @@ datum/controller/game_controller/proc/Recover()		//Mostly a placeholder for now.
 				else
 					msg += "\t [varname] = [varval]\n"
 	world.log << msg
+
+	subsystems = master_controller.subsystems
 
