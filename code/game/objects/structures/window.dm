@@ -152,6 +152,9 @@
 		usr.visible_message("[usr.name] knocks on the [src.name].", \
 							"You knock on the [src.name].", \
 							"You hear a knocking sound.")
+
+	add_fingerprint(user)
+
 	return
 
 /obj/structure/window/attack_generic(var/mob/user, var/damage)

@@ -856,15 +856,15 @@ note dizziness decrements automatically in the mob's Life() proc.
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
 	if(istype(buckled, /obj/vehicle))
-		var/obj/vehicle/V = buckled
+		//var/obj/vehicle/V = buckled
 		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 			lying = 1
 			canmove = 0
-			pixel_y = V.mob_offset_y - 5
+			//pixel_y = V.mob_offset_y - 5
 		else
 			lying = 0
 			canmove = 1
-			pixel_y = V.mob_offset_y
+			//pixel_y = V.mob_offset_y
 	else if(buckled)
 		if (!buckled.movable)
 			anchored = 1
