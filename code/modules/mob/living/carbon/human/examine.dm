@@ -26,6 +26,7 @@
 
 	// crappy hacks because you can't do \his[src] etc. I'm sorry this proc is so unreadable, blame the text macros :<
 	var/t_He = "It" //capitalised for use at the start of each line.
+	var/t_he = "it"
 	var/t_his = "its"
 	var/t_him = "it"
 	var/t_has = "has"
@@ -45,10 +46,12 @@
 		switch(gender)
 			if(MALE)
 				t_He = "He"
+				t_he = "he"
 				t_his = "his"
 				t_him = "him"
 			if(FEMALE)
 				t_He = "She"
+				t_he = "she"
 				t_his = "her"
 				t_him = "her"
 
@@ -237,7 +240,7 @@
 
 	if((!species.has_organ["brain"] || has_brain()) && stat != DEAD)
 		if(istype(src,/mob/living/carbon/human/interactive))
-			msg += "<span class='deadsay'>[t_He] [t_is] doesn't look like they're interested in talking to you. </span>\n"
+			msg += "<span class='deadsay'>[t_He] doesn't look like [t_he]'s interested in talking to you. </span>\n"
 		else if(!key)
 			msg += "<span class='deadsay'>[t_He] [t_is] fast asleep. It doesn't look like they are waking up anytime soon.</span>\n"
 		else if(!client)
