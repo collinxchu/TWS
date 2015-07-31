@@ -134,6 +134,17 @@
 			var/mob/living/D = load
 			D << "\red You hit [M]!"
 			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+	if(istype(A, /obj/structure/window/))
+		var/obj/structure/window/W = A
+		var/mob/living/D = load
+		D << "\red Your [src] smashes through the [W]!"
+		W.shatter()
+	if(istype(A, /obj/structure/table/glasstable))
+		var/obj/structure/table/glasstable/G = A
+		var/mob/living/D = load
+		D << "\red Your [src] smashes through the [G]!"
+		G.shatter()
+
 
 /obj/vehicle/train/cargo/engine/sportscar/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))

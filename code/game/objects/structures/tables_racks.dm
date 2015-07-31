@@ -16,12 +16,15 @@
 	var/flipped = 0
 	var/health = 100
 
+	var/frame = /obj/structure/table_frame
+
 
 
 /obj/structure/table/woodentable
 	name = "wooden table"
 	desc = "Do not apply fire to this. Rumour says it burns easily."
 	icon_state = "wood_table"
+	frame = /obj/structure/table_frame/wood
 	parts = /obj/item/weapon/table_parts/wood
 	health = 50
 
@@ -385,15 +388,53 @@
 		step(O, get_dir(O, src))
 	return
 
+/obj/structure/table/proc/shatter(var/display_message = 1)
+	if (!istype(src, /obj/structure/table/glasstable)) return
 
-/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
-	if (!W) return
+	playsound(src, "shatter", 70, 1)
+	if(display_message)
+		visible_message("[src] shatters!")
+		new /obj/item/weapon/shard(loc)
+		new frame(src.loc)
+	del(src)
+	return
 
-	// Handle harm intent grabbing/tabling.
+/obj/structure/table/glasstable/tablepush(obj/item/W, mob/user)
+
 	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
 		var/obj/item/weapon/grab/G = W
+		var/mob/living/carbon/human/M = G.affecting
 		if (istype(G.affecting, /mob/living))
-			var/mob/living/M = G.affecting
+			if(G.affecting.buckled)
+				user << "<span class='warning'>[G.affecting] is buckled to [G.affecting.buckled]!</span>"
+				return 0
+			if(!G.confirm())
+				return 0
+			if (G.state < 2)
+				if(user.a_intent == "hurt")
+					G.affecting.loc = src.loc
+					G.affecting.Weaken(5)
+					visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
+					visible_message("<span class='warning'>[src] breaks!</span>")
+					M.adjustBruteLoss(5)
+					if(prob(50))
+						var/obj/item/weapon/shard/S = new(M)
+						var/datum/organ/external/affecting = M.get_organ("head")
+						S.add_blood(M)
+						affecting.embed(S) //Lodge the object into the limb
+						visible_message("<span class='warning'>The [S] has embedded into [M]'s head!</span>",
+													"<span class='userdanger'>You feel [S] lodge into your head!</span>")
+						M.emote("scream")
+					src.shatter()
+				else
+					user << "<span class='danger'>You need a better grip to do that!</span>"
+					return
+			else
+				G.affecting.loc = src.loc
+				G.affecting.Weaken(5)
+				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
+			del(W)
+		else
 			if (G.state < 2)
 				if(user.a_intent == "hurt")
 					if (prob(15))	M.Weaken(5)
@@ -408,7 +449,46 @@
 				G.affecting.Weaken(5)
 				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
 			del(W)
-			return
+		return
+
+/obj/structure/table/proc/tablepush(obj/item/W, mob/user)
+	if(get_dist(src, user) < 2)
+		var/obj/item/weapon/grab/G = W
+		var/mob/living/carbon/human/M = G.affecting
+		if(G.affecting.buckled)
+			user << "<span class='warning'>[G.affecting] is buckled to [G.affecting.buckled]!</span>"
+			return 0
+		if(!G.confirm())
+			return 0
+
+		if(G.state < GRAB_AGGRESSIVE)
+			if(user.a_intent == "hurt")
+				if (prob(15))	M.Weaken(5)
+				M.apply_damage(8,def_zone = "head")
+				visible_message("<span class='danger'>[G.assailant] slams [G.affecting]'s face against \the [src]!</span>")
+				playsound(src.loc, 'sound/weapons/tablehit1.ogg', 50, 1)
+			else
+				user << "<span class='warning'>You need a better grip to do that!</span>"
+				return
+		else
+			G.affecting.loc = src.loc
+			if(G.affecting.stat == CONSCIOUS)
+				G.affecting.Weaken(5)
+			G.affecting.visible_message("<span class='danger'>[G.assailant] pushes [G.affecting] onto [src].</span>", \
+										"<span class='userdanger'>[G.assailant] pushes [G.affecting] onto [src].</span>")
+			add_logs(G.assailant, G.affecting, "tabled")
+			M = G.affecting
+			del(W)
+			return M
+	del(W)
+
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+	if (!W) return
+
+	// Handle harm intent grabbing/tabling.
+	if (istype(W, /obj/item/weapon/grab))
+		tablepush(W, user)
+		return
 
 	// Handle dissembly.
 	if (istype(W, /obj/item/weapon/wrench))

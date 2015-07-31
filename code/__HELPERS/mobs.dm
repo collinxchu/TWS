@@ -2,7 +2,7 @@
 	return pick(4;"O-", 36;"O+", 3;"A-", 28;"A+", 1;"B-", 20;"B+", 1;"AB-", 5;"AB+")
 
 
-proc/random_hair_color()
+proc/random_hair_color(var/mob/living/carbon/human/M)
 	//Hair colour
 	var/r_hair = 0
 	var/g_hair = 0
@@ -13,40 +13,41 @@ proc/random_hair_color()
 	var/green
 	var/blue
 
-	var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "old", "punk")
-	switch(col)
-		if("blonde")
-			red = 255
-			green = 255
-			blue = 0
-		if("black")
-			red = 0
-			green = 0
-			blue = 0
-		if("chestnut")
-			red = 153
-			green = 102
-			blue = 51
-		if("copper")
-			red = 255
-			green = 153
-			blue = 0
-		if("brown")
-			red = 102
-			green = 51
-			blue = 0
-		if("wheat")
-			red = 255
-			green = 255
-			blue = 153
-		if("old")
-			red = rand (100, 255)
-			green = red
-			blue = red
-		if("punk")
-			red = rand (0, 255)
-			green = rand (0, 255)
-			blue = rand (0, 255)
+	var/col = pick ("blonde", "black", "chestnut", "copper", "brown", "wheat", "punk")
+	if(M.age > 70)
+		red = rand (100, 255)
+		green = red
+		blue = red
+	else
+		switch(col)
+			if("blonde")
+				red = 255
+				green = 255
+				blue = 0
+			if("black")
+				red = 0
+				green = 0
+				blue = 0
+			if("chestnut")
+				red = 153
+				green = 102
+				blue = 51
+			if("copper")
+				red = 255
+				green = 153
+				blue = 0
+			if("brown")
+				red = 102
+				green = 51
+				blue = 0
+			if("wheat")
+				red = 255
+				green = 255
+				blue = 153
+			if("punk")
+				red = rand (0, 255)
+				green = rand (0, 255)
+				blue = rand (0, 255)
 
 	red = max(min(red + rand (-25, 25), 255), 0)
 	green = max(min(green + rand (-25, 25), 255), 0)
@@ -247,26 +248,32 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	/obj/item/clothing/under/cheongsam)
 
 	if(M.gender == MALE)
-		outfit = pick (
-			"old_man",
-			"hip_man",
-			"middleaged_man",
-			"wealthy_man",
-			"hooligan_man")
+		if(M.age < 90)
+			outfit = pick (
+				"hip_man",
+				"middleaged_man",
+				"wealthy_man",
+				"hooligan_man")
+		else
+			outfit = pick (
+				"old_man")
 	if(M.gender == FEMALE)
-		outfit = pick (
-			"old_woman",
-			"hip_woman",
-			"orange_woman",
-			"floral_dress_woman",
-			"hr",
-			"pink",
-			"harlot",
-			"azn",
-			"exec",
-			"dorothy",
-			"fire",
-			"white")
+		if(M.age < 90)
+			outfit = pick (
+				"hip_woman",
+				"orange_woman",
+				"floral_dress_woman",
+				"hr",
+				"pink",
+				"harlot",
+				"azn",
+				"exec",
+				"dorothy",
+				"fire",
+				"white")
+		else
+			outfit = pick (
+				"old_woman")
 
 
 	switch(outfit)
@@ -278,27 +285,22 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 
 			M.equip_to_slot_or_del(new /obj/item/weapon/cane(M), slot_r_hand)
 		if ("hr")
-			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/blue(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/dress/dress_hr(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(M), slot_glasses)
 			M.undershirt = undershirt_t.Find("None")
 		if ("pink")
-			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/blue(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/dress/dress_pink(M), slot_w_uniform)
-			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(M), slot_glasses)
+			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/big(M), slot_glasses)
 			M.undershirt = undershirt_t.Find("None")
-
 		if ("harlot")
-			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/blue(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/dress/dress_saloon(M), slot_w_uniform)
-			M.equip_to_slot_or_del(new /obj/item/clothing/head/fluff/bruce_hachert(M), slot_head)
-			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(M), slot_glasses)
 			M.undershirt = undershirt_t.Find("None")
 		if ("exec")
-			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/blue(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/laceup(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/suit_jacket/female(M), slot_w_uniform)
-			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(M), slot_glasses)
-			M.undershirt = undershirt_t.Find("None")
 		if ("dorothy")
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/blue(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/dress/plaid_blue(M), slot_w_uniform)
@@ -306,6 +308,7 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 			M.undershirt = undershirt_t.Find("None")
 		if ("fire")
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/blue(M), slot_shoes)
+			M.equip_to_slot_or_del(new /obj/item/clothing/head/fluff/bruce_hachert(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/dress/dress_fire(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/regular(M), slot_glasses)
 			M.undershirt = undershirt_t.Find("None")
@@ -332,7 +335,6 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 			M.equip_to_slot_or_del(new /obj/item/clothing/shoes/combat(M), slot_shoes)
 			M.equip_to_slot_or_del(new /obj/item/clothing/under/fluff/tian_dress(M), slot_w_uniform)
 			M.equip_to_slot_or_del(new /obj/item/clothing/suit/storage/bomber(M), slot_wear_suit)
-			//M.equip_to_slot_or_del(new /obj/item/clothing/head/collectable/petehat(M), slot_head)
 			M.equip_to_slot_or_del(new /obj/item/clothing/glasses/sunglasses/big(M), slot_glasses)
 			M.undershirt = undershirt_t.Find("None")
 		if ("orange_woman")

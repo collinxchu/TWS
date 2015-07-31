@@ -32,6 +32,7 @@
 			visible_message("[src] looks seriously damaged!" )
 		else if(src.health < src.maxhealth * 3/4 && initialhealth >= src.maxhealth * 3/4)
 			visible_message("Cracks begin to appear in [src]!" )
+	update_nearby_icons()
 	return
 
 /obj/structure/window/proc/shatter(var/display_message = 1)
@@ -129,10 +130,10 @@
 	user.visible_message("<span class='notice'>Something knocks on [src].</span>")
 	playsound(loc, 'sound/effects/Glasshit.ogg', 50, 1)
 
-/obj/structure/window/attack_hand(mob/user as mob)
-	if(HULK in user.mutations)
-		user.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
-		user.visible_message("<span class='danger'>[user] smashes through [src]!</span>")
+/obj/structure/window/attack_hand(mob/usr as mob)
+	if(HULK in usr.mutations)
+		usr.say(pick(";RAAAAAAAARGH!", ";HNNNNNNNNNGGGGGGH!", ";GWAAAAAAAARRRHHH!", "NNNNNNNNGGGGGGGGHH!", ";AAAAAAARRRGH!"))
+		usr.visible_message("<span class='danger'>[usr] smashes through [src]!</span>")
 		shatter()
 
 	else if (usr.a_intent == "hurt")
@@ -153,7 +154,7 @@
 							"You knock on the [src.name].", \
 							"You hear a knocking sound.")
 
-	add_fingerprint(user)
+	add_fingerprint(usr)
 
 	return
 
@@ -359,6 +360,11 @@
 				icon_state = "[basestate][junction]"
 			else
 				icon_state = "[basestate][junction]"
+
+		overlays.Cut()
+		var/ratio = health / maxhealth
+		ratio = Ceiling(ratio*4) * 25
+		overlays += "damage[ratio]"
 
 		return
 

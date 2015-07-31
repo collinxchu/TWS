@@ -81,12 +81,13 @@
 
 /mob/living/carbon/human/interactive/proc/random()
 
+	age = rand(AGE_MIN,AGE_MAX)
 	s_tone = random_skin_tone()
 	h_style = random_hair_style(gender, "Human")
 	f_style = random_facial_hair_style(gender, "Human")
 
 	//randomize hair color
-	var/hair_color = random_hair_color("hair")
+	var/hair_color = random_hair_color(src)
 	r_hair = hair_color[1]
 	g_hair = hair_color[2]
 	b_hair = hair_color[3]
@@ -102,12 +103,11 @@
 	g_eyes = eye_color[2]
 	b_eyes = eye_color[3]
 
-	random_skin_tone()
 	undershirt = rand(1,undershirt_t.len)
-	age = rand(AGE_MIN,AGE_MAX)
-	random_outfit(src)
 	underwear = rand(1,underwear_m.len)
-	backbag = 2
+	scream_voice = rand(1,2)
+	backbag = rand(1,4)
+	random_outfit(src)
 
 /*
 	//job handling - NO, take your job and shove it

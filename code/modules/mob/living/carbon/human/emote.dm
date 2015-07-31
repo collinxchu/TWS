@@ -598,7 +598,12 @@
 				m_type = 1
 			else
 				if (!muzzled)
+					var/sound = "sound/misc/scream_m[src.scream_voice].ogg"
+					if(gender == FEMALE)
+						sound = "sound/misc/scream_f[src.scream_voice].ogg"
+					playsound(src.loc, sound, 50, 1, 10, 1.2)
 					message = "<B>[src]</B> screams!"
+					src.adjustOxyLoss(5)
 					m_type = 2
 				else
 					message = "<B>[src]</B> makes a very loud noise."
