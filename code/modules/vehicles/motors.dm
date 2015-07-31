@@ -112,7 +112,6 @@
 	usr << "You honk the horn. Hmm...must be broken."
 
 /obj/vehicle/train/cargo/engine/sportscar/proc/honk_horn()
-
 	playsound(src, 'sound/items/bikehorn.ogg',40,1)
 
 /obj/vehicle/train/cargo/engine/sportscar/Bump(atom/Obstacle)
@@ -124,27 +123,57 @@
 		var/turf/T = get_step(A, dir)
 		if(isturf(T))
 			A.Move(T)	//bump things away when hit
-
 	if(istype(A, /mob/living))
 		var/mob/living/M = A
+		var/mob/living/D = load
 		visible_message("\red [src] knocks over [M]!")
 		M.apply_effects(5, 5)				//knock people down if you hit them
-		M.apply_damages(70 / move_delay)	// and do damage according to how fast the train is going
+		M.apply_damages(70 / move_delay)	// and do damage according to how fast the car is going
 		if(istype(load, /mob/living/carbon/human))
-			var/mob/living/D = load
 			D << "\red You hit [M]!"
 			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
-	if(istype(A, /obj/structure/window/))
-		var/obj/structure/window/W = A
-		var/mob/living/D = load
-		D << "\red Your [src] smashes through the [W]!"
-		W.shatter()
-	if(istype(A, /obj/structure/table/glasstable))
-		var/obj/structure/table/glasstable/G = A
-		var/mob/living/D = load
-		D << "\red Your [src] smashes through the [G]!"
-		G.shatter()
 
+	else if(istype(A, /obj/structure/table/glasstable))
+		var/obj/structure/table/glasstable/G = A
+		G.shatter()
+		src.take_damage(1)  //crashing the car into things repeatedly is generally a bad idea
+
+	else if(istype(A, /obj/structure/table/woodentable))
+		var/obj/structure/table/woodentable/T = A
+		if(istype(T, /obj/structure/table/rack))
+			return
+		T.destroy()
+		src.take_damage(1)
+
+	else if(istype(A, /obj/structure/window/))
+		var/obj/structure/window/W = A
+		load << "\red You drive [src] straight through the [W]!"
+		W.shatter()
+		src.take_damage(5)
+
+	else if(istype(A, /obj/machinery/door/window/))
+		var/obj/machinery/door/window/W = A
+		W.take_damage(80)
+		src.take_damage(5)
+
+	else if(istype(A, /obj/structure))
+		if(istype(A, /obj/structure/barricade/wooden))
+			var/obj/structure/table/T = A
+			load << "\red You crash [src] into the [A]!"
+			T.destroy()
+			src.take_damage(1)
+			return
+		load << "\red You crash [src] into the [A]!"
+		src.take_damage(10)
+
+/obj/vehicle/train/cargo/engine/sportscar/proc/take_damage(damage)
+	src.health -= damage
+	if(prob(10))
+		new /obj/effect/decal/cleanable/blood/oil(src.loc)
+	if (src.health > 0 && src.health <= 15)
+		load << "\red You've done some serious damage, [src] likely won't survive another crash."
+	spawn(1) healthcheck()
+	return 1
 
 /obj/vehicle/train/cargo/engine/sportscar/MouseDrop_T(var/atom/movable/C, mob/user as mob)
 	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))

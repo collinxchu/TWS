@@ -222,7 +222,7 @@
 		M.apply_effects(5, 5)
 
 	unload()
-
+	//explosion(src.loc, 2, 3, 4, 4)
 	new /obj/effect/gibspawner/robot(Tsec)
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 
