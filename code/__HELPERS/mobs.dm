@@ -240,7 +240,7 @@ proc/random_outfit(var/mob/living/carbon/human/M)
 	var/outfit
 
 	/var/random_dress = pick(/obj/item/clothing/under/dress/dress_yellow,
-	new /obj/item/clothing/under/dress/dress_hr, /obj/item/clothing/under/dress/dress_pink,
+	/obj/item/clothing/under/dress/dress_hr, /obj/item/clothing/under/dress/dress_pink,
 	/obj/item/clothing/under/dress/dress_saloon, /obj/item/clothing/under/dress/plaid_blue,
 	/obj/item/clothing/under/dress/dress_fire,
 	/obj/item/clothing/under/sundress_white,

@@ -53,7 +53,6 @@ for reference:
 
 */
 
-
 //Barricades, maybe there will be a metal one later...
 /obj/structure/barricade/wooden
 	name = "wooden barricade"
@@ -62,6 +61,7 @@ for reference:
 	icon_state = "woodenbarricade"
 	anchored = 1.0
 	density = 1.0
+	parts = /obj/item/stack/sheet/wood
 	var/health = 100.0
 	var/maxhealth = 100.0
 
@@ -88,10 +88,7 @@ for reference:
 				else
 			if (src.health <= 0)
 				visible_message("\red <B>The barricade is smashed apart!</B>")
-				new /obj/item/stack/sheet/wood(get_turf(src))
-				new /obj/item/stack/sheet/wood(get_turf(src))
-				new /obj/item/stack/sheet/wood(get_turf(src))
-				del(src)
+				destroy()
 			..()
 
 	ex_act(severity)
@@ -104,18 +101,12 @@ for reference:
 				src.health -= 25
 				if (src.health <= 0)
 					visible_message("\red <B>The barricade is blown apart!</B>")
-					new /obj/item/stack/sheet/wood(get_turf(src))
-					new /obj/item/stack/sheet/wood(get_turf(src))
-					new /obj/item/stack/sheet/wood(get_turf(src))
-					del(src)
+					destroy()
 				return
 
 	meteorhit()
 		visible_message("\red <B>The barricade is smashed apart!</B>")
-		new /obj/item/stack/sheet/wood(get_turf(src))
-		new /obj/item/stack/sheet/wood(get_turf(src))
-		new /obj/item/stack/sheet/wood(get_turf(src))
-		del(src)
+		destroy()
 		return
 
 	blob_act()
@@ -272,3 +263,11 @@ for reference:
 		explosion(src.loc,-1,-1,0)
 		if(src)
 			del(src)
+
+	/obj/structure/barricade/wooden/destroy()
+		if(parts)
+			new parts(loc)
+			new parts(loc)
+			new parts(loc)
+		density = 0
+		del(src)

@@ -361,7 +361,6 @@
 			else
 				icon_state = "[basestate][junction]"
 
-		overlays.Cut()
 		var/ratio = health / maxhealth
 		ratio = Ceiling(ratio*4) * 25
 		overlays += "damage[ratio]"
