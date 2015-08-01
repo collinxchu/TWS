@@ -316,42 +316,6 @@
 
 	return 1
 
-/obj/vehicle/proc/load_passenger(var/atom/movable/C)
-	//This loads objects onto the vehicle so they can still be interacted with.
-	//Define allowed items for loading in specific vehicle definitions.
-	if(!isturf(C.loc)) //To prevent loading things from someone's inventory, which wouldn't get handled properly.
-		return 0
-	if(passenger || C.anchored)
-		return 0
-
-	// if a create/closet, close before loading
-	var/obj/structure/closet/crate = C
-	if(istype(crate))
-		crate.close()
-
-	C.forceMove(loc)
-	C.set_dir(dir)
-	C.anchored = 1
-
-	passenger = C
-
-	if(passenger_item_visible)
-		C.pixel_x += passenger_offset_x
-		if(ismob(C))
-			C.pixel_y += mob_offset_y
-		else
-			C.pixel_y += passenger_offset_y
-		C.layer = layer + 0.1		//so it sits above the vehicle
-
-	if(ismob(C))
-		var/mob/M = C
-		M.buckled = src
-		M.pixel_y = src.passenger_offset_y
-		M.update_canmove()
-
-	return 1
-
-
 /obj/vehicle/proc/unload(var/mob/user, var/direction)
 	if(!load)
 		return
@@ -398,54 +362,6 @@
 	load = null
 
 	return 1
-
-/obj/vehicle/proc/unload_passenger(var/mob/user, var/direction)
-	if(!passenger)
-		return
-
-	var/turf/dest = null
-
-	//find a turf to unload to
-	if(direction)	//if direction specified, unload in that direction
-		dest = get_step(src, direction)
-	else if(user)	//if a user has unloaded the vehicle, unload at their feet
-		dest = get_turf(user)
-
-	if(!dest)
-		dest = get_step_to(src, get_step(src, turn(dir, 90))) //try unloading to the side of the vehicle first if neither of the above are present
-
-	//if these all result in the same turf as the vehicle or nullspace, pick a new turf with open space
-	if(!dest || dest == get_turf(src))
-		var/list/options = new()
-		for(var/test_dir in alldirs)
-			var/new_dir = get_step_to(src, get_step(src, test_dir))
-			if(new_dir && passenger.Adjacent(new_dir))
-				options += new_dir
-		if(options.len)
-			dest = pick(options)
-		else
-			dest = get_turf(src)	//otherwise just dump it on the same turf as the vehicle
-
-	if(!isturf(dest))	//if there still is nowhere to unload, cancel out since the vehicle is probably in nullspace
-		return 0
-
-	passenger.forceMove(dest)
-	passenger.set_dir(get_dir(loc, dest))
-	passenger.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
-	passenger.pixel_x = initial(passenger.pixel_x)
-	passenger.pixel_y = initial(passenger.pixel_y)
-	passenger.layer = initial(passenger.layer)
-
-	if(ismob(passenger))
-		var/mob/M = passenger
-		M.buckled = null
-		M.anchored = initial(M.anchored)
-		M.update_canmove()
-
-	passenger = null
-
-	return 1
-
 
 //-------------------------------------------------------
 // Stat update procs

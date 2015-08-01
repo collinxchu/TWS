@@ -1580,6 +1580,7 @@
 #include "code\modules\surgery\robolimbs.dm"
 #include "code\modules\surgery\slimes.dm"
 #include "code\modules\surgery\surgery.dm"
+#include "code\modules\vehicles\car.dm"
 #include "code\modules\vehicles\cargo_train.dm"
 #include "code\modules\vehicles\coupe.dm"
 #include "code\modules\vehicles\fourwheeler.dm"
