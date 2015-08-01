@@ -141,7 +141,7 @@
 		for(var/mob/O in viewers(M))
 			O.show_message( "\red <B>[M] attempts to pull [occupant] out of the vehicle!</B>", 1)
 
-		if(do_after(user, 50, 10))
+		if(do_after(user, 50, 10, needhand = 1, target = src))
 			if(M.restrained() || M.buckled)
 				return
 			for(var/mob/O in viewers(M))

@@ -87,6 +87,16 @@
 			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 		return
 
+	if(istype(A, /obj/vehicle/car/))
+		var/obj/vehicle/car/C = A
+		var/mob/living/D = load
+		visible_message("\red [src] crashes into [C]!")
+		C.take_damage(20 / move_delay)	//||and do damage according to how fast the car is going
+		src.take_damage(15 / move_delay)	//||and do damage according to how fast the car is going
+		if(istype(load, /mob/living/carbon/human))
+			D << "\red You hit [C]!"
+		return
+
 	if(istype(A, /obj/structure))
 		if(istype(A, /obj/structure/barricade/wooden))
 			var/obj/structure/table/T = A
