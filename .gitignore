@@ -1,43 +1,13 @@
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
 
-# Folder config file
-Desktop.ini
+###Files and folders specified here will never be tracked.
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+#Ignore everything in datafolder and subdirectories
+/data/**/*
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
+#Ignore compiled files and other files generated during compilation.
+*.dmb
+*.rsc
+*.lk
+*.int
+*.backup
+baystation12.int
