@@ -1746,7 +1746,7 @@
 "HD" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/structure/sign/coffee,/turf/unsimulated/floor{icon_state = "redyellowfull"},/area/planets/biezel)
 "HE" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007},/obj/structure/sign/coffee{icon_state = "coffee-right"},/turf/unsimulated/floor{icon_state = "redyellowfull"},/area/planets/biezel)
 "HF" = (/turf/unsimulated/wall{icon_state = "iron5"},/area/planets/biezel)
-"HG" = (/obj/structure/window/reinforced{color = "#85AD33"; dir = 5; health = 1e+007; name = "green reinforced window"},/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets/biezel)
+"HG" = (/obj/structure/window/reinforced{color = ""; dir = 5; health = 1e+007; name = "reinforced window"},/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets/biezel)
 "HH" = (/obj/machinery/door/airlock/woodglass,/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets/biezel)
 "HI" = (/obj/structure/sign/game,/turf/unsimulated/wall{icon_state = "iron12"},/area/planets/biezel)
 "HJ" = (/obj/structure/sign/game{icon_state = "gamecenter-right"},/turf/unsimulated/wall{icon_state = "iron12"},/area/planets/biezel)
