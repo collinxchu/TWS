@@ -432,7 +432,6 @@
 				TARGET = pick(target_filter(orange(MIN_RANGE_FIND,src)))
 		//	else
 				//TARGET = pick(get_area_turfs(job2area(myjob)))
-		if (!stat)
 			tryWalk(TARGET)
 	LAST_TARGET = TARGET
 

@@ -74,10 +74,10 @@
 						load(C, "trunk")
 				return
 				//||trunk is closed
-		if(!trunk_open)
+		if(!trunk_open || trunk)
 				//||car is empty
 			if(!load && !passenger)
-				var/utype = alert("Which seat do you want them to take?",,"Driver's", "Passenger's")
+				var/utype = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "None")
 				switch(utype)
 					if("Driver's")
 						load(C, "driver")
@@ -85,28 +85,25 @@
 					if("Passenger's")
 						load(C, "passenger")
 						update_dir_sportscar_overlays()
+					if("None")
+						return
 				return
 				//||passenger's seat is taken
 			if(!load)
-				var/utype = alert("Which seat do you want them to take?",,"Driver's")
-				switch(utype)
-					if("Driver's")
-						load(C, "driver")
-						update_dir_sportscar_overlays()
+				load(C, "driver")
+				update_dir_sportscar_overlays()
 				return
 				//||driver's seat is taken
 			if(!passenger)
-				var/utype = alert("Which seat do you want them to take?",, "Passenger's")
-				switch(utype)
-
-					if("Passenger's")
-						load(C, "passenger")
-						update_dir_sportscar_overlays()
+				load(C, "passenger")
+				update_dir_sportscar_overlays()
 				return
-	else
-		if(!load(C))
-			load(C, "trunk")
-			user << "\red You were unable to load [C] on [src]."
+	if(!trunk_open)
+		usr << "Open the trunk first!"
+	else if(trunk)
+		usr << "There is already something in the trunk. Remove [trunk] first before loading [C] into the trunk"
+	else if(trunk_open && !trunk)
+		load(C, "trunk")
 
 /obj/vehicle/car/sportscar/attack_hand(mob/living/user as mob)
 	if(user.stat || user.restrained() || !Adjacent(user))

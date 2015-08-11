@@ -318,7 +318,7 @@
 
 /obj/vehicle/car/load(var/atom/movable/C, who)
 	if(!istype(C, /mob/living/carbon/human))
-		usr << "It's working"
+		usr << "You load [C] into the trunk."
 	switch(who)
 		if("driver")
 			if(load) return 0
