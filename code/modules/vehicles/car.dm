@@ -14,6 +14,7 @@
 	movable = 0
 
 	var/obj/item/weapon/key/car/key
+	var/trunk_open = 0
 
 /obj/item/weapon/key/car
 	name = "key"
@@ -29,7 +30,8 @@
 	..()
 	cell = new /obj/item/weapon/cell/high(src)
 	key = new(src)
-	turn_off()	//||so engine verbs are correctly set
+	turn_off() 		//||so engine verbs are correctly set
+	close_trunk()	//||so trunk verbs are correctly set
 
 /obj/vehicle/car/Move(var/turf/destination)
 	if(on && cell.charge < charge_use)
@@ -145,7 +147,7 @@
 	spawn(1) healthcheck()
 	return 1
 
-/obj/vehicle/car/sportscar/turn_on()
+/obj/vehicle/car/turn_on()
 	if(!key)
 		return
 	if(health <= 10)
@@ -161,7 +163,7 @@
 		else
 			verbs += /obj/vehicle/car/verb/start_engine
 
-/obj/vehicle/car/sportscar/turn_off()
+/obj/vehicle/car/turn_off()
 	..()
 
 	verbs -= /obj/vehicle/car/verb/stop_engine
@@ -171,6 +173,42 @@
 		verbs += /obj/vehicle/car/verb/start_engine
 	else
 		verbs += /obj/vehicle/car/verb/stop_engine
+
+/obj/vehicle/car/verb/open_trunk()
+	set name = "Open trunk"
+	set category = "Vehicle"
+	set src in view(0)
+
+	trunk_open = 1
+	usr << "You pop open the trunk."
+
+	if(!key)
+		return
+	else
+
+		verbs -= /obj/vehicle/car/verb/close_trunk
+		verbs -= /obj/vehicle/car/verb/open_trunk
+
+		if(trunk_open)
+			verbs += /obj/vehicle/car/verb/close_trunk
+		else
+			verbs += /obj/vehicle/car/verb/open_trunk
+
+/obj/vehicle/car/verb/close_trunk()
+	set name = "Close trunk"
+	set category = "Vehicle"
+	set src in view(1)
+
+	trunk_open = 0
+	usr << "You close the trunk."
+
+	verbs -= /obj/vehicle/car/verb/close_trunk
+	verbs -= /obj/vehicle/car/verb/open_trunk
+
+	if(!trunk_open)
+		verbs += /obj/vehicle/car/verb/open_trunk
+	else
+		verbs += /obj/vehicle/car/verb/close_trunk
 
 /obj/vehicle/car/proc/honk_horn()
 	playsound(src, 'sound/items/bikehorn.ogg',40,1)
@@ -197,6 +235,8 @@
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 	user << "Car integrity is at [health? round(100.0*health/maxhealth, 0.01) : 0]%"
+	if(trunk_open)
+		user << "The trunk has been left open."
 
 /obj/vehicle/car/verb/start_engine()
 	set name = "Start engine"
@@ -259,7 +299,7 @@
 /obj/vehicle/car/verb/honk()
 	set name = "Honk horn"
 	set category = "Vehicle"
-	set src in view(1)
+	set src in view(0)
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
@@ -271,18 +311,21 @@
 	honk_horn()
 	usr << "You honk the horn. Hmm...must be broken."
 
+
 //-------------------------------------------
 // Loading/unloading procs
 //-------------------------------------------
 
 /obj/vehicle/car/load(var/atom/movable/C, who)
 	if(!istype(C, /mob/living/carbon/human))
-		return 0
+		usr << "It's working"
 	switch(who)
 		if("driver")
 			if(load) return 0
 		if("passenger")
 			if(passenger) return 0
+		if("trunk")
+			if(trunk) return 0
 
 	C.forceMove(loc)
 	C.set_dir(dir)
@@ -308,6 +351,9 @@
 				else
 					C.pixel_y += passenger_offset_y
 				C.layer = layer + 0.1		//so it sits above the vehicle
+		if("trunk")
+			trunk = C
+			trunk.loc = src
 
 	if(ismob(C))
 		var/mob/M = C
@@ -317,6 +363,8 @@
 				M.pixel_y = src.load_offset_y
 			if("passenger")
 				M.pixel_y = src.passenger_offset_y
+			if("trunk")
+				M.pixel_y = src.load_offset_y
 		M.update_canmove()
 
 	return 1
@@ -327,6 +375,8 @@
 			if(!load) return
 		if("passenger")
 			if(!passenger) return
+		if("trunk")
+			if(!trunk) return
 
 	var/turf/dest = null
 
@@ -350,6 +400,9 @@
 						options += new_dir
 				if("passenger")
 					if(new_dir && passenger.Adjacent(new_dir))
+						options += new_dir
+				if("trunk")
+					if(new_dir && trunk.Adjacent(new_dir))
 						options += new_dir
 		if(options.len)
 			dest = pick(options)
@@ -390,5 +443,20 @@
 				M.update_canmove()
 
 			passenger = null
+		if("trunk")
+			trunk.forceMove(dest)
+			trunk.set_dir(get_dir(loc, dest))
+			trunk.anchored = 0		//we can only load non-anchored items, so it makes sense to set this to false
+			trunk.pixel_x = initial(trunk.pixel_x)
+			trunk.pixel_y = initial(trunk.pixel_y)
+			trunk.layer = initial(trunk.layer)
+			trunk.loc = src.loc
 
+			if(ismob(trunk))
+				var/mob/M = trunk
+				M.buckled = null
+				M.anchored = initial(M.anchored)
+				M.update_canmove()
+
+			trunk = null
 	return 1

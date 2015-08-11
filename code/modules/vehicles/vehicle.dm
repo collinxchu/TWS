@@ -33,6 +33,7 @@
 
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
 	var/atom/movable/passenger  //some vehicles can take passengers
+	var/atom/movable/trunk	    //some vehicles have additional storage in the back
 	var/load_item_visible = 1	//set if the loaded item should be overlayed on the vehicle sprite
 	var/passenger_item_visible = 1
 	var/load_offset_x = 0		//pixel_x offset for item overlay
@@ -76,6 +77,9 @@
 		if(passenger)
 			passenger.forceMove(loc)
 			passenger.set_dir(dir)
+		if(trunk)
+			//trunk.forceMove(loc)
+			trunk.set_dir(dir)
 
 		return 1
 	else
