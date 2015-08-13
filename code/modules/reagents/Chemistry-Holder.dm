@@ -27,7 +27,7 @@ datum
 				//Chemical Reactions - Initialises all /datum/chemical_reaction into a list
 				// It is filtered into multiple lists within a list.
 				// For example:
-				// chemical_reaction_list["phoron"] is a list of all reactions relating to phoron
+				// chemical_reaction_list["plasma"] is a list of all reactions relating to plasma
 
 				var/paths = typesof(/datum/chemical_reaction) - /datum/chemical_reaction
 				chemical_reactions_list = list()
@@ -79,9 +79,9 @@ datum
 					if(A.volume > the_volume)
 						the_volume = A.volume
 						the_reagent = A
-				
+
 				return the_reagent
-			
+
 			get_master_reagent_name()
 				var/the_name = null
 				var/the_volume = 0

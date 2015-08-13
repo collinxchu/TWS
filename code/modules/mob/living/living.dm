@@ -603,11 +603,11 @@
 				if(istype(usr.loc, /obj/structure/closet/secure_closet))
 					var/obj/structure/closet/secure_closet/SC = L.loc
 					SC.desc = "It appears to be broken."
-					SC.icon_state = SC.icon_off
-					flick(SC.icon_broken, SC)
-					sleep(10)
-					flick(SC.icon_broken, SC)
-					sleep(10)
+					//SC.icon_state = SC.icon_off
+					//flick(SC.icon_broken, SC)
+					//sleep(10)
+					//flick(SC.icon_broken, SC)
+					//sleep(10)
 					SC.broken = 1
 					SC.locked = 0
 					SC.update_icon()

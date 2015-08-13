@@ -2,7 +2,7 @@
 
 /mob/living/carbon/monkey
 	var/oxygen_alert = 0
-	var/phoron_alert = 0
+	var/plasma_alert = 0
 	var/fire_alert = 0
 	var/pressure_alert = 0
 
@@ -285,7 +285,7 @@
 		var/safe_oxygen_min = 16 // Minimum safe partial pressure of O2, in kPa
 		//var/safe_oxygen_max = 140 // Maximum safe partial pressure of O2, in kPa (Not used for now)
 		var/safe_co2_max = 10 // Yes it's an arbitrary value who cares?
-		var/safe_phoron_max = 0.5
+		var/safe_plasma_max = 0.5
 		var/SA_para_min = 0.5
 		var/SA_sleep_min = 5
 		var/oxygen_used = 0
@@ -293,8 +293,8 @@
 
 		//Partial pressure of the O2 in our breath
 		var/O2_pp = (breath.gas["oxygen"] / breath.total_moles) * breath_pressure
-		// Same, but for the phoron
-		var/Toxins_pp = (breath.gas["phoron"] / breath.total_moles) * breath_pressure
+		// Same, but for the plasma
+		var/Toxins_pp = (breath.gas["plasma"] / breath.total_moles) * breath_pressure
 		// And CO2, lets say a PP of more than 10 will be bad (It's a little less really, but eh, being passed out all round aint no fun)
 		var/CO2_pp = (breath.gas["carbon_dioxide"] / breath.total_moles) * breath_pressure
 
@@ -335,14 +335,14 @@
 		else
 			co2overloadtime = 0
 
-		if(Toxins_pp > safe_phoron_max) // Too much phoron
-			var/ratio = (breath.gas["phoron"] / safe_phoron_max) * 10
+		if(Toxins_pp > safe_plasma_max) // Too much plasma
+			var/ratio = (breath.gas["plasma"] / safe_plasma_max) * 10
 			//adjustToxLoss(Clamp(ratio, MIN_PLASMA_DAMAGE, MAX_PLASMA_DAMAGE))	//Limit amount of damage toxin exposure can do per second
 			if(reagents)
 				reagents.add_reagent("toxin", Clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
-			phoron_alert = max(phoron_alert, 1)
+			plasma_alert = max(plasma_alert, 1)
 		else
-			phoron_alert = 0
+			plasma_alert = 0
 
 		if(breath.gas["sleeping_agent"])
 			var/SA_pp = (breath.gas["sleeping_agent"] / breath.total_moles) * breath_pressure
@@ -373,7 +373,7 @@
 
 		//Moved these vars here for use in the fuck-it-skip-processing check.
 		var/pressure = environment.return_pressure()
-		if(pressure < WARNING_HIGH_PRESSURE && pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.gas["phoron"] < MOLES_PHORON_VISIBLE)
+		if(pressure < WARNING_HIGH_PRESSURE && pressure > WARNING_LOW_PRESSURE && abs(environment.temperature - 293.15) < 20 && abs(bodytemperature - 310.14) < 0.5 && environment.gas["plasma"] < MOLES_PLASMA_VISIBLE)
 
 
 			//Hopefully should fix the walk-inside-still-pressure-warning issue.
@@ -565,7 +565,7 @@
 		if(pullin)	pullin.icon_state = "pull[pulling ? 1 : 0]"
 
 
-		if (toxin)	toxin.icon_state = "tox[phoron_alert ? 1 : 0]"
+		if (toxin)	toxin.icon_state = "tox[plasma_alert ? 1 : 0]"
 		if (oxygen) oxygen.icon_state = "oxy[oxygen_alert ? 1 : 0]"
 		if (fire) fire.icon_state = "fire[fire_alert ? 2 : 0]"
 		//NOTE: the alerts dont reset when youre out of danger. dont blame me,

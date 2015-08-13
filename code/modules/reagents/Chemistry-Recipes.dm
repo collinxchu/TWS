@@ -117,7 +117,7 @@ datum
 			id = "oxycodone"
 			result = "oxycodone"
 			required_reagents = list("ethanol" = 1, "tramadol" = 1)
-			required_catalysts = list("phoron" = 1)
+			required_catalysts = list("plasma" = 1)
 			result_amount = 1
 
 		//cyanide
@@ -145,7 +145,7 @@ datum
 			name = "Lexorin"
 			id = "lexorin"
 			result = "lexorin"
-			required_reagents = list("phoron" = 1, "hydrogen" = 1, "nitrogen" = 1)
+			required_reagents = list("plasma" = 1, "hydrogen" = 1, "nitrogen" = 1)
 			result_amount = 3
 
 		space_drugs
@@ -209,7 +209,7 @@ datum
 			id = "peridaxon"
 			result = "peridaxon"
 			required_reagents = list("bicaridine" = 2, "clonexadone" = 2)
-			required_catalysts = list("phoron" = 5)
+			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
 		virus_food
@@ -224,7 +224,7 @@ datum
 			id = "leporazine"
 			result = "leporazine"
 			required_reagents = list("silicon" = 1, "copper" = 1)
-			required_catalysts = list("phoron" = 5)
+			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
 		cryptobiolin
@@ -252,8 +252,8 @@ datum
 			name = "Dexalin"
 			id = "dexalin"
 			result = "dexalin"
-			required_reagents = list("oxygen" = 2, "phoron" = 0.1)
-			required_catalysts = list("phoron" = 5)
+			required_reagents = list("oxygen" = 2, "plasma" = 0.1)
+			required_catalysts = list("plasma" = 5)
 			result_amount = 1
 
 		dermaline
@@ -302,8 +302,8 @@ datum
 			name = "Clonexadone"
 			id = "clonexadone"
 			result = "clonexadone"
-			required_reagents = list("cryoxadone" = 1, "sodium" = 1, "phoron" = 0.1)
-			required_catalysts = list("phoron" = 5)
+			required_reagents = list("cryoxadone" = 1, "sodium" = 1, "plasma" = 0.1)
+			required_catalysts = list("plasma" = 5)
 			result_amount = 2
 
 		spaceacillin
@@ -401,7 +401,7 @@ datum
 			name = "Napalm"
 			id = "napalm"
 			result = null
-			required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
+			required_reagents = list("aluminum" = 1, "plasma" = 1, "sacid" = 1 )
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/turf/location = get_turf(holder.my_atom.loc)
@@ -474,7 +474,7 @@ datum
 			name = "Potassium Chlorophoride"
 			id = "potassium_chlorophoride"
 			result = "potassium_chlorophoride"
-			required_reagents = list("potassium_chloride" = 1, "phoron" = 1, "chloralhydrate" = 1)
+			required_reagents = list("potassium_chloride" = 1, "plasma" = 1, "chloralhydrate" = 1)
 			result_amount = 4
 
 		stoxin
@@ -512,15 +512,15 @@ datum
 			required_reagents = list("sodiumchloride" = 1, "ethanol" = 1, "radium" = 1)
 			result_amount = 3
 
-		phoronsolidification
-			name = "Solid Phoron"
-			id = "solidphoron"
+		plasmasolidification
+			name = "Solid Plasma"
+			id = "solidplasma"
 			result = null
-			required_reagents = list("iron" = 5, "frostoil" = 5, "phoron" = 20)
+			required_reagents = list("iron" = 5, "frostoil" = 5, "plasma" = 20)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
-				new /obj/item/stack/sheet/mineral/phoron(location)
+				new /obj/item/stack/sheet/mineral/plasma(location)
 				return
 
 		plastication
@@ -583,7 +583,7 @@ datum
 			id = "condensedcapsaicin"
 			result = "condensedcapsaicin"
 			required_reagents = list("capsaicin" = 2)
-			required_catalysts = list("phoron" = 5)
+			required_catalysts = list("plasma" = 5)
 			result_amount = 1
 ///////////////////////////////////////////////////////////////////////////////////
 
@@ -995,13 +995,13 @@ datum
 			name = "Slime Spawn"
 			id = "m_spawn"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/grey
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				for(var/mob/O in viewers(get_turf(holder.my_atom), null))
-					O.show_message(text("\red Infused with phoron, the core begins to quiver and grow, and soon a new baby slime emerges from it!"), 1)
+					O.show_message(text("\red Infused with plasma, the core begins to quiver and grow, and soon a new baby slime emerges from it!"), 1)
 				var/mob/living/carbon/slime/S = new /mob/living/carbon/slime
 				S.loc = get_turf(holder.my_atom)
 
@@ -1024,7 +1024,7 @@ datum
 			name = "Mutation Toxin"
 			id = "mutationtoxin"
 			result = "mutationtoxin"
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_other = 1
 			required_container = /obj/item/slime_extract/green
@@ -1034,7 +1034,7 @@ datum
 			name = "Slime Metal"
 			id = "m_metal"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/metal
 			required_other = 1
@@ -1051,7 +1051,7 @@ datum
 			name = "Slime Crit"
 			id = "m_tele"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/gold
 			required_other = 1
@@ -1098,7 +1098,7 @@ datum
 			name = "Slime Bork"
 			id = "m_tele2"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/silver
 			required_other = 1
@@ -1128,7 +1128,7 @@ datum
 			name = "Slime Frost Oil"
 			id = "m_frostoil"
 			result = "frostoil"
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 10
 			required_container = /obj/item/slime_extract/blue
 			required_other = 1
@@ -1137,7 +1137,7 @@ datum
 			name = "Slime Freeze"
 			id = "m_freeze"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/darkblue
 			required_other = 1
@@ -1164,7 +1164,7 @@ datum
 			name = "Slime fire"
 			id = "m_fire"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/orange
 			required_other = 1
@@ -1174,7 +1174,7 @@ datum
 				sleep(50)
 				var/turf/location = get_turf(holder.my_atom.loc)
 				for(var/turf/simulated/floor/target_tile in range(0,location))
-					target_tile.assume_gas("phoron", 25, 1400)
+					target_tile.assume_gas("plasma", 25, 1400)
 					spawn (0) target_tile.hotspot_expose(700, 400)
 
 //Yellow
@@ -1194,7 +1194,7 @@ datum
 			name = "Slime Powercell"
 			id = "m_cell"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/yellow
 			required_other = 1
@@ -1222,7 +1222,7 @@ datum
 			name = "Slime Steroid"
 			id = "m_steroid"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/purple
 			required_other = 1
@@ -1247,12 +1247,12 @@ datum
 			name = "Slime Plasma"
 			id = "m_plasma"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/darkpurple
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
-				var/obj/item/stack/sheet/mineral/phoron/P = new /obj/item/stack/sheet/mineral/phoron
+				var/obj/item/stack/sheet/mineral/plasma/P = new /obj/item/stack/sheet/mineral/plasma
 				P.amount = 10
 				P.loc = get_turf(holder.my_atom)
 
@@ -1261,7 +1261,7 @@ datum
 			name = "Slime Glycerol"
 			id = "m_glycerol"
 			result = "glycerol"
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 8
 			required_container = /obj/item/slime_extract/red
 			required_other = 1
@@ -1286,7 +1286,7 @@ datum
 			name = "Slime Potion"
 			id = "m_potion"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/pink
 			required_other = 1
@@ -1300,7 +1300,7 @@ datum
 			name = "Advanced Mutation Toxin"
 			id = "mutationtoxin2"
 			result = "amutationtoxin"
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_other = 1
 			required_container = /obj/item/slime_extract/black
@@ -1310,7 +1310,7 @@ datum
 			name = "Slime Explosion"
 			id = "m_explosion"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/oil
 			required_other = 1
@@ -1326,7 +1326,7 @@ datum
 			result = null
 			result_amount = 1
 			required_container = /obj/item/slime_extract/lightpink
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			required_other = 1
 			on_reaction(var/datum/reagents/holder)
 				var/obj/item/weapon/slimepotion2/P = new /obj/item/weapon/slimepotion2
@@ -1336,7 +1336,7 @@ datum
 			name = "Slime Golem"
 			id = "m_golem"
 			result = null
-			required_reagents = list("phoron" = 5)
+			required_reagents = list("plasma" = 5)
 			result_amount = 1
 			required_container = /obj/item/slime_extract/adamantine
 			required_other = 1
@@ -1636,11 +1636,11 @@ datum
 			required_reagents = list("tequilla" = 2, "orangejuice" = 1)
 			result_amount = 3
 
-		phoron_special
+		plasma_special
 			name = "Toxins Special"
-			id = "phoronspecial"
-			result = "phoronspecial"
-			required_reagents = list("rum" = 2, "vermouth" = 1, "phoron" = 2)
+			id = "plasmaspecial"
+			result = "plasmaspecial"
+			required_reagents = list("rum" = 2, "vermouth" = 1, "plasma" = 2)
 			result_amount = 5
 
 		beepsky_smash

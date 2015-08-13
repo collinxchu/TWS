@@ -11,12 +11,7 @@
 
 /obj/structure/closet/secure_closet/miner
 	name = "miner's equipment"
-	icon_state = "miningsec1"
-	icon_closed = "miningsec"
-	icon_locked = "miningsec1"
-	icon_opened = "miningsecopen"
-	icon_broken = "miningsecbroken"
-	icon_off = "miningsecoff"
+	icon_state = "mining"
 	req_access = list(access_mining)
 
 /obj/structure/closet/secure_closet/miner/New()
@@ -114,7 +109,7 @@
 	w_class = 3.0 //it is smaller than the pickaxe
 	damtype = "fire"
 	digspeed = 20 //Can slice though normal walls, all girders, or be used in reinforced wall deconstruction/ light thermite on fire
-	origin_tech = "materials=4;phorontech=3;engineering=3"
+	origin_tech = "materials=4;plasmatech=3;engineering=3"
 	desc = "A rock cutter that uses bursts of hot plasma. You could use it to cut limbs off of xenos! Or, you know, mine stuff."
 	drill_verb = "cutting"
 
@@ -177,11 +172,10 @@
 /obj/structure/closet/crate/miningcar
 	desc = "A mining car. This one doesn't work on rails, but has to be dragged."
 	name = "Mining car (not for rails)"
-	icon = 'icons/obj/storage.dmi'
-	icon_state = "miningcar"
+	icon = 'icons/obj/crates.dmi'
 	density = 1
-	icon_opened = "miningcaropen"
-	icon_closed = "miningcar"
+	icon_crate = "miningcar"
+	icon_state = "miningcar"
 
 // Flags.
 

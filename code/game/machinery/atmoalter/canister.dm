@@ -40,8 +40,8 @@
 	canister_color = "blue"
 	can_label = 0
 
-/obj/machinery/portable_atmospherics/canister/phoron
-	name = "Canister \[Phoron\]"
+/obj/machinery/portable_atmospherics/canister/plasma
+	name = "Canister \[Plasma\]"
 	icon_state = "orange"
 	canister_color = "orange"
 	can_label = 0
@@ -69,8 +69,8 @@
 	name = "Canister: \[O2\]"
 	icon_state = "blue"
 	canister_color = "blue"
-/obj/machinery/portable_atmospherics/canister/empty/phoron
-	name = "Canister \[Phoron\]"
+/obj/machinery/portable_atmospherics/canister/empty/plasma
+	name = "Canister \[Plasma\]"
 	icon_state = "orange"
 	canister_color = "orange"
 
@@ -196,7 +196,7 @@ update_flag
 	else
 		can_label = 0
 
-	if(air_contents.temperature > PHORON_FLASHPOINT)
+	if(air_contents.temperature > PLASMA_FLASHPOINT)
 		air_contents.zburn()
 	return
 
@@ -357,10 +357,10 @@ update_flag
 
 	return 1
 
-/obj/machinery/portable_atmospherics/canister/phoron/New()
+/obj/machinery/portable_atmospherics/canister/plasma/New()
 	..()
 
-	src.air_contents.adjust_gas("phoron", MolesForPressure())
+	src.air_contents.adjust_gas("plasma", MolesForPressure())
 	src.update_icon()
 	return 1
 

@@ -1,12 +1,12 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/shield_gen_ex
 	name = T_BOARD("hull shield generator")
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen/external"
-	origin_tech = "bluespace=4;phorontech=3"
+	origin_tech = "bluespace=4;plasmatech=3"
 	frame_desc = "Requires 2 Pico Manipulators, 1 Subspace Transmitter, 5 Pieces of cable, 1 Subspace Crystal, 1 Subspace Amplifier and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator/pico" = 2,
@@ -20,7 +20,7 @@
 	name = T_BOARD("bubble shield generator")
 	board_type = "machine"
 	build_path = "/obj/machinery/shield_gen"
-	origin_tech = "bluespace=4;phorontech=3"
+	origin_tech = "bluespace=4;plasmatech=3"
 	frame_desc = "Requires 2 Pico Manipulators, 1 Subspace Transmitter, 5 Pieces of cable, 1 Subspace Crystal, 1 Subspace Amplifier and 1 Console Screen."
 	req_components = list(
 							"/obj/item/weapon/stock_parts/manipulator/pico" = 2,

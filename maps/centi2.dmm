@@ -392,7 +392,7 @@
 "hB" = (/obj/structure/table/woodentable,/obj/item/weapon/card/id/housekeys/berislavtarik{name = "Laura Karolina's house keys"},/obj/item/weapon/card/id/housekeys/berislavtarik,/turf/simulated/floor/wood,/area/centcom/creed)
 "hC" = (/obj/structure/table/woodentable,/obj/item/weapon/twohanded/spear,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)
 "hD" = (/obj/structure/table/woodentable,/obj/item/weapon/katana,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)
-"hE" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/phoron,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)
+"hE" = (/obj/structure/table/woodentable,/obj/machinery/atmospherics/pipe/tank/phoron,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)
 "hF" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/uranium,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)
 "hG" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/platinum,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)
 "hH" = (/obj/structure/table/woodentable,/obj/item/weapon/archaeological_find,/turf/simulated/floor{icon_state = "plate1"},/area/centcom/creed)

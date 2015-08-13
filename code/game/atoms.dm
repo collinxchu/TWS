@@ -439,3 +439,6 @@ its easier to just keep the beam vertical.
 		return 1
 	else
 		return 0
+
+/atom/proc/emag_act()
+	return

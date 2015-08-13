@@ -1589,10 +1589,10 @@ datum
 				..()
 				return
 
-		toxin/phoron
-			name = "Phoron"
-			id = "phoron"
-			description = "Phoron in its liquid form."
+		toxin/plasma
+			name = "Plasma"
+			id = "plasma"
+			description = "Plasma in its liquid form."
 			reagent_state = LIQUID
 			color = "#9D14DB"
 			toxpwr = 3
@@ -3788,7 +3788,7 @@ datum
 
 		ethanol/toxins_special
 			name = "Toxins Special"
-			id = "phoronspecial"
+			id = "plasmaspecial"
 			description = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
 			reagent_state = LIQUID
 			color = "#664300" // rgb: 102, 67, 0

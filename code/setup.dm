@@ -21,7 +21,7 @@
 #define O2STANDARD 0.21
 #define N2STANDARD 0.79
 
-#define MOLES_PHORON_VISIBLE 0.7 //Moles in a standard cell after which phoron is visible
+#define MOLES_PLASMA_VISIBLE 0.7 //Moles in a standard cell after which plasma is visible
 #define MOLES_O2STANDARD MOLES_CELLSTANDARD*O2STANDARD	// O2 standard value (21%)
 #define MOLES_N2STANDARD MOLES_CELLSTANDARD*N2STANDARD	// N2 standard value (79%)
 
@@ -117,13 +117,13 @@
 #define CARBON_LIFEFORM_FIRE_RESISTANCE 200+T0C
 #define CARBON_LIFEFORM_FIRE_DAMAGE		4
 
-//Phoron fire properties
-#define PHORON_MINIMUM_BURN_TEMPERATURE		100+T0C
-#define PHORON_FLASHPOINT 					246+T0C
-#define PHORON_UPPER_TEMPERATURE			1370+T0C
-#define PHORON_MINIMUM_OXYGEN_NEEDED		2
-#define PHORON_MINIMUM_OXYGEN_PHORON_RATIO	20
-#define PHORON_OXYGEN_FULLBURN				10
+//Plasma fire properties
+#define PLASMA_MINIMUM_BURN_TEMPERATURE		100+T0C
+#define PLASMA_FLASHPOINT 					246+T0C
+#define PLASMA_UPPER_TEMPERATURE			1370+T0C
+#define PLASMA_MINIMUM_OXYGEN_NEEDED		2
+#define PLASMA_MINIMUM_OXYGEN_PLASMA_RATIO	20
+#define PLASMA_OXYGEN_FULLBURN				10
 
 #define T0C 273.15					// 0degC
 #define T20C 293.15					// 20degC
@@ -189,7 +189,7 @@
 
 #define BLOCK_GAS_SMOKE_EFFECT 2048	// blocks the effect that chemical clouds would have on a mob --glasses, mask and helmets ONLY! (NOTE: flag shared with ONESIZEFITSALL)
 #define ONESIZEFITSALL 2048
-#define PHORONGUARD 4096			//Does not get contaminated by phoron.
+#define PLASMAGUARD 4096			//Does not get contaminated by plasma.
 
 #define	NOREACT		4096 			//Reagents dont' react inside this container.
 
@@ -833,3 +833,9 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_BINARY 1
 #define SUIT_SENSOR_VITAL 2
 #define SUIT_SENSOR_TRACKING 3
+
+//Sizes of mobs, used by mob/living/var/mob_size
+#define MOB_SIZE_TINY 0
+#define MOB_SIZE_SMALL 1
+#define MOB_SIZE_HUMAN 2
+#define MOB_SIZE_LARGE 3

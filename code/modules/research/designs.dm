@@ -11,7 +11,7 @@ they are simply references used as part of a "has materials?" type proc. They al
 The currently supporting non-reagent materials:
 - $metal (/obj/item/stack/metal). One sheet = 3750 units.
 - $glass (/obj/item/stack/glass). One sheet = 3750 units.
-- $phoron (/obj/item/stack/phoron). One sheet = 3750 units.
+- $plasma (/obj/item/stack/plasma). One sheet = 3750 units.
 - $silver (/obj/item/stack/silver). One sheet = 3750 units.
 - $gold (/obj/item/stack/gold). One sheet = 3750 units.
 - $uranium (/obj/item/stack/uranium). One sheet = 3750 units.
@@ -23,7 +23,7 @@ Don't add new keyword/IDs if they are made from an existing one (such as rods wh
 Design Guidlines
 - The reliability formula for all R&D built items is reliability_base (a fixed number) + total tech levels required to make it +
 reliability_mod (starts at 0, gets improved through experimentation). Example: PACMAN generator. 79 base reliablity + 6 tech
-(3 phorontech, 3 powerstorage) + 0 (since it's completely new) = 85% reliability. Reliability is the chance it works CORRECTLY.
+(3 plasmatech, 3 powerstorage) + 0 (since it's completely new) = 85% reliability. Reliability is the chance it works CORRECTLY.
 - When adding new designs, check rdreadme.dm to see what kind of things have already been made and where new stuff is needed.
 - A single sheet of anything is 3750 units of material. Materials besides metal/glass require help from other jobs (mining for
 other types of metals and chemistry for reagents).
@@ -313,8 +313,8 @@ datum/design/circuit/aifixer
 /////////Shield Generators/////////
 ///////////////////////////////////
 datum/design/circuit/shield
-	req_tech = list("bluespace" = 4, "phorontech" = 3)
-	materials = list("$glass" = 2000, "sacid" = 20, "$phoron" = 10000, "$diamond" = 5000, "$gold" = 10000)
+	req_tech = list("bluespace" = 4, "plasmatech" = 3)
+	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 10000, "$diamond" = 5000, "$gold" = 10000)
 
 datum/design/circuit/shield/AssembleDesignName()
 	name = "Shield generator circuit design ([name])"
@@ -451,7 +451,7 @@ datum/design/circuit/tcom/server
 	name = "server mainframe"
 	id = "tcom-server"
 	build_path = /obj/item/weapon/circuitboard/telecomms/server
-	
+
 datum/design/circuit/tcom/processor
 	name = "processor unit"
 	id = "tcom-processor"
@@ -658,10 +658,10 @@ datum/design/item/mecha/repair_droid
 	req_tech = list("magnets" = 3, "programming" = 3, "engineering" = 3)
 	build_path = /obj/item/mecha_parts/mecha_equipment/repair_droid
 
-datum/design/item/mecha/phoron_generator
-	desc = "Exosuit-mounted phoron generator."
-	id = "mech_phoron_generator"
-	req_tech = list("phorontech" = 2, "powerstorage"= 2, "engineering" = 2)
+datum/design/item/mecha/plasma_generator
+	desc = "Exosuit-mounted plasma generator."
+	id = "mech_plasma_generator"
+	req_tech = list("plasmatech" = 2, "powerstorage"= 2, "engineering" = 2)
 	build_path = /obj/item/mecha_parts/mecha_equipment/generator
 
 datum/design/item/mecha/energy_relay
@@ -743,7 +743,7 @@ datum/design/item/paicard
 datum/design/item/posibrain
 	id = "posibrain"
 	req_tech = list("engineering" = 4, "materials" = 6, "bluespace" = 2, "programming" = 4)
-	materials = list("$metal" = 2000, "$glass" = 1000, "$silver" = 1000, "$gold" = 500, "$phoron" = 500, "$diamond" = 100)
+	materials = list("$metal" = 2000, "$glass" = 1000, "$silver" = 1000, "$gold" = 500, "$plasma" = 500, "$diamond" = 100)
 	build_path = /obj/item/device/mmi/digital/posibrain
 
 ////////////////////////////////////////
@@ -977,7 +977,7 @@ datum/design/circuit/secure_airlock
 datum/design/circuit/pacman
 	name = "PACMAN-type generator"
 	id = "pacman"
-	req_tech = list("programming" = 3, "phorontech" = 3, "powerstorage" = 3, "engineering" = 3)
+	req_tech = list("programming" = 3, "plasmatech" = 3, "powerstorage" = 3, "engineering" = 3)
 	reliability_base = 79
 	materials = list("$glass" = 2000, "sacid" = 20)
 	build_path = /obj/item/weapon/circuitboard/pacman
@@ -1193,7 +1193,7 @@ datum/design/item/beaker/bluespace
 	desc = "A bluespace beaker, powered by experimental bluespace technology and Element Cuban combined with the Compound Pete. Can hold up to 300 units."
 	id = "bluespacebeaker"
 	req_tech = list("bluespace" = 2, "materials" = 6)
-	materials = list("$metal" = 3000, "$phoron" = 3000, "$diamond" = 500)
+	materials = list("$metal" = 3000, "$plasma" = 3000, "$diamond" = 500)
 	reliability_base = 76
 	build_path = /obj/item/weapon/reagent_containers/glass/beaker/bluespace
 
@@ -1343,10 +1343,10 @@ datum/design/item/weapon/stunshell
 	materials = list("$metal" = 4000)
 	build_path = /obj/item/ammo_casing/shotgun/stunshell
 
-datum/design/item/weapon/phoronpistol
+datum/design/item/weapon/plasmapistol
 	id = "ppistol"
-	req_tech = list("combat" = 5, "phorontech" = 4)
-	materials = list("$metal" = 5000, "$glass" = 1000, "$phoron" = 3000)
+	req_tech = list("combat" = 5, "plasmatech" = 4)
+	materials = list("$metal" = 5000, "$glass" = 1000, "$plasma" = 3000)
 	build_path = /obj/item/weapon/gun/energy/toxgun
 
 /////////////////////////////////////////
@@ -1371,8 +1371,8 @@ datum/design/item/weapon/mining/drill
 
 datum/design/item/weapon/mining/plasmacutter
 	id = "plasmacutter"
-	req_tech = list("materials" = 4, "phorontech" = 3, "engineering" = 3)
-	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$phoron" = 500)
+	req_tech = list("materials" = 4, "plasmatech" = 3, "engineering" = 3)
+	materials = list("$metal" = 1500, "$glass" = 500, "$gold" = 500, "$plasma" = 500)
 	reliability_base = 79
 	build_path = /obj/item/weapon/pickaxe/plasmacutter
 
@@ -1415,7 +1415,7 @@ datum/design/bluespace_crystal
 	id = "bluespace_crystal"
 	req_tech = list("bluespace" = 5, "materials" = 7)
 	build_type = PROTOLATHE
-	materials = list("$gold" = 1500, "$diamond" = 3000, "$phoron" = 1500)
+	materials = list("$gold" = 1500, "$diamond" = 3000, "$plasma" = 1500)
 	reliability_base = 100
 	build_path = /obj/item/bluespace_crystal/artificial"
 */
@@ -1547,7 +1547,7 @@ datum/design/item/mesons
 	req_tech = list("magnets" = 2, "engineering" = 2)
 	materials = list("$metal" = 50, "$glass" = 50)
 	build_path = /obj/item/clothing/glasses/meson
-	
+
 datum/design/item/binaryencrypt
 	name = "Binary encryption key"
 	desc = "Allows for deciphering the binary channel on-the-fly."

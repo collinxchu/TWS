@@ -105,13 +105,10 @@
 		/obj/vehicle
 		)
 
+/obj/item/weapon/card/emag/attack()
+	return
 
-/obj/item/weapon/card/emag/afterattack(var/obj/item/weapon/O as obj, mob/user as mob)
-
-	for(var/type in devices)
-		if(istype(O,type))
-			uses--
-			break
+/obj/item/weapon/card/emag/afterattack(atom/target, mob/user, proximity)
 
 	if(uses<1)
 		user.visible_message("[src] fizzles and sparks - it seems it's been used once too often, and is now broken.")
@@ -121,7 +118,14 @@
 		del(src)
 		return
 
-	..()
+	var/atom/A = target
+	if(!proximity) return
+	A.emag_act(user)
+
+	for(var/type in devices)
+		if(istype(target,type))
+			uses--
+			break
 
 /obj/item/weapon/card/id
 	name = "identification card"

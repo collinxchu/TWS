@@ -1,12 +1,7 @@
 /obj/structure/closet/secure_closet/medical1
 	name = "medicine closet"
 	desc = "Filled with medical junk."
-	icon_state = "medical1"
-	icon_closed = "medical"
-	icon_locked = "medical1"
-	icon_opened = "medicalopen"
-	icon_broken = "medicalbroken"
-	icon_off = "medicaloff"
+	icon_state = "med"
 	req_access = list(access_medical)
 
 
@@ -29,12 +24,7 @@
 /obj/structure/closet/secure_closet/medical2
 	name = "anesthetics closet"
 	desc = "Used to knock people out."
-	icon_state = "medical1"
-	icon_closed = "medical"
-	icon_locked = "medical1"
-	icon_opened = "medicalopen"
-	icon_broken = "medicalbroken"
-	icon_off = "medicaloff"
+	icon_state = "med"
 	req_access = list(access_surgery)
 
 
@@ -53,12 +43,7 @@
 /obj/structure/closet/secure_closet/medical3
 	name = "medical doctor's locker"
 	req_access = list(access_surgery)
-	icon_state = "securemed1"
-	icon_closed = "securemed"
-	icon_locked = "securemed1"
-	icon_opened = "securemedopen"
-	icon_broken = "securemedbroken"
-	icon_off = "securemedoff"
+	icon_state = "med_secure"
 
 	New()
 		..()
@@ -103,12 +88,7 @@
 /obj/structure/closet/secure_closet/CMO
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
-	icon_state = "cmosecure1"
-	icon_closed = "cmosecure"
-	icon_locked = "cmosecure1"
-	icon_opened = "cmosecureopen"
-	icon_broken = "cmosecurebroken"
-	icon_off = "cmosecureoff"
+	icon_state = "cmo"
 
 	New()
 		..()
@@ -160,12 +140,7 @@
 /obj/structure/closet/secure_closet/chemical
 	name = "chemical closet"
 	desc = "Store dangerous chemicals in here."
-	icon_state = "medical1"
-	icon_closed = "medical"
-	icon_locked = "medical1"
-	icon_opened = "medicalopen"
-	icon_broken = "medicalbroken"
-	icon_off = "medicaloff"
+	icon_door = "chemical"
 	req_access = list(access_chemistry)
 
 
@@ -180,10 +155,10 @@
 	desc = "It's a secure wall-mounted storage unit for first aid supplies."
 	icon_state = "medical_wall_locked"
 	icon_closed = "medical_wall_unlocked"
-	icon_locked = "medical_wall_locked"
+	var/icon_locked = "medical_wall_locked"
 	icon_opened = "medical_wall_open"
-	icon_broken = "medical_wall_spark"
-	icon_off = "medical_wall_off"
+	var/icon_broken = "medical_wall_spark"
+	var/icon_off = "medical_wall_off"
 	anchored = 1
 	density = 0
 	wall_mounted = 1
