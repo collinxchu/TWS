@@ -76,7 +76,7 @@
 	var/druggy = 0			//Carbon
 	var/confused = 0		//Carbon
 	var/antitoxs = null
-	var/phoron = null
+	var/plasma = null
 	var/sleeping = 0		//Carbon
 	var/resting = 0			//Carbon
 	var/lying = 0
@@ -214,7 +214,7 @@
 	var/universal_understand = 0 // Set to 1 to enable the mob to understand everyone, not necessarily speak
 
 	var/stance_damage = 0 //Whether this mob's ability to stand has been affected
-	
+
 	//SSD var, changed it up some so people can have special things happen for different mobs when SSD.
 	var/player_logged = 0
 

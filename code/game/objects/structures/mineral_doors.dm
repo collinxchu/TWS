@@ -197,12 +197,12 @@
 
 	proc/TemperatureAct(temperature)
 		for(var/turf/simulated/floor/target_tile in range(2,loc))
-			var/phoronToDeduce = temperature/10
-			target_tile.assume_gas("phoron", phoronToDeduce, 200+T0C)
+			var/plasmaToDeduce = temperature/10
+			target_tile.assume_gas("plasma", plasmaToDeduce, 200+T0C)
 
 			spawn (0) target_tile.hotspot_expose(temperature, 400)
 
-			hardness -= phoronToDeduce/100
+			hardness -= plasmaToDeduce/100
 			CheckHardness()
 
 /obj/structure/mineral_door/transparent/diamond

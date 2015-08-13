@@ -37,7 +37,7 @@ Rare minerals:
 	diamond
 
 Deep minerals:
-	phoron
+	plasma
 	osmium (platinum)
 	tritium (hydrogen)
 */
@@ -177,7 +177,7 @@ Deep minerals:
 								target_turf.resources["silver"] =     rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
 								target_turf.resources["uranium"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
 								target_turf.resources["diamond"] =    0
-								target_turf.resources["phoron"] =     0
+								target_turf.resources["plasma"] =     0
 								target_turf.resources["osmium"] =     0
 								target_turf.resources["hydrogen"] =   0
 							if(100 to 124)
@@ -186,7 +186,7 @@ Deep minerals:
 								target_turf.resources["silver"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
 								target_turf.resources["uranium"] =    rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
 								target_turf.resources["diamond"] =    0
-								target_turf.resources["phoron"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
+								target_turf.resources["plasma"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
 								target_turf.resources["osmium"] =     rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
 								target_turf.resources["hydrogen"] =   0
 							if(125 to 255)
@@ -195,7 +195,7 @@ Deep minerals:
 								target_turf.resources["silver"] =     0
 								target_turf.resources["uranium"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
 								target_turf.resources["diamond"] =    rand(RESOURCE_LOW_MIN,RESOURCE_LOW_MAX)
-								target_turf.resources["phoron"] =     rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
+								target_turf.resources["plasma"] =     rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
 								target_turf.resources["osmium"] =     rand(RESOURCE_HIGH_MIN,RESOURCE_HIGH_MAX)
 								target_turf.resources["hydrogen"] =   rand(RESOURCE_MID_MIN,RESOURCE_MID_MAX)
 

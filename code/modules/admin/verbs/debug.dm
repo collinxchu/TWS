@@ -948,7 +948,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 		if(Rad.anchored)
 			if(!Rad.P)
 				var/obj/item/weapon/tank/plasma/Plasma = new/obj/item/weapon/tank/plasma(Rad)
-				Plasma.air_contents.gas["phoron"] = 70
+				Plasma.air_contents.gas["plasma"] = 70
 				Rad.drainratio = 0
 				Rad.P = Plasma
 				Plasma.loc = Rad
@@ -991,7 +991,7 @@ But you can call procs that are of type /mob/living/carbon/human/proc/ for that 
 
 				var/obj/item/weapon/tank/plasma/Plasma = new/obj/item/weapon/tank/plasma(Rad)
 
-				Plasma.air_contents.gas["phoron"] = 29.1154	//This is a full tank if you filled it from a canister
+				Plasma.air_contents.gas["plasma"] = 29.1154	//This is a full tank if you filled it from a canister
 				Rad.P = Plasma
 
 				Plasma.loc = Rad
