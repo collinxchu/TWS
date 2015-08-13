@@ -12,7 +12,7 @@
 /obj/structure/closet/gimmick
 	name = "administrative supply closet"
 	desc = "It's a storage unit for things that have no right being here."
-	icon_state = "syndicate"
+	icon_state = "syndicate_green"
 	anchored = 0
 
 /obj/structure/closet/gimmick/russian

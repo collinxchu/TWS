@@ -2316,7 +2316,7 @@
 "SB" = (/obj/structure/table/woodentable,/obj/structure/flora/pottedplant{tag = "icon-plant-06"; icon_state = "plant-06"},/turf/simulated/floor{icon_state = "wood7"},/area/planets/biezel)
 "SC" = (/obj/structure/table/woodentable,/obj/item/weapon/twohanded/spear,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
 "SD" = (/obj/structure/table/woodentable,/obj/item/weapon/katana,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
-"SE" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/phoron,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
+"SE" = (/obj/structure/table/woodentable,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
 "SF" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/uranium,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
 "SG" = (/obj/structure/table/woodentable,/obj/item/weapon/coin/platinum,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
 "SH" = (/obj/structure/table/woodentable,/obj/item/weapon/archaeological_find,/turf/simulated/floor{icon_state = "plate1"},/area/planets/biezel)
@@ -2532,3 +2532,4 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMbMfTfTfemompmqmqmqmrmonTnTnTnToEnTnTnTnTnTnTnTnToEnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnTnToEnTnTnTnTnTnTnTnToEnTnTfTfTfTfTfTfTfTfTfTfTfTnTycJvodJvodJDJDLaSQmtmtmtodfTfTfTfTcucucucucucucuvHvHvHfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaczczczczczczczczczczczczczczczczczczczczczczczczczczczczczczczczfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTfTaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

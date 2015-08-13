@@ -51,7 +51,7 @@
 
 
 /obj/structure/closet/l3closet/scientist
-	icon_state = "bio_viro"
+	icon_state = "bio_science"
 
 
 /obj/structure/closet/l3closet/scientist/New()

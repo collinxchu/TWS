@@ -1151,6 +1151,10 @@
 	..()
 	icon_state = "co2"
 
+/obj/machinery/atmospherics/pipe/tank/phoron
+	name = "Dummy object - please remove this object from the map"
+	icon_state = "plasma_map"
+
 /obj/machinery/atmospherics/pipe/tank/plasma
 	name = "Pressure Tank (Plasma)"
 	icon_state = "plasma_map"

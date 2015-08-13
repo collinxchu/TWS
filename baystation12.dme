@@ -42,9 +42,6 @@
 #define FILE_DIR "icons/turf"
 #define FILE_DIR "icons/vehicles"
 #define FILE_DIR "icons/vending_icons"
-#define FILE_DIR "maps"
-#define FILE_DIR "maps/overmap"
-#define FILE_DIR "maps/overmap/bearcat"
 #define FILE_DIR "nano"
 #define FILE_DIR "nano/images"
 #define FILE_DIR "sound"
@@ -1626,4 +1623,6 @@
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
 #include "maps\centi2.dmm"
+#include "maps\Sol-England_2.dmm"
+#include "maps\TauCeti-Biezel.dmm"
 // END_INCLUDE
