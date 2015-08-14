@@ -147,6 +147,11 @@
 			if (mineral == "metal")
 				new /obj/item/stack/sheet/metal( src )
 				new /obj/item/stack/sheet/metal( src )
+			else if (mineral == "wood")
+				new /obj/item/stack/sheet/wood( src )
+				new /obj/item/stack/sheet/wood( src )
+			else if (mineral == "rust")
+				new /obj/item/stack/sheet/metal( src )
 			else
 				var/M = text2path("/obj/item/stack/sheet/mineral/[mineral]")
 				new M( src )
@@ -154,6 +159,13 @@
 		else
 			if (mineral == "metal")
 				new /obj/item/stack/sheet/metal( src )
+				new /obj/item/stack/sheet/metal( src )
+				new /obj/item/stack/sheet/metal( src )
+			else if (mineral == "wood")
+				new /obj/item/stack/sheet/wood( src )
+				new /obj/item/stack/sheet/wood( src )
+				new /obj/item/stack/sheet/wood( src )
+			else if (mineral == "rust")
 				new /obj/item/stack/sheet/metal( src )
 				new /obj/item/stack/sheet/metal( src )
 			else

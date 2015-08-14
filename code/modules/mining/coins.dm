@@ -35,10 +35,6 @@
 	name = "solid plasma coin"
 	icon_state = "coin_plasma"
 
-/obj/item/weapon/coin/phoron
-	name = "Dummy object - please remove this object from the map"
-	icon_state = "coin_plasma"
-
 /obj/item/weapon/coin/uranium
 	name = "uranium coin"
 	icon_state = "coin_uranium"
