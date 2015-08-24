@@ -238,8 +238,10 @@
 /obj/item/weapon/twohanded/chainsaw/update_icon()
 	if(wielded)
 		icon_state = "chainsaw[wielded]"
+		item_state = "chainsaw[wielded]"
 	else
 		icon_state = "chainsaw0"
+		item_state = "chainsaw0"
 
 
 /obj/item/weapon/twohanded/chainsaw/attack(mob/target as mob, mob/living/user as mob)
