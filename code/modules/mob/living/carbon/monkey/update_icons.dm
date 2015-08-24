@@ -55,7 +55,7 @@
 	if(r_hand)
 		var/t_state = r_hand.item_state
 		if(!t_state)	t_state = r_hand.icon_state
-		overlays_standing[M_R_HAND_LAYER]	= image("icon" = 'icons/mob/items_righthand.dmi', "icon_state" = t_state)
+		overlays_standing[M_R_HAND_LAYER]	= image("icon" = r_hand.righthand_file, "icon_state" = t_state)
 		r_hand.screen_loc = ui_rhand
 		if (handcuffed) drop_r_hand()
 	else
@@ -67,7 +67,7 @@
 	if(l_hand)
 		var/t_state = l_hand.item_state
 		if(!t_state)	 t_state = l_hand.icon_state
-		overlays_standing[M_L_HAND_LAYER]	= image("icon" = 'icons/mob/items_lefthand.dmi', "icon_state" = t_state)
+		overlays_standing[M_L_HAND_LAYER]	= image("icon" = l_hand.lefthand_file, "icon_state" = t_state)
 		l_hand.screen_loc = ui_lhand
 		if (handcuffed) drop_l_hand()
 	else

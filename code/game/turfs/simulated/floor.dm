@@ -20,7 +20,7 @@ var/list/icons_to_ignore_at_floor_init = list("damaged1","damaged2","damaged3","
 				"ironsand6", "ironsand7", "ironsand8", "ironsand9", "ironsand10", "ironsand11",
 				"ironsand12", "ironsand13", "ironsand14", "ironsand15")
 
-var/list/plating_icons = list("plating","platingdmg1","platingdmg2","platingdmg3","asteroid","asteroid_dug",
+var/list/plating_icons = list("plating","platingdmg1","platingdmg2","platingdmg3", "dirt", "asteroid","asteroid_dug",
 				"ironsand1", "ironsand2", "ironsand3", "ironsand4", "ironsand5", "ironsand6", "ironsand7",
 				"ironsand8", "ironsand9", "ironsand10", "ironsand11",
 				"ironsand12", "ironsand13", "ironsand14", "ironsand15")
@@ -80,21 +80,27 @@ var/list/wood_icons = list("wood","wood-broken")
 	//set src in oview(1)
 	switch(severity)
 		if(1.0)
-			src.ChangeTurf(/turf/simulated/floor/holofloor/desert) //for now, explosions will replace floor with dirt.
+			src.ChangeTurf(/turf/simulated/floor/plating/dirt/deep) //for now, explosions will replace floor with dirt.
 		if(2.0)
 			switch(pick(1,2;75,3))
 				if (1)
 					//src.ReplaceWithLattice()
-					if(prob(33)) new /obj/item/stack/sheet/metal(src)
+					if(prob(33))
+						new /obj/item/stack/tile/dirt(src)
+					else if(prob(33))
+						new /obj/item/stack/sheet/metal(src)
 				if(2)
-					src.ChangeTurf(/turf/simulated/floor/holofloor/desert) //replace with dirt
+					src.ChangeTurf(/turf/simulated/floor/plating/dirt) //replace with dirt
 				if(3)
 					if(prob(80))
 						src.break_tile_to_plating()
 					else
 						src.break_tile()
 					src.hotspot_expose(1000,CELL_VOLUME)
-					if(prob(33)) new /obj/item/stack/sheet/metal(src)
+					if(prob(33))
+						new /obj/item/stack/tile/dirt(src)
+					else if(prob(33))
+						new /obj/item/stack/sheet/metal(src)
 		if(3.0)
 			if (prob(50))
 				src.break_tile()
@@ -128,6 +134,8 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_plating())
 		if(!broken && !burnt)
 			icon_state = icon_plating //Because asteroids are 'platings' too.
+			if(istype(src,/turf/simulated/floor/grass) || istype(src,/turf/simulated/floor/plating/dirt || istype(src,/turf/simulated/floor/plating/dirt/deep)))
+				update_grass_overlays(1)
 	else if(is_light_floor())
 		if(get_lightfloor_on())
 			switch(get_lightfloor_state())
@@ -204,6 +212,34 @@ turf/simulated/floor/proc/update_icon()
 			if(air)
 				update_visuals(air)*/
 
+/turf/simulated/floor/proc/update_grass_overlays(var/update_neighbors)
+
+	overlays.Cut()
+	var/list/step_overlays = list("n" = NORTH, "s" = SOUTH, "e" = EAST, "w" = WEST)
+	for(var/direction in step_overlays)
+		var/turf/T
+		T = get_step(src, step_overlays[direction])
+			//| apply overlays when surrounded by grass
+		if(T && T.is_grass_floor())
+			overlays += image('icons/turf/floors.dmi', "grass_edge_[direction]", layer = 2.45) //Just above cables which are at 2.44
+			//| if src is a dirt hole, apply overlays when surrounded by dirt
+		if(istype(src, /turf/simulated/floor/plating/dirt/deep))
+			if(T.is_dirt_floor())
+				overlays += image('icons/turf/floors.dmi', "dirt_edge_[direction]", layer = 2.45) //Just above cables which are at 2.44
+		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
+			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]", layer = 2.45)
+
+	if(update_neighbors)
+		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)
+		for(var/direction in all_step_directions)
+			var/turf/simulated/floor/F
+			if(istype(get_step(src, direction), /turf/simulated/floor/grass))
+				F = get_step(src, direction)
+				F.update_grass_overlays()
+			if(istype(get_step(src, direction), /turf/simulated/floor/plating/dirt))
+				F = get_step(src, direction)
+				F.update_grass_overlays()
+
 /turf/simulated/floor/return_siding_icon_state()
 	..()
 	if(is_grass_floor())
@@ -255,6 +291,17 @@ turf/simulated/floor/proc/update_icon()
 	else
 		return 0
 
+/turf/simulated/floor/is_dirt_floor()
+	if(!is_grass_floor())
+		if(istype(src,/turf/simulated/floor/plating/dirt/deep))
+			return 0
+		if(istype(src,/turf/simulated/floor/plating/dirt))
+			return 1
+		if(istype(src,/turf/simulated/floor/grass))
+			return 1
+	else
+		return 0
+
 /turf/simulated/floor/is_wood_floor()
 	if(ispath(floor_type, /obj/item/stack/tile/wood))
 		return 1
@@ -280,6 +327,7 @@ turf/simulated/floor/proc/update_icon()
 
 /turf/simulated/floor/proc/break_tile()
 	if(istype(src,/turf/simulated/floor/engine)) return
+	if(istype(src,/turf/simulated/floor/plating/dirt)) return
 	if(istype(src,/turf/simulated/floor/mech_bay_recharge_floor))
 		src.ChangeTurf(/turf/simulated/floor/plating)
 	if(broken) return
@@ -289,7 +337,7 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_light_floor())
 		src.icon_state = "light_broken"
 		broken = 1
-	else if(is_plating())
+	else if(is_plating() && !istype(src, /turf/simulated/floor/grass))
 		src.icon_state = "platingdmg[pick(1,2,3)]"
 		broken = 1
 	else if(is_wood_floor())
@@ -302,12 +350,13 @@ turf/simulated/floor/proc/update_icon()
 		src.icon_state = "carpet-broken"
 		broken = 1
 	else if(is_grass_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
+		make_plating()
 		broken = 1
 
 /turf/simulated/floor/proc/burn_tile()
 	if(istype(src,/turf/simulated/floor/engine)) return
 	if(istype(src,/turf/simulated/floor/plating/airless/asteroid)) return//Asteroid tiles don't burn
+	if(istype(src,/turf/simulated/floor/plating/dirt)) return//Dirt tiles don't burn
 	if(broken || burnt) return
 	if(is_plasteel_floor())
 		src.icon_state = "damaged[pick(1,2,3,4,5)]"
@@ -315,7 +364,7 @@ turf/simulated/floor/proc/update_icon()
 	else if(is_plasteel_floor())
 		src.icon_state = "floorscorched[pick(1,2)]"
 		burnt = 1
-	else if(is_plating())
+	else if(is_plating() && !istype(src, /turf/simulated/floor/grass))
 		src.icon_state = "panelscorched"
 		burnt = 1
 	else if(is_wood_floor())
@@ -325,7 +374,7 @@ turf/simulated/floor/proc/update_icon()
 		src.icon_state = "carpet-broken"
 		burnt = 1
 	else if(is_grass_floor())
-		src.icon_state = "sand[pick("1","2","3")]"
+		src.icon_state = "grass_burnt"
 		burnt = 1
 
 //This proc will set floor_type to null and the update_icon() proc will then change the icon_state of the turf
@@ -347,7 +396,6 @@ turf/simulated/floor/proc/update_icon()
 						FF.update_icon() //so siding get updated properly
 
 	if(!floor_type) return
-	icon_plating = "plating"
 	SetLuminosity(0)
 	floor_type = null
 	intact = 0
@@ -473,7 +521,7 @@ turf/simulated/floor/proc/update_icon()
 			else
 				user << "\blue The lightbulb seems fine, no need to replace it."
 
-	if(istype(C, /obj/item/weapon/crowbar) && (!(is_plating())))
+	if(istype(C, /obj/item/weapon/crowbar) && (!(is_plating())) && (!is_grass_floor()))
 		if(broken || burnt)
 			user << "\red You remove the broken plating."
 		else
@@ -530,6 +578,8 @@ turf/simulated/floor/proc/update_icon()
 					return
 				floor_type = T.type
 				intact = 1
+				if(istype(T,/obj/item/stack/tile/dirt))
+					return
 				if(istype(T,/obj/item/stack/tile/light))
 					var/obj/item/stack/tile/light/L = T
 					set_lightfloor_state(L.state)
@@ -561,10 +611,19 @@ turf/simulated/floor/proc/update_icon()
 
 	if(istype(C, /obj/item/weapon/shovel))
 		if(is_grass_floor())
-			new /obj/item/weapon/ore/glass(src)
-			new /obj/item/weapon/ore/glass(src) //Make some sand if you shovel grass
-			user << "\blue You shovel the grass."
+			user << "\red You start digging."
+			playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
+
+			//if(!do_after(user,40)) return
+
+			user << "\blue You dig up the grass, revealing the earth underneath."
+			new floor_type(src)
 			make_plating()
+			return
+		if(is_dirt_floor())
+			user << "\blue You dig deeper into the dirt."
+			new /obj/item/stack/tile/dirt(user)
+			ChangeTurf(/turf/simulated/floor/plating/dirt/deep)
 		else
 			user << "\red You cannot shovel this."
 

@@ -13,6 +13,7 @@
 	var/mob/target_mob
 	var/obj/machinery/apiary/parent
 	pass_flags = PASSTABLE
+	flying = 1
 	turns_per_move = 6
 	var/obj/machinery/portable_atmospherics/hydroponics/my_hydrotray
 
@@ -21,6 +22,11 @@
 	parent = new_parent
 
 /mob/living/simple_animal/bee/Del()
+	if(parent)
+		parent.owned_bee_swarms.Remove(src)
+	..()
+
+/mob/living/simple_animal/bee/Destroy()
 	if(parent)
 		parent.owned_bee_swarms.Remove(src)
 	..()

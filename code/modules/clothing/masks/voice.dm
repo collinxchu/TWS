@@ -7,6 +7,7 @@
 /obj/item/clothing/mask/gas/voice
 	name = "gas mask"
 	desc = "A face-covering mask that can be connected to an air supply. It seems to house some odd electronics."
+	item_state = "gas_mask"
 	var/obj/item/voice_changer/changer
 	origin_tech = "syndicate=4"
 

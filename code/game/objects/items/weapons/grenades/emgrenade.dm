@@ -5,7 +5,7 @@
 	origin_tech = "materials=2;magnets=3"
 
 	prime()
-		..()
-		if(empulse(src, 4, 10))
-			del(src)
+		update_mob()
+		empulse(src, 4, 10)
+		qdel(src)
 		return

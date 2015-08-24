@@ -1,0 +1,30 @@
+"a" = (/turf/simulated/wall/r_wall,/area/planets)
+"b" = (/turf/simulated/wall,/area/planets)
+"c" = (/turf/simulated/floor/grass,/area/planets)
+"d" = (/obj/item/weapon/wrench,/turf/simulated/floor/grass,/area/planets)
+"e" = (/obj/item/weapon/wirecutters,/turf/simulated/floor/grass,/area/planets)
+"f" = (/turf/simulated/floor/plating/dirt,/area/planets)
+"g" = (/obj/item/weapon/screwdriver,/turf/simulated/floor/grass,/area/planets)
+"h" = (/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey,/turf/simulated/floor/grass,/area/planets)
+"i" = (/obj/item/device/assembly/timer,/turf/simulated/floor/grass,/area/planets)
+"j" = (/obj/item/device/assembly/igniter,/turf/simulated/floor/grass,/area/planets)
+"k" = (/obj/item/weapon/grenade/chem_grenade,/turf/simulated/floor/grass,/area/planets/sol)
+"l" = (/obj/item/weapon/reagent_containers/glass/beaker,/turf/simulated/floor/grass,/area/planets)
+"m" = (/obj/effect/landmark/start{name = "Captain"},/turf/simulated/floor/grass,/area/planets)
+"n" = (/obj/effect/landmark{name = "JoinLate"},/turf/simulated/floor/grass,/area/planets)
+"o" = (/obj/effect/landmark{name = "Observer-Start"},/turf/simulated/floor/grass,/area/planets)
+"p" = (/obj/effect/landmark/start{name = "Assistant"},/turf/simulated/floor/grass,/area/planets)
+"q" = (/obj/item/weapon/shovel,/turf/simulated/floor/grass,/area/planets)
+
+(1,1,1) = {"
+aaabbbbaaa
+acccdcecca
+acffghijca
+bcffckllcb
+bccmnopccb
+bccccccccb
+bcccqccccb
+acccccccca
+acccccccca
+aaabbbbaaa
+"}

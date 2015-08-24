@@ -160,7 +160,7 @@
 			else
 				chance_of_deletion = 100
 			if(prob(chance_of_deletion))
-				T.ChangeTurf(/turf/simulated/floor/holofloor/desert) //extreme heat will cause turf to be replaced by dirt
+				T.ChangeTurf(/turf/simulated/floor/plating/dirt) //extreme heat will cause turf to be replaced by dirt
 			else
 				T.to_be_destroyed = 0
 				T.max_fire_temperature_sustained = 0

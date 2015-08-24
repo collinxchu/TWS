@@ -103,6 +103,7 @@
 	sharp = 1
 	edge = 1
 	w_class = 3
+	no_embed = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	IsShield()
@@ -128,6 +129,7 @@
 	sharp = 1
 	edge = 1
 	w_class = 3
+	no_embed = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
 	suicide_act(mob/user)
@@ -391,6 +393,16 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 		M << "You are free of the net!"
 
 	processing_objects -= src
+	..()
+
+/obj/effect/energy_net/Destroy()
+
+	if(affecting)
+		var/mob/living/carbon/M = affecting
+		M.anchored = initial(affecting.anchored)
+		M.captured = 0
+		M << "You are free of the net!"
+
 	..()
 
 /obj/effect/energy_net/proc/healthcheck()

@@ -1,6 +1,10 @@
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
+	var/flash_protect = 0		//Malk: What level of bright light protection item has. 1 = Flashers, Flashes, & Flashbangs | 2 = Welding | -1 = OH GOD WELDING BURNT OUT MY RETINAS
+	var/tint = 0				//Malk: Sets the item's level of visual impairment tint, normally set to the same as flash_protect
+	lefthand_file = 'icons/mob/inhands/clothing_lefthand.dmi'
+	righthand_file = 'icons/mob/inhands/clothing_righthand.dmi'
 	var/list/species_restricted = null //Only these species can wear this kit.
 
 	/*
@@ -68,7 +72,7 @@
 /obj/item/clothing/head/helmet/refit_for_species(var/target_species)
 	if(!species_restricted)
 		return //this item doesn't use the species_restricted system
-	
+
 	//Set species_restricted list
 	switch(target_species)
 		if("Skrell")
@@ -156,6 +160,7 @@
 	icon_state = "earmuffs"
 	item_state = "earmuffs"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
+	flags = EARBANGPROTECT
 
 ///////////////////////////////////////////////////////////////////////
 //Glasses

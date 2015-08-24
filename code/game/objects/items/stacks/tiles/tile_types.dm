@@ -22,6 +22,20 @@
 	max_amount = 60
 	origin_tech = "biotech=1"
 
+/obj/item/stack/tile/dirt
+	name = "dirt"
+	singular_name = "grass pile"
+	desc = "A pile of dirt."
+	icon_state = "pile_dirt"
+	w_class = 3.0
+	force = 1.0
+	throwforce = 1.0
+	throw_speed = 5
+	throw_range = 20
+	flags = CONDUCT
+	max_amount = 60
+	origin_tech = "biotech=1"
+
 /*
  * Wood
  */

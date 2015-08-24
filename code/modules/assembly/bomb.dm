@@ -39,7 +39,7 @@
 		bombtank.master = null
 		bombtank = null
 
-		del(src)
+		qdel(src)
 		return
 	if((istype(W, /obj/item/weapon/weldingtool) && W:welding))
 		if(!status)
@@ -73,19 +73,27 @@
 	if(bombassembly)
 		bombassembly.HasProximity(AM)
 
+/obj/item/device/onetankbomb/Crossed(atom/movable/AM as mob|obj) //for mousetraps
+	if(bombassembly)
+		bombassembly.Crossed(AM)
+
+/obj/item/device/onetankbomb/on_found(mob/finder) //for mousetraps
+	if(bombassembly)
+		bombassembly.on_found(finder)
+
+
 // ---------- Procs below are for tanks that are used exclusively in 1-tank bombs ----------
 
 /obj/item/weapon/tank/proc/bomb_assemble(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
 	var/obj/item/device/assembly_holder/S = W
 	var/mob/M = user
-	if(!S.secured)										//Check if the assembly is secured
-		return
 	if(isigniter(S.a_left) == isigniter(S.a_right))		//Check if either part of the assembly has an igniter, but if both parts are igniters, then fuck it
+		return
+	if(!M.drop_item())									//Remove the assembly from your hands
 		return
 
 	var/obj/item/device/onetankbomb/R = new /obj/item/device/onetankbomb(loc)
 
-	M.drop_item()			//Remove the assembly from your hands
 	M.remove_from_mob(src)	//Remove the tank from your character,in case you were holding it
 	M.put_in_hands(R)		//Equips the bomb if possible, or puts it on the floor.
 
@@ -144,8 +152,8 @@
 		ground_zero.hotspot_expose(1000, 125)
 
 	if(master)
-		del(master)
-	del(src)
+		qdel(master)
+	qdel(src)
 
 /obj/item/weapon/tank/proc/release()	//This happens when the bomb is not welded. Tank contents are just spat out.
 	var/datum/gas_mixture/removed = air_contents.remove(air_contents.total_moles)

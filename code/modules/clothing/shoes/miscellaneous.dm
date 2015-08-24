@@ -19,6 +19,7 @@
 	name = "\improper SWAT shoes"
 	desc = "When you want to turn up the heat."
 	icon_state = "swat"
+	item_state = "jackboots"
 	force = 3
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	flags = NOSLIP
@@ -28,6 +29,7 @@
 	name = "combat boots"
 	desc = "When you REALLY want to turn up the heat"
 	icon_state = "swat"
+	item_state = "jackboots"
 	force = 5
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	flags = NOSLIP
@@ -42,6 +44,7 @@
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"
 	icon_state = "wizard"
+	item_state = "wizshoe"
 	species_restricted = null
 	body_parts_covered = 0
 
@@ -55,6 +58,7 @@
 	desc = "Rubber boots"
 	name = "galoshes"
 	icon_state = "galoshes"
+	item_state = "galoshes"
 	permeability_coefficient = 0.05
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
@@ -104,7 +108,7 @@
 	name = "bunny slippers"
 	desc = "Fluffy!"
 	icon_state = "slippers"
-	item_state = "slippers"
+	item_state = "w_shoes"
 	force = 0
 	species_restricted = null
 	w_class = 2
@@ -113,7 +117,7 @@
 	name = "worn bunny slippers"
 	desc = "Fluffy..."
 	icon_state = "slippers_worn"
-	item_state = "slippers_worn"
+	item_state = "w_shoes"
 	force = 0
 	w_class = 2
 

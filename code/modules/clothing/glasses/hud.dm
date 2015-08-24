@@ -25,6 +25,8 @@
 	desc = "A heads-up display that scans the humans in view and provides accurate data about their ID status and security records."
 	icon_state = "securityhud"
 	body_parts_covered = 0
+	flash_protect = 1
+	tint = 1
 	var/global/list/jobs[0]
 
 /obj/item/clothing/glasses/hud/security/jensenshades

@@ -292,7 +292,7 @@ emp_act
 		var/embed_threshold = weapon_sharp? 5*I.w_class : 15*I.w_class
 
 		//Sharp objects will always embed if they do enough damage.
-		if((weapon_sharp && damage > (10*I.w_class)) || (damage > embed_threshold && prob(embed_chance)))
+		if(((weapon_sharp && prob(damage/(10*I.w_class)*100)) || (damage > embed_threshold && prob(embed_chance))) && (I.no_embed == 0))
 			affecting.embed(I)
 	return 1
 

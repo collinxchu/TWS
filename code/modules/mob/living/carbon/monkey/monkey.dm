@@ -284,3 +284,10 @@
         message = capitalize(trim_left(message))
 
         ..(message, speaking, verb, alt_name, italics, message_range, used_radios)
+
+/mob/living/carbon/monkey/check_eye_prot()
+	var/number = ..()
+	if(istype(src.wear_mask, /obj/item/clothing/mask))
+		var/obj/item/clothing/mask/MFP = src.wear_mask
+		number += MFP.flash_protect
+	return number

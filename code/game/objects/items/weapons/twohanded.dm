@@ -21,10 +21,14 @@
 	var/force_wielded = 0
 	var/wieldsound = null
 	var/unwieldsound = null
+	var/force_unwielded = 0
 
 /obj/item/weapon/twohanded/proc/unwield()
 	wielded = 0
-	force = initial(force)
+	if(force_unwielded)
+		force = force_unwielded
+	else
+		force = initial(force)
 	name = "[initial(name)]"
 	update_icon()
 
@@ -118,6 +122,7 @@
 	edge = 1
 	w_class = 4.0
 	slot_flags = SLOT_BACK
+	force_unwielded = 5
 	force_wielded = 40
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 
@@ -153,6 +158,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 2.0
+	force_unwielded = 3
 	force_wielded = 30
 	wieldsound = 'sound/weapons/saberon.ogg'
 	unwieldsound = 'sound/weapons/saberoff.ogg'
@@ -161,6 +167,7 @@
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	sharp = 1
 	edge = 1
+	no_embed = 1
 
 /obj/item/weapon/twohanded/dualsaber/update_icon()
 	icon_state = "dualsaber[wielded]"
@@ -192,6 +199,7 @@
 	force = 14
 	w_class = 4.0
 	slot_flags = SLOT_BACK
+	force_unwielded = 10
 	force_wielded = 22 // Was 13, Buffed - RR
 	throwforce = 20
 	throw_speed = 3
@@ -204,3 +212,56 @@
 /obj/item/weapon/twohanded/spear/update_icon()
 	icon_state = "spearglass[wielded]"
 	return
+
+/obj/item/weapon/twohanded/chainsaw
+	icon_state = "chainsaw0"
+	item_state = "chainsaw0"
+	name = "Chainsaw"
+	desc = "Perfect for felling trees or fellow spacemen."
+	force = 15
+	throwforce = 15
+	throw_speed = 1
+	throw_range = 5
+	w_class = 4.0 // can't fit in backpacks
+	force_unwielded = 15 //still pretty robust
+	force_wielded = 40  //you'll gouge their eye out! Or a limb...maybe even their entire body!
+	wieldsound = 'sound/weapons/chainsawstart.ogg'
+	hitsound = null
+	flags = NOSHIELD
+	origin_tech = "materials=6;syndicate=4"
+	attack_verb = list("sawed", "cut", "hacked", "carved", "cleaved", "butchered", "felled", "timbered")
+	sharp = 1
+	edge = 1
+	no_embed = 1
+
+
+/obj/item/weapon/twohanded/chainsaw/update_icon()
+	if(wielded)
+		icon_state = "chainsaw[wielded]"
+	else
+		icon_state = "chainsaw0"
+
+
+/obj/item/weapon/twohanded/chainsaw/attack(mob/target as mob, mob/living/user as mob)
+	if(wielded)
+		playsound(loc, 'sound/weapons/chainsaw.ogg', 100, 1, -1) //incredibly loud; you ain't goin' for stealth with this thing. Credit to Lonemonk of Freesound for this sound.
+		if(isrobot(target))
+			..()
+			return
+		if(!isliving(target))
+			return
+		else
+			target.Weaken(4)
+			..()
+		return
+	else
+		playsound(loc, "swing_hit", 50, 1, -1)
+		return ..()
+
+/obj/item/weapon/twohanded/chainsaw/wield() //you can't disarm an active chainsaw, you crazy person.
+	..()
+	flags |= NODROP
+
+/obj/item/weapon/twohanded/chainsaw/unwield()
+	..()
+	flags &= ~NODROP

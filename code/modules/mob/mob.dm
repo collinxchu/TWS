@@ -1,3 +1,15 @@
+/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+	mob_list -= src
+	dead_mob_list -= src
+	living_mob_list -= src
+	qdel(hud_used)
+	if(mind && mind.current == src)
+		spellremove(src)
+	for(var/infection in viruses)
+		qdel(infection)
+	ghostize()
+	..()
+
 /mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
 	mob_list -= src
 	dead_mob_list -= src
@@ -5,13 +17,27 @@
 	ghostize()
 	..()
 
+/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
+	mob_list -= src
+	dead_mob_list -= src
+	living_mob_list -= src
+	ghostize()
+	..()
+
+var/next_mob_id = 0
 /mob/New()
+	tag = "mob_[next_mob_id++]"
 	mob_list += src
 	if(stat == DEAD)
 		dead_mob_list += src
 	else
 		living_mob_list += src
+	//prepare_huds()
 	..()
+/*
+/mob/proc/prepare_huds()
+	for(var/hud in hud_possible)
+		hud_list[hud] = image('icons/mob/hud.dmi', src, "")*/
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
 
@@ -150,7 +176,7 @@
 				var/list/temp = list(  )
 				temp += L.container
 				//L = null
-				del(L)
+				qdel(L)
 				return temp
 			else
 				return L.container
@@ -181,7 +207,7 @@
 
 	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
-			del(W)
+			qdel(W)
 		else
 			if(!disable_warning)
 				src << "\red You are unable to equip that." //Only print if del_on_fail is false
@@ -292,7 +318,7 @@ var/list/slot_equipment_priority = list( \
 	P.invisibility = invisibility
 	spawn (20)
 		if(P)
-			del(P)	// qdel
+			qdel(P)
 
 	face_atom(A)
 	return 1
@@ -449,7 +475,7 @@ var/list/slot_equipment_priority = list( \
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(M)
+		qdel(M)
 		return
 
 	M.key = key
@@ -805,19 +831,19 @@ note dizziness decrements automatically in the mob's Life() proc.
 			stat(null,"Location:\t([x], [y], [z])")
 			stat(null,"CPU:\t[world.cpu]")
 			stat(null,"Instances:\t[world.contents.len]")
-
+/*
 			if(master_controller)
-				stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
+				//stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
 				stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
 				stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
-				stat(null,"Dis-[master_controller.diseases_cost]\t#[active_diseases.len]")
-				stat(null,"Mch-[master_controller.machines_cost]\t#[machines.len]")
-				stat(null,"Obj-[master_controller.objects_cost]\t#[processing_objects.len]")
+				stat(null,"Dis-[master_controller.diseases_cost]\t#[SSdisease.processing.len]")
+				stat(null,"Mch-[master_controller.machines_cost]\t#[SSmachines.processing.len]")
+				stat(null,"Obj-[master_controller.objects_cost]\t#[SSobj.processing.len]")
 				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
-				stat(null,"NanoUI-[master_controller.nano_cost]\t#[nanomanager.processing_uis.len]")
+				stat(null,"NanoUI-[master_controller.nano_cost]\t#[SSnano.processing_uis.len]")
 				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
 			else
-				stat(null,"MasterController-ERROR")
+				stat(null,"MasterController-ERROR") */
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -1012,6 +1038,12 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
+	return
+
+/mob/proc/adjustEarDamage()
+	return
+
+/mob/proc/setEarDamage()
 	return
 
 /mob/proc/get_species()

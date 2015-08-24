@@ -82,6 +82,7 @@
 	var/lying = 0
 	var/lying_prev = 0
 	var/canmove = 1
+	var/eye_stat = null//Living, potentially Carbon
 	var/lastpuke = 0
 	var/unacidable = 0
 	var/small = 0
@@ -202,6 +203,7 @@
 	var/area/lastarea = null
 
 	var/digitalcamo = 0 // Can they be tracked by the AI?
+	var/weakeyes = 0    //Are they vulnerable to flashes?
 
 	var/list/radar_blips = list() // list of screen objects, radar blips
 	var/radar_open = 0 	// nonzero is radar is open

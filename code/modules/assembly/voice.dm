@@ -4,8 +4,10 @@
 	icon_state = "voice"
 	matter = list("metal" = 500, "glass" = 50, "waste" = 10)
 	origin_tech = "magnets=1"
+	flags = HEAR
+	attachable = 1
 	var/listening = 0
-	var/recorded	//the activation message
+	var/recorded = "" //the activation message
 
 /obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)
 	if(listening)
@@ -14,7 +16,10 @@
 		var/turf/T = get_turf(src)	//otherwise it won't work in hand
 		T.visible_message("\icon[src] beeps, \"Activation message is '[recorded]'.\"")
 	else
+		var/turf/T = get_turf(src)
+		T.visible_message("i made it")
 		if(findtext(msg, recorded))
+			T.visible_message("all the way")
 			pulse(0)
 
 /obj/item/device/assembly/voice/activate()
@@ -22,14 +27,13 @@
 		if(!holder)
 			listening = !listening
 			var/turf/T = get_turf(src)
-			T.visible_message("\icon[src] beeps, \"[listening ? "Now" : "No longer"] recording input.\"")
-
+			T.visible_message("[listening ? "Now" : "No longer"] recording input.")
 
 /obj/item/device/assembly/voice/attack_self(mob/user)
-	if(!user)	return 0
+	if(!user)
+		return 0
 	activate()
 	return 1
-
 
 /obj/item/device/assembly/voice/toggle_secure()
 	. = ..()

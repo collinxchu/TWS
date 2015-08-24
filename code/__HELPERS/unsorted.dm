@@ -546,6 +546,13 @@ Turf and target are seperate in case you want to teleport some distance from a t
 /proc/key_name_admin(var/whom, var/include_name = 1)
 	return key_name(whom, 1, include_name)
 
+/proc/get_mob_by_ckey(key)
+	if(!key)
+		return
+	var/list/mobs = sortmobs()
+	for(var/mob/M in mobs)
+		if(M.ckey == key)
+			return M
 
 // returns the turf located at the map edge in the specified direction relative to A
 // used for mass driver
@@ -1414,6 +1421,33 @@ var/list/WALLITEMS = list(
 
 /proc/format_text(text)
 	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
+
+/obj/proc/atmosanalyzer_scan(datum/gas_mixture/air_contents, mob/user, obj/target = src)
+	var/obj/icon = target
+	user.visible_message("[user] has used the analyzer on \icon[icon] [target].", "<span class='notice'>You use the analyzer on \icon[icon] [target].</span>")
+	var/pressure = air_contents.return_pressure()
+	var/total_moles = air_contents.total_moles()
+
+	user << "<span class='notice'>Results of analysis of \icon[icon] [target].</span>"
+	if(total_moles>0)
+		var/o2_concentration = air_contents.oxygen/total_moles
+		var/n2_concentration = air_contents.nitrogen/total_moles
+		var/co2_concentration = air_contents.carbon_dioxide/total_moles
+		var/plasma_concentration = air_contents.toxins/total_moles
+
+		var/unknown_concentration =  1-(o2_concentration+n2_concentration+co2_concentration+plasma_concentration)
+
+		user << "<span class='notice'>Pressure: [round(pressure,0.1)] kPa</span>"
+		user << "<span class='notice'>Nitrogen: [round(n2_concentration*100)] %</span>"
+		user << "<span class='notice'>Oxygen: [round(o2_concentration*100)] %</span>"
+		user << "<span class='notice'>CO2: [round(co2_concentration*100)] %</span>"
+		user << "<span class='notice'>Plasma: [round(plasma_concentration*100)] %</span>"
+		if(unknown_concentration>0.01)
+			user << "<span class='danger'>Unknown: [round(unknown_concentration*100)] %</span>"
+		user << "<span class='notice'>Temperature: [round(air_contents.temperature-T0C)] &deg;C</span>"
+	else
+		user << "<span class='notice'>[target] is empty!</span>"
+	return
 
 /proc/topic_link(var/datum/D, var/arglist, var/content)
 	if(istype(arglist,/list))

@@ -170,6 +170,7 @@
 #define NOBLUDGEON  2       // when an item has this it produces no "X has been hit by Y with Z" message with the default handler
 #define AIRTIGHT	4	    // functions with internals
 #define USEDELAY 	8		// 1 second extra delay on use (Can be used once every 2s)
+#define NODROP		2		// This flag makes it so that an item literally cannot be removed at all, or at least that's how it should be. Only deleted.
 #define NOSHIELD	16		// weapon not affected by shield
 #define CONDUCT		32		// conducts electricity (metal etc.)
 #define ON_BORDER	64		// item has priority to check when entering or leaving
@@ -296,16 +297,6 @@
 #define STRUCDNASIZE 27
 #define UNIDNASIZE 13
 
-	// Generic mutations:
-#define	TK				1
-#define COLD_RESISTANCE	2
-#define XRAY			3
-#define HULK			4
-#define CLUMSY			5
-#define FAT				6
-#define HUSK			7
-#define NOCLONE			8
-
 	// Extra powers:
 #define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
 #define HEAL			10 	// healing people with hands
@@ -321,19 +312,6 @@
 #define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
 #define SKELETON 29
 #define PLANT 30
-
-// Other Mutations:
-#define mNobreath		100 	// no need to breathe
-#define mRemote			101 	// remote viewing
-#define mRegen			102 	// health regen
-#define mRun			103 	// no slowdown
-#define mRemotetalk		104 	// remote talking
-#define mMorph			105 	// changing appearance
-#define mBlend			106 	// nothing (seriously nothing)
-#define mHallucination	107 	// hallucinations
-#define mFingerprints	108 	// no fingerprints
-#define mShock			109 	// insulated hands
-#define mSmallsize		110 	// table climbing
 
 //disabilities
 #define NEARSIGHTED		1

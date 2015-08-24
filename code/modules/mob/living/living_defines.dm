@@ -36,6 +36,15 @@
 	var/cameraFollow = null
 
 	var/tod = null // Time of death
+
+
+	var/on_fire = 0 //The "Are we on fire?" var
+	var/fire_stacks = 0 //Tracks how many stacks of fire we have on, max is usually 20
+
 	var/update_slimes = 1
 	var/silent = null 		// Can't talk. Value goes down every life proc.
 	var/mob_size            // Used by lockers.
+
+	var/ventcrawler = 0 //0 No vent crawling, 1 vent crawling in the nude, 2 vent crawling always
+	var/list/pipes_shown = list()  //Used by ventcrawl
+	var/last_played_vent

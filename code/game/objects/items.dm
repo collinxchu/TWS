@@ -1,9 +1,16 @@
+var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_state" = "fire")
+
 /obj/item
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
+	var/no_embed = 0 // For use in item_attack.dm
 	var/abstract = 0
 	var/item_state = null
+	var/lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
+	var/righthand_file = 'icons/mob/inhands/items_righthand.dmi'
+
+
 	var/r_speed = 1.0
 	var/health = null
 	var/burn_point = null
@@ -57,6 +64,12 @@
 
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
+
+/obj/item/Destroy()
+	if(ismob(loc))
+		var/mob/m = loc
+		m.unEquip(src, 1)
+	return ..()
 
 /obj/item/ex_act(severity)
 	switch(severity)
@@ -707,3 +720,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
 
 	return
+
+/obj/item/proc/remove_item_from_storage(atom/newLoc) //please use this if you're going to snowflake an item out of a obj/item/weapon/storage
+	if(!newLoc)
+		return 0
+	if(istype(loc,/obj/item/weapon/storage))
+		var/obj/item/weapon/storage/S = loc
+		S.remove_from_storage(src,newLoc)
+		return 1
+	return 0

@@ -224,8 +224,6 @@
 	item_state = "lb_suit"
 	item_color = "overalls"
 
-
-
 /obj/item/clothing/under/pirate
 	name = "pirate outfit"
 	desc = "Yarr."
@@ -481,9 +479,9 @@
 /obj/item/clothing/under/serviceoveralls
 	name = "Workman outfit"
 	desc = "The very image of a working man. Not that you're probably doing work."
-	icon_state = "mechanic_s"
-	item_state = "mechanic_s"
-	item_color = "mechanic_s"
+	icon_state = "mechanic"
+	item_state = "b_suit"
+	item_color = "mechanic"
 
 /obj/item/clothing/under/cheongsam
 	name = "White Cheongsam"

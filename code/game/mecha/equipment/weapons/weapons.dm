@@ -273,7 +273,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang//Because I am a heartless bastard -Sieve
 	name = "\improper SOP-6 grenade launcher"
-	projectile = /obj/item/weapon/grenade/flashbang/clusterbang
+	projectile = /obj/item/weapon/grenade/clusterbang
 	construction_cost = list("metal"=20000,"gold"=6000,"uranium"=6000)
 
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/flashbang/clusterbang/limited/get_equip_info()//Limited version of the clusterbang launcher that can't reload

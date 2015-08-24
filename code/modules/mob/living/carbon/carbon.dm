@@ -252,6 +252,46 @@
 			H.germ_level = 0
 	update_icons()	//apply the now updated overlays to the mob
 
+/mob/living/carbon/flash_eyes(intensity = 1, override_blindness_check = 0, affect_silicon = 0)
+	var/damage = intensity - check_eye_prot()
+	if(..()) // we've been flashed
+		if(weakeyes)
+			Stun(2)
+		switch(damage)
+			if(1)
+				src << "<span class='warning'>Your eyes sting a little.</span>"
+				if(prob(40))
+					eye_stat += 1
+
+			if(2)
+				src << "<span class='warning'>Your eyes burn.</span>"
+				eye_stat += rand(2, 4)
+
+			else
+				src << "<span class='warning'>Your eyes itch and burn severely!</span>"
+				eye_stat += rand(12, 16)
+
+		if(eye_stat > 10)
+			eye_blind += damage
+			eye_blurry += damage * rand(3, 6)
+
+			if(eye_stat > 20)
+				if (prob(eye_stat - 20))
+					src << "<span class='warning'>Your eyes start to burn badly!</span>"
+					disabilities |= NEARSIGHT
+				else if(prob(eye_stat - 25))
+					src << "<span class='warning'>You can't see anything!</span>"
+					disabilities |= BLIND
+			else
+				src << "<span class='warning'>Your eyes are really starting to hurt. This can't be good for you!</span>"
+		return 1
+
+	else if(damage == 0) // just enough protection
+		if(prob(20))
+			src << "<span class='notice'>Something bright flashes in the corner of your vision!</span>"
+
+/mob/living/carbon/proc/tintcheck()
+	return 0
 
 //Throwing stuff
 
@@ -511,6 +551,143 @@
 		return
 	return
 
+/mob/living/carbon/proc/spin(spintime, speed)
+	spawn()
+		var/D = dir
+		while(spintime >= speed)
+			sleep(speed)
+			switch(D)
+				if(NORTH)
+					D = EAST
+				if(SOUTH)
+					D = WEST
+				if(EAST)
+					D = SOUTH
+				if(WEST)
+					D = NORTH
+			dir = D
+			spintime -= speed
+	return
+
+/mob/living/carbon/resist_buckle()
+	if(restrained())
+		changeNext_move(CLICK_CD_BREAKOUT)
+		last_special = world.time + CLICK_CD_BREAKOUT
+		visible_message("<span class='warning'>[src] attempts to unbuckle themself!</span>", \
+					"<span class='notice'>You attempt to unbuckle yourself... (This will take around one minute and you need to stay still.)</span>")
+		if(do_after(src, 600, needhand = 0, target = src))
+			if(!buckled)
+				return
+			buckled.user_unbuckle_mob(src,src)
+		else
+			if(src && buckled)
+				src << "<span class='warning'>You fail to unbuckle yourself!</span>"
+	else
+		buckled.user_unbuckle_mob(src,src)
+
+/mob/living/carbon/resist_fire()
+	fire_stacks -= 5
+	Weaken(3,1)
+	spin(32,2)
+	visible_message("<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>", \
+		"<span class='notice'>You stop, drop, and roll!</span>")
+	sleep(30)
+	if(fire_stacks <= 0)
+		visible_message("<span class='danger'>[src] has successfully extinguished themselves!</span>", \
+			"<span class='notice'>You extinguish yourself.</span>")
+		ExtinguishMob()
+	return
+
+/mob/living/carbon/resist_restraints()
+	var/obj/item/I = null
+	if(handcuffed)
+		I = handcuffed
+	else if(legcuffed)
+		I = legcuffed
+	if(I)
+		changeNext_move(CLICK_CD_BREAKOUT)
+		last_special = world.time + CLICK_CD_BREAKOUT
+		cuff_resist(I)
+
+
+/mob/living/carbon/proc/cuff_resist(obj/item/I, breakouttime = 600, cuff_break = 0)
+	if(istype(I, /obj/item/weapon/restraints))
+		var/obj/item/weapon/restraints/R = I
+		breakouttime = R.breakouttime
+	var/displaytime = breakouttime / 600
+	if(!cuff_break)
+		visible_message("<span class='warning'>[src] attempts to remove [I]!</span>")
+		src << "<span class='notice'>You attempt to remove [I]... (This will take around [displaytime] minutes and you need to stand still.)</span>"
+		if(do_after(src, breakouttime, 10, 0, target = src))
+			if(I.loc != src || buckled)
+				return
+			visible_message("<span class='danger'>[src] manages to remove [I]!</span>")
+			src << "<span class='notice'>You successfully remove [I].</span>"
+
+			if(handcuffed)
+				handcuffed.loc = loc
+				handcuffed.dropped(src)
+				handcuffed = null
+				if(buckled && buckled.buckle_requires_restraints)
+					buckled.unbuckle_mob()
+				update_inv_handcuffed()
+				return
+			if(legcuffed)
+				legcuffed.loc = loc
+				legcuffed.dropped()
+				legcuffed = null
+				update_inv_legcuffed()
+		else
+			src << "<span class='warning'>You fail to remove [I]!</span>"
+
+	else
+		breakouttime = 50
+		visible_message("<span class='warning'>[src] is trying to break [I]!</span>")
+		src << "<span class='notice'>You attempt to break [I]... (This will take around 5 seconds and you need to stand still.)</span>"
+		if(do_after(src, breakouttime, needhand = 0, target = src))
+			if(!I.loc || buckled)
+				return
+			visible_message("<span class='danger'>[src] manages to break [I]!</span>")
+			src << "<span class='notice'>You successfully break [I].</span>"
+			qdel(I)
+
+			if(handcuffed)
+				handcuffed = null
+				update_inv_handcuffed()
+				return
+			else
+				legcuffed = null
+				update_inv_legcuffed()
+		else
+			src << "<span class='warning'>You fail to break [I]!</span>"
+
+/mob/living/carbon/proc/uncuff()
+	if (handcuffed)
+		var/obj/item/weapon/W = handcuffed
+		handcuffed = null
+		if (buckled && buckled.buckle_requires_restraints)
+			buckled.unbuckle_mob()
+		update_inv_handcuffed()
+		if (client)
+			client.screen -= W
+		if (W)
+			W.loc = loc
+			W.dropped(src)
+			if (W)
+				W.layer = initial(W.layer)
+	if (legcuffed)
+		var/obj/item/weapon/W = legcuffed
+		legcuffed = null
+		update_inv_legcuffed()
+		if (client)
+			client.screen -= W
+		if (W)
+			W.loc = loc
+			W.dropped(src)
+			if (W)
+				W.layer = initial(W.layer)
+
+
 /mob/living/carbon/can_use_vents()
 	return
 
@@ -523,3 +700,11 @@
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
+
+/mob/living/carbon/check_eye_prot()
+	var/number = ..()
+	return number
+
+/mob/living/carbon/check_ear_prot()
+	if(head && (head.flags & HEADBANGPROTECT))
+		return 1

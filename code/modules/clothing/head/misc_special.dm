@@ -23,6 +23,8 @@
 	flags_inv = (HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE)
 	body_parts_covered = HEAD|FACE|EYES
 	icon_action_button = "action_welding"
+	flash_protect = 2
+	tint = 2
 	siemens_coefficient = 0.9
 	w_class = 3
 

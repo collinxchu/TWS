@@ -2,7 +2,7 @@
 	desc = "A close-fitting mask that can be connected to an air supply."
 	name = "breath mask"
 	icon_state = "breath"
-	item_state = "breath"
+	item_state = "m_mask"
 	flags = MASKCOVERSMOUTH | AIRTIGHT
 	body_parts_covered = 0
 	w_class = 2
@@ -40,5 +40,4 @@
 	desc = "A close-fitting sterile mask that can be connected to an air supply."
 	name = "medical mask"
 	icon_state = "medical"
-	item_state = "medical"
 	permeability_coefficient = 0.01

@@ -104,6 +104,50 @@
 		..()
 		name = "plating"
 
+/turf/simulated/floor/plating/dirt
+	name = "dirt"
+	icon_state = "dirt"
+	icon_plating = "dirt"
+	var/dug = 0 //0 = has not yet been dug, 1 = has already been dug
+	var/overlay_detail
+
+/turf/simulated/floor/plating/dirt/New()
+	update_grass_overlays(1)
+	..()
+
+/turf/simulated/floor/plating/dirt/deep
+	name = "dirt"
+	icon_state = "dirt_deep"
+	icon_plating = "dirt_deep"
+	dug = 1
+
+/turf/simulated/floor/plating/dirt/deep/attackby(obj/item/C as obj, mob/user as mob)
+
+	if(!C || !user)
+		return 0
+
+	if(istype(C, /obj/item/stack/tile/dirt))
+		var/obj/item/stack/tile/dirt/D = C
+		user << "\blue You fill the hole with some dirt."
+		D.use(1)
+		ChangeTurf(/turf/simulated/floor/plating/dirt)
+	if(istype(C, /obj/item/stack/cable_coil))
+		if(is_plating())
+			var/obj/item/stack/cable_coil/coil = C
+			coil.turf_place(src, user)
+		else
+			user << "\red You must remove the plating first."
+
+/turf/simulated/floor/plating/dirt/ex_act(severity)
+	switch(severity)
+		if(3.0)
+			return
+		if(2.0)
+			return
+		if(1.0)
+			return
+	return
+
 /turf/simulated/floor/bluegrid
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "bcircuit"
@@ -174,6 +218,8 @@
 	name = "Grass patch"
 	icon_state = "grass1"
 	floor_type = /obj/item/stack/tile/grass
+	icon_plating = "dirt"
+	var/dug = 0 //0 = has not yet been dug, 1 = has already been dug
 
 	New()
 		icon_state = "grass[pick("1","2","3","4")]"
@@ -185,6 +231,7 @@
 					if(istype(get_step(src,direction),/turf/simulated/floor))
 						var/turf/simulated/floor/FF = get_step(src,direction)
 						FF.update_icon() //so siding get updated properly
+
 
 /turf/simulated/floor/carpet
 	name = "Carpet"

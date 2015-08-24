@@ -4,6 +4,7 @@
 
 	//for floors, use is_plating(), is_plasteel_floor() and is_light_floor()
 	var/intact = 1
+	var/baseturf = /turf/space
 
 	//Properties for open tiles (/floor)
 	var/oxygen = 0
@@ -165,6 +166,8 @@
 	return 0
 /turf/proc/is_grass_floor()
 	return 0
+/turf/proc/is_dirt_floor()
+	return 0
 /turf/proc/is_wood_floor()
 	return 0
 /turf/proc/is_road_floor()
@@ -278,7 +281,7 @@
 		W.lighting_lumcount += old_lumcount
 		if(old_lumcount != W.lighting_lumcount)
 			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
+			SSlighting.changed_turfs += W
 
 		if(old_fire)
 			old_fire.RemoveFire()

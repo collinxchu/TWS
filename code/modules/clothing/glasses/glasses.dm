@@ -31,7 +31,7 @@
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
-	item_state = "glasses"
+	item_state = "meson"
 	icon_action_button = "action_meson" //This doesn't actually matter, the action button is generated from the current icon_state. But, this is the only way to get it to show up.
 	origin_tech = "magnets=2;engineering=2"
 	toggleable = 1
@@ -104,20 +104,20 @@
 	name = "Prescription Glasses"
 	desc = "Made by Uncool. Co."
 	icon_state = "hipster_glasses"
-	item_state = "hipster_glasses"
+	item_state = "glasses"
 
 /obj/item/clothing/glasses/threedglasses
 	desc = "A long time ago, people used these glasses to makes images from screens threedimensional."
 	name = "3D glasses"
 	icon_state = "3d"
-	item_state = "3d"
+	item_state = "glasses"
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/gglasses
 	name = "Green Glasses"
 	desc = "Forest green glasses, like the kind you'd wear when hatching a nasty scheme."
 	icon_state = "gglasses"
-	item_state = "gglasses"
+	item_state = "glasses"
 	body_parts_covered = 0
 
 /obj/item/clothing/glasses/sunglasses
@@ -125,6 +125,8 @@
 	name = "sunglasses"
 	icon_state = "sun"
 	item_state = "sunglasses"
+	flash_protect = 1
+	tint = 1
 	darkness_view = -1
 
 /obj/item/clothing/glasses/welding
@@ -132,6 +134,8 @@
 	desc = "Protects the eyes from welders, approved by the mad scientist association."
 	icon_state = "welding-g"
 	item_state = "welding-g"
+	flash_protect = 2
+	tint = 2
 	icon_action_button = "action_welding_g"
 	var/up = 0
 
@@ -174,7 +178,8 @@
 	desc = "Covers the eyes, preventing sight."
 	icon_state = "blindfold"
 	item_state = "blindfold"
-	//vision_flags = BLIND  	// This flag is only supposed to be used if it causes permanent blindness, not temporary because of glasses
+	flash_protect = 2
+	tint = 3			// to make them blind
 
 /obj/item/clothing/glasses/sunglasses/prescription
 	name = "prescription sunglasses"
@@ -183,7 +188,6 @@
 /obj/item/clothing/glasses/sunglasses/big
 	desc = "Strangely ancient technology used to help provide rudimentary eye cover. Larger than average enhanced shielding blocks many flashes."
 	icon_state = "bigsunglasses"
-	item_state = "bigsunglasses"
 
 /obj/item/clothing/glasses/sunglasses/sechud
 	name = "HUDSunglasses"
@@ -210,6 +214,7 @@
 	toggleable = 1
 	vision_flags = SEE_MOBS
 	invisa_view = 2
+	flash_protect = -1
 
 	emp_act(severity)
 		if(istype(src.loc, /mob/living/carbon/human))
@@ -231,6 +236,7 @@
 	name = "Optical Meson Scanner"
 	desc = "Used for seeing walls, floors, and stuff through anything."
 	icon_state = "meson"
+	item_state = "meson"
 	icon_action_button = "action_meson"
 	origin_tech = "magnets=3;syndicate=4"
 
@@ -254,5 +260,4 @@
 	name = "Optical Thermal Implants"
 	desc = "A set of implantable lenses designed to augment your vision"
 	icon_state = "thermalimplants"
-	item_state = "syringe_kit"
 	toggleable = 0
