@@ -3,7 +3,6 @@
 	icon_state = "flashbang"
 	item_state = "flashbang"
 	origin_tech = "materials=2;combat=1"
-	var/banglet = 0
 
 
 /obj/item/weapon/grenade/flashbang/prime()
@@ -18,7 +17,7 @@
 		var/damage = round(30/(get_dist(B,get_turf(src))+1))
 		B.health -= damage
 		B.update_icon()
-	qdel(src)
+	del(src)
 
 /obj/item/weapon/grenade/flashbang/proc/bang(turf/T , mob/living/M)
 	M.show_message("<span class='warning'>BANG</span>", 2)

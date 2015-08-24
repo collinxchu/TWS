@@ -739,13 +739,13 @@
 						CM.drop_from_inventory(CM.legcuffed)
 						CM.legcuffed = null
 						CM.update_inv_legcuffed()
-
+/* #TOREMOVE
 	//Breaking out of a container (Locker, sleeper, cryo...)
 	else if(loc && istype(loc, /obj) && !isturf(loc))
 		if(stat == CONSCIOUS && !stunned && !weakened && !paralysis)
 			var/obj/C = loc
 			C.container_resist(src)
-
+*/
 	else if(canmove)
 		if(on_fire)
 			resist_fire() //stop, drop, and roll
@@ -785,7 +785,7 @@
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
-
+/* #TOREMOVE
 /mob/living/proc/get_temperature(datum/gas_mixture/environment)
 	var/loc_temp = T0C
 	if(istype(loc, /obj/mecha))
@@ -799,8 +799,8 @@
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature
 
-	else if(istype(loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
-		var/obj/machinery/atmospherics/components/unary/cryo_cell/C = loc
+	else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+		var/obj/machinery/atmospherics/unary/cryo_cell/C = loc
 		var/datum/gas_mixture/G = C.airs["a1"]
 
 		if(G.total_moles() < 10)
@@ -812,3 +812,4 @@
 		loc_temp = environment.temperature
 
 	return loc_temp
+*/

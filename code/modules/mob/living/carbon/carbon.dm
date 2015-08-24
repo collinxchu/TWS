@@ -568,7 +568,7 @@
 			dir = D
 			spintime -= speed
 	return
-
+/* #TOREMOVE
 /mob/living/carbon/resist_buckle()
 	if(restrained())
 		changeNext_move(CLICK_CD_BREAKOUT)
@@ -584,7 +584,7 @@
 				src << "<span class='warning'>You fail to unbuckle yourself!</span>"
 	else
 		buckled.user_unbuckle_mob(src,src)
-
+*/
 /mob/living/carbon/resist_fire()
 	fire_stacks -= 5
 	Weaken(3,1)
@@ -595,9 +595,10 @@
 	if(fire_stacks <= 0)
 		visible_message("<span class='danger'>[src] has successfully extinguished themselves!</span>", \
 			"<span class='notice'>You extinguish yourself.</span>")
-		ExtinguishMob()
+		//ExtinguishMob() #TOREMOVE
 	return
 
+/* #TOREMOVE
 /mob/living/carbon/resist_restraints()
 	var/obj/item/I = null
 	if(handcuffed)
@@ -686,7 +687,7 @@
 			W.dropped(src)
 			if (W)
 				W.layer = initial(W.layer)
-
+*/
 
 /mob/living/carbon/can_use_vents()
 	return

@@ -45,6 +45,7 @@
 	var/max_n2 = 0
 	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
+	var/flying = 1
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
 	var/melee_damage_lower = 0

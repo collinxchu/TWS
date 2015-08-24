@@ -147,13 +147,13 @@ Code:
 
 /obj/item/device/assembly/signaler/process()
 	if(!deadman)
-		SSobj.processing.Remove(src)
+		processing_objects.Remove(src)
 	var/mob/M = src.loc
 	if(!M || !ismob(M))
 		if(prob(5))
 			signal()
 		deadman = 0
-		SSobj.processing.Remove(src)
+		processing_objects.Remove(src)
 	else if(prob(5))
 		M.visible_message("[M]'s finger twitches a bit over [src]'s signal button!")
 	return
@@ -163,7 +163,7 @@ Code:
 		set name = "Threaten to push the button!"
 		set desc = "BOOOOM!"
 		deadman = 1
-		SSobj.processing |= src
+		processing_objects.Add(src)
 		usr.visible_message("\red [usr] moves their finger over [src]'s signal button...")
 
 // Embedded signaller used in grenade construction.

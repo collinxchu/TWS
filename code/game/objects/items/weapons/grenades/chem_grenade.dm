@@ -53,10 +53,10 @@
 			if(iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.throw_mode_on()
-			if(istype(user,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = user
-				H.update_inv_l_hand()
-				H.update_inv_r_hand()
+			//if(istype(user,/mob/living/carbon/human))
+			//	var/mob/living/carbon/human/H = user
+			//	H.update_inv_l_hand()
+			//	H.update_inv_r_hand()
 
 			spawn(det_time)
 				prime()
@@ -220,11 +220,11 @@
 
 	invisibility = INVISIBILITY_MAXIMUM //Why am i doing this?
 	spawn(50)		   //To make sure all reagents can work
-		qdel(src)	   //correctly before deleting the grenade.
+		del(src)	   //correctly before deleting the grenade.
 
 
 /obj/item/weapon/grenade/chem_grenade/proc/mix_reagents()
-	var/total_temp
+	//var/total_temp #TOREMOVE
 	for(var/obj/item/weapon/reagent_containers/glass/G in beakers)
 		G.reagents.trans_to(src, G.reagents.total_volume)
 		//total_temp += G.reagents.chem_temp

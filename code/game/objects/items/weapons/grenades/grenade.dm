@@ -45,6 +45,7 @@
 			var/area/A = get_area(bombturf)
 			message_admins("[key_name(usr)]<A HREF='?_src_=holder;adminmoreinfo=\ref[usr]'>?</A> has primed a [name] for detonation at <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[bombturf.x];Y=[bombturf.y];Z=[bombturf.z]'>[A.name] (JMP)</a>.")
 			log_game("[key_name(usr)] has primed a [name] for detonation at [A.name] ([bombturf.x],[bombturf.y],[bombturf.z]).")
+			update_icon()
 			if(iscarbon(user))
 				var/mob/living/carbon/C = user
 				C.throw_mode_on()
@@ -95,8 +96,8 @@
 		var/mob/M = loc
 		M.unEquip(src)
 
-/obj/item/weapon/grenade/update_icon(is_active)
-	if(is_active)
+/obj/item/weapon/grenade/update_icon()
+	if(active)
 		icon_state = initial(icon_state) + "_active"
 		item_state = initial(item_state) + "_active"
 	else

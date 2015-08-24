@@ -6,7 +6,7 @@
 	if(stat == DEAD || paralysis || weakened || stunned || restrained())
 		return
 
-	handle_ventcrawl()
+// #TOREMOVE	handle_ventcrawl()
 
 /mob/living/proc/hide()
 	set name = "Hide"

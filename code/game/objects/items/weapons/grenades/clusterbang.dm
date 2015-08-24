@@ -26,7 +26,7 @@
 
 	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
-	qdel(src)
+	del(src)
 
 
 //////////////////////
@@ -54,7 +54,7 @@
 
 	playsound(loc, 'sound/weapons/armbomb.ogg', 75, 1, -3)
 
-	qdel(src)
+	del(src)
 
 //////////////////////////////////
 //The payload spawner effect
@@ -69,7 +69,7 @@
 		spawn(rand(15,60))
 			if(P && !P.gc_destroyed)
 				P.prime()
-			qdel(src)
+			del(src)
 
 
 //////////////////////////////////

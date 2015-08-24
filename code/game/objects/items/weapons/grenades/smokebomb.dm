@@ -14,7 +14,7 @@
 		src.smoke.attach(src)
 
 /obj/item/weapon/grenade/smokebomb/Destroy()
-	qdel(smoke)
+	del(smoke)
 	..()
 
 /obj/item/weapon/grenade/smokebomb/prime()
@@ -34,5 +34,5 @@
 		B.health -= damage
 		B.update_icon()
 	sleep(80)
-	qdel(src)
+	del(src)
 	return

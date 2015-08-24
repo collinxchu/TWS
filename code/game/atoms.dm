@@ -22,6 +22,9 @@
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
 
+/atom/proc/CheckParts()
+	return
+
 /atom/proc/assume_air(datum/gas_mixture/giver)
 	return null
 

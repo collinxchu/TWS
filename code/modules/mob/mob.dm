@@ -2,11 +2,11 @@
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
-	qdel(hud_used)
+	del(hud_used)
 	if(mind && mind.current == src)
 		spellremove(src)
 	for(var/infection in viruses)
-		qdel(infection)
+		del(infection)
 	ghostize()
 	..()
 
@@ -176,7 +176,7 @@ var/next_mob_id = 0
 				var/list/temp = list(  )
 				temp += L.container
 				//L = null
-				qdel(L)
+				del(L)
 				return temp
 			else
 				return L.container
@@ -207,7 +207,7 @@ var/next_mob_id = 0
 
 	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
-			qdel(W)
+			del(W)
 		else
 			if(!disable_warning)
 				src << "\red You are unable to equip that." //Only print if del_on_fail is false
@@ -318,7 +318,7 @@ var/list/slot_equipment_priority = list( \
 	P.invisibility = invisibility
 	spawn (20)
 		if(P)
-			qdel(P)
+			del(P)
 
 	face_atom(A)
 	return 1
@@ -475,7 +475,7 @@ var/list/slot_equipment_priority = list( \
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		qdel(M)
+		del(M)
 		return
 
 	M.key = key

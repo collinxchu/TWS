@@ -1422,6 +1422,7 @@ var/list/WALLITEMS = list(
 /proc/format_text(text)
 	return replacetext(replacetext(text,"\proper ",""),"\improper ","")
 
+/* #TOREMOVE
 /obj/proc/atmosanalyzer_scan(datum/gas_mixture/air_contents, mob/user, obj/target = src)
 	var/obj/icon = target
 	user.visible_message("[user] has used the analyzer on \icon[icon] [target].", "<span class='notice'>You use the analyzer on \icon[icon] [target].</span>")
@@ -1448,7 +1449,7 @@ var/list/WALLITEMS = list(
 	else
 		user << "<span class='notice'>[target] is empty!</span>"
 	return
-
+*/
 /proc/topic_link(var/datum/D, var/arglist, var/content)
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)

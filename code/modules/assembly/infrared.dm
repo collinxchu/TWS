@@ -26,11 +26,11 @@
 /obj/item/device/assembly/infra/toggle_secure()
 	secured = !secured
 	if(secured)
-		SSobj.processing |= src
+		processing_objects.Add(src)
 	else
 		on = 0
 		if(first)	qdel(first)
-		SSobj.processing.Remove(src)
+		processing_objects.Remove(src)
 	update_icon()
 	return secured
 
@@ -50,7 +50,7 @@
 /obj/item/device/assembly/infra/process()
 	if(!on)
 		if(first)
-			del(first)
+			qdel(first)
 			return
 	if(!secured)
 		return
@@ -173,7 +173,7 @@
 		next.vis_spread(v)
 
 	if((loc.density || !(master)))
-		del(src)
+		qdel(src)
 		return
 	if(left > 0)
 		left--
@@ -201,7 +201,7 @@
 
 
 /obj/effect/beam/i_beam/Bump()
-	del(src)
+	qdel(src)
 	return
 
 /obj/effect/beam/i_beam/Bumped()

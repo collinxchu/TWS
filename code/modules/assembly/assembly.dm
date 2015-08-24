@@ -107,7 +107,7 @@
 
 
 /obj/item/device/assembly/process()
-	SSobj.processing.Remove(src)
+	processing_objects.Remove(src)
 	return
 
 

@@ -281,7 +281,7 @@
 		W.lighting_lumcount += old_lumcount
 		if(old_lumcount != W.lighting_lumcount)
 			W.lighting_changed = 1
-			SSlighting.changed_turfs += W
+			lighting_controller.changed_turfs += W
 
 		if(old_fire)
 			old_fire.RemoveFire()
