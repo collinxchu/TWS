@@ -40,6 +40,7 @@
 
 		var/trans = A.reagents.trans_to(src, A:amount_per_transfer_from_this)
 		user << "<span class='notice'>You fill \the [src] with [trans] units of the contents of \the [A].</span>"
+		user.changeNext_move(CLICK_CD_FILL)
 		return
 
 	if(reagents.total_volume < amount_per_transfer_from_this)

@@ -412,15 +412,6 @@
 #define SEC_LEVEL_RED	2
 #define SEC_LEVEL_DELTA	3
 
-#define CLICK_CD_MELEE 8
-#define CLICK_CD_RANGE 4
-#define CLICK_CD_BREAKOUT 100
-#define CLICK_CD_HANDCUFFED 10
-#define CLICK_CD_TKSTRANGLE 10
-#define CLICK_CD_RESIST 20
-//click cooldowns, in tenths of a second
-//click cooldowns, in tenths of a second
-
 #define TRANSITIONEDGE	7 //Distance from edge to move to another z-level
 
 //A set of constants used to determine which type of mute an admin wishes to apply:

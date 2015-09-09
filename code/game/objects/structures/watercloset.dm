@@ -383,6 +383,7 @@
 	if (istype(RG) && RG.is_open_container())
 		RG.reagents.add_reagent("water", min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("\blue [user] fills \the [RG] using \the [src].","\blue You fill \the [RG] using \the [src].")
+		user.changeNext_move(CLICK_CD_FILL) //to make filling up a container quicker.
 		return
 
 	else if (istype(O, /obj/item/weapon/melee/baton))

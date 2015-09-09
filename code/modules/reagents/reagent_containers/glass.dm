@@ -106,6 +106,7 @@
 
 			var/trans = target.reagents.trans_to(src, target:amount_per_transfer_from_this)
 			user << "\blue You fill [src] with [trans] units of the contents of [target]."
+			user.changeNext_move(CLICK_CD_FILL) //to make filling up a container quicker.
 
 		else if(target.is_open_container() && target.reagents) //Something like a glass. Player probably wants to transfer TO it.
 
@@ -119,6 +120,7 @@
 
 			var/trans = src.reagents.trans_to(target, amount_per_transfer_from_this)
 			user << "\blue You transfer [trans] units of the solution to [target]."
+			user.changeNext_move(CLICK_CD_FILL)
 
 		else if(istype(target, /obj/machinery/bunsen_burner))
 			return
