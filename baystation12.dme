@@ -1634,7 +1634,5 @@
 #include "code\ZAS\Zone.dm"
 #include "interface\interface.dm"
 #include "interface\skin.dmf"
-#include "maps\centi2.dmm"
-#include "maps\Sol-England_2.dmm"
-#include "maps\TauCeti-Biezel.dmm"
+#include "maps\citydraft.dmm"
 // END_INCLUDE

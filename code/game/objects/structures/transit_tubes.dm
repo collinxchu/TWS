@@ -6,8 +6,8 @@
 /obj/structure/transit_tube
 	icon = 'icons/obj/pipes/transit_tube.dmi'
 	icon_state = "E-W"
-	density = 1
-	layer = 3.1
+	density = 0 //transit tubes are now "overhead" and can be passed underneath.
+	layer = MOB_LAYER + 1.0
 	anchored = 1.0
 	var/list/tube_dirs = null
 	var/exit_delay = 2
@@ -111,7 +111,7 @@ obj/structure/ex_act(severity)
 /obj/structure/transit_tube/station/New(loc)
 	..(loc)
 
-
+/*
 
 /obj/structure/transit_tube/station/Bumped(mob/AM as mob|obj)
 	if(!pod_moving && icon_state == "open" && istype(AM, /mob))
@@ -121,6 +121,31 @@ obj/structure/ex_act(severity)
 				return
 			else if(!pod.moving && pod.dir in directions())
 				AM.loc = pod
+				return
+
+*/
+
+/obj/structure/transit_tube/station/MouseDrop_T(var/atom/movable/AM, mob/user as mob)
+	if(!pod_moving && icon_state == "open" && istype(AM, /mob))
+		for(var/obj/structure/transit_tube_pod/pod in loc)
+			if(pod.contents.len)
+				AM << "<span class='notice'>The pod is already occupied.</span>"
+				return
+			else if(!pod.moving && pod.dir in directions())
+				AM.loc = pod
+				return
+
+/obj/structure/transit_tube/station/verb/enter()
+	set src in oview(1) // One square distance
+	set category = "Object"
+	set name = "Enter pod"
+	if(!pod_moving && icon_state == "open" && istype(usr, /mob))
+		for(var/obj/structure/transit_tube_pod/pod in loc)
+			if(pod.contents.len)
+				usr << "<span class='notice'>The pod is already occupied.</span>"
+				return
+			else if(!pod.moving && pod.dir in directions())
+				usr.loc = pod
 				return
 
 
