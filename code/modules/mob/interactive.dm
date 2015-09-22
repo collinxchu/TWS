@@ -212,7 +212,7 @@
 	if (health > 0)
 		if(M.a_intent == "help")
 			chatter()
-		if(M.a_intent == "harm")
+		if(M.a_intent == "hurt")
 			retal = 1
 			retal_target = M
 

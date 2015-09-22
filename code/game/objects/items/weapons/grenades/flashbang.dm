@@ -17,7 +17,7 @@
 		var/damage = round(30/(get_dist(B,get_turf(src))+1))
 		B.health -= damage
 		B.update_icon()
-	del(src)
+	qdel(src)
 
 /obj/item/weapon/grenade/flashbang/proc/bang(turf/T , mob/living/M)
 	M.show_message("<span class='warning'>BANG</span>", 2)

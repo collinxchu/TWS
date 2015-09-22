@@ -18,9 +18,16 @@
 	powernets += src
 	..()
 
-/datum/powernet/Del()
+/datum/powernet/Destroy()
+	for(var/obj/structure/cable/C in cables)
+		cables -= C
+		C.powernet = null
+	for(var/obj/machinery/power/M in nodes)
+		nodes -= M
+		M.powernet = null
+
 	powernets -= src
-	..()
+	return ..()
 
 //Returns the amount of excess power (before refunding to SMESs) from last tick.
 //This is for machines that might adjust their power consumption using this data.
@@ -42,7 +49,7 @@
 	cables -= C
 	C.powernet = null
 	if(is_empty())//the powernet is now empty...
-		del(src)///... delete it - qdel
+		qdel(src)///... delete it - qdel
 
 //add a cable to the current powernet
 //Warning : this proc DON'T check if the cable exists
@@ -62,7 +69,7 @@
 	nodes -=M
 	M.powernet = null
 	if(is_empty())//the powernet is now empty...
-		del(src)///... delete it - qdel
+		qdel(src)///... delete it - qdel
 
 
 //add a power machine to the current powernet
@@ -150,7 +157,4 @@
 	return null
 
 /area/proc/get_apc()
-	for(var/area/RA in src.related)
-		var/obj/machinery/power/apc/FINDME = locate() in RA
-		if (FINDME)
-			return FINDME
+	return apc

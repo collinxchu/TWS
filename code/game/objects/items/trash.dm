@@ -6,6 +6,7 @@
 	icon = 'icons/obj/trash.dmi'
 	w_class = 2.0
 	desc = "This is rubbish."
+	burn_state = 0 //Burnable
 
 /obj/item/trash/raisins
 	name = "\improper 4no raisins"
@@ -55,9 +56,15 @@
 	name = "semki pack"
 	icon_state = "semki_pack"
 
+/obj/item/trash/tape_roll
+	name = "tape roll"
+	desc = "There's no tape left"
+	icon_state = "empty_taperoll"
+
 /obj/item/trash/tray
 	name = "tray"
 	icon_state = "tray"
+	burn_state = -1 //Not Burnable
 
 /obj/item/trash/candle
 	name = "candle"
@@ -67,6 +74,10 @@
 /obj/item/trash/liquidfood
 	name = "\improper \"LiquidFood\" ration"
 	icon_state = "liquidfood"
+
+/obj/item/trash/tastybread
+	name = "bread tube"
+	icon_state = "tastybread"
 
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return

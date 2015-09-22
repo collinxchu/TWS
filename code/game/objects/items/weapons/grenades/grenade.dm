@@ -8,9 +8,15 @@
 	throw_range = 20
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
+	burn_state = 0 //Burnable
+	burntime = 5
 	var/active = 0
 	var/det_time = 50
 	var/display_timer = 1
+
+/obj/item/weapon/grenade/burn()
+	prime()
+	..()
 
 /obj/item/weapon/grenade/proc/clown_check(var/mob/living/carbon/human/user)
 	if(user.disabilities & CLUMSY && prob(50))

@@ -22,7 +22,7 @@
 	open_layer = DOOR_OPEN_LAYER - 0.01 // Just below doors when open
 	closed_layer = DOOR_CLOSED_LAYER + 0.01 // Just above doors when closed
 
-	//These are frequenly used with windows, so make sure zones can pass. 
+	//These are frequenly used with windows, so make sure zones can pass.
 	//Generally if a firedoor is at a place where there should be a zone boundery then there will be a regular door underneath it.
 	block_air_zones = 0
 
@@ -56,7 +56,7 @@
 	for(var/obj/machinery/door/firedoor/F in loc)
 		if(F != src)
 			spawn(1)
-				del src
+				qdel(src)
 			return .
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
@@ -70,7 +70,7 @@
 			A.all_doors.Add(src)
 			areas_added += A
 
-/obj/machinery/door/firedoor/Del()
+/obj/machinery/door/firedoor/Destroy()
 	for(var/area/A in areas_added)
 		A.all_doors.Remove(src)
 	. = ..()
@@ -230,7 +230,7 @@
 					FA.density = 1
 					FA.wired = 1
 					FA.update_icon()
-					del(src)
+					qdel(src)
 		return
 
 	if(blocked)
@@ -272,7 +272,7 @@
 				spawn(0)
 					close()
 			return
-		
+
 	return ..()
 
 // CHECK PRESSURE

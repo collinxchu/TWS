@@ -53,19 +53,19 @@
 /obj/machinery/chem_dispenser/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 
 /obj/machinery/chem_dispenser/blob_act()
 	if (prob(50))
-		del(src)
+		qdel(src)
 
 /obj/machinery/chem_dispenser/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
  /**
@@ -276,19 +276,19 @@
 /obj/machinery/chem_master/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 
 /obj/machinery/chem_master/blob_act()
 	if (prob(50))
-		del(src)
+		qdel(src)
 
 /obj/machinery/chem_master/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
 /obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
@@ -566,6 +566,7 @@
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
+	light_color = LIGHT_COLOR_CYAN
 	circuit = /obj/item/weapon/circuitboard/pandemic
 	//use_power = 1
 	//idle_power_usage = 20		//defaults make more sense.
@@ -925,7 +926,7 @@
 		user << "Cannot refine into a reagent."
 		return 1
 
-	user.before_take_item(O)
+	user.unEquip(O)
 	O.loc = src
 	holdingitems += O
 	src.updateUsrDialog()
@@ -1061,7 +1062,7 @@
 
 /obj/machinery/reagentgrinder/proc/remove_object(var/obj/item/O)
 	holdingitems -= O
-	del(O)
+	qdel(O)
 
 /obj/machinery/reagentgrinder/proc/juice()
 	power_change()

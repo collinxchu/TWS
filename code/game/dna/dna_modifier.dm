@@ -137,14 +137,14 @@
 	if (!ismob(G.affecting))
 		return
 	if (src.occupant)
-		user << "\blue <B>The scanner is already occupied!</B>"
+		user << "<span class='warning'>The scanner is already occupied!</span>"
 		return
 	if (G.affecting.abiotic())
-		user << "\blue <B>Subject cannot have abiotic items on.</B>"
+		user << "<span class='warning'>The subject cannot have abiotic items on.</span>"
 		return
 	put_in(G.affecting)
 	src.add_fingerprint(user)
-	del(G)
+	qdel(G)
 	return
 
 /obj/machinery/dna_scannernew/proc/put_in(var/mob/M)
@@ -187,7 +187,7 @@
 				ex_act(severity)
 				//Foreach goto(35)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
@@ -196,7 +196,7 @@
 					ex_act(severity)
 					//Foreach goto(108)
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -205,7 +205,7 @@
 					ex_act(severity)
 					//Foreach goto(181)
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -215,13 +215,14 @@
 	if(prob(75))
 		for(var/atom/movable/A as mob|obj in src)
 			A.loc = src.loc
-		del(src)
+		qdel(src)
 
 /obj/machinery/computer/scan_consolenew
 	name = "DNA Modifier Access Console"
 	desc = "Scand DNA."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "scanner"
+	light_color = LIGHT_COLOR_DARKBLUE
 	density = 1
 	circuit = /obj/item/weapon/circuitboard/scan_consolenew
 	var/selected_ui_block = 1.0
@@ -262,12 +263,12 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -275,7 +276,7 @@
 /obj/machinery/computer/scan_consolenew/blob_act()
 
 	if(prob(75))
-		del(src)
+		qdel(src)
 
 /obj/machinery/computer/scan_consolenew/power_change()
 	..()

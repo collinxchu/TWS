@@ -6,6 +6,8 @@
 	icon_state = "glass_empty"
 	amount_per_transfer_from_this = 5
 	volume = 30
+	burn_state = 0 //Burnable
+	burntime = 5
 	center_of_mass = list("x"=16, "y"=10)
 
 	on_reagent_change()
@@ -44,6 +46,13 @@
 			desc = "Your standard drinking glass."
 			center_of_mass = list("x"=16, "y"=10)
 			return
+
+/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/burn()
+	reagents.total_volume = 0 //Burns away all the alcohol :(
+	reagents.reagent_list.Cut()
+	on_reagent_change()
+	extinguish()
+	return
 
 // for /obj/machinery/vending/sovietsoda
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda

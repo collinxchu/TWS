@@ -18,6 +18,8 @@
 	anchored = 1
 	density = 1
 	opacity = 1
+	burn_state = 0 //Burnable
+	burntime = 30
 
 /obj/structure/bookcase/initialize()
 	for(var/obj/item/I in loc)
@@ -56,20 +58,20 @@
 	switch(severity)
 		if(1.0)
 			for(var/obj/item/weapon/book/b in contents)
-				del(b)
-			del(src)
+				qdel(b)
+			qdel(src)
 			return
 		if(2.0)
 			for(var/obj/item/weapon/book/b in contents)
 				if (prob(50)) b.loc = (get_turf(src))
-				else del(b)
-			del(src)
+				else qdel(b)
+			qdel(src)
 			return
 		if(3.0)
 			if (prob(50))
 				for(var/obj/item/weapon/book/b in contents)
 					b.loc = (get_turf(src))
-				del(src)
+				qdel(src)
 			return
 		else
 	return
@@ -127,6 +129,7 @@
 	throw_range = 5
 	w_class = 3		 //upped to three because books are, y'know, pretty big. (and you could hide them inside eachother recursively forever)
 	attack_verb = list("bashed", "whacked", "educated")
+	burn_state = 0 //Burnable
 	var/dat			 // Actual page content
 	var/due_date = 0 // Game time in 1/10th seconds
 	var/author		 // Who wrote the thing, can be changed by pen or PC. It is not automatically assigned

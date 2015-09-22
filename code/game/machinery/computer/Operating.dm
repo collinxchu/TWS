@@ -5,6 +5,7 @@
 	density = 1
 	anchored = 1.0
 	icon_state = "operating"
+	light_color = LIGHT_COLOR_PURE_BLUE
 	circuit = "/obj/item/weapon/circuitboard/operating"
 	var/mob/living/carbon/human/victim = null
 	var/obj/machinery/optable/table = null

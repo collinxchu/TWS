@@ -1,9 +1,11 @@
 /obj/structure/largecrate
 	name = "large crate"
 	desc = "A hefty wooden crate."
-	icon = 'icons/obj/storage.dmi'
+	icon = 'icons/obj/crates.dmi'
 	icon_state = "densecrate"
 	density = 1
+	burn_state = 0 //Burnable
+	burntime = 30
 
 /obj/structure/largecrate/attack_hand(mob/user as mob)
 	user << "<span class='notice'>You need a crowbar to pry this open!</span>"
@@ -18,7 +20,7 @@
 		user.visible_message("<span class='notice'>[user] pries \the [src] open.</span>", \
 							 "<span class='notice'>You pry open \the [src].</span>", \
 							 "<span class='notice'>You hear splitting wood.</span>")
-		del(src)
+		qdel(src)
 	else
 		return attack_hand(user)
 
@@ -71,7 +73,7 @@
 	if(istype(W, /obj/item/weapon/crowbar))
 		var/obj/item/mecha_parts/mecha_equipment/ME
 		var/obj/mecha/working/hoverpod/H = new (loc)
-		
+
 		ME = new /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp
 		ME.attach(H)
 		ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger

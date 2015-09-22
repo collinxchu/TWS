@@ -28,6 +28,12 @@
 	charge = 0
 	should_be_mapped = 1
 
+/obj/machinery/power/smes/buildable/Destroy()
+	..()
+	qdel(wires)
+//	for(var/obj/nano_module/rcon/R in world) #TOREMOVE
+//		R.FindDevices()
+
 // Proc: process()
 // Parameters: None
 // Description: Uses parent process, but if grounding wire is cut causes sparks to fly around.
@@ -207,7 +213,7 @@
 					src.ping("DANGER! Magnetic containment field failure in 3 ... 2 ... 1 ...")
 					explosion(src.loc,1,2,4,8)
 					// Not sure if this is necessary, but just in case the SMES *somehow* survived..
-					del(src)
+					qdel(src)
 
 
 
@@ -294,7 +300,7 @@
 					if(I.reliability != 100 && crit_fail)
 						I.crit_fail = 1
 					I.loc = src.loc
-				del(src)
+				qdel(src)
 				return
 
 		// Superconducting Magnetic Coil - Upgrade the SMES

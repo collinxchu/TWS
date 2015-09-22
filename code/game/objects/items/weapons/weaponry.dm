@@ -205,7 +205,7 @@
 	if(istype(W,/obj/item/weapon/screwdriver))
 		user << "You finish the concealed blade weapon."
 		new /obj/item/weapon/butterfly(user.loc)
-		del(src)
+		qdel(src)
 		return
 
 /obj/item/butterflyblade
@@ -226,8 +226,8 @@
 	if(istype(W,/obj/item/butterflyblade))
 		user << "You attach the two concealed blade parts."
 		new /obj/item/butterflyconstruction(user.loc)
-		del(W)
-		del(src)
+		qdel(W)
+		qdel(src)
 		return
 	update_icon(user)
 
@@ -280,8 +280,8 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 
 		user.put_in_hands(S)
 		user << "<span class='notice'>You fasten the glass shard to the top of the rod with the cable.</span>"
-		del(I)
-		del(src)
+		qdel(I)
+		qdel(src)
 		update_icon(user)
 
 	else if(istype(I, /obj/item/weapon/wirecutters))
@@ -289,10 +289,31 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 
 		user.put_in_hands(P)
 		user << "<span class='notice'>You fasten the wirecutters to the top of the rod with the cable, prongs outward.</span>"
-		del(I)
-		del(src)
+		qdel(I)
+		qdel(src)
 		update_icon(user)
 	update_icon(user)
+
+
+/obj/item/weapon/shank
+	name = "shank"
+	desc = "A nasty looking shard of glass. There's duct tape over one of the ends."
+	icon_state = "shank"
+	sharp = 1
+	edge = 1
+	desc = "Could probably be used as ... a throwing weapon?"
+	w_class = 2.0
+	force = 5.0
+	throwforce = 8.0
+	item_state = "shard-glass"
+	matter = list("glass" = 3750)
+	attack_verb = list("stabbed", "slashed", "sliced", "cut")
+	hitsound = 'sound/weapons/bladeslice.ogg'
+
+/obj/item/weapon/shard/suicide_act(mob/user)
+		viewers(user) << pick("\red <b>[user] is slitting \his wrists with \the [src]! It looks like \he's trying to commit suicide.</b>", \
+							"\red <b>[user] is slitting \his throat with \the [src]! It looks like \he's trying to commit suicide.</b>")
+		return (BRUTELOSS)
 
 /obj/item/weapon/star
 	name = "shuriken"
@@ -337,7 +358,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 
 /obj/item/weapon/energy_net/dropped()
 	spawn(10)
-		if(src) del(src)
+		if(src) qdel(src)
 
 /obj/item/weapon/energy_net/throw_impact(atom/hit_atom)
 	..()
@@ -345,7 +366,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	var/mob/living/M = hit_atom
 
 	if(!istype(M) || locate(/obj/effect/energy_net) in M.loc)
-		del(src)
+		qdel(src)
 		return 0
 
 	var/turf/T = get_turf(M)
@@ -355,11 +376,11 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 		M.captured = 1
 		net.affecting = M
 		T.visible_message("[M] was caught in an energy net!")
-		del(src)
+		qdel(src)
 
 	// If we miss or hit an obstacle, we still want to delete the net.
 	spawn(10)
-		if(src) del(src)
+		if(src) qdel(src)
 
 /obj/effect/energy_net
 	name = "energy net"
@@ -384,7 +405,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	..()
 	processing_objects |= src
 
-/obj/effect/energy_net/Del()
+/obj/effect/energy_net/Destroy()
 
 	if(affecting)
 		var/mob/living/carbon/M = affecting
@@ -395,28 +416,18 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	processing_objects -= src
 	..()
 
-/obj/effect/energy_net/Destroy()
-
-	if(affecting)
-		var/mob/living/carbon/M = affecting
-		M.anchored = initial(affecting.anchored)
-		M.captured = 0
-		M << "You are free of the net!"
-
-	..()
-
 /obj/effect/energy_net/proc/healthcheck()
 
 	if(health <=0)
 		density = 0
 		src.visible_message("The energy net is torn apart!")
-		del(src)
+		qdel(src)
 	return
 
 /obj/effect/energy_net/process()
 
 	if(isnull(affecting) || affecting.loc != loc)
-		del(src)
+		qdel(src)
 		return
 
 	// Countdown begin set to -1 will stop the teleporter from firing.
@@ -449,7 +460,7 @@ obj/item/weapon/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	playsound(affecting.loc, 'sound/effects/sparks2.ogg', 50, 1)
 	anim(affecting.loc,affecting,'icons/mob/mob.dmi',,"phasein",,affecting.dir)
 
-	del(src)
+	qdel(src)
 
 /obj/effect/energy_net/bullet_act(var/obj/item/projectile/Proj)
 	health -= Proj.damage

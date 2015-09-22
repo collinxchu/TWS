@@ -16,7 +16,7 @@
 	var/screen = 0
 
 
-/obj/item/weapon/paper_bundle/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/paper_bundle/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	..()
 	var/obj/item/weapon/paper/P
 	if(istype(W, /obj/item/weapon/paper))
@@ -45,8 +45,20 @@
 		user << "<span class='notice'>You add [(W.name == "photo") ? "the photo" : W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
 		user.drop_from_inventory(W)
 		W.loc = src
-	else if(istype(W, /obj/item/weapon/flame))
-		burnpaper(W, user)
+	else if(is_hot(P))
+		if(user.disabilities & CLUMSY && prob(10))
+			user.visible_message("<span class='warning'>[user] accidentally ignites themselves!</span>", \
+								"<span class='userdanger'>You miss the paper and accidentally light yourself on fire!</span>")
+			user.unEquip(P)
+			user.adjust_fire_stacks(1)
+			user.IgniteMob()
+			return
+
+		if(!(in_range(user, src))) //to prevent issues as a result of telepathically lighting a paper
+			return
+
+		user.unEquip(src)
+		burn_paper(W, user)
 	else if(istype(W, /obj/item/weapon/paper_bundle))
 		user.drop_from_inventory(W)
 		for(var/obj/O in W)
@@ -56,9 +68,9 @@
 			if(screen == 2)
 				screen = 1
 		user << "<span class='notice'>You add \the [W.name] to [(src.name == "paper bundle") ? "the paper bundle" : src.name].</span>"
-		del(W)
+		qdel(W)
 	else
-		if(istype(W, /obj/item/weapon/tape_roll))
+		if(istype(W, /obj/item/tape_roll))
 			return 0
 		if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/toy/crayon))
 			usr << browse("", "window=[name]") //Closes the dialog
@@ -70,31 +82,6 @@
 	attack_self(usr) //Update the browsed page.
 	add_fingerprint(usr)
 	return
-
-
-/obj/item/weapon/paper_bundle/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
-	var/class = "<span class='warning'>"
-
-	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/weapon/flame/lighter/zippo))
-			class = "<span class='rose'>"
-
-		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
-		"[class]You hold \the [P] up to \the [src], burning it slowly.")
-
-		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
-				user.visible_message("[class][user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", \
-				"[class]You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.")
-
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
-
-				new /obj/effect/decal/cleanable/ash(src.loc)
-				del(src)
-
-			else
-				user << "\red You must hold \the [P] steady to burn \the [src]."
 
 /obj/item/weapon/paper_bundle/examine(mob/user)
 	if(..(user, 1))
@@ -171,7 +158,7 @@
 				var/obj/item/weapon/paper/P = src[1]
 				usr.drop_from_inventory(src)
 				usr.put_in_hands(P)
-				del(src)
+				qdel(src)
 			else if(page == amount)
 				screen = 2
 			else if(page == amount+1)
@@ -210,7 +197,7 @@
 		O.layer = initial(O.layer)
 		O.add_fingerprint(usr)
 	usr.drop_from_inventory(src)
-	del(src)
+	qdel(src)
 	return
 
 
@@ -244,3 +231,23 @@
 		desc += "\nThere is a photo attached to it."
 	overlays += image('icons/obj/bureaucracy.dmi', "clip")
 	return
+
+/obj/item/weapon/paper_bundle/proc/burn_paper(obj/item/I, mob/user)
+	var/class = "<span class='warning'>"
+
+	if(!user.restrained())
+		if(istype(I, /obj/item/weapon/flame/lighter/zippo))
+			class = "<span class='rose'>"
+
+		user.visible_message("[class][user] holds \the [I] up to \the [src], it looks like \he's trying to burn it!", \
+		"[class]You hold \the [I] up to \the [src], burning it slowly.")
+
+		if(do_after(user, 20, 10, target = src))
+			if(user.get_active_hand() == I)
+				user.visible_message("[class]\the [src] catches on fire!")
+
+				user.unEquip(src)
+				fire_act()
+
+			else
+				user << "\red You must hold \the [I] steady to burn \the [src]."

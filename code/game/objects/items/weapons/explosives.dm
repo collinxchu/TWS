@@ -19,6 +19,12 @@
 	image_overlay = image('icons/obj/assemblies.dmi', "plastic-explosive2")
 	..()
 
+/obj/item/weapon/plastique/Destroy()
+	qdel(wires)
+	wires = null
+	target = null
+	return ..()
+
 /obj/item/weapon/plastique/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/weapon/screwdriver))
 		open_panel = !open_panel
@@ -80,7 +86,7 @@
 			target.ex_act(1)
 	if(target)
 		target.overlays -= image_overlay
-	del(src) // qdel
+	qdel(src) // qdel
 
 /obj/item/weapon/plastique/attack(mob/M as mob, mob/user as mob, def_zone)
 	return

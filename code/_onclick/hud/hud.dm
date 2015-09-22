@@ -140,6 +140,25 @@ datum/hud/New(mob/owner)
 	instantiate()
 	..()
 
+/datum/hud/Destroy()
+	..()
+	grab_intent = null
+	hurt_intent = null
+	disarm_intent = null
+	help_intent = null
+	lingchemdisplay = null
+	blobpwrdisplay = null
+	blobhealthdisplay = null
+	r_hand_hud_object = null
+	l_hand_hud_object = null
+	action_intent = null
+	move_intent = null
+	adding = null
+	other = null
+	hotkeybuttons = null
+	item_action_list = null
+	mymob = null
+
 /datum/hud/proc/hidden_inventory_update()
 	if(!mymob) return
 	if(ishuman(mymob))
@@ -245,6 +264,8 @@ datum/hud/New(mob/owner)
 		ai_hud()
 	else if(isrobot(mymob))
 		robot_hud()
+	else if(iscorgi(mymob))
+		corgi_hud()
 	else if(isobserver(mymob))
 		ghost_hud()
 
@@ -280,6 +301,7 @@ datum/hud/New(mob/owner)
 				else
 					src.client.screen -= src.healths
 					src.client.screen -= src.internals
+					src.client.screen -= src.healthdoll
 					src.client.screen -= src.gun_setting_icon
 
 				//These ones are not a part of 'adding', 'other' or 'hotkeybuttons' but we want them gone.
@@ -295,6 +317,8 @@ datum/hud/New(mob/owner)
 					src.client.screen += src.hud_used.hotkeybuttons
 				if(src.healths)
 					src.client.screen |= src.healths
+				if(src.healthdoll)
+					src.client.screen |= src.healthdoll
 				if(src.internals)
 					src.client.screen |= src.internals
 				if(src.gun_setting_icon)

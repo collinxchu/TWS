@@ -11,7 +11,12 @@
 	density = 1
 	anchored = 1
 	animate_movement=1
-	luminosity = 3
+	light_power = 1.5
+	light_range = 3
+
+	can_buckle = 1
+	buckle_movable = 1
+	buckle_lying = 0
 
 	var/attack_log = null
 	var/on = 0
@@ -25,7 +30,6 @@
 	var/emagged = 0
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
-	var/movable = 1
 	var/fits_passenger = 0
 
 	var/obj/item/weapon/cell/cell
@@ -167,7 +171,7 @@
 	pulse2.set_dir(pick(cardinal))
 
 	spawn(10)
-		pulse2.delete()
+		qdel(pulse2)
 	if(on)
 		turn_off()
 	spawn(severity*300)
@@ -191,7 +195,7 @@
 	if(powered && cell.charge < charge_use)
 		return 0
 	on = 1
-	luminosity = initial(luminosity)
+	set_light(initial(light_range))
 	update_icon()
 	return 1
 
@@ -230,7 +234,7 @@
 	new /obj/effect/gibspawner/robot(Tsec)
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
 
-	del(src)
+	qdel(src)
 
 /obj/vehicle/proc/healthcheck()
 	if(health <= 0)
@@ -313,10 +317,7 @@
 		default_layer = C.layer
 
 	if(ismob(C))
-		var/mob/M = C
-		M.buckled = src
-		M.pixel_y = src.mob_offset_y
-		M.update_canmove()
+		buckle_mob(C)
 
 	return 1
 
@@ -358,10 +359,7 @@
 	load.layer = initial(load.layer)
 
 	if(ismob(load))
-		var/mob/M = load
-		M.buckled = null
-		M.anchored = initial(M.anchored)
-		M.update_canmove()
+		unbuckle_mob(load)
 
 	load = null
 

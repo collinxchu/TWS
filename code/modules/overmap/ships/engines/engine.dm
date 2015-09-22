@@ -15,7 +15,7 @@ var/list/ship_engines = list()
 			break
 
 //Tries to fire the engine. If successfull, returns 1
-/datum/ship_engine/proc/burn()
+/datum/ship_engine/proc/eburn()
 	if(!engine)
 		die()
 	return 1
@@ -57,4 +57,4 @@ var/list/ship_engines = list()
 		if (E.z == zlevel)
 			E.engines -= src
 			break
-	del(src)
+	qdel(src)

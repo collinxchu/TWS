@@ -75,15 +75,15 @@
 		set name = "Reset Computer"
 		set category = "Object"
 		set src in view(1)
-		
+
 		if(usr.stat || usr.restrained() || usr.lying || !istype(usr, /mob/living))
 			usr << "\red You can't do that."
 			return
-		
+
 		if(!Adjacent(usr))
 			usr << "You can't reach it."
 			return
-		
+
 		Reset()
 
 	New(var/L, var/built = 0)
@@ -215,11 +215,11 @@
 	ex_act(severity)
 		switch(severity)
 			if(1.0)
-				del(src)
+				qdel(src)
 				return
 			if(2.0)
 				if (prob(25))
-					del(src)
+					qdel(src)
 					return
 				if (prob(50))
 					for(var/x in verbs)
@@ -278,8 +278,8 @@
 			chan = power_channel
 
 		var/area/A = get_area(loc)
-		if(istype(A) && A.master && A.master.powered(chan))
-			A.master.use_power(amount, chan)
+		if(istype(A) && A.powered(chan))
+			A.use_power(amount, chan)
 		else if(battery && battery.charge > 0)
 			battery.use(amount)
 

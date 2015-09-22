@@ -24,7 +24,7 @@
 		..()
 		if(health <= 0)
 			new /obj/item/stack/sheet/metal(get_turf(src))
-			del(src)
+			qdel(src)
 
 		return
 
@@ -43,7 +43,7 @@
 			if(get_turf(user, 40))
 				user << "\blue You secured the girder!"
 				new/obj/structure/girder( src.loc )
-				del(src)
+				qdel(src)
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 		user << "\blue Now slicing apart the girder"
@@ -71,7 +71,7 @@
 			if(!src) return
 			user << "\blue You removed the support struts!"
 			new/obj/structure/girder( src.loc )
-			del(src)
+			qdel(src)
 
 	else if(istype(W, /obj/item/weapon/crowbar) && state == 0 && anchored )
 		playsound(src.loc, 'sound/items/Crowbar.ogg', 100, 1)
@@ -80,7 +80,7 @@
 			if(!src) return
 			user << "\blue You dislodged the girder!"
 			new/obj/structure/girder/displaced( src.loc )
-			del(src)
+			qdel(src)
 
 	else if(istype(W, /obj/item/stack/sheet))
 
@@ -92,7 +92,7 @@
 					if(S.use(2))
 						user << "<span class='notice'>You create a false wall! Push on it to open or close the passage.</span>"
 						new /obj/structure/falsewall (src.loc)
-						del(src)
+						qdel(src)
 				else
 					if(S.get_amount() < 2) return ..()
 					user << "<span class='notice'>Now adding plating...</span>"
@@ -103,7 +103,7 @@
 							Tsrc.ChangeTurf(/turf/simulated/wall)
 							for(var/turf/simulated/wall/X in Tsrc.loc)
 								if(X)	X.add_hiddenprint(usr)
-							del(src)
+							qdel(src)
 					return
 
 			if(/obj/item/stack/sheet/plasteel)
@@ -111,7 +111,7 @@
 					if(S.use(2))
 						user << "\blue You create a false wall! Push on it to open or close the passage."
 						new /obj/structure/falserwall (src.loc)
-						del(src)
+						qdel(src)
 				else
 					if (src.icon_state == "reinforced") //I cant believe someone would actually write this line of code...
 						if(S.get_amount() < 1) return ..()
@@ -123,7 +123,7 @@
 								Tsrc.ChangeTurf(/turf/simulated/wall/r_wall)
 								for(var/turf/simulated/wall/r_wall/X in Tsrc.loc)
 									if(X)	X.add_hiddenprint(usr)
-								del(src)
+								qdel(src)
 						return
 					else
 						if(S.get_amount() < 1) return ..()
@@ -132,7 +132,7 @@
 							if(S.use(1))
 								user << "<span class='notice'>Girders reinforced!</span>"
 								new/obj/structure/girder/reinforced( src.loc )
-								del(src)
+								qdel(src)
 						return
 
 		if(S.sheettype)
@@ -143,7 +143,7 @@
 				user << "\blue You create a false wall! Push on it to open or close the passage."
 				var/F = text2path("/obj/structure/falsewall/[M]")
 				new F (src.loc)
-				del(src)
+				qdel(src)
 			else
 				if(S.amount < 2) return ..()
 				user << "\blue Now adding plating..."
@@ -155,7 +155,7 @@
 					Tsrc.ChangeTurf(text2path("/turf/simulated/wall/mineral/[M]"))
 					for(var/turf/simulated/wall/mineral/X in Tsrc.loc)
 						if(X)	X.add_hiddenprint(usr)
-					del(src)
+					qdel(src)
 				return
 
 		add_hiddenprint(usr)
@@ -171,7 +171,7 @@
 
 /obj/structure/girder/proc/dismantle()
 	new /obj/item/stack/sheet/metal(get_turf(src))
-	del(src)
+	qdel(src)
 
 /obj/structure/girder/attack_hand(mob/user as mob)
 	if (HULK in user.mutations)
@@ -182,25 +182,25 @@
 
 /obj/structure/girder/blob_act()
 	if(prob(40))
-		del(src)
+		qdel(src)
 
 
 /obj/structure/girder/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(30))
 				var/remains = pick(/obj/item/stack/rods,/obj/item/stack/sheet/metal)
 				new remains(loc)
-				del(src)
+				qdel(src)
 			return
 		if(3.0)
 			if (prob(5))
 				var/remains = pick(/obj/item/stack/rods,/obj/item/stack/sheet/metal)
 				new remains(loc)
-				del(src)
+				qdel(src)
 			return
 		else
 	return
@@ -232,7 +232,7 @@
 
 /obj/structure/cultgirder/proc/dismantle()
 	new /obj/effect/decal/remains/human(get_turf(src))
-	del(src)
+	qdel(src)
 
 /obj/structure/cultgirder/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
@@ -267,7 +267,7 @@
 /obj/structure/cultgirder/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(30))

@@ -17,6 +17,7 @@
 	body_parts_covered = UPPER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/laser/bluetag)
 	siemens_coefficient = 3.0
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/redtag
 	name = "red laser tag armour"
@@ -27,6 +28,7 @@
 	body_parts_covered = UPPER_TORSO
 	allowed = list (/obj/item/weapon/gun/energy/laser/redtag)
 	siemens_coefficient = 3.0
+	burn_state = -1 //Won't burn in fires
 
 /*
  * Costume
@@ -117,6 +119,7 @@
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank/emergency_oxygen,/obj/item/toy)
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|HANDS|LEGS|FEET
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/hastur
 	name = "Hastur's Robes"
@@ -216,12 +219,14 @@
 	desc = "A long, thick black leather coat."
 	icon_state = "leathercoat"
 	item_state = "leathercoat"
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/browncoat
 	name = "brown leather coat"
 	desc = "A long, brown leather coat."
 	icon_state = "browncoat"
 	item_state = "browncoat"
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/neocoat
 	name = "black coat"
@@ -355,6 +360,7 @@
 	cold_protection = UPPER_TORSO|ARMS
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/storage/leather_jacket
 	name = "leather jacket"
@@ -362,6 +368,7 @@
 	icon_state = "leather_jacket"
 	item_state = "leather_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/storage/leather_jacket/nanotrasen
 	desc = "A black leather coat. The letters NT are proudly displayed on the back."
@@ -376,6 +383,7 @@
 	icon_open = "brown_jacket_open"
 	icon_closed = "brown_jacket"
 	body_parts_covered = UPPER_TORSO|ARMS
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
 	desc = "A brown leather coat. The letters NT are proudly displayed on the back."

@@ -195,6 +195,12 @@
 	mymob.healths.name = "health"
 	mymob.healths.screen_loc = ui_health
 
+	mymob.healthdoll = new /obj/screen()
+	mymob.healthdoll.icon = ui_style
+	mymob.healthdoll.icon_state = "healthdoll_DEAD"
+	mymob.healthdoll.name = "health doll"
+	mymob.healthdoll.screen_loc = ui_healthdoll
+
 	mymob.pullin = new /obj/screen()
 	mymob.pullin.icon = ui_style
 	mymob.pullin.icon_state = "pull0"
@@ -242,7 +248,7 @@
 
 	mymob.client.screen = null
 
-	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.pressure, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.pullin, mymob.blind, mymob.flash, mymob.gun_setting_icon) //, mymob.hands, mymob.rest, mymob.sleep, mymob.mach )
+	mymob.client.screen += list( mymob.throw_icon, mymob.zone_sel, mymob.oxygen, mymob.pressure, mymob.toxin, mymob.bodytemp, mymob.internals, mymob.fire, mymob.healths, mymob.healthdoll, mymob.pullin, mymob.blind, mymob.flash, mymob.gun_setting_icon) //, mymob.hands, mymob.rest, mymob.sleep, mymob.mach )
 	mymob.client.screen += src.adding + src.other
 
 	return

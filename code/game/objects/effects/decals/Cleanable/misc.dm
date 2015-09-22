@@ -21,14 +21,14 @@
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		F.dirt += 4
-	del(src)
+	qdel(src)
 
 /obj/effect/decal/cleanable/greenglow
 
 	New()
 		..()
 		spawn(1200)// 2 minutes
-			del(src)
+			qdel(src)
 
 /obj/effect/decal/cleanable/dirt
 	name = "dirt"
@@ -71,6 +71,9 @@
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb1"
 
+/obj/effect/decal/cleanable/cobweb/fire_act()
+	qdel(src)
+
 /obj/effect/decal/cleanable/molten_item
 	name = "gooey grey mass"
 	desc = "It looks like a melted... something."
@@ -80,7 +83,7 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "molten"
 
-/obj/effect/decal/cleanable/cobweb2
+/obj/effect/decal/cleanable/cobweb/cobweb2
 	name = "cobweb"
 	desc = "Somebody should remove that."
 	density = 0
@@ -102,10 +105,11 @@
 	random_icon_states = list("vomit_1", "vomit_2", "vomit_3", "vomit_4")
 	var/list/viruses = list()
 
-	Del()
-		for(var/datum/disease/D in viruses)
-			D.cure(0)
-		..()
+/obj/effect/decal/cleanable/vomit/Destroy()
+	for(var/datum/disease/D in viruses)
+		D.cure(0)
+	viruses = null
+	return ..()
 
 /obj/effect/decal/cleanable/tomato_smudge
 	name = "tomato smudge"
@@ -133,3 +137,18 @@
 	layer = 2
 	icon = 'icons/effects/tomatodecal.dmi'
 	random_icon_states = list("smashed_pie")
+
+/obj/effect/decal/cleanable/shreds
+	name = "shreds"
+	desc = "The shredded remains of what appears to be clothing."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "shreds"
+	gender = PLURAL
+	density = 0
+	anchored = 1
+	layer = 2
+
+/obj/effect/decal/cleanable/shreds/New()
+	pixel_x = rand(-5, 5)
+	pixel_y = rand(-5, 5)
+	..()

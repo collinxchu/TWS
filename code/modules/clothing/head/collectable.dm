@@ -67,6 +67,7 @@
 	icon_state = "welding"
 	item_state = "welding"
 	body_parts_covered = HEAD|FACE|EYES
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/head/collectable/slime
 	name = "collectable slime hat"
@@ -124,9 +125,11 @@
 	desc = "Go Red! I mean Green! I mean Red! No Green!"
 	icon_state = "thunderdome"
 	item_state = "thunderdome"
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/head/collectable/swat
 	name = "collectable SWAT helmet"
 	desc = "Now you can be in the Deathsquad too!"
 	icon_state = "swat"
 	item_state = "swat"
+	burn_state = -1 //Won't burn in fires

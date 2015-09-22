@@ -46,6 +46,11 @@ var/bomb_set
 	src.safety_wire = pick(w)
 	w -= src.safety_wire
 
+/obj/machinery/nuclearbomb/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
+
 /obj/machinery/nuclearbomb/process()
 	if (src.timing)
 		bomb_set = 1 //So long as there is one nuke timing, it means one nuke is armed.
@@ -426,7 +431,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 				return
 	return
 
-/obj/item/weapon/disk/nuclear/Del()
+/obj/item/weapon/disk/nuclear/Destroy()
 	if(blobstart.len > 0)
 		var/obj/D = new /obj/item/weapon/disk/nuclear(pick(blobstart))
 		message_admins("[src] has been destroyed. Spawning [D] at ([D.x], [D.y], [D.z]).")

@@ -8,12 +8,18 @@
 	pass_flags = PASSTABLE
 	update_icon = 0		///no need to call regenerate_icon
 
+	//damage_overlays = 'icons/mob/human_races/masks/dam_monkey.dmi'
+	//damage_mask = 'icons/mob/human_races/masks/dam_mask_monkey.dmi'
+	//blood_mask = 'icons/mob/human_races/masks/blood_monkey.dmi'
+
 	var/obj/item/weapon/card/id/wear_id = null // Fix for station bounced radios -- Skie
 	var/greaterform = "Human"                  // Used when humanizing a monkey.
 	icon_state = "monkey1"
 	//var/uni_append = "12C4E2"                // Small appearance modifier for different species.
 	var/list/uni_append = list(0x12C,0x4E2)    // Same as above for DNA2.
 	var/update_muts = 1                        // Monkey gene must be set at start.
+	//is_small = 1
+	//show_ssd = null #TOREMOVE - make into datum/species
 
 /mob/living/carbon/monkey/tajara
 	name = "farwa"
@@ -259,7 +265,7 @@
 		return
 	if (stat == DEAD && !client)
 		gibs(loc, viruses)
-		del(src)
+		qdel(src)
 		return
 
 //Unless its monkey mode monkeys cant use advanced tools

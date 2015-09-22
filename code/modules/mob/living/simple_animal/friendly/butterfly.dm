@@ -15,7 +15,8 @@
 	harm_intent_damage = 1
 	friendly = "nudges"
 	pass_flags = PASSTABLE
-	mob_size = 0
+	mob_size = MOB_SIZE_TINY
+	flying = 1
 
 /mob/living/simple_animal/butterfly/New()
 	..()

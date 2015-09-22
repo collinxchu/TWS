@@ -24,8 +24,8 @@
 	dir = 1
 	explosion_resistance = 25
 	emitter_resistance = 50 // Lots of emitter blasts, it's *blast* door after all.
-	
-	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways, 
+
+	//Most blast doors are infrequently toggled and sometimes used with regular doors anyways,
 	//turning this off prevents awkward zone geometry in places like medbay lobby, for example.
 	block_air_zones = 0
 
@@ -57,7 +57,7 @@
 	src.density = 0
 	update_nearby_tiles()
 	src.update_icon()
-	src.SetOpacity(0)
+	src.set_opacity(0)
 	sleep(15)
 	src.layer = open_layer
 	src.operating = 0
@@ -72,7 +72,7 @@
 	src.density = 1
 	update_nearby_tiles()
 	src.update_icon()
-	src.SetOpacity(initial(opacity))
+	src.set_opacity(initial(opacity))
 	sleep(15)
 	src.operating = 0
 

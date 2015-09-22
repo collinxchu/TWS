@@ -7,6 +7,7 @@
 	var/nometeors = 1
 	required_players = 0
 	votable = 0
+	deny_respawn = 0
 
 	uplink_welcome = "EVIL METEOR Uplink Console:"
 	uplink_uses = 10

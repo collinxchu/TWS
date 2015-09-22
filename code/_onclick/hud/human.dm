@@ -278,6 +278,13 @@
 		mymob.healths.screen_loc = ui_health
 		hud_elements |= mymob.healths
 
+		mymob.healthdoll = new /obj/screen()
+		mymob.healthdoll.icon = ui_style
+		mymob.healthdoll.icon_state = "healthdoll_DEAD"
+		mymob.healthdoll.name = "health doll"
+		mymob.healthdoll.screen_loc = ui_healthdoll
+		hud_elements |= mymob.healthdoll
+
 	if(hud_data.has_pressure)
 		mymob.pressure = new /obj/screen()
 		mymob.pressure.icon = ui_style

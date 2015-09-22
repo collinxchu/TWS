@@ -20,13 +20,12 @@
 	// Life vars/
 	var/energy = 0
 	var/obj/effect/plant_controller/master = null
-	var/mob/living/buckled_mob
 	var/datum/seed/seed
 
 /obj/effect/plantsegment/New()
 	return
 
-/obj/effect/plantsegment/Del()
+/obj/effect/plantsegment/Destroy()
 	if(master)
 		master.vines -= src
 		master.growth_queue -= src
@@ -35,28 +34,28 @@
 /obj/effect/plantsegment/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (!W || !user || !W.type) return
 	switch(W.type)
-		if(/obj/item/weapon/circular_saw) del src
-		if(/obj/item/weapon/kitchen/utensil/knife) del src
-		if(/obj/item/weapon/scalpel) del src
-		if(/obj/item/weapon/twohanded/fireaxe) del src
-		if(/obj/item/weapon/hatchet) del src
-		if(/obj/item/weapon/melee/energy) del src
-		if(/obj/item/weapon/pickaxe/plasmacutter) del src
+		if(/obj/item/weapon/circular_saw) qdel(src)
+		if(/obj/item/weapon/kitchen/utensil/knife) qdel(src)
+		if(/obj/item/weapon/scalpel) qdel(src)
+		if(/obj/item/weapon/twohanded/fireaxe) qdel(src)
+		if(/obj/item/weapon/hatchet) qdel(src)
+		if(/obj/item/weapon/melee/energy) qdel(src)
+		if(/obj/item/weapon/pickaxe/plasmacutter) qdel(src)
 
 		// Less effective weapons
 		if(/obj/item/weapon/wirecutters)
-			if(prob(25)) del src
+			if(prob(25)) qdel(src)
 		if(/obj/item/weapon/shard)
-			if(prob(25)) del src
+			if(prob(25)) qdel(src)
 
 		// Weapons with subtypes
 		else
-			if(istype(W, /obj/item/weapon/melee/energy/sword)) del src
+			if(istype(W, /obj/item/weapon/melee/energy/sword)) qdel(src)
 			else if(istype(W, /obj/item/weapon/weldingtool))
 				var/obj/item/weapon/weldingtool/WT = W
-				if(WT.remove_fuel(0, user)) del src
+				if(WT.remove_fuel(0, user)) qdel(src)
 			else
-				manual_unbuckle(user)
+				user_unbuckle_mob(user)
 				return
 		// Plant-b-gone damage is handled in its entry in chemistry-reagents.dm
 	..()
@@ -71,39 +70,8 @@
 		update()
 		return
 
-	manual_unbuckle(user)
+	user_unbuckle_mob(user)
 
-/obj/effect/plantsegment/proc/unbuckle()
-	if(buckled_mob)
-		if(buckled_mob.buckled == src)	//this is probably unneccesary, but it doesn't hurt
-			buckled_mob.buckled = null
-			buckled_mob.anchored = initial(buckled_mob.anchored)
-			buckled_mob.update_canmove()
-		buckled_mob = null
-	return
-
-/obj/effect/plantsegment/proc/manual_unbuckle(mob/user as mob)
-	if(buckled_mob)
-		if(prob(seed ? min(max(0,100 - seed.potency),100) : 50))
-			if(buckled_mob.buckled == src)
-				if(buckled_mob != user)
-					buckled_mob.visible_message(\
-						"<span class='notice'>[user.name] frees [buckled_mob.name] from [src].</span>",\
-						"<span class='notice'>[user.name] frees you from [src].</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
-				else
-					buckled_mob.visible_message(\
-						"<span class='notice'>[buckled_mob.name] struggles free of [src].</span>",\
-						"<span class='notice'>You untangle [src] from around yourself.</span>",\
-						"<span class='warning'>You hear shredding and ripping.</span>")
-			unbuckle()
-		else
-			var/text = pick("rips","tears","pulls")
-			user.visible_message(\
-				"<span class='notice'>[user.name] [text] at [src].</span>",\
-				"<span class='notice'>You [text] at [src].</span>",\
-				"<span class='warning'>You hear shredding and ripping.</span>")
-	return
 
 /obj/effect/plantsegment/proc/grow()
 
@@ -154,7 +122,7 @@
 					H.adjustBruteLoss(damage)
 					return
 
-				var/datum/organ/external/affecting = H.get_organ(pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin"))
+				var/obj/item/organ/external/affecting = H.get_organ(pick("l_foot","r_foot","l_leg","r_leg","l_hand","r_hand","l_arm", "r_arm","head","chest","groin"))
 
 				if(affecting)
 					affecting.take_damage(damage, 0)
@@ -178,14 +146,14 @@
 
 	// Update bioluminescence.
 	if(seed.biolum)
-		SetLuminosity(1+round(seed.potency/10))
+		set_light(1+round(seed.potency/10))
 		if(seed.biolum_colour)
-			l_color = seed.biolum_colour
+			light_color = seed.biolum_colour
 		else
-			l_color = null
+			light_color = null
 		return
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 	// Update flower/product overlay.
 	overlays.Cut()
@@ -234,12 +202,12 @@
 
 // Hotspots kill vines.
 /obj/effect/plantsegment/fire_act(null, temp, volume)
-	del src
+	qdel(src)
 
 /obj/effect/plantsegment/proc/die()
 	if(seed && harvest && rand(5))
 		seed.harvest(src,1)
-		del(src)
+		qdel(src)
 
 /obj/effect/plantsegment/proc/life()
 
@@ -265,7 +233,7 @@
 		die()
 		return
 
-	var/area/A = T.loc
+/*	var/area/A = T.loc
 	if(A)
 		var/light_available
 		if(A.lighting_use_dynamic)
@@ -274,7 +242,7 @@
 			light_available =  5
 		if(abs(light_available - seed.ideal_light) > seed.light_tolerance)
 			die()
-			return
+			return  #TOREMOVE */
 
 /obj/effect/plant_controller
 
@@ -298,14 +266,14 @@
 
 /obj/effect/plant_controller/New()
 	if(!istype(src.loc,/turf/simulated/floor))
-		del(src)
+		qdel(src)
 
 	spawn(0)
 		spawn_piece(src.loc)
 
 	processing_objects.Add(src)
 
-/obj/effect/plant_controller/Del()
+/obj/effect/plant_controller/Destroy()
 	processing_objects.Remove(src)
 	..()
 
@@ -324,12 +292,12 @@
 
 	// Space vines exterminated. Remove the controller
 	if(!vines)
-		del(src)
+		qdel(src)
 		return
 
 	// Sanity check.
 	if(!growth_queue)
-		del(src)
+		qdel(src)
 		return
 
 	// Check if we're too big for our own good.

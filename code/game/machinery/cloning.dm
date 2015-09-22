@@ -22,6 +22,14 @@
 	var/eject_wait = 0 //Don't eject them as soon as they are created fuckkk
 	var/biomass = CLONE_BIOMASS * 3
 
+	light_color = LIGHT_COLOR_PURE_GREEN
+	power_change()
+		..()
+		if(!(stat & (BROKEN|NOPOWER)))
+			set_light(2)
+		else
+			set_light(0)
+
 //The return of data disks?? Just for transferring between genetics machine/cloning machine.
 //TO-DO: Make the genetics machine accept them.
 /obj/item/weapon/disk/data
@@ -300,7 +308,7 @@
 		user << "\blue \The [src] processes \the [W]."
 		biomass += 50
 		user.drop_item()
-		del(W)
+		qdel(W)
 		return
 	else if (istype(W, /obj/item/weapon/wrench))
 		if(src.locked && (src.anchored || src.occupant))
@@ -386,7 +394,7 @@
 		src.icon_state = "pod_g"
 		src.occupant.ghostize()
 		spawn(5)
-			del(src.occupant)
+			qdel(src.occupant)
 	return
 
 /obj/machinery/clonepod/relaymove(mob/user as mob)
@@ -405,21 +413,21 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.loc
 				ex_act(severity)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		else
 	return

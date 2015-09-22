@@ -119,6 +119,8 @@
 		"You cut \the [C]'s restraints with \the [src]!",\
 		"You hear cable being cut.")
 		C.handcuffed = null
+		if(C.buckled && C.buckled.buckle_require_restraints)
+			C.buckled.unbuckle_mob()
 		C.update_inv_handcuffed()
 		return
 	else
@@ -160,6 +162,10 @@
 	R.add_reagent("fuel", max_fuel)
 	return
 
+/obj/item/weapon/weldingtool/Destroy()
+	if(welding)
+		processing_objects -= src
+	..()
 
 /obj/item/weapon/weldingtool/examine(mob/user)
 	if(..(user, 0))
@@ -188,12 +194,12 @@
 		if (user.client)
 			user.client.screen -= src
 		if (user.r_hand == src)
-			user.u_equip(src)
+			user.unEquip(src)
 		else
-			user.u_equip(src)
+			user.unEquip(src)
 		src.master = F
 		src.layer = initial(src.layer)
-		user.u_equip(src)
+		user.unEquip(src)
 		if (user.client)
 			user.client.screen -= src
 		src.loc = F
@@ -259,6 +265,9 @@
 	if (src.welding)
 		remove_fuel(1)
 		var/turf/location = get_turf(user)
+		if(isliving(O))
+			var/mob/living/L = O
+			L.IgniteMob()
 		if (istype(location, /turf))
 			location.hotspot_expose(700, 50, 1)
 	return
@@ -357,7 +366,7 @@
 	var/safety = user:eyecheck()
 	if(istype(user, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = user
-		var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 		if(!E)
 			return
 		if(H.species.flags & IS_SYNTHETIC)
@@ -452,7 +461,7 @@
 
 	if(hasorgans(M))
 
-		var/datum/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
+		var/obj/item/organ/external/S = M:organs_by_name[user.zone_sel.selecting]
 
 		if (!S) return
 		if(!(S.status & ORGAN_ROBOT) || user.a_intent != "help")
@@ -467,7 +476,7 @@
 
 		if(S.brute_dam)
 			S.heal_damage(15,0,0,1)
-			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.display_name] with \the [src].")
+			user.visible_message("\red \The [user] patches some dents on \the [M]'s [S.name] with \the [src].")
 			return
 		else
 			user << "Nothing to fix!"

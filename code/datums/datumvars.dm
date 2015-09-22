@@ -609,7 +609,7 @@ client
 				for(var/obj/Obj in world)
 					if(Obj.type == O_type)
 						i++
-						del(Obj)
+						qdel(Obj)
 				if(!i)
 					usr << "No objects of this type exist"
 					return
@@ -620,7 +620,7 @@ client
 				for(var/obj/Obj in world)
 					if(istype(Obj,O_type))
 						i++
-						del(Obj)
+						qdel(Obj)
 				if(!i)
 					usr << "No objects of this type exist"
 					return
@@ -865,7 +865,7 @@ client
 			usr << "This can only be done to instances of type /mob/living/carbon"
 			return
 
-		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/datum/organ/internal)-/datum/organ/internal
+		var/new_organ = input("Please choose an organ to add.","Organ",null) as null|anything in typesof(/obj/item/organ)-/obj/item/organ
 		if(!new_organ) return
 
 		if(!M)
@@ -876,36 +876,8 @@ client
 			usr << "Mob already has that organ."
 			return
 
-		if(istype(M,/mob/living/carbon/human))
-			var/mob/living/carbon/human/H = M
-			var/datum/organ/internal/I = new new_organ(H)
+		new new_organ(M)
 
-			var/organ_slot = input(usr, "Which slot do you want the organ to go in ('default' for default)?")  as text|null
-
-			if(!organ_slot)
-				return
-
-			if(organ_slot != "default")
-				organ_slot = sanitize(copytext(organ_slot,1,MAX_MESSAGE_LEN))
-			else
-				if(I.removed_type)
-					var/obj/item/organ/O = new I.removed_type()
-					organ_slot = O.organ_tag
-					del(O)
-				else
-					organ_slot = "unknown organ"
-
-			if(H.internal_organs_by_name[organ_slot])
-				usr << "[H] already has an organ in that slot."
-				del(I)
-				return
-
-			H.internal_organs |= I
-			H.internal_organs_by_name[organ_slot] = I
-			usr << "Added new [new_organ] to [H] as slot [organ_slot]."
-		else
-			new new_organ(M)
-			usr << "Added new [new_organ] to [M]."
 
 	else if(href_list["remorgan"])
 		if(!check_rights(R_SPAWN))	return
@@ -915,7 +887,7 @@ client
 			usr << "This can only be done to instances of type /mob/living/carbon"
 			return
 
-		var/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in M.internal_organs
+		var/obj/item/organ/rem_organ = input("Please choose an organ to remove.","Organ",null) as null|anything in M.internal_organs
 
 		if(!M)
 			usr << "Mob doesn't exist anymore"
@@ -926,7 +898,8 @@ client
 			return
 
 		usr << "Removed [rem_organ] from [M]."
-		del(rem_organ)
+		rem_organ.removed()
+		qdel(rem_organ)
 
 	else if(href_list["fix_nano"])
 		if(!check_rights(R_DEBUG)) return

@@ -27,6 +27,11 @@ Possible to do for anyone motivated enough:
 // HOLOPAD MODE
 // 0 = RANGE BASED
 // 1 = AREA BASED
+
+#define HOLOGRAM_POWER_USAGE 2
+#define RANGE_BASED 4
+#define AREA_BASED 6
+
 var/const/HOLOPAD_MODE = 0
 
 /obj/machinery/hologram/holopad
@@ -36,6 +41,7 @@ var/const/HOLOPAD_MODE = 0
 
 	layer = TURF_LAYER+0.1 //Preventing mice and drones from sneaking under them.
 
+	var/power_per_hologram = 500 //per usage per hologram
 	var/mob/living/silicon/ai/master//Which AI, if any, is controlling the object? Only one AI may control a hologram at any time.
 	var/last_request = 0 //to prevent request spam. ~Carn
 	var/holo_range = 5 // Change to change how far the AI can move away from the holopad before deactivating.
@@ -113,8 +119,8 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
 	hologram.name = "[A.name] (Hologram)"//If someone decides to right click.
-	hologram.SetLuminosity(2)	//hologram lighting
-	SetLuminosity(2)			//pad lighting
+	hologram.set_light(2)	//hologram lighting
+	set_light(2)			//pad lighting
 	icon_state = "holopad1"
 	A.holo = src
 	master = A//AI is the master.
@@ -122,32 +128,35 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	return 1
 
 /obj/machinery/hologram/holopad/proc/clear_holo()
-//	hologram.SetLuminosity(0)//Clear lighting.	//handled by the lighting controller when its ower is deleted
-	del(hologram)//Get rid of hologram.
+//	hologram.set_light(0)//Clear lighting.	//handled by the lighting controller when its ower is deleted
+	qdel(hologram)//Get rid of hologram.
 	if(master.holo == src)
 		master.holo = null
 	master = null//Null the master, since no-one is using it now.
-	SetLuminosity(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
+	set_light(0)			//pad lighting (hologram lighting will be handled automatically since its owner was deleted)
 	icon_state = "holopad0"
 	use_power = 1//Passive power usage.
 	return 1
 
 /obj/machinery/hologram/holopad/process()
-	if(hologram)//If there is a hologram.
-		if(master && !master.stat && master.client && master.eyeobj)//If there is an AI attached, it's not incapacitated, it has a client, and the client eye is centered on the projector.
-			if(!(stat & NOPOWER))//If the  machine has power.
-				if((HOLOPAD_MODE == 0 && (get_dist(master.eyeobj, src) <= holo_range)))
-					return 1
+	for (var/mob/living/silicon/ai/master in hologram)
+		var/active_ai = (master && !master.stat && master.client && master.eyeobj)//If there is an AI attached, it's not incapacitated, it has a client, and the client eye is centered on the projector.
+		if((stat & NOPOWER) || !active_ai)
+			clear_holo(master)
+			continue
 
-				else if (HOLOPAD_MODE == 1)
+		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(master.eyeobj, src) > holo_range)))
+			clear_holo(master)
+			continue
 
-					var/area/holo_area = get_area(src)
-					var/area/eye_area = get_area(master.eyeobj)
+		if(HOLOPAD_MODE == AREA_BASED)
+			var/area/holo_area = get_area(src)
+			var/area/eye_area = get_area(master.eyeobj)
+			if(eye_area != holo_area)
+				clear_holo(master)
+				continue
 
-					if(eye_area in holo_area.master.related)
-						return 1
-
-		clear_holo()//If not, we want to get rid of the hologram.
+		use_power(power_per_hologram)
 	return 1
 
 /obj/machinery/hologram/holopad/proc/move_hologram()
@@ -172,24 +181,24 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 /obj/machinery/hologram/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 		if(3.0)
 			if (prob(5))
-				del(src)
+				qdel(src)
 	return
 
 /obj/machinery/hologram/blob_act()
-	del(src)
+	qdel(src)
 	return
 
 /obj/machinery/hologram/meteorhit()
-	del(src)
+	qdel(src)
 	return
 
-/obj/machinery/hologram/Del()
+/obj/machinery/hologram/Destroy()
 	if(hologram)
 		src:clear_holo()
 	..()

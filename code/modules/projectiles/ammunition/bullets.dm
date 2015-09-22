@@ -78,6 +78,80 @@
 	projectile_type = "/obj/item/projectile/bullet/weakbullet/beanbag"
 	matter = list("metal" = 500)
 
+/obj/item/ammo_casing/shotgun/improvised
+	name = "improvised shell"
+	desc = "An extremely weak shotgun shell with multiple small pellets made out of metal shards."
+	icon_state = "improvshell"
+//	projectile_type = /obj/item/projectile/bullet/pellet/weak
+	matter = list("metal" = 250)
+	//pellets = 5
+	//variance = 0.8 #TOREMOVE
+
+
+/obj/item/ammo_casing/shotgun/improvised/overload
+	name = "overloaded improvised shell"
+	desc = "An extremely weak shotgun shell with multiple small pellets made out of metal shards. This one has been packed with even more \
+	propellant. It's like playing russian roulette, with a shotgun."
+	icon_state = "improvshell"
+//	projectile_type = /obj/item/projectile/bullet/pellet/random
+	matter = list("metal" = 250)
+	//pellets = 5
+	//variance = 1
+
+/obj/item/ammo_casing/shotgun/meteorshot
+	name = "meteorshot shell"
+	desc = "A shotgun shell rigged with CMC technology, which launches a massive slug when fired."
+	icon_state = "mshell"
+//	projectile_type = /obj/item/projectile/bullet/meteorshot
+
+/obj/item/ammo_casing/shotgun/pulseslug
+	name = "pulse slug"
+	desc = "A delicate device which can be loaded into a shotgun. The primer acts as a button which triggers the gain medium and fires a powerful \
+	energy blast. While the heat and power drain limit it to one use, it can still allow an operator to engage targets that ballistic ammunition \
+	would have difficulty with."
+	icon_state = "pshell"
+//	projectile_type = /obj/item/projectile/beam/pulse/shot
+
+/obj/item/ammo_casing/shotgun/incendiary
+	name = "incendiary slug"
+	desc = "An incendiary-coated shotgun slug."
+	icon_state = "ishell"
+//	projectile_type = /obj/item/projectile/bullet/incendiary/shell
+
+/obj/item/ammo_casing/shotgun/frag12
+	name = "FRAG-12 slug"
+	desc = "A high explosive breaching round for a 12 gauge shotgun."
+	icon_state = "heshell"
+//	projectile_type = /obj/item/projectile/bullet/frag12
+
+/obj/item/ammo_casing/shotgun/incendiary/dragonsbreath
+	name = "dragonsbreath shell"
+	desc = "A shotgun shell which fires a spread of incendiary pellets."
+	icon_state = "ishell2"
+//	projectile_type = /obj/item/projectile/bullet/incendiary/shell/dragonsbreath
+//	pellets = 4
+//	variance = 0.9
+
+/obj/item/ammo_casing/shotgun/ion
+	name = "ion shell"
+	desc = "An advanced shotgun shell which uses a subspace ansible crystal to produce an effect similar to a standard ion rifle. \
+	The unique properties of the crystal splot the pulse into a spread of individually weaker bolts."
+	icon_state = "ionshell"
+//	projectile_type = /obj/item/projectile/ion/weak
+//	pellets = 4
+//	variance = 0.9
+
+/obj/item/ammo_casing/shotgun/laserslug
+	name = "laser slug"
+	desc = "An advanced shotgun shell that uses a micro laser to replicate the effects of a laser weapon in a ballistic package."
+	icon_state = "lshell"
+//	projectile_type = /obj/item/projectile/beam
+
+/obj/item/ammo_casing/shotgun/techshell
+	name = "unloaded technological shell"
+	desc = "A high-tech shotgun shell which can be loaded with materials to produce unique effects."
+	icon_state = "cshell"
+	projectile_type = null
 
 /obj/item/ammo_casing/shotgun/stunshell
 	name = "stun shell"
@@ -85,7 +159,6 @@
 	icon_state = "stunshell"
 	projectile_type = "/obj/item/projectile/bullet/stunshot"
 	matter = list("metal" = 2500)
-
 
 /obj/item/ammo_casing/shotgun/dart
 	name = "shotgun darts"

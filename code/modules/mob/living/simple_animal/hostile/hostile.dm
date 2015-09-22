@@ -113,11 +113,11 @@
 
 /mob/living/simple_animal/hostile/proc/ListTargets(var/dist = 7)
 	var/list/L = hearers(src, dist)
-	
+
 	for (var/obj/mecha/M in mechas_list)
 		if (get_dist(src, M) <= dist)
 			L += M
-	
+
 	return L
 
 /mob/living/simple_animal/hostile/death()
@@ -185,7 +185,7 @@
 	if(!A)	return
 
 	if (!istype(target, /turf))
-		del(A)
+		qdel(A)
 		return
 	A.current = target
 	A.yo = target:y - start:y

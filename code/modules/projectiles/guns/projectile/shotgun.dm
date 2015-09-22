@@ -134,3 +134,33 @@
 				name = "sawn-off shotgun"
 				desc = "Omar's coming!"
 				user << "<span class='warning'>You shorten the barrel of \the [src]!</span>"
+
+// IMPROVISED SHOTGUN //
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised
+	name = "improvised shotgun"
+	desc = "Essentially a tube that aims shotgun shells."
+	icon_state = "ishotgun"
+	item_state = "shotgun"
+	w_class = 4
+	force = 10
+	slot_flags = null
+	origin_tech = "combat=2;materials=2"
+//	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/improvised
+//	sawn_desc = "I'm just here for the gasoline."
+//	unique_rename = 0
+//	unique_reskin = 0
+/*
+/obj/item/weapon/gun/projectile/revolver/doublebarrel/improvised/attackby(obj/item/A, mob/user, params)
+	..()
+	if(istype(A, /obj/item/stack/cable_coil) && !sawn_state)
+		var/obj/item/stack/cable_coil/C = A
+		if(C.use(10))
+			slot_flags = SLOT_BACK
+			icon_state = "ishotgunsling"
+			user << "<span class='notice'>You tie the lengths of cable to the shotgun, making a sling.</span>"
+			update_icon()
+		else
+			user << "<span class='warning'>You need at least ten lengths of cable if you want to make a sling!</span>"
+			return
+// Sawing guns related procs //
+*/

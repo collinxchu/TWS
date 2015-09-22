@@ -21,11 +21,11 @@
 	if(on)
 		on = 0
 		user << "\blue You turn off the light"
-		SetLuminosity(0)
+		set_light(0)
 	else
 		on = 1
 		user << "\blue You turn on the light"
-		SetLuminosity(brightness_on)
+		set_light(brightness_on)
 
 
 

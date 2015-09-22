@@ -135,7 +135,7 @@
 				if(!client.holder && !config.antag_hud_allowed)           // For new ghosts we remove the verb from even showing up if it's not allowed.
 					observer.verbs -= /mob/dead/observer/verb/toggle_antagHUD        // Poor guys, don't know what they are missing!
 				observer.key = key
-				del(src)
+				qdel(src)
 
 				return 1
 
@@ -352,7 +352,7 @@
 		else
 			AnnounceCyborg(character, rank, join_message)
 
-		del(src)
+		qdel(src)
 
 	proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
@@ -360,7 +360,7 @@
 			if(character.mind.role_alt_title)
 				rank = character.mind.role_alt_title
 			a.autosay("[character.real_name],[rank ? " [rank]," : " visitor," ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
-			del(a)
+			qdel(a)
 
 	proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message)
 		if (ticker.current_state == GAME_STATE_PLAYING)
@@ -369,7 +369,7 @@
 				rank = character.mind.role_alt_title
 			// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
 			a.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer")
-			del(a)
+			qdel(a)
 
 	proc/LateChoices()
 		var/mills = world.time // 1/10 of a second, not real milliseconds but whatever

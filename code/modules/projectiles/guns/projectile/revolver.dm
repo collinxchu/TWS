@@ -15,7 +15,7 @@
 			M << "<span class='danger'>[src] blows up in your face.</span>"
 			M.take_organ_damage(0,20)
 			M.drop_item()
-			del(src)
+			qdel(src)
 			return 0
 		return 1
 
@@ -114,7 +114,7 @@
 
 /obj/item/weapon/gun/projectile/russian/proc/Spin()
 	for(var/obj/item/ammo_casing/AC in loaded)
-		del(AC)
+		qdel(AC)
 	loaded = list()
 	var/random = rand(1, max_shells)
 	for(var/i = 1; i <= max_shells; i++)
@@ -165,7 +165,7 @@
 
 	if(isliving(target) && isliving(user))
 		if(target == user)
-			var/datum/organ/external/affecting = user.zone_sel.selecting
+			var/obj/item/organ/external/affecting = user.zone_sel.selecting
 			if(affecting == "head")
 
 				var/obj/item/ammo_casing/AC = loaded[1]

@@ -24,7 +24,7 @@
 	RefreshParts()
 	src.initialize(); //Agouri
 
-/obj/machinery/r_n_d/server/Del()
+/obj/machinery/r_n_d/server/Destroy()
 	griefProtection()
 	..()
 
@@ -103,7 +103,7 @@
 /obj/machinery/r_n_d/server/proc/produce_heat()
 	if (!produces_heat)
 		return
-	
+
 	if (!use_power)
 		return
 
@@ -118,7 +118,7 @@
 
 			if(removed)
 				var/heat_produced = idle_power_usage	//obviously can't produce more heat than the machine draws from it's power source
-				
+
 				removed.add_thermal_energy(heat_produced)
 
 			env.merge(removed)
@@ -149,7 +149,7 @@
 				if(I.reliability != 100 && crit_fail)
 					I.crit_fail = 1
 				I.loc = src.loc
-			del(src)
+			qdel(src)
 			return 1
 
 /obj/machinery/r_n_d/server/attack_hand(mob/user as mob)
@@ -196,6 +196,7 @@
 /obj/machinery/computer/rdservercontrol
 	name = "R&D Server Controller"
 	icon_state = "rdcomp"
+	light_color = LIGHT_COLOR_FADEDPURPLE
 	circuit = /obj/item/weapon/circuitboard/rdservercontrol
 	var/screen = 0
 	var/obj/machinery/r_n_d/server/temp_server

@@ -3,12 +3,14 @@
 	desc = "You sit in this. Either by will or force."
 	icon_state = "wheelchair"
 	anchored = 0
-	movable = 1
+	buckle_movable = 1
 
 	var/driving = 0
 	var/mob/living/pulling = null
 	var/bloodiness
 
+/obj/structure/stool/bed/chair/wheelchair/update_icon()
+	return
 
 /obj/structure/stool/bed/chair/wheelchair/set_dir()
 	..()
@@ -17,6 +19,11 @@
 	overlays += O
 	if(buckled_mob)
 		buckled_mob.set_dir(dir)
+
+/obj/structure/stool/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/weapon/wrench) || istype(W,/obj/item/stack) || istype(W, /obj/item/weapon/wirecutters))
+		return
+	..()
 
 /obj/structure/stool/bed/chair/wheelchair/relaymove(mob/user, direction)
 	// Redundant check?
@@ -68,7 +75,7 @@
 	set_dir(direction)
 	if(pulling) // Driver
 		if(pulling.loc == src.loc) // We moved onto the wheelchair? Revert!
-			pulling.loc = T
+			pulling.forceMove(T)
 		else
 			spawn(0)
 			if(get_dist(src, pulling) > 1) // We are too far away? Losing control.
@@ -93,20 +100,20 @@
 						if (O != occupant)
 							Bump(O)
 				else
-					unbuckle()
+					unbuckle_mob()
 			if (pulling && (get_dist(src, pulling) > 1))
 				pulling.pulledby = null
 				pulling << "\red You lost your grip!"
 				pulling = null
 		else
 			if (occupant && (src.loc != occupant.loc))
-				src.loc = occupant.loc // Failsafe to make sure the wheelchair stays beneath the occupant after driving
+				src.forceMove(occupant.loc)  // Failsafe to make sure the wheelchair stays beneath the occupant after driving
 
-/obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/user as mob)
+/obj/structure/stool/bed/chair/wheelchair/attack_hand(mob/living/user as mob)
 	if (pulling)
 		MouseDrop(usr)
 	else
-		manual_unbuckle(user)
+		user_unbuckle_mob(user)
 	return
 
 /obj/structure/stool/bed/chair/wheelchair/MouseDrop(over_object, src_location, over_location)
@@ -138,8 +145,7 @@
 	if(!buckled_mob)	return
 
 	if(propelled || (pulling && (pulling.a_intent == "hurt")))
-		var/mob/living/occupant = buckled_mob
-		unbuckle()
+		var/mob/living/occupant = unbuckle_mob()
 
 		if (pulling && (pulling.a_intent == "hurt"))
 			occupant.throw_at(A, 3, 3, pulling)

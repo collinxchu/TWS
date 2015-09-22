@@ -70,7 +70,7 @@
 	return
 
 
-/obj/machinery/door/Del()
+/obj/machinery/door/Destroy()
 	density = 0
 	update_nearby_tiles()
 	..()
@@ -85,7 +85,7 @@
 		var/mob/M = AM
 		if(world.time - M.last_bumped <= 10) return	//Can bump-open one airlock per second. This is to prevent shock spam.
 		M.last_bumped = world.time
-		if(!M.restrained() && !M.small)
+		if(!M.restrained() && M.mob_size >= MOB_SIZE_HUMAN)
 			bumpopen(M)
 		return
 
@@ -155,7 +155,7 @@
 			if(emitter_hits >= emitter_resistance)
 				visible_message("\red <B>[src.name] breaks apart!</B>", 1)
 				new /obj/effect/decal/cleanable/ash(src.loc) // Turn it to ashes!
-				del(src)
+				qdel(src)
 
 	if(Proj.damage)
 		take_damage(Proj.damage)
@@ -241,7 +241,7 @@
 				user << "<span class='notice'>You finish repairing the damage to \the [src].</span>"
 				health = between(health, health + repairing.amount*DOOR_REPAIR_AMOUNT, maxhealth)
 				update_icon()
-				del(repairing)
+				qdel(repairing)
 		return
 
 	if(repairing && istype(I, /obj/item/weapon/crowbar))
@@ -308,7 +308,7 @@
 
 /obj/machinery/door/blob_act()
 	if(prob(40))
-		del(src)
+		qdel(src)
 	return
 
 
@@ -326,10 +326,10 @@
 /obj/machinery/door/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 		if(2.0)
 			if(prob(25))
-				del(src)
+				qdel(src)
 			else
 				take_damage(300)
 		if(3.0)
@@ -375,13 +375,13 @@
 
 	do_animate("opening")
 	icon_state = "door0"
-	src.SetOpacity(0)
+	src.set_opacity(0)
 	sleep(10)
 	src.layer = open_layer
 	src.density = 0
 	explosion_resistance = 0
 	update_icon()
-	SetOpacity(0)
+	set_opacity(0)
 	update_nearby_tiles()
 
 	if(operating)	operating = 0
@@ -408,14 +408,14 @@
 	sleep(10)
 	update_icon()
 	if(visible && !glass)
-		SetOpacity(1)	//caaaaarn!
+		set_opacity(1)	//caaaaarn!
 	operating = 0
 	update_nearby_tiles()
 
 	//I shall not add a check every x ticks if a door has closed over some fire.
 	var/obj/fire/fire = locate() in loc
 	if(fire)
-		del fire
+		qdel(fire)
 	return
 
 /obj/machinery/door/proc/requiresID()
@@ -459,3 +459,6 @@
 
 /obj/machinery/door/morgue
 	icon = 'icons/obj/doors/doormorgue.dmi'
+
+/obj/machinery/door/storage_contents_dump_act(obj/item/weapon/storage/src_object, mob/user)
+	return 0

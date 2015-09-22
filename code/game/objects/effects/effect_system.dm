@@ -13,6 +13,11 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	unacidable = 1//So effect are not targeted by alien acid.
 	pass_flags = PASSTABLE | PASSGRILLE
 
+/obj/effect/Destroy()
+	if(reagents)
+		reagents.delete()
+	return ..()
+
 /obj/effect/effect/water
 	name = "water"
 	icon = 'icons/effects/effects.dmi'
@@ -20,19 +25,13 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	var/life = 15.0
 	mouse_opacity = 0
 
-/obj/effect/proc/delete()
-	loc = null
-	if(reagents)
-		reagents.delete()
-	return
-
 /obj/effect/effect/water/Move(turf/newloc)
 	//var/turf/T = src.loc
 	//if (istype(T, /turf))
 	//	T.firelevel = 0 //TODO: FIX
 	if (--src.life < 1)
 		//SN src = null
-		delete()
+		qdel(src)
 	if(newloc.density)
 		return 0
 	.=..()
@@ -110,7 +109,7 @@ steam.start() -- spawns the effect
 					sleep(5)
 					step(steam,direction)
 				spawn(20)
-					steam.delete()
+					qdel(steam)
 
 /////////////////////////////////////////////
 //SPARK SYSTEM (like steam system)
@@ -133,10 +132,10 @@ steam.start() -- spawns the effect
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
 	spawn (100)
-		delete()
+		qdel(src)
 	return
 
-/obj/effect/effect/sparks/Del()
+/obj/effect/effect/sparks/Destroy()
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
@@ -183,7 +182,7 @@ steam.start() -- spawns the effect
 					step(sparks,direction)
 				spawn(20)
 					if(sparks)
-						sparks.delete()
+						qdel(sparks)
 					src.total_sparks--
 
 
@@ -212,7 +211,7 @@ steam.start() -- spawns the effect
 /obj/effect/effect/smoke/New()
 	..()
 	spawn (time_to_live)
-		delete()
+		qdel(src)
 	return
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
@@ -354,7 +353,7 @@ steam.start() -- spawns the effect
 				sleep(10)
 				step(smoke,direction)
 			spawn(smoke.time_to_live*0.75+rand(10,30))
-				if (smoke) smoke.delete()
+				if (smoke) qdel(smoke)
 				src.total_smoke--
 
 
@@ -406,7 +405,7 @@ steam.start() -- spawns the effect
 						flick("ion_fade", I)
 						I.icon_state = "blank"
 						spawn( 20 )
-							I.delete()
+							qdel(I)
 					spawn(2)
 						if(src.on)
 							src.processing = 1
@@ -451,7 +450,7 @@ steam.start() -- spawns the effect
 					src.oldposition = get_turf(holder)
 					I.set_dir(src.holder.dir)
 					spawn(10)
-						I.delete()
+						qdel(I)
 						src.number--
 					spawn(2)
 						if(src.on)
@@ -506,7 +505,7 @@ steam.start() -- spawns the effect
 
 		flick("[icon_state]-disolve", src)
 		sleep(5)
-		delete()
+		qdel(src)
 	return
 
 // transfer any reagents to the floor
@@ -551,7 +550,7 @@ steam.start() -- spawns the effect
 		flick("[icon_state]-disolve", src)
 
 		spawn(5)
-			delete()
+			qdel(src)
 
 
 /obj/effect/effect/foam/Crossed(var/atom/movable/AM)
@@ -627,7 +626,7 @@ steam.start() -- spawns the effect
 
 
 
-	Del()
+	Destroy()
 
 		density = 0
 		update_nearby_tiles(1)
@@ -641,14 +640,14 @@ steam.start() -- spawns the effect
 
 
 	ex_act(severity)
-		del(src)
+		qdel(src)
 
 	blob_act()
-		del(src)
+		qdel(src)
 
 	bullet_act()
 		if(metal==1 || prob(50))
-			del(src)
+			qdel(src)
 
 	attack_hand(var/mob/user)
 		if ((HULK in user.mutations) || (prob(75 - metal*25)))
@@ -657,7 +656,7 @@ steam.start() -- spawns the effect
 				if ((O.client && !( O.blinded )))
 					O << "\red [user] smashes through the foamed metal."
 
-			del(src)
+			qdel(src)
 		else
 			user << "\blue You hit the metal foam but bounce off it."
 		return
@@ -665,14 +664,12 @@ steam.start() -- spawns the effect
 
 	attackby(var/obj/item/I, var/mob/user)
 
-		if (istype(I, /obj/item/weapon/grab))
+		if(istype(I, /obj/item/weapon/grab))
 			var/obj/item/weapon/grab/G = I
 			G.affecting.loc = src.loc
-			for(var/mob/O in viewers(src))
-				if (O.client)
-					O << "\red [G.assailant] smashes [G.affecting] through the foamed metal wall."
-			del(I)
-			del(src)
+			visible_message("<span class='warning'>[G.assailant] smashes [G.affecting] through the foamed metal wall.</span>")
+			qdel(I)
+			qdel(src)
 			return
 
 		if(prob(I.force*20 - metal*25))
@@ -680,7 +677,7 @@ steam.start() -- spawns the effect
 			for(var/mob/O in oviewers(user))
 				if ((O.client && !( O.blinded )))
 					O << "\red [user] smashes through the foamed metal."
-			del(src)
+			qdel(src)
 		else
 			user << "\blue You hit the metal foam to no effect."
 

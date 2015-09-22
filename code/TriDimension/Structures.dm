@@ -41,18 +41,18 @@
 		switch(severity)
 			if(1.0)
 				if(icon_state == "ladderup" && prob(10))
-					Del()
+					Destroy()
 			if(2.0)
 				if(prob(50))
-					Del()
+					Destroy()
 			if(3.0)
-				Del()
+				Destroy()
 		return*/
 
-	Del()
+	Destroy()
 		spawn(1)
 			if(target && icon_state == "ladderdown")
-				del target
+				qdel(target)
 		return ..()
 
 	attackby(obj/item/C as obj, mob/user as mob)
@@ -78,7 +78,7 @@
 					if(!blocked && !istype(below, /turf/simulated/wall))
 						var/obj/multiz/ladder/X = new /obj/multiz/ladder(below)
 						S.amount = S.amount - 2
-						if(S.amount == 0) S.Del()
+						if(S.amount == 0) S.Destroy()
 						X.icon_state = "ladderup"
 						connect()
 						user << "You finish the ladder."
@@ -99,7 +99,7 @@
 			if(target)
 				var/obj/item/stack/rods/R = new /obj/item/stack/rods(target.loc)
 				R.amount = 2
-				target.Del()
+				target.Destroy()
 
 				user << "<span class='notice'>You remove the bolts anchoring the ladder.</span>"
 			return
@@ -117,7 +117,7 @@
 				var/obj/item/stack/sheet/metal/S = new /obj/item/stack/sheet/metal( src )
 				S.amount = 2
 				user << "<span class='notice'>You remove the ladder and close the hole.</span>"
-				Del()
+				Destroy()
 			else
 				user << "<span class='notice'>You need more welding fuel to complete this task.</span>"
 			return

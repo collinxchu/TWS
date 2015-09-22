@@ -20,6 +20,12 @@
 	var/obj/structure/m_tray/connected = null
 	anchored = 1.0
 
+/obj/structure/morgue/Destroy()
+	if(connected)
+		qdel(connected)
+		connected = null
+	return ..()
+
 /obj/structure/morgue/proc/update()
 	if (src.connected)
 		src.icon_state = "morgue0"
@@ -36,21 +42,21 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.loc
 				ex_act(severity)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 	return
 
@@ -64,7 +70,7 @@
 				A.loc = src
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		//src.connected = null
-		del(src.connected)
+		qdel(src.connected)
 	else
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray( src.loc )
@@ -80,7 +86,7 @@
 			src.connected.set_dir(src.dir)
 		else
 			//src.connected = null
-			del(src.connected)
+			qdel(src.connected)
 	src.add_fingerprint(user)
 	update()
 	return
@@ -116,7 +122,7 @@
 		src.connected.icon_state = "morguet"
 	else
 		//src.connected = null
-		del(src.connected)
+		qdel(src.connected)
 	return
 
 
@@ -134,6 +140,12 @@
 	anchored = 1
 	throwpass = 1
 
+/obj/structure/m_tray/Destroy()
+	if(connected && connected.connected == src)
+		connected.connected = null
+	connected = null
+	return ..()
+
 /obj/structure/m_tray/attack_hand(mob/user as mob)
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.loc)
@@ -144,7 +156,7 @@
 		src.connected.update()
 		add_fingerprint(user)
 		//SN src = null
-		del(src)
+		qdel(src)
 		return
 	return
 
@@ -179,6 +191,12 @@
 	var/id = 1
 	var/locked = 0
 
+/obj/structure/crematorium/Destroy()
+	if(connected)
+		qdel(connected)
+		connected = null
+	return ..()
+
 /obj/structure/crematorium/proc/update()
 	if (src.connected)
 		src.icon_state = "crema0"
@@ -195,21 +213,21 @@
 			for(var/atom/movable/A as mob|obj in src)
 				A.loc = src.loc
 				ex_act(severity)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
 				for(var/atom/movable/A as mob|obj in src)
 					A.loc = src.loc
 					ex_act(severity)
-				del(src)
+				qdel(src)
 				return
 	return
 
@@ -232,7 +250,7 @@
 				A.loc = src
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		//src.connected = null
-		del(src.connected)
+		qdel(src.connected)
 	else if (src.locked == 0)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/c_tray( src.loc )
@@ -247,7 +265,7 @@
 			src.connected.icon_state = "cremat"
 		else
 			//src.connected = null
-			del(src.connected)
+			qdel(src.connected)
 	src.add_fingerprint(user)
 	update()
 
@@ -282,7 +300,7 @@
 		src.connected.icon_state = "cremat"
 	else
 		//src.connected = null
-		del(src.connected)
+		qdel(src.connected)
 	return
 
 /obj/structure/crematorium/proc/cremate(atom/A, mob/user as mob)
@@ -323,10 +341,10 @@
 			//log_attack("\[[time_stamp()]\] <b>[user]/[user.ckey]</b> cremated <b>[M]/[M.ckey]</b>")
 			M.death(1)
 			M.ghostize()
-			del(M)
+			qdel(M)
 
 		for(var/obj/O in contents) //obj instead of obj/item so that bodybags and ashes get destroyed. We dont want tons and tons of ash piling up
-			del(O)
+			qdel(O)
 
 		new /obj/effect/decal/cleanable/ash(src)
 		sleep(30)
@@ -350,6 +368,12 @@
 	anchored = 1
 	throwpass = 1
 
+/obj/structure/c_tray/Destroy()
+	if(connected && connected.connected == src)
+		connected.connected = null
+	connected = null
+	return ..()
+
 /obj/structure/c_tray/attack_hand(mob/user as mob)
 	if (src.connected)
 		for(var/atom/movable/A as mob|obj in src.loc)
@@ -360,7 +384,7 @@
 		src.connected.update()
 		add_fingerprint(user)
 		//SN src = null
-		del(src)
+		qdel(src)
 		return
 	return
 

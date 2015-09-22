@@ -148,6 +148,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	singular_name = "wood plank"
 	icon_state = "sheet-wood"
 	origin_tech = "materials=1;biotech=1"
+	burn_state = 0 //Burnable
 
 /obj/item/stack/sheet/wood/cyborg
 	name = "wooden plank"
@@ -169,6 +170,7 @@ var/global/list/datum/stack_recipe/wood_recipes = list ( \
 	singular_name = "cloth roll"
 	icon_state = "sheet-cloth"
 	origin_tech = "materials=2"
+	burn_state = 0 //Burnable
 
 /*
  * Cardboard
@@ -199,6 +201,7 @@ var/global/list/datum/stack_recipe/cardboard_recipes = list ( \
 	singular_name = "cardboard sheet"
 	icon_state = "sheet-card"
 	origin_tech = "materials=1"
+	burn_state = 0 //Burnable
 
 /obj/item/stack/sheet/cardboard/New(var/loc, var/amount=null)
 		recipes = cardboard_recipes

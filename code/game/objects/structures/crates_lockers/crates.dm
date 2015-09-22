@@ -137,12 +137,12 @@
 				continue
 			if(!S.anchored)
 				found = 1
-				S.loc = src
+				S.forceMove(src)
 				break
 		if(!found)
 			for(var/obj/machinery/M in src.loc)
 				if(!M.anchored)
-					M.loc = src
+					M.forceMove(src)
 					break
 	return
 
@@ -163,12 +163,12 @@
 				continue
 			if(!S.anchored)
 				found = 1
-				S.loc = src
+				S.forceMove(src)
 				break
 		if(!found)
 			for(var/obj/machinery/M in src.loc)
 				if(!M.anchored)
-					M.loc = src
+					M.forceMove(src)
 					break
 	return
 
@@ -287,13 +287,13 @@
 		if(B.buckled_mob)
 			return 0
 
-	AM.loc = src
+	AM.forceMove(src)
 	return 1
 
 /obj/structure/closet/crate/proc/tear_manifest(mob/user as mob)
 	user << "<span class='notice'>You tear the manifest off of the crate.</span>"
 	playsound(src.loc, 'sound/items/poster_ripped.ogg', 75, 1)
-	manifest.loc = loc
+	manifest.forceMove(loc)
 	if(ishuman(user))
 		user.put_in_hands(manifest)
 	manifest = null
@@ -385,7 +385,7 @@
 			if(!user.drop_item())
 				return
 			user  << "<span class='notice'>You attach [W] to [src].</span>"
-			W.loc = src
+			W.forceMove(src)
 			return
 	else if(istype(W, /obj/item/weapon/wirecutters))
 		if(rigged)
@@ -418,56 +418,22 @@
 			src.req_access += pick(get_all_accesses())
 	..()
 
-/obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(opened)
-		if(isrobot(user))
-			return
-		if(W.loc != user) // This should stop mounted modules ending up outside the module.
-			return
-		user.drop_item()
-		if(W)
-			W.loc = src.loc
-	else if(istype(W, /obj/item/weapon/packageWrap))
-		return
-	else if(istype(W, /obj/item/stack/cable_coil))
-		var/obj/item/stack/cable_coil/C = W
-		if(rigged)
-			user << "<span class='notice'>[src] is already rigged!</span>"
-			return
-		if (C.use(1))
-			user  << "<span class='notice'>You rig [src].</span>"
-			rigged = 1
-			return
-	else if(istype(W, /obj/item/device/radio/electropack))
-		if(rigged)
-			user  << "<span class='notice'>You attach [W] to [src].</span>"
-			user.drop_item()
-			W.loc = src
-			return
-	else if(istype(W, /obj/item/weapon/wirecutters))
-		if(rigged)
-			user  << "<span class='notice'>You cut away the wiring.</span>"
-			playsound(loc, 'sound/items/Wirecutter.ogg', 100, 1)
-			rigged = 0
-			return
-	else return attack_hand(user)
-
 /obj/structure/closet/crate/ex_act(severity)
 	switch(severity)
 		if(1.0)
 			for(var/obj/O in src.contents)
-				del(O)
-			del(src)
+				qdel(O)
+			qdel(src)
 			return
 		if(2.0)
 			for(var/obj/O in src.contents)
 				if(prob(50))
-					del(O)
-			del(src)
+					qdel(O)
+			qdel(src)
 			return
 		if(3.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 			return
 		else
 	return

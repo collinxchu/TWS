@@ -5,6 +5,7 @@
 /obj/item/weapon/grown // Grown weapons
 	name = "grown_weapon"
 	icon = 'icons/obj/weapons.dmi'
+	burn_state = 0 //Burnable
 	var/plantname
 	var/potency = 1
 
@@ -59,7 +60,7 @@
 						continue
 					G.attackby(NG, user)
 					usr << "You add the newly-formed wood to the stack. It now contains [NG.amount] planks."
-			del(src)
+			qdel(src)
 			return
 
 /obj/item/weapon/grown/sunflower // FLOWER POWER!
@@ -107,7 +108,7 @@
 		user << "\red The nettle burns your bare hand!"
 		if(istype(user, /mob/living/carbon/human))
 			var/organ = ((user.hand ? "l_":"r_") + "arm")
-			var/datum/organ/external/affecting = user.get_organ(organ)
+			var/obj/item/organ/external/affecting = user.get_organ(organ)
 			if(affecting.take_damage(0,force))
 				user.UpdateDamageIcon()
 		else
@@ -126,7 +127,7 @@
 		if(user)
 			user << "All the leaves have fallen off \the [src] from violent whacking."
 			user.drop_from_inventory(src)
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/grown/nettle/death // -- Skie
 	plantname = "deathnettle"
@@ -168,7 +169,7 @@
 /obj/item/weapon/corncob
 	name = "corn cob"
 	desc = "A reminder of meals gone by."
-	icon = 'icons/obj/harvest.dmi'
+	icon = 'icons/obj/trash.dmi'
 	icon_state = "corncob"
 	item_state = "corncob"
 	w_class = 2.0
@@ -181,5 +182,5 @@
 	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || istype(W, /obj/item/weapon/kitchen/utensil/knife) || istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/kitchenknife/ritual))
 		user << "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>"
 		new /obj/item/clothing/mask/cigarette/pipe/cobpipe (user.loc)
-		del(src)
+		qdel(src)
 		return

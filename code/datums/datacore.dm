@@ -156,7 +156,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	temp = new /icon(icobase, "head_[g]")
 	preview_icon.Blend(temp, ICON_OVERLAY)
 
-	for(var/datum/organ/external/E in H.organs)
+	for(var/obj/item/organ/external/E in H.organs)
 		if(E.status & ORGAN_CUT_AWAY || E.status & ORGAN_DESTROYED) continue
 		temp = new /icon(icobase, "[E.name]")
 		if(E.status & ORGAN_ROBOT)
@@ -298,7 +298,7 @@ proc/get_id_photo(var/mob/living/carbon/human/H)
 	preview_icon.Blend(eyes_s, ICON_OVERLAY)
 	if(clothes_s)
 		preview_icon.Blend(clothes_s, ICON_OVERLAY)
-	del(eyes_s)
-	del(clothes_s)
+	qdel(eyes_s)
+	qdel(clothes_s)
 
 	return preview_icon

@@ -92,6 +92,7 @@
 	icon_state = "ert_uniform"
 	item_state = "bl_suit"
 	item_color = "ert_uniform"
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/under/space
 	name = "\improper NASA jumpsuit"
@@ -105,6 +106,7 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | ARMS //Needs gloves and shoes with cold protection to be fully protected.
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/under/acj
 	name = "administrative cybernetic jumpsuit"
@@ -119,6 +121,7 @@
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/under/owl
 	name = "owl uniform"
@@ -276,6 +279,7 @@
 	item_state = "gladiator"
 	item_color = "gladiator"
 	body_parts_covered = LOWER_TORSO
+	burn_state = -1 //Won't burn in fires
 
 //dress
 /obj/item/clothing/under/dress/

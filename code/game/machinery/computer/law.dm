@@ -4,6 +4,7 @@
 	name = "\improper AI upload console"
 	desc = "Used to upload laws to the AI."
 	icon_state = "command"
+	light_color = LIGHT_COLOR_WHITE
 	circuit = "/obj/item/weapon/circuitboard/aiupload"
 	var/mob/living/silicon/ai/current = null
 	var/opened = 0

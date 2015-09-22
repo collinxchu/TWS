@@ -14,6 +14,11 @@
 	sparks.set_up(2, 0, src)
 	sparks.attach(src)
 
+/obj/item/device/assembly/igniter/Destroy()
+	qdel(sparks)
+	sparks = null
+	return ..()
+
 /obj/item/device/assembly/igniter/activate()
 	if(!..())	return 0//Cooldown check
 	var/turf/location = get_turf(loc)

@@ -13,12 +13,43 @@
 	var/throw_range = 7
 	var/moved_recently = 0
 	var/mob/pulledby = null
+	var/inertia_dir = 0
 
-/atom/movable/Bump(var/atom/A as mob|obj|turf|area, yes)
+	var/auto_init = 1
+
+
+/atom/movable/Del()
+	if(isnull(gcDestroyed) && loc)
+		testing("GC: -- [type] was deleted via del() rather than qdel() --")
+//		generate_debug_runtime() // stick a stack trace in the runtime logs
+//	else if(isnull(gcDestroyed))
+//		testing("GC: [type] was deleted via GC without qdel()") //Not really a huge issue but from now on, please qdel()
+//	else
+//		testing("GC: [type] was deleted via GC with qdel()")
+	..()
+
+/atom/movable/Destroy()
+	. = ..()
+	if(reagents)
+		qdel(reagents)
+		reagents = null
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
+	loc = null
+	if (pulledby)
+		if (pulledby.pulling == src)
+			pulledby.pulling = null
+		pulledby = null
+
+/atom/movable/proc/initialize()
+	return
+
+/atom/movable/Bump(var/atom/A, yes)
 	if(src.throwing)
 		src.throw_impact(A)
+		src.throwing = 0
 
-	spawn( 0 )
+	spawn(0)
 		if ((A && yes))
 			A.last_bumped = world.time
 			A.Bumped(src)
@@ -32,6 +63,8 @@
 			loc.Exited(src)
 		loc = destination
 		loc.Entered(src)
+		for(var/atom/movable/AM in loc)
+			AM.Crossed(src)
 		return 1
 	return 0
 
@@ -132,7 +165,7 @@
 			a = get_area(src.loc)
 	else
 		var/error = dist_y/2 - dist_x
-		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
+		while(src && target &&((((src.y < target.y && dy == NORTH) || (src.y > target.y && dy == SOUTH)) && dist_travelled < range) || (a && a.has_gravity == 0)  || istype(src.loc, /turf/space)) && src.throwing && istype(src.loc, /turf))
 			// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
 			if(error < 0)
 				var/atom/step = get_step(src, dx)
@@ -166,7 +199,6 @@
 	src.throwing = 0
 	src.thrower = null
 	src.throw_source = null
-
 
 //Overlays
 /atom/movable/overlay

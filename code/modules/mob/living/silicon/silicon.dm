@@ -22,6 +22,9 @@
 	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
+	var/next_alarm_notice
+	var/list/datum/alarm/queued_alarms = new()
+
 	var/sensor_mode = 0 //Determines the current HUD.
 	#define SEC_HUD 1 //Security HUD mode
 	#define MED_HUD 2 //Medical HUD mode
@@ -29,6 +32,13 @@
 /mob/living/silicon/New()
 	..()
 	add_language("Galactic Common")
+
+/* #TOREMOVE
+/mob/living/silicon/Destroy()
+	silicon_mob_list -= src
+	for(var/datum/alarm_handler/AH in alarm_manager.all_handlers)
+		AH.unregister(src)
+	..() */
 
 /mob/living/silicon/proc/show_laws()
 	return
@@ -278,3 +288,71 @@
 				adjustBruteLoss(30)
 
 	updatehealth()
+
+/mob/living/silicon/proc/receive_alarm(var/datum/alarm_handler/alarm_handler, var/datum/alarm/alarm, was_raised)
+	if(!next_alarm_notice)
+		next_alarm_notice = world.time + SecondsToTicks(10)
+
+	var/list/alarms = queued_alarms[alarm_handler]
+	if(was_raised)
+		// Raised alarms are always set
+		alarms[alarm] = 1
+	else
+		// Alarms that were raised but then cleared before the next notice are instead removed
+		if(alarm in alarms)
+			alarms -= alarm
+		// And alarms that have only been cleared thus far are set as such
+		else
+			alarms[alarm] = -1
+
+/mob/living/silicon/proc/process_queued_alarms()
+	if(next_alarm_notice && (world.time > next_alarm_notice))
+		next_alarm_notice = 0
+
+		var/alarm_raised = 0
+		for(var/datum/alarm_handler/AH in queued_alarms)
+			var/list/alarms = queued_alarms[AH]
+			var/reported = 0
+			for(var/datum/alarm/A in alarms)
+				if(alarms[A] == 1)
+					alarm_raised = 1
+					if(!reported)
+						reported = 1
+						src << "<span class='warning'>--- [AH.category] Detected ---</span>"
+					raised_alarm(A)
+
+		for(var/datum/alarm_handler/AH in queued_alarms)
+			var/list/alarms = queued_alarms[AH]
+			var/reported = 0
+			for(var/datum/alarm/A in alarms)
+				if(alarms[A] == -1)
+					if(!reported)
+						reported = 1
+						src << "<span class='notice'>--- [AH.category] Cleared ---</span>"
+					src << "\The [A.alarm_name()]."
+
+		if(alarm_raised)
+			src << "<A HREF=?src=\ref[src];showalerts=1>\[Show Alerts\]</A>"
+		for(var/datum/alarm_handler/AH in queued_alarms)
+			var/list/alarms = queued_alarms[AH]
+			alarms.Cut()
+/mob/living/silicon/proc/raised_alarm(var/datum/alarm/A)
+	src << "[A.alarm_name()]!"
+/mob/living/silicon/ai/raised_alarm(var/datum/alarm/A)
+	var/cameratext = ""
+	for(var/obj/machinery/camera/C in A.cameras())
+		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
+	src << "[A.alarm_name()]! ([(cameratext)? cameratext : "No Camera"])"
+
+/*/mob/living/silicon/proc/is_traitor()
+	return mind && (mind in traitors.current_antagonists)
+
+/mob/living/silicon/proc/is_malf()
+	return mind && (mind in malf.current_antagonists)  #TOREMOVE
+
+/mob/living/silicon/proc/is_malf_or_traitor()
+	return is_traitor() || is_malf()
+	*/
+/mob/living/silicon/reset_view()
+	..()
+//	if(cameraFollow) #TOREMOVE

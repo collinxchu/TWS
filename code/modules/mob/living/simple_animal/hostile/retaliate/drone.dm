@@ -19,6 +19,7 @@
 	stop_automated_movement_when_pulled = 0
 	health = 300
 	maxHealth = 300
+	mob_size = MOB_SIZE_SMALL
 	speed = 8
 	projectiletype = /obj/item/projectile/beam/drone
 	projectilesound = 'sound/weapons/laser3.ogg'
@@ -159,9 +160,9 @@
 
 /mob/living/simple_animal/hostile/retaliate/malf_drone/death()
 	..(null,"suddenly breaks apart.")
-	del(src)
+	qdel(src)
 
-/mob/living/simple_animal/hostile/retaliate/malf_drone/Del()
+/mob/living/simple_animal/hostile/retaliate/malf_drone/Destroy()
 	//some random debris left behind
 	if(has_loot)
 		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

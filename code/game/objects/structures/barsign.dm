@@ -1,15 +1,22 @@
 /obj/structure/sign/double/barsign
 	icon = 'icons/obj/barsigns.dmi'
 	icon_state = "empty"
+	light_color = "#742a20"
+	light_power = 2
 	anchored = 1
+	var/on
 	New()
 		ChangeSign(pick("pinkflamingo", "magmasea", "limbo", "rustyaxe", "armokbar", "brokendrum", "meadbay", "thedamnwall", "thecavern", "cindikate", "theorchard", "thesaucyclown", "theclownshead", "whiskeyimplant", "carpecarp", "robustroadhouse", "greytide", "theredshirt"))
+		on = 1
+		blink()
 		return
 	proc/ChangeSign(var/Text)
 		src.icon_state = "[Text]"
-		//on = 0
-		//brightness_on = 4 //uncomment these when the lighting fixes get in
 		return
+
+/obj/structure/sign/double/barsign/Destroy()
+	set_light(0)
+	..()
 
 /obj/structure/sign/double/barsign/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/card/id))
@@ -22,3 +29,13 @@
 				sign_type = replacetext(lowertext(sign_type), " ", "") // lowercase, strip spaces - along with choices for user options, avoids huge if-else-else
 				src.ChangeSign(sign_type)
 				user << "You change the barsign."
+
+/obj/structure/sign/double/barsign/proc/blink()
+	if(on)
+		switch(light_range)
+			if(5)
+				set_light(0)
+			if(0)
+				set_light(5)
+	else
+		set_light(0)

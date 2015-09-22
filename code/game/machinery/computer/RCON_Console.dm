@@ -9,6 +9,7 @@
 	desc = "Console used to remotely control machinery on the station."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "ai-fixer"
+	light_color = LIGHT_COLOR_PURPLE
 	circuit = /obj/item/weapon/circuitboard/rcon_console
 	req_one_access = list(access_engine)
 	var/current_tag = null

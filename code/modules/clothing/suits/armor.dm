@@ -9,6 +9,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
+	burn_state = -1 //Not Burnable
 
 
 /obj/item/clothing/suit/armor/vest
@@ -32,6 +33,7 @@
 	icon_state = "warden_jacket"
 	item_state = "armor"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
+	burn_state = 0 //Burnable
 
 
 /obj/item/clothing/suit/armor/riot
@@ -101,6 +103,7 @@
 	flags = ONESIZEFITSALL
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	armor = list(melee = 50, bullet = 15, laser = 50, energy = 10, bomb = 25, bio = 0, rad = 0)
+	burn_state = 0 //Burnable
 
 
 //Reactive armor

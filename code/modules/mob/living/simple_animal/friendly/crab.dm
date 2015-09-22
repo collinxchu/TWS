@@ -5,7 +5,6 @@
 	icon_state = "crab"
 	icon_living = "crab"
 	icon_dead = "crab_dead"
-	small = 1
 	speak_emote = list("clicks")
 	emote_hear = list("clicks")
 	emote_see = list("clacks")
@@ -17,7 +16,7 @@
 	response_harm   = "stomps"
 	stop_automated_movement = 1
 	friendly = "pinches"
-	mob_size = 5
+	mob_size = MOB_SIZE_TINY
 	var/obj/item/inventory_head
 	var/obj/item/inventory_mask
 
@@ -94,7 +93,7 @@
 					emote_hear = list("clicks")
 					emote_see = list("clacks")
 					desc = "Free crabs!"
-					src.sd_SetLuminosity(0)
+					src.sd_set_light(0)
 					inventory_head.loc = src.loc
 					inventory_head = null
 				else

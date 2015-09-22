@@ -3,6 +3,8 @@
 	name = "RUST Core Control"
 	icon = 'icons/rust.dmi'
 	icon_state = "core_control"
+	light_color = LIGHT_COLOR_ORANGE
+
 	var/list/connected_devices = list()
 	var/id_tag = "allan remember to update this before you leave"
 	var/scan_range = 25

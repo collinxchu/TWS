@@ -7,8 +7,9 @@
 	language = "Hivemind"
 	maxHealth = 25
 	health = 25
+	mob_size = MOB_SIZE_TINY
 
 /mob/living/carbon/alien/larva/New()
 	..()
 	add_language("Xenomorph") //Bonus language.
-	internal_organs += new /datum/organ/internal/xenos/hivenode(src)
+	internal_organs += new /obj/item/organ/xenos/hivenode(src)

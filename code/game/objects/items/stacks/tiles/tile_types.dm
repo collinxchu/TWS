@@ -21,6 +21,7 @@
 	flags = CONDUCT
 	max_amount = 60
 	origin_tech = "biotech=1"
+	burn_state = 0 //Burnable
 
 /obj/item/stack/tile/dirt
 	name = "dirt"
@@ -51,6 +52,7 @@
 	throw_range = 20
 	flags = CONDUCT
 	max_amount = 60
+	burn_state = 0 //Burnable
 
 /*
  * Carpets
@@ -67,3 +69,4 @@
 	throw_range = 20
 	flags = CONDUCT
 	max_amount = 60
+	burn_state = 0 //Burnable

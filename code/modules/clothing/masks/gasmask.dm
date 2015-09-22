@@ -13,6 +13,7 @@
 	var/gas_filter_strength = 1			//For gas mask filters
 	var/list/filtered_gases = list("plasma", "sleeping_agent")
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 75, rad = 0)
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/mask/gas/filter_air(datum/gas_mixture/air)
 	var/datum/gas_mixture/filtered = new
@@ -54,18 +55,21 @@
 	desc = "A true prankster's facial attire. A clown is incomplete without his wig and mask."
 	icon_state = "clown"
 	item_state = "clown_hat"
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/mask/gas/sexyclown
 	name = "sexy-clown wig and mask"
 	desc = "A feminine clown mask for the dabbling crossdressers or female entertainers."
 	icon_state = "sexyclown"
 	item_state = "sexyclown"
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/mask/gas/mime
 	name = "mime mask"
 	desc = "The traditional mime's mask. It has an eerie facial posture."
 	icon_state = "mime"
 	item_state = "mime"
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/mask/gas/monkeymask
 	name = "monkey mask"
@@ -73,12 +77,14 @@
 	icon_state = "monkeymask"
 	item_state = "monkeymask"
 	body_parts_covered = HEAD|FACE|EYES
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/mask/gas/sexymime
 	name = "sexy mime mask"
 	desc = "A traditional female mime's mask."
 	icon_state = "sexymime"
 	item_state = "sexymime"
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/mask/gas/death_commando
 	name = "Death Commando Mask"
@@ -90,8 +96,10 @@
 	name = "cyborg visor"
 	desc = "Beep boop"
 	icon_state = "death"
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/mask/gas/owl_mask
 	name = "owl mask"
 	desc = "Twoooo!"
 	icon_state = "owl"
+	burn_state = 0 //Burnable

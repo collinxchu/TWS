@@ -10,18 +10,21 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	var/obj/item/weapon/reagent_containers/beaker = null
-	var/global/list/allowed_items = list (
-		/obj/item/weapon/reagent_containers/food/snacks/grown/tomato  = "tomatojuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/carrot  = "carrotjuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/berries = "berryjuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/banana  = "banana",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/potato = "potato",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/lemon = "lemonjuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/orange = "orangejuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/lime = "limejuice",
+	var/global/list/allowed_items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/watermelonslice = "watermelonjuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/grapes = "grapejuice",
-		/obj/item/weapon/reagent_containers/food/snacks/grown/poisonberries = "poisonberryjuice",
+		/obj/item/weapon/reagent_containers/food/snacks/grown = "water",
+	)
+
+	var/global/list/allowed_tags = list (
+		"tomato"  = "tomatojuice",
+		"carrot"  = "carrotjuice",
+		"berries" = "berryjuice",
+		"banana" = "banana",
+		"potato" = "potato",
+		"lemon" = "lemonjuice",
+		"orange" = "orangejuice",
+		"lime" = "limejuice",
+		"poisonberries" = "poisonberryjuice",
 	)
 
 /obj/machinery/juicer/New()
@@ -32,13 +35,15 @@
 	return
 
 
-/obj/machinery/juicer/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/machinery/juicer/attackby(var/obj/item/O as obj, var/mob/user as mob, params)
 	if (istype(O,/obj/item/weapon/reagent_containers/glass) || \
 		istype(O,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass))
 		if (beaker)
 			return 1
 		else
-			user.before_take_item(O)
+			if(!user.unEquip(O))
+				user << "<span class='notice'>\the [O] is stuck to your hand, you cannot put it in \the [src]</span>"
+				return 0
 			O.loc = src
 			beaker = O
 			src.verbs += /obj/machinery/juicer/verb/detach
@@ -46,9 +51,11 @@
 			src.updateUsrDialog()
 			return 0
 	if (!is_type_in_list(O, allowed_items))
-		user << "It looks as not containing any juice."
+		user << "It doesn't look like that contains any juice."
 		return 1
-	user.before_take_item(O)
+	if(!user.unEquip(O))
+		user << "<span class='notice'>\the [O] is stuck to your hand, you cannot put it in \the [src]</span>"
+		return 0
 	O.loc = src
 	src.updateUsrDialog()
 	return 0
@@ -126,10 +133,13 @@
 	beaker = null
 	update_icon()
 
-/obj/machinery/juicer/proc/get_juice_id(var/obj/item/weapon/reagent_containers/food/snacks/grown/O)
-	for (var/i in allowed_items)
-		if (istype(O, i))
-			return allowed_items[i]
+/obj/machinery/juicer/proc/get_juice_id(var/obj/item/weapon/reagent_containers/food/snacks/O)
+	if (istype(O, /obj/item/weapon/reagent_containers/food/snacks/watermelonslice))
+		return "watermelonjuice"
+	else if(istype(O, /obj.item/weapon/reagent_containers/food/snacks/grown))
+		for(var/i in allowed_tags)
+			return allowed_tags[i]
+		return "water"
 
 /obj/machinery/juicer/proc/get_juice_amount(var/obj/item/weapon/reagent_containers/food/snacks/grown/O)
 	if (!istype(O))
@@ -149,7 +159,7 @@
 	for (var/obj/item/weapon/reagent_containers/food/snacks/O in src.contents)
 		var/r_id = get_juice_id(O)
 		beaker.reagents.add_reagent(r_id,get_juice_amount(O))
-		del(O)
+		qdel(O)
 		if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 			break
 

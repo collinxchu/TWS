@@ -32,6 +32,7 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	var/word1
 	var/word2
 	var/word3
+	var/image/blood_image
 // Places these combos are mentioned: this file - twice in the rune code, once in imbued tome, once in tome's HTML runes.dm - in the imbue rune code. If you change a combination - dont forget to change it everywhere.
 
 // travel self [word] - Teleport to random [rune with word destination matching]
@@ -63,10 +64,19 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 // join hide technology - stun rune. Rune color: bright pink.
 	New()
 		..()
-		var/image/blood = image(loc = src)
-		blood.override = 1
+		blood_image = image(loc = src)
+		blood_image.override = 1
 		for(var/mob/living/silicon/ai/AI in player_list)
-			AI.client.images += blood
+			AI.client.images += blood_image
+
+	Destroy()
+		for(var/mob/living/silicon/ai/AI in player_list)
+			if(AI.client)
+				AI.client.images -= blood_image
+		qdel(blood_image)
+		blood_image = null
+		//rune_list.Remove(src) #TOREMOVE
+		..()
 
 	examine(mob/user)
 		..()
@@ -77,11 +87,11 @@ var/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", 
 	attackby(I as obj, user as mob)
 		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
 			user << "You retrace your steps, carefully undoing the lines of the rune."
-			del(src)
+			qdel(src)
 			return
 		else if(istype(I, /obj/item/weapon/nullrod))
 			user << "\blue You disrupt the vile magic with the deadening field of the null rod!"
-			del(src)
+			qdel(src)
 			return
 		return
 

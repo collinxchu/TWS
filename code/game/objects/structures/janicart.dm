@@ -24,6 +24,13 @@
 		user << "[src] \icon[src] contains [reagents.total_volume] unit\s of liquid!"
 	//everything else is visible, so doesn't need to be mentioned
 
+/obj/structure/janitorialcart/proc/put_in_cart(obj/item/I, mob/user)
+	if(!user.drop_item())
+		return
+	I.loc = src
+	updateUsrDialog()
+	user << "<span class='notice'>You put [I] into [src].</span>"
+	return
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/storage/bag/trash) && !mybag)
@@ -211,7 +218,7 @@
 
 /obj/structure/stool/bed/chair/janicart/relaymove(mob/user, direction)
 	if(user.stat || user.stunned || user.weakened || user.paralysis)
-		unbuckle()
+		unbuckle_mob()
 	if(istype(user.l_hand, /obj/item/key) || istype(user.r_hand, /obj/item/key))
 		step(src, direction)
 		update_mob()
@@ -226,36 +233,24 @@
 			buckled_mob.loc = loc
 
 
-/obj/structure/stool/bed/chair/janicart/buckle_mob(mob/M, mob/user)
-	if(M != user || !ismob(M) || get_dist(src, user) > 1 || user.restrained() || user.lying || user.stat || M.buckled || istype(user, /mob/living/silicon))
-		return
-
-	unbuckle()
-
-	M.visible_message(\
-		"<span class='notice'>[M] climbs onto the [callme]!</span>",\
-		"<span class='notice'>You climb onto the [callme]!</span>")
-	M.buckled = src
-	M.loc = loc
-	M.set_dir(dir)
-	M.update_canmove()
-	buckled_mob = M
+/obj/structure/stool/bed/chair/janicart/post_buckle_mob(mob/living/M)
 	update_mob()
-	add_fingerprint(user)
+	return ..()
 
 
-/obj/structure/stool/bed/chair/janicart/update_layer()
+/obj/structure/stool/bed/chair/janicart/proc/update_layer()
 	if(dir == SOUTH)
 		layer = FLY_LAYER
 	else
 		layer = OBJ_LAYER
 
 
-/obj/structure/stool/bed/chair/janicart/unbuckle()
-	if(buckled_mob)
-		buckled_mob.pixel_x = 0
-		buckled_mob.pixel_y = 0
-	..()
+/obj/structure/stool/bed/chair/janicart/unbuckle_mob()
+	var/mob/living/M = ..()
+	if(M)
+		M.pixel_x = 0
+		M.pixel_y = 0
+	return M
 
 
 /obj/structure/stool/bed/chair/janicart/set_dir()

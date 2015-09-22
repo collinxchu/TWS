@@ -15,6 +15,13 @@
 		return istype(H.species, /datum/species/xenos)
 	return 0
 
+/proc/issmall(A)
+	if(A && istype(A, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = A
+		if(H.species && H.species.is_small)
+			return 1
+	return 0
+
 /proc/ismonkey(A)
 	if(A && istype(A, /mob/living/carbon/monkey))
 		return 1
@@ -85,6 +92,16 @@
 		return 1
 	return 0
 
+
+/mob/proc/isSynthetic()
+	return 0
+
+/mob/living/carbon/human/isSynthetic()
+	return species.flags & IS_SYNTHETIC
+
+/mob/living/silicon/isSynthetic()
+	return 1
+
 /proc/iscarbon(A)
 	if(istype(A, /mob/living/carbon))
 		return 1
@@ -106,7 +123,7 @@ proc/isobserver(A)
 	return 0
 
 proc/isorgan(A)
-	if(istype(A, /datum/organ/external))
+	if(istype(A, /obj/item/organ/external))
 		return 1
 	return 0
 
@@ -190,7 +207,7 @@ var/list/global/organ_rel_size = list(
 // Returns zone with a certain probability. If the probability fails, or no zone is specified, then a random body part is chosen.
 // Do not use this if someone is intentionally trying to hit a specific body part.
 // Use get_zone_with_miss_chance() for that.
-/proc/ran_zone(zone, probability)
+/proc/ran_zone(zone, probability = 80)
 	if (zone)
 		zone = check_zone(zone)
 		if (prob(probability))
@@ -547,3 +564,7 @@ proc/is_blind(A)
 			say_dead_direct("The ghost of <span class='name'>[name]</span> now [pick("skulks","lurks","prowls","creeps","stalks")] among the dead. [message]")
 		else
 			say_dead_direct("<span class='name'>[name]</span> no longer [pick("skulks","lurks","prowls","creeps","stalks")] in the realm of the dead. [message]")
+
+// Returns true if the mob has a client which has been active in the last given X minutes.
+/mob/proc/is_client_active(var/active = 1)
+	return client && client.inactivity < active MINUTES

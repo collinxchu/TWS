@@ -14,6 +14,16 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 /turf/space/New()
 	if(!istype(src, /turf/space/transit))
 		icon_state = "[((x + y) ^ ~(x * y) + z) % 25]"
+	update_starlight()
+	..()
+
+/turf/space/proc/update_starlight()
+	if(!config.starlight)
+		return
+	if(locate(/turf/simulated) in orange(src,1))
+		set_light(3)
+	else
+		set_light(0)
 
 /turf/space/attackby(obj/item/C as obj, mob/user as mob)
 
@@ -34,7 +44,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 			var/obj/item/stack/tile/plasteel/S = C
 			if (S.get_amount() < 1)
 				return
-			del(L)
+			qdel(L)
 			playsound(src, 'sound/weapons/Genhit.ogg', 50, 1)
 			S.build(src)
 			S.use(1)
@@ -63,11 +73,11 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 		if(A.z > 6 && !config.use_overmap) return
 		if (A.x <= TRANSITIONEDGE || A.x >= (world.maxx - TRANSITIONEDGE - 1) || A.y <= TRANSITIONEDGE || A.y >= (world.maxy - TRANSITIONEDGE - 1))
 			if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
-				del(A)
+				qdel(A)
 				return
 
 			if(istype(A, /obj/item/weapon/disk/nuclear)) // Don't let nuke disks travel Z levels  ... And moving this shit down here so it only fires when they're actually trying to change z-level.
-				del(A) //The disk's Del() proc ensures a new one is created
+				qdel(A) //The disk's Destroy() proc ensures a new one is created
 				return
 			if(config.use_overmap)
 				overmap_spacetravel(src,A)
@@ -88,10 +98,10 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 							MM.inertia_dir = 2
 					else
 						for(var/obj/item/weapon/disk/nuclear/N in disk_search)
-							del(N)//Make the disk respawn it is on a clientless mob or corpse
+							qdel(N)//Make the disk respawn it is on a clientless mob or corpse
 				else
 					for(var/obj/item/weapon/disk/nuclear/N in disk_search)
-						del(N)//Make the disk respawn if it is floating on its own
+						qdel(N)//Make the disk respawn if it is floating on its own
 				return
 
 			var/move_to_z = src.z
@@ -142,7 +152,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 
 	if(src.x <= 1)
 		if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
-			del(A)
+			qdel(A)
 			return
 
 		var/list/cur_pos = src.get_global_map_pos()
@@ -167,7 +177,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 					A.loc.Entered(A)
 	else if (src.x >= world.maxx)
 		if(istype(A, /obj/effect/meteor))
-			del(A)
+			qdel(A)
 			return
 
 		var/list/cur_pos = src.get_global_map_pos()
@@ -192,7 +202,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 					A.loc.Entered(A)
 	else if (src.y <= 1)
 		if(istype(A, /obj/effect/meteor))
-			del(A)
+			qdel(A)
 			return
 		var/list/cur_pos = src.get_global_map_pos()
 		if(!cur_pos) return
@@ -217,7 +227,7 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 
 	else if (src.y >= world.maxy)
 		if(istype(A, /obj/effect/meteor)||istype(A, /obj/effect/space_dust))
-			del(A)
+			qdel(A)
 			return
 		var/list/cur_pos = src.get_global_map_pos()
 		if(!cur_pos) return
@@ -240,3 +250,6 @@ var/list/accessible_z_levels = list("1" = 5, "3" = 10, "4" = 15, "5" = 10, "6" =
 				if ((A && A.loc))
 					A.loc.Entered(A)
 	return
+
+/turf/space/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
+	return ..(N, tell_universe, 1)

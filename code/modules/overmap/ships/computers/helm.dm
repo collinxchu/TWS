@@ -1,6 +1,7 @@
 /obj/machinery/computer/helm
 	name = "helm control console"
 	icon_state = "id"
+	light_color = LIGHT_COLOR_PURE_BLUE
 	var/state = "status"
 	var/obj/effect/map/ship/linked			//connected overmap object
 	var/autopilot = 0

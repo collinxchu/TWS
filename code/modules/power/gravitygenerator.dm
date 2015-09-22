@@ -1,10 +1,13 @@
 // It.. uses a lot of power.  Everything under power is engineering stuff, at least.
 
+var/list/gravity_generators = list() // We will keep track of this by adding new gravity generators to the list, and keying it with the z level.
+
 /obj/machinery/computer/gravity_control_computer
 	name = "Gravity Generator Control"
 	desc = "A computer to control a local gravity generator.  Qualified personnel only."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "airtunnel0e"
+	light_color = LIGHT_COLOR_PURE_BLUE
 	anchored = 1
 	density = 1
 	var/obj/machinery/gravity_generator = null
@@ -50,8 +53,8 @@
 	for(var/area/A in range(src,effectiverange))
 		if(A.name == "Space")
 			continue // No (de)gravitizing space.
-		if(A.master && !( A.master in localareas) )
-			localareas += A.master
+		if(!(A in localareas))
+			localareas += A
 
 /obj/machinery/computer/gravity_control_computer/proc/findgenerator()
 	var/obj/machinery/gravity_generator/foundgenerator = null
@@ -125,7 +128,7 @@
 			for(var/area/A in gravity_generator:localareas)
 				var/obj/machinery/gravity_generator/G
 				for(G in machines)
-					if((A.master in G.localareas) && (G.on))
+					if((A in G.localareas) && (G.on))
 						break
 				if(!G)
 					A.gravitychange(0,A)

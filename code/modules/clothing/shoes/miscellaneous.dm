@@ -9,6 +9,7 @@
 	var/list/clothing_choices = list()
 	siemens_coefficient = 0.8
 	species_restricted = null
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/shoes/mime
 	name = "mime shoes"
@@ -24,6 +25,7 @@
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	flags = NOSLIP
 	siemens_coefficient = 0.6
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/shoes/combat //Basically SWAT shoes combined with galoshes.
 	name = "combat boots"
@@ -34,6 +36,7 @@
 	armor = list(melee = 80, bullet = 60, laser = 50,energy = 25, bomb = 50, bio = 10, rad = 0)
 	flags = NOSLIP
 	siemens_coefficient = 0.6
+	burn_state = -1 //Won't burn in fires
 
 	cold_protection = FEET
 	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
@@ -63,6 +66,7 @@
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/shoes/clown_shoes
 	desc = "The prankster's standard-issue clowning shoes. Damn they're huge!"
@@ -83,6 +87,7 @@
 	item_color = "hosred"
 	force = 3
 	siemens_coefficient = 0.7
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/shoes/cult
 	name = "boots"
@@ -133,3 +138,4 @@
 	flags = NOSLIP
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
+	burn_state = -1 //Won't burn in fires

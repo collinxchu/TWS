@@ -103,7 +103,7 @@
 			animation.master = user
 			flick("blspell", animation)
 			sleep(5)
-			del(animation)
+			qdel(animation)
 
 	if(!flashfail)
 		flick("flash2", src)

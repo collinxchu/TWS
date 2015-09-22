@@ -27,6 +27,7 @@
 	tint = 2
 	siemens_coefficient = 0.9
 	w_class = 3
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/head/welding/attack_self()
 	toggle()

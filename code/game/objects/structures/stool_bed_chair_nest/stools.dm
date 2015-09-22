@@ -9,28 +9,28 @@
 /obj/structure/stool/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
-				del(src)
+				qdel(src)
 				return
 	return
 
 /obj/structure/stool/blob_act()
 	if(prob(75))
 		new /obj/item/stack/sheet/metal(src.loc)
-		del(src)
+		qdel(src)
 
 /obj/structure/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/metal(src.loc)
-		del(src)
+		qdel(src)
 	return
 
 /obj/structure/stool/MouseDrop(atom/over_object)
@@ -43,6 +43,24 @@
 			H.put_in_hands(S)
 			H.visible_message("\red [H] grabs [src] from the floor!", "\red You grab [src] from the floor!")
 
+/obj/structure/stool/bar
+	name = "bar stool"
+	icon_state = "barstool"
+	can_buckle = 1
+	mouse_opacity = 2
+
+/obj/structure/stool/bar/post_buckle_mob(mob/living/M)
+	if(M == buckled_mob)
+		M.pixel_y = 5
+		M.old_y = 5
+		density = 1
+		if(M.dir == 1) M.layer = OBJ_LAYER - 0.1
+	else
+		M.pixel_y = 0
+		M.old_y = 0
+		density = 0
+		if(M.dir == 1) M.layer = initial(M.layer)
+
 /obj/item/weapon/stool
 	name = "stool"
 	desc = "Uh-hoh, bar is heating up."
@@ -53,37 +71,22 @@
 	w_class = 5.0
 	var/obj/structure/stool/origin = null
 
-/obj/item/weapon/stool/proc/deploy(var/mob/user)
-
-	if(!origin)
-		del src
-
-	origin.loc = get_turf(src)
-
-	if(user)
-		user.u_equip(src)
-		user.visible_message("\blue [user] puts [src] down.", "\blue You put [src] down.")
-
-	del src
-
-/obj/item/weapon/stool/dropped(mob/user as mob)
-	..()
-	if(istype(loc,/turf/))
-		deploy(user)
-
 /obj/item/weapon/stool/attack_self(mob/user as mob)
 	..()
-	deploy(user)
+	origin.loc = get_turf(src)
+	origin.dir = user.dir
+	user.unEquip(src)
+	user.visible_message("\blue [user] puts [src] down.", "\blue You put [src] down.")
+	qdel(src)
 
 /obj/item/weapon/stool/attack(mob/M as mob, mob/user as mob)
 	if (prob(5) && istype(M,/mob/living))
-		user.visible_message("\red [user] breaks [src] over [M]'s back!")
-		user.u_equip(src)
+		user.visible_message("\red [user] breaks [src] over [M]'s back!.")
+		user.unEquip(src)
 		var/obj/item/stack/sheet/metal/m = new/obj/item/stack/sheet/metal
 		m.loc = get_turf(src)
-		del src
+		qdel(src)
 		var/mob/living/T = M
-		T.Weaken(10)
-		T.apply_damage(20)
+		T.Weaken(5)
 		return
 	..()

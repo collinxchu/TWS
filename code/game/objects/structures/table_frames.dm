@@ -60,6 +60,8 @@
 	name = "wooden table frame"
 	desc = "Four wooden legs with four framing wooden rods for a wooden table. You could easily pass through this."
 	icon_state = "wood_frame"
+	burn_state = 0 //Burnable
+	burntime = 20
 
 /obj/structure/table_frame/wood/attackby(var/obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/weapon/wrench))
@@ -74,7 +76,7 @@
 		var/obj/item/stack/sheet/wood/W = I
 		user << "<span class='notice'>Now adding [W] to [src].</span>"
 		if(do_after(user, 20))
-			new /obj/structure/table/woodentable(src.loc)
+			new /obj/structure/table/wooden(src.loc)
 			qdel(src)
 			W.use(1)
 			return
@@ -82,7 +84,7 @@
 		var/obj/item/stack/tile/carpet/C = I
 		user << "<span class='notice'>Now adding [C] to [src].</span>"
 		if(do_after(user, 20))
-			new /obj/structure/table/gamblingtable(src.loc)
+			new /obj/structure/table/wooden/gamblingtable(src.loc)
 			qdel(src)
 			C.use(1)
 			return

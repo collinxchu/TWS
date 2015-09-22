@@ -84,22 +84,22 @@
 
 	return
 
-/obj/machinery/vending/Del()
-	del(wires) // qdel
+/obj/machinery/vending/Destroy()
+	qdel(wires) // qdel
 	wires = null
 	if(coin)
-		del(coin) // qdel
+		qdel(coin) // qdel
 		coin = null
 	..()
 
 /obj/machinery/vending/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -114,7 +114,7 @@
 	if (prob(50))
 		spawn(0)
 			src.malfunction()
-			del(src)
+			qdel(src)
 		return
 
 	return
@@ -200,7 +200,7 @@
 		for(var/datum/data/vending_product/R in product_records)
 			if(istype(W, R.product_path))
 				stock(R, user)
-				del(W)
+				qdel(W)
 
 	else
 		..()
@@ -462,9 +462,9 @@
 				user << "\blue You successfully pull the coin out before the [src] could swallow it."
 			else
 				user << "\blue You weren't able to pull the coin out fast enough, the machine ate it, string and all."
-				del(coin)
+				qdel(coin)
 		else
-			del(coin)
+			qdel(coin)
 
 	R.amount--
 
@@ -821,7 +821,7 @@
 
 		var/obj/item/seeds/S = new typepath(src)
 		R.product_name = S.name
-		del(S)
+		qdel(S)
 	return
 
 /obj/machinery/vending/magivend
@@ -840,7 +840,7 @@
 	desc = "A kitchen and restaurant equipment vendor."
 	product_ads = "Mm, food stuffs!;Food and food accessories.;Get your plates!;You like forks?;I like forks.;Woo, utensils.;You don't really need these..."
 	icon_state = "dinnerware"
-	products = list(/obj/item/weapon/tray = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
+	products = list(/obj/item/weapon/storage/bag/tray/ = 8,/obj/item/weapon/kitchen/utensil/fork = 6,/obj/item/weapon/kitchenknife = 3,/obj/item/weapon/reagent_containers/food/drinks/drinkingglass = 8,/obj/item/clothing/suit/chef/classic = 2)
 	contraband = list(/obj/item/weapon/kitchen/utensil/spoon = 2,/obj/item/weapon/kitchen/utensil/knife = 2,/obj/item/weapon/kitchen/rollingpin = 2, /obj/item/weapon/butch = 2)
 
 /obj/machinery/vending/sovietsoda

@@ -22,7 +22,8 @@
 		name = "[mineralType] door"
 		update_nearby_tiles(need_rebuild=1)
 
-	Del()
+	Destroy()
+		processing_objects -= src
 		update_nearby_tiles()
 		..()
 
@@ -137,7 +138,7 @@
 				var/ore = text2path("/obj/item/stack/sheet/mineral/[mineralType]")
 				for(var/i = 3, i <= oreAmount, i++)
 					new ore(get_turf(src))
-		del(src)
+		qdel(src)
 
 	ex_act(severity = 1)
 		switch(severity)
@@ -168,7 +169,7 @@
 /obj/structure/mineral_door/uranium
 	mineralType = "uranium"
 	hardness = 3
-	luminosity = 2
+	light_range = 2
 
 /obj/structure/mineral_door/sandstone
 	mineralType = "sandstone"
@@ -212,6 +213,8 @@
 /obj/structure/mineral_door/wood
 	mineralType = "wood"
 	hardness = 1
+	burn_state = 0 //Burnable
+	burntime = 30
 
 	Open()
 		isSwitchingStates = 1
@@ -239,7 +242,7 @@
 		if(!devastated)
 			for(var/i = 1, i <= oreAmount, i++)
 				new/obj/item/stack/sheet/wood(get_turf(src))
-		del(src)
+		qdel(src)
 
 /obj/structure/mineral_door/resin
 	mineralType = "resin"
@@ -249,7 +252,7 @@
 	TryToSwitchState(atom/user)
 
 		var/mob/living/carbon/M = user
-		if(istype(M) && locate(/datum/organ/internal/xenos/hivenode) in M.internal_organs)
+		if(istype(M) && locate(/obj/item/organ/xenos/hivenode) in M.internal_organs)
 			return ..()
 
 	Open()
@@ -279,7 +282,7 @@
 		isSwitchingStates = 0
 
 	Dismantle(devastated = 0)
-		del(src)
+		qdel(src)
 
 	CheckHardness()
 		playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)

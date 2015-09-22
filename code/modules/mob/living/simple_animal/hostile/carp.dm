@@ -16,6 +16,8 @@
 	speed = 4
 	maxHealth = 25
 	health = 25
+	mob_size = MOB_SIZE_LARGE
+	flying = 1
 
 	harm_intent_damage = 8
 	melee_damage_lower = 15
@@ -33,6 +35,7 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
+
 
 	break_stuff_probability = 15
 

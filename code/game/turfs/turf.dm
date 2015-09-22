@@ -27,13 +27,21 @@
 	var/has_resources
 	var/list/resources
 
+
+	var/dynamic_lighting = 1
+	luminosity = 1
+
 /turf/New()
 	..()
 	for(var/atom/movable/AM as mob|obj in src)
 		spawn( 0 )
 			src.Entered(AM)
 			return
-	return
+//	turfs |= src #TOREMOVE
+
+/turf/Destroy()
+//	turfs -= src
+	..()
 
 /turf/ex_act(severity)
 	return 0
@@ -208,10 +216,10 @@
 /turf/proc/RemoveLattice()
 	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
 	if(L)
-		del L
+		qdel(L)
 
 //Creates a new turf
-/turf/proc/ChangeTurf(var/turf/N)
+/turf/proc/ChangeTurf(var/turf/N, var/tell_universe=1, var/force_lighting_update = 0)
 	if (!N)
 		return
 
@@ -229,8 +237,11 @@
 					return W
 ///// Z-Level Stuff
 
-	var/old_lumcount = lighting_lumcount - initial(lighting_lumcount)
 	var/obj/fire/old_fire = fire
+	var/old_opacity = opacity
+	var/old_dynamic_lighting = dynamic_lighting
+	var/list/old_affecting_lights = affecting_lights
+	var/old_lighting_overlay = lighting_overlay
 
 	//world << "Replacing [src.type] with [N]"
 
@@ -244,53 +255,54 @@
 		if(S.zone) S.zone.rebuild()
 
 	if(ispath(N, /turf/simulated/floor))
-		//if the old turf had a zone, connect the new turf to it as well - Cael
-		//Adjusted by SkyMarshal 5/10/13 - The air master will handle the addition of the new turf.
-		//if(zone)
-		//	zone.RemoveTurf(src)
-		//	if(!zone.CheckStatus())
-		//		zone.SetStatus(ZONE_ACTIVE)
-
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
-		//W.Assimilate_Air()
-
-		W.lighting_lumcount += old_lumcount
-
-		if(W.lighting_lumcount)
-			W.UpdateAffectingLights()
-
 		if(old_fire)
 			fire = old_fire
 
 		if (istype(W,/turf/simulated/floor))
 			W.RemoveLattice()
 
+		if(tell_universe)
+			universe.OnTurfChange(W)
+
 		if(air_master)
-			air_master.mark_for_update(src)
+			air_master.mark_for_update(src) //handle the addition of the new turf.
+
+		for(var/turf/space/S in range(W,1))
+			S.update_starlight()
 
 		W.levelupdate()
-		return W
+		. = W
 
 	else
-		//if(zone)
-		//	zone.RemoveTurf(src)
-		//	if(!zone.CheckStatus())
-		//		zone.SetStatus(ZONE_ACTIVE)
 
 		var/turf/W = new N( locate(src.x, src.y, src.z) )
-		W.lighting_lumcount += old_lumcount
-		if(old_lumcount != W.lighting_lumcount)
-			W.lighting_changed = 1
-			lighting_controller.changed_turfs += W
 
 		if(old_fire)
 			old_fire.RemoveFire()
 
+		if(tell_universe)
+			universe.OnTurfChange(W)
+
 		if(air_master)
 			air_master.mark_for_update(src)
 
+		for(var/turf/space/S in range(W,1))
+			S.update_starlight()
+
 		W.levelupdate()
-		return W
+		. =  W
+
+	lighting_overlay = old_lighting_overlay
+	affecting_lights = old_affecting_lights
+	if((old_opacity != opacity) || (dynamic_lighting != old_dynamic_lighting) || force_lighting_update)
+		reconsider_lights()
+	if(dynamic_lighting != old_dynamic_lighting)
+		if(dynamic_lighting)
+			lighting_build_overlays()
+		else
+			lighting_clear_overlays()
+
 
 
 //Commented out by SkyMarshal 5/10/13 - If you are patching up space, it should be vacuum.
@@ -360,9 +372,50 @@
 			M.take_damage(100, "brute")
 
 /turf/proc/Bless()
-	if(flags & NOJAUNT)
-		return
 	flags |= NOJAUNT
+
+/////////////////////////////////////////////////////////////////////////
+// Navigation procs
+// Used for A-star pathfinding
+////////////////////////////////////////////////////////////////////////
+
+///////////////////////////
+//Cardinal only movements
+///////////////////////////
+/* #TOREMOVE - this is in bots.dm.....move it eventually
+// Returns the surrounding cardinal turfs with open links
+// Including through doors openable with the ID
+/turf/proc/CardinalTurfsWithAccess(var/obj/item/weapon/card/id/ID)
+	var/list/L = new()
+	var/turf/simulated/T
+
+	for(var/dir in cardinal)
+		T = get_step(src, dir)
+		if(istype(T) && !T.density)
+			if(!LinkBlockedWithAccess(src, T, ID))
+				L.Add(T)
+	return L */
+
+// Returns the surrounding cardinal turfs with open links
+// Don't check for ID, doors passable only if open
+/turf/proc/CardinalTurfs()
+	var/list/L = new()
+	var/turf/simulated/T
+
+	for(var/dir in cardinal)
+		T = get_step(src, dir)
+		if(istype(T) && !T.density)
+			if(!LinkBlocked(src, T))
+				L.Add(T)
+	return L
+
+/turf/storage_contents_dump_act(obj/item/weapon/storage/src_object, mob/user)
+	for(var/obj/item/I in src_object)
+		if(user.s_active != src_object)
+			if(I.on_found(user))
+				return
+		src_object.remove_from_storage(I, src) //No check needed, put everything inside
+	return 1
 
 /turf/proc/AdjacentTurfs()
 	var/L[] = new()
@@ -385,3 +438,14 @@
 			if(!LinkBlocked(src, t) && !TurfBlockedNonWindow(t))
 				L.Add(t)
 	return L
+
+/turf/proc/process()
+	return PROCESS_KILL
+
+/turf/proc/contains_dense_objects()
+	if(density)
+		return 1
+	for(var/atom/A in src)
+		if(A.density && !(A.flags & ON_BORDER))
+			return 1
+	return 0

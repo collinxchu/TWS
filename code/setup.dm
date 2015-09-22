@@ -1,6 +1,9 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:31
 
 #define DEBUG
+//#define TESTING	 //ifdefs
+//#define GC_FINDREF
+//#define GC_DEBUG
 
 #define PI 3.1415
 
@@ -297,39 +300,6 @@
 #define STRUCDNASIZE 27
 #define UNIDNASIZE 13
 
-	// Extra powers:
-#define LASER			9 	// harm intent - click anywhere to shoot lasers from eyes
-#define HEAL			10 	// healing people with hands
-#define SHADOW			11 	// shadow teleportation (create in/out portals anywhere) (25%)
-#define SCREAM			12 	// supersonic screaming (25%)
-#define EXPLOSIVE		13 	// exploding on-demand (15%)
-#define REGENERATION	14 	// superhuman regeneration (30%)
-#define REPROCESSOR		15 	// eat anything (50%)
-#define SHAPESHIFTING	16 	// take on the appearance of anything (40%)
-#define PHASING			17 	// ability to phase through walls (40%)
-#define SHIELD			18 	// shielding from all projectile attacks (30%)
-#define SHOCKWAVE		19 	// attack a nearby tile and cause a massive shockwave, knocking most people on their asses (25%)
-#define ELECTRICITY		20 	// ability to shoot electric attacks (15%)
-#define SKELETON 29
-#define PLANT 30
-
-//disabilities
-#define NEARSIGHTED		1
-#define EPILEPSY		2
-#define COUGHING		4
-#define TOURETTES		8
-#define NERVOUS			16
-
-//sdisabilities
-#define BLIND			1
-#define MUTE			2
-#define DEAF			4
-
-//mob/var/stat things
-#define CONSCIOUS	0
-#define UNCONSCIOUS	1
-#define DEAD		2
-
 // channel numbers for power
 #define EQUIP	1
 #define LIGHT	2
@@ -386,25 +356,6 @@
 #define FIRELOSS 2
 #define TOXLOSS 4
 #define OXYLOSS 8
-
-//Bitflags defining which status effects could be or are inflicted on a mob
-#define CANSTUN		1
-#define CANWEAKEN	2
-#define CANPARALYSE	4
-#define CANPUSH		8
-#define LEAPING		16
-#define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
-#define GODMODE		4096
-#define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
-#define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
-#define XENO_HOST	32768	//Tracks whether we're gonna be a baby alien's mummy.
-
-//Grab levels
-#define GRAB_PASSIVE	1
-#define GRAB_AGGRESSIVE	2
-#define GRAB_NECK		3
-#define GRAB_UPGRADING	4
-#define GRAB_KILL		5
 
 //Security levels
 #define SEC_LEVEL_GREEN	0
@@ -803,8 +754,17 @@ var/list/be_special_flags = list(
 #define SUIT_SENSOR_VITAL 2
 #define SUIT_SENSOR_TRACKING 3
 
-//Sizes of mobs, used by mob/living/var/mob_size
-#define MOB_SIZE_TINY 0
-#define MOB_SIZE_SMALL 1
-#define MOB_SIZE_HUMAN 2
-#define MOB_SIZE_LARGE 3
+//#define Clamp(x, y, z) 	(x <= y ? y : (x >= z ? z : x))
+
+#define CLAMP01(x) 		(Clamp(x, 0, 1))
+
+#define FOR_DVIEW(type, range, center, invis_flags) \
+	dview_mob.loc = center; \
+	dview_mob.see_invisible = invis_flags; \
+	for(type in view(range, dview_mob))
+#define END_FOR_DVIEW dview_mob.loc = null
+
+// Fire.
+#define FIRE_MIN_STACKS          -20
+#define FIRE_MAX_STACKS           25
+#define FIRE_MAX_FIRESUIT_STACKS  20 // If the number of stacks goes above this firesuits won't protect you anymore. If not, you can walk around while on fire like a badass.

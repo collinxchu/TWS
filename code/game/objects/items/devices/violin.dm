@@ -12,6 +12,8 @@
 	var/help = 0
 	var/edit = 1
 	var/repeat = 0
+	burn_state = 0 //Burnable
+	burntime = 20
 
 /obj/item/device/violin/proc/playnote(var/note as text)
 	//world << "Note: [note]"

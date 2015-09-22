@@ -27,6 +27,7 @@
 	status_flags = 0
 	faction = "cult"
 	status_flags = CANPUSH
+	flying = 1
 
 
 	Life()
@@ -37,7 +38,7 @@
 				if((M.client && !( M.blinded )))
 					M.show_message("\red [src] lets out a contented sigh as their form unwinds. ")
 					ghostize()
-			del src
+			qdel(src)
 			return
 
 

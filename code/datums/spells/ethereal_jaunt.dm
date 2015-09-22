@@ -20,7 +20,7 @@
 
 			if(target.buckled)
 				var/obj/structure/stool/bed/buckled_to = target.buckled.
-				buckled_to.unbuckle()
+				buckled_to.unbuckle_mob()
 
 			var/mobloc = get_turf(target.loc)
 			var/obj/effect/dummy/spell_jaunt/holder = new /obj/effect/dummy/spell_jaunt( mobloc )
@@ -53,8 +53,8 @@
 								break
 				target.canmove = 1
 				target.client.eye = target
-				del(animation)
-				del(holder)
+				qdel(animation)
+				qdel(holder)
 			else
 				flick("liquify",animation)
 				target.loc = holder
@@ -79,8 +79,8 @@
 								break
 				target.canmove = 1
 				target.client.eye = target
-				del(animation)
-				del(holder)
+				qdel(animation)
+				qdel(holder)
 
 /obj/effect/dummy/spell_jaunt
 	name = "water"
@@ -89,6 +89,12 @@
 	var/canmove = 1
 	density = 0
 	anchored = 1
+
+/obj/effect/dummy/spell_jaunt/Destroy()
+	// Eject contents if deleted somehow
+	for(var/atom/movable/AM in src)
+		AM.loc = get_turf(src)
+	return ..()
 
 /obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
 	if (!src.canmove) return

@@ -4,7 +4,7 @@
 	icon_state = "repairbot"
 
 	emote_type = 2		// pAIs emotes are heard, not seen, so they can be seen through a container (eg. person)
-	small = 1
+	mob_size = MOB_SIZE_TINY
 	pass_flags = 1
 
 	var/network = "SS13"

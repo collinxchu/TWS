@@ -2,6 +2,7 @@
 	name = "Cure Research Machine"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "dna"
+	light_color = LIGHT_COLOR_DARKBLUE
 	circuit = /obj/item/weapon/circuitboard/curefab
 	var/curing
 	var/virusing

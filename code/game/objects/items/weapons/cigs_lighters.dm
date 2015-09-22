@@ -31,6 +31,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	attack_verb = list("burnt", "singed")
 
 /obj/item/weapon/flame/match/process()
+	if(isliving(loc))
+		var/mob/living/M = loc
+		M.IgniteMob()
 	var/turf/location = get_turf(src)
 	smoketime--
 	if(smoketime < 1)
@@ -41,8 +44,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		return
 
 /obj/item/weapon/flame/match/dropped(mob/user as mob)
+	//If dropped, put ourselves out
+	//not before lighting up the turf we land on, though.
 	if(lit)
-		burn_out()
+		spawn(0)
+			var/turf/location = src.loc
+			if(istype(location))
+				location.hotspot_expose(700, 5)
+			burn_out()
 	return ..()
 
 /obj/item/weapon/flame/match/proc/burn_out()
@@ -81,9 +90,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	flags |= NOREACT // so it doesn't react until you light it
 	create_reagents(chem_volume) // making the cigarrete a chemical holder with a maximum volume of 15
 
-/obj/item/clothing/mask/cigarette/Del()
+/obj/item/clothing/mask/cigarette/Destroy()
 	..()
-	del(reagents)
+	qdel(reagents)
 
 /obj/item/clothing/mask/cigarette/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
@@ -143,13 +152,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("plasma") / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
-			del(src)
+			qdel(src)
 			return
 		if(reagents.get_reagent_amount("fuel")) // the fuel explodes, too, but much less violently
 			var/datum/effect/effect/system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("fuel") / 5, 1), get_turf(src), 0, 0)
 			e.start()
-			del(src)
+			qdel(src)
 			return
 		flags &= ~NOREACT // allowing reagents to react after being lit
 		reagents.handle_reactions()
@@ -157,6 +166,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		item_state = icon_on
 		var/turf/T = get_turf(src)
 		T.visible_message(flavor_text)
+		set_light(2, 0.25, "#E38F46")
 		processing_objects.Add(src)
 
 
@@ -193,15 +203,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/cigarette/proc/die()
 	var/turf/T = get_turf(src)
+	set_light(0)
 	var/obj/item/butt = new type_butt(T)
 	transfer_fingerprints_to(butt)
 	if(ismob(loc))
 		var/mob/living/M = loc
 		M << "<span class='notice'>Your [name] goes out.</span>"
-		M.u_equip(src)	//un-equip it so the overlays can update
-		M.update_inv_wear_mask(0)
+		M.unEquip(src, 1)		//Force the un-equip so the overlays update
 	processing_objects.Remove(src)
-	del(src)
+	qdel(src)
 
 ////////////
 // CIGARS //
@@ -430,7 +440,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 						user.apply_damage(2,BURN,"r_hand")
 					user.visible_message("<span class='notice'>After a few attempts, [user] manages to light the [src], they however burn their finger in the process.</span>")
 
-			user.SetLuminosity(user.luminosity + 2)
+			set_light(2)
 			processing_objects.Add(src)
 		else
 			lit = 0
@@ -441,7 +451,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			else
 				user.visible_message("<span class='notice'>[user] quietly shuts off the [src].")
 
-			user.SetLuminosity(user.luminosity - 2)
+			set_light(0)
 			processing_objects.Remove(src)
 	else
 		return ..()
@@ -451,6 +461,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	if(!istype(M, /mob))
 		return
+	M.IgniteMob()
 
 	if(istype(M.wear_mask, /obj/item/clothing/mask/cigarette) && user.zone_sel.selecting == "mouth" && lit)
 		var/obj/item/clothing/mask/cigarette/cig = M.wear_mask
@@ -468,18 +479,4 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/turf/location = get_turf(src)
 	if(location)
 		location.hotspot_expose(700, 5)
-	return
-
-
-/obj/item/weapon/flame/lighter/pickup(mob/user)
-	if(lit)
-		SetLuminosity(0)
-		user.SetLuminosity(user.luminosity+2)
-	return
-
-
-/obj/item/weapon/flame/lighter/dropped(mob/user)
-	if(lit)
-		user.SetLuminosity(user.luminosity-2)
-		SetLuminosity(2)
 	return

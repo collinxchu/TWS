@@ -21,6 +21,11 @@
 
 	var/datum/wires/autolathe/wires = null
 
+/obj/machinery/autolathe/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
+
 /obj/machinery/autolathe/proc/update_recipe_list()
 	if(!machine_recipes)
 		machine_recipes = autolathe_recipes
@@ -177,7 +182,7 @@
 		stack.use(max(1,round(total_used/mass_per_sheet))) // Always use at least 1 to prevent infinite materials.
 	else
 		user.drop_item(O)
-		del(O)
+		qdel(O)
 
 	updateUsrDialog()
 	return

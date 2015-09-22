@@ -14,18 +14,6 @@
 	..()
 	return
 
-/obj/item/assembly/shock_kit/Del()
-	qdel(part1)
-	qdel(part2)
-	..()
-	return
-
-/obj/item/assembly/shock_kit/Destroy()
-	qdel(part1)
-	qdel(part2)
-	..()
-	return
-
 /obj/item/assembly/shock_kit/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench) && !status)
 		var/turf/T = loc

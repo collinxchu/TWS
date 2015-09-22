@@ -9,6 +9,7 @@
 	density = 1
 	anchored = 1.0
 	circuit = "/obj/item/weapon/circuitboard/atmoscontrol"
+	light_color = LIGHT_COLOR_GREEN
 	var/obj/machinery/alarm/current
 	var/overridden = 0 //not set yet, can't think of a good way to do it
 	req_access = list(access_ce)
@@ -19,6 +20,7 @@
 	name = "Atmospherics Laptop"
 	desc = "Cheap Nanotrasen Laptop."
 	icon_state = "medlaptop"
+	light_color = LIGHT_COLOR_DARKGREEN
 	density = 0
 
 /obj/machinery/computer/atmoscontrol/initialize()

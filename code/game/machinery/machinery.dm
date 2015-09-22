@@ -49,7 +49,7 @@ Class Variables:
 Class Procs:
    New()                     'game/machinery/machine.dm'
 
-   Del()                     'game/machinery/machine.dm'
+   Destroy()                     'game/machinery/machine.dm'
 
    auto_use_power()            'game/machinery/machine.dm'
       This proc determines how power mode power is deducted by the machine.
@@ -122,8 +122,17 @@ Class Procs:
 		machines += src
 		machinery_sort_required = 1
 
-/obj/machinery/Del()
+/obj/machinery/Destroy()
 	machines -= src
+	if(component_parts)
+		for(var/atom/A in component_parts)
+			if(A.loc == src) // If the components are inside the machine, delete them.
+				qdel(A)
+			else // Otherwise we assume they were dropped to the ground during deconstruction, and were not removed from the component_parts list by deconstruction code.
+				component_parts -= A
+/*	if(contents) // The same for contents.
+		for(var/atom/A in contents)
+			qdel(A)       #TOREMOVE */
 	..()
 
 /obj/machinery/process()//If you dont use process or power why are you here
@@ -141,28 +150,28 @@ Class Procs:
 		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
-			pulse2.delete()
+			qdel(pulse2)
 	..()
 
 /obj/machinery/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
-				del(src)
+				qdel(src)
 				return
 		else
 	return
 
 /obj/machinery/blob_act()
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 //sets the use_power var and then forces an area power update
 /obj/machinery/proc/update_use_power(var/new_use_power, var/force_update = 0)
@@ -331,7 +340,7 @@ Class Procs:
 		if(I.reliability != 100 && crit_fail)
 			I.crit_fail = 1
 		I.loc = loc
-	del(src)
+	qdel(src)
 	return 1
 
 /obj/machinery/proc/on_assess_perp(mob/living/carbon/human/perp)

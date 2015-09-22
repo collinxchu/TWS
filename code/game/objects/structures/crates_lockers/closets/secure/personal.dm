@@ -23,20 +23,22 @@
 	spawn(4)
 		// Not really the best way to do this, but it's better than "contents = list()"!
 		for(var/atom/movable/AM in contents)
-			del(AM)
+			qdel(AM)
 		new /obj/item/clothing/under/color/white( src )
 		new /obj/item/clothing/shoes/white( src )
 	return
 
 /obj/structure/closet/secure_closet/personal/cabinet
 	icon_state = "cabinet"
+	burn_state = 0 //Burnable
+	burntime = 20
 
 /obj/structure/closet/secure_closet/personal/cabinet/New()
 	..()
 	spawn(4)
 		// Not really the best way to do this, but it's better than "contents = list()"!
 		for(var/atom/movable/AM in contents)
-			del(AM)
+			qdel(AM)
 		new /obj/item/weapon/storage/backpack/satchel/withwallet( src )
 		new /obj/item/device/radio/headset( src )
 	return

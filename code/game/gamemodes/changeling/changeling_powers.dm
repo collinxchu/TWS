@@ -153,7 +153,7 @@
 		src << "<span class='warning'>This creature's DNA is ruined beyond useability!</span>"
 		return
 
-	if(!G.state == GRAB_KILL)
+	if(G.state != GRAB_KILL)
 		src << "<span class='warning'>We must have a tighter grip to absorb this creature.</span>"
 		return
 
@@ -173,7 +173,7 @@
 				src << "<span class='notice'>We stab [T] with the proboscis.</span>"
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
 				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
-				var/datum/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
+				var/obj/item/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
 				if(affecting.take_damage(39,0,1,0,"large organic needle"))
 					T:UpdateDamageIcon()
 
@@ -310,7 +310,7 @@
 	animation.master = src
 	flick("h2monkey", animation)
 	sleep(48)
-	del(animation)
+	qdel(animation)
 
 	var/mob/living/carbon/monkey/O = new /mob/living/carbon/monkey(src)
 	O.dna = C.dna.Clone()
@@ -319,7 +319,7 @@
 	for(var/obj/item/W in C)
 		C.drop_from_inventory(W)
 	for(var/obj/T in C)
-		del(T)
+		qdel(T)
 
 	O.loc = C.loc
 	O.name = "monkey ([copytext(md5(C.real_name), 2, 6)])"
@@ -340,7 +340,7 @@
 	O.changeling_update_languages(changeling.absorbed_languages)
 
 	feedback_add_details("changeling_powers","LF")
-	del(C)
+	qdel(C)
 	return 1
 
 
@@ -385,10 +385,10 @@
 	animation.master = src
 	flick("monkey2h", animation)
 	sleep(48)
-	del(animation)
+	qdel(animation)
 
 	for(var/obj/item/W in src)
-		C.u_equip(W)
+		C.unEquip(W)
 		if (C.client)
 			C.client.screen -= W
 		if (W)
@@ -406,7 +406,7 @@
 	O.real_name = chosen_dna.real_name
 
 	for(var/obj/T in C)
-		del(T)
+		qdel(T)
 
 	O.loc = C.loc
 
@@ -426,7 +426,7 @@
 	O.changeling_update_languages(changeling.absorbed_languages)
 
 	feedback_add_details("changeling_powers","LFT")
-	del(C)
+	qdel(C)
 	return 1
 
 

@@ -11,7 +11,6 @@
 	charge_use = 0
 	bound_width = 64
 	bound_height = 64
-	movable = 0
 
 	var/obj/item/weapon/key/car/key
 	var/trunk_open = 0
@@ -83,7 +82,7 @@
 		var/mob/living/D = load
 		visible_message("\red [src] knocks over [M]!")
 		M.apply_effects(5, 5)				//||knock people down if you hit them
-		M.apply_damages(70 / move_delay)	//||and do damage according to how fast the car is going
+		M.apply_damages(20 / move_delay)	//||and do damage according to how fast the car is going
 		if(istype(load, /mob/living/carbon/human))
 			D << "\red You hit [M]!"
 			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
@@ -101,10 +100,10 @@
 
 	if(istype(A, /obj/structure))
 		if(istype(A, /obj/structure/barricade/wooden))
-			var/obj/structure/table/T = A
+			var/obj/structure/barricade/wooden/B = A
 			load << "\red You crash [src] into the [A]!"
 			playsound(src.loc, 'sound/effects/woodcrash.ogg', 80, 0, 11025)
-			T.destroy()
+			B.dismantle()
 			src.take_damage(1)
 			return
 
@@ -121,12 +120,17 @@
 			src.take_damage(1)  //||crashing the car into things repeatedly is generally a bad idea
 			return
 
-		if(istype(A, /obj/structure/table/woodentable))
-			var/obj/structure/table/woodentable/T = A
+		if(istype(A, /obj/structure/table/wooden))
+			var/obj/structure/table/wooden/T = A
 			if(istype(T, /obj/structure/table/rack))
 				return
 			playsound(src.loc, 'sound/effects/woodcrash.ogg', 80, 0, 11025)
-			T.destroy()
+			qdel(T)
+			src.take_damage(1)
+			return
+		if(istype(A, /obj/structure/table/rack))
+			var/obj/structure/table/rack/R = A
+			qdel(R)
 			src.take_damage(1)
 			return
 
@@ -177,7 +181,7 @@
 /obj/vehicle/car/verb/open_trunk()
 	set name = "Open trunk"
 	set category = "Vehicle"
-	set src in view(0)
+	set src in oview(1)
 
 	trunk_open = 1
 	usr << "You pop open the trunk."
@@ -197,7 +201,7 @@
 /obj/vehicle/car/verb/close_trunk()
 	set name = "Close trunk"
 	set category = "Vehicle"
-	set src in view(1)
+	set src in oview(1)
 
 	trunk_open = 0
 	usr << "You close the trunk."
@@ -357,7 +361,8 @@
 
 	if(ismob(C))
 		var/mob/M = C
-		M.buckled = src
+		//M.buckled = src
+		buckle_mob(C)
 		switch(who)
 			if("driver")
 				M.pixel_y = src.load_offset_y
@@ -422,10 +427,7 @@
 			load.layer = initial(load.layer)
 
 			if(ismob(load))
-				var/mob/M = load
-				M.buckled = null
-				M.anchored = initial(M.anchored)
-				M.update_canmove()
+				unbuckle_mob(load)
 
 			load = null
 		if("passenger")
@@ -437,10 +439,7 @@
 			passenger.layer = initial(passenger.layer)
 
 			if(ismob(passenger))
-				var/mob/M = passenger
-				M.buckled = null
-				M.anchored = initial(M.anchored)
-				M.update_canmove()
+				unbuckle_mob(passenger)
 
 			passenger = null
 		if("trunk")
@@ -453,10 +452,7 @@
 			trunk.loc = src.loc
 
 			if(ismob(trunk))
-				var/mob/M = trunk
-				M.buckled = null
-				M.anchored = initial(M.anchored)
-				M.update_canmove()
+				unbuckle_mob(trunk)
 
 			trunk = null
 	return 1

@@ -30,6 +30,12 @@
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
 
+
+/obj/machinery/door/airlock/Destroy()
+	qdel(wires)
+	wires = null
+	return ..()
+
 /obj/machinery/door/airlock/attack_generic(var/mob/user, var/damage)
 	if(stat & (BROKEN|NOPOWER))
 		if(damage >= 10)
@@ -266,13 +272,13 @@
 	for(var/obj/structure/falsewall/plasma/F in range(3,src))//Hackish as fuck, but until temperature_expose works, there is nothing I can do -Sieve
 		var/turf/T = get_turf(F)
 		T.ChangeTurf(/turf/simulated/wall/mineral/plasma/)
-		del (F)
+		qdel (F)
 	for(var/turf/simulated/wall/mineral/plasma/W in range(3,src))
 		W.ignite((temperature/4))//Added so that you can't set off a massive chain reaction with a small flame
 	for(var/obj/machinery/door/airlock/plasma/D in range(3,src))
 		D.ignite(temperature/4)
 	new/obj/structure/door_assembly( src.loc )
-	del (src)
+	qdel (src)
 
 /obj/machinery/door/airlock/sandstone
 	name = "Sandstone Airlock"
@@ -654,7 +660,7 @@ About the new airlock wires panel:
 			playsound(src.loc, 'sound/effects/bang.ogg', 25, 1)
 			if(!istype(H.head, /obj/item/clothing/head/helmet))
 				visible_message("\red [user] headbutts the airlock.")
-				var/datum/organ/external/affecting = H.get_organ("head")
+				var/obj/item/organ/external/affecting = H.get_organ("head")
 				H.Stun(8)
 				H.Weaken(5)
 				if(affecting.take_damage(10, 0))
@@ -949,7 +955,7 @@ About the new airlock wires panel:
 					electronics.loc = src.loc
 					electronics = null
 
-				del(src)
+				qdel(src)
 				return
 		else if(arePowerSystemsOn())
 			user << "\blue The airlock's motors resist your efforts to force it."
@@ -1047,7 +1053,7 @@ About the new airlock wires panel:
 				S.victim = M
 				S.loc = M.loc
 				spawn(20)
-					del(S)
+					qdel(S)
 				if (iscarbon(M))
 					var/mob/living/carbon/C = M
 					if (!(C.species && (C.species.flags & NO_PAIN)))

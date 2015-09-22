@@ -9,25 +9,50 @@
 	throw_range = 7
 	pressure_resistance = 10
 	layer = OBJ_LAYER - 0.1
+	burn_state = 0 //Burnable
 	var/amount = 30					//How much paper is in the bin.
 	var/list/papers = new/list()	//List of papers put in the bin for reference.
 
 
-/obj/item/weapon/paper_bin/MouseDrop(mob/user as mob)
-	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
-		if(!istype(usr, /mob/living/carbon/slime) && !istype(usr, /mob/living/simple_animal))
-			if( !usr.get_active_hand() )		//if active hand is empty
-				attack_hand(usr, 1, 1)
+/obj/item/weapon/paper_bin/fire_act()
+	if(!amount)
+		return
+	..()
 
+/obj/item/weapon/paper_bin/burn()
+	amount = 0
+	extinguish()
+	update_icon()
 	return
+
+/obj/item/weapon/paper_bin/MouseDrop(atom/over_object)
+	var/mob/M = usr
+	if(M.restrained() || M.stat || !Adjacent(M))
+		return
+
+	if(over_object == M)
+		M.put_in_hands(src)
+
+	else if(istype(over_object, /obj/screen))
+		switch(over_object.name)
+			if("r_hand")
+				if(!remove_item_from_storage(M))
+					M.unEquip(src)
+				M.put_in_r_hand(src)
+			if("l_hand")
+				if(!remove_item_from_storage(M))
+					M.unEquip(src)
+				M.put_in_l_hand(src)
+
+	add_fingerprint(M)
 
 /obj/item/weapon/paper_bin/attack_hand(mob/user as mob)
 	if (hasorgans(user))
-		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = user:organs_by_name["r_hand"]
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
 			return
 	var/response = ""
 	if(!papers.len > 0)
@@ -65,15 +90,17 @@
 	return
 
 
-/obj/item/weapon/paper_bin/attackby(obj/item/weapon/paper/i as obj, mob/user as mob)
+/obj/item/weapon/paper_bin/attackby(obj/item/weapon/paper/i, mob/user, params)
 	if(!istype(i))
-		return
+		return ..()
 
-	user.drop_item()
+	if(!user.unEquip(i))
+		return
 	i.loc = src
 	user << "<span class='notice'>You put [i] in [src].</span>"
 	papers.Add(i)
 	amount++
+	update_icon()
 
 
 /obj/item/weapon/paper_bin/examine(mob/user)

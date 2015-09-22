@@ -1,6 +1,7 @@
 /obj/machinery/computer/forensic_scanning
 	name = "high-res forensic scanning computer"
 	icon_state = "forensic"
+	light_color = LIGHT_COLOR_RED
 
 	var/screen = "database"
 	var/authenticated = 0
@@ -276,7 +277,7 @@
 			if(istype(I, /obj/item/weapon/f_card))
 				if(process_card(I))
 					M.drop_item()
-					del(I)
+					qdel(I)
 			else
 				usr << "<spawn class='warning'>Invalid fingerprint card, rejected.</span>"
 		if("print")

@@ -26,3 +26,15 @@
 
 /obj/structure/cable/heavyduty/cableColor(var/colorC)
 	return
+
+/obj/item/stack/cable_coil/heavyduty/mainline
+	name = "main line cable coil"
+	icon = 'icons/obj/power.dmi'
+	icon_state = "wire"
+
+/obj/structure/cable/heavyduty/mainline
+	color = COLOR_WHITE
+	icon = 'icons/obj/power_cond_mainline.dmi'
+	name = "main power line"
+	desc = "This power line is tough. It cannot be cut with simple hand tools."
+	layer = 2.39 //Just below pipes, which are at 2.4

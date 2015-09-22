@@ -85,7 +85,7 @@ var/global/list/turf/synd_spawn = list()
 				if(synd_mind.current.client)
 					for(var/image/I in synd_mind.current.client.images)
 						if(I.icon_state == "synd")
-							del(I)
+							qdel(I)
 
 		for(var/datum/mind/synd_mind in syndicates)
 			if(synd_mind.current)
@@ -109,13 +109,13 @@ var/global/list/turf/synd_spawn = list()
 				if(synd.current.client)
 					for(var/image/I in synd.current.client.images)
 						if(I.icon_state == "synd" && I.loc == synd_mind.current)
-							del(I)
+							qdel(I)
 
 		if(synd_mind.current)
 			if(synd_mind.current.client)
 				for(var/image/I in synd_mind.current.client.images)
 					if(I.icon_state == "synd")
-						del(I)
+						qdel(I)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////

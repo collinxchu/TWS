@@ -11,6 +11,7 @@
 	worlds tumultous at best."
 
 	flags = CAN_JOIN | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	dietflags = DIET_OMNI
 
 /datum/species/unathi
 	name = "Unathi"
@@ -39,11 +40,27 @@
 	heat_level_3 = 1100 //Default 1000
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	dietflags = DIET_CARN
 
 	flesh_color = "#34AF10"
 
 	reagent_tag = IS_UNATHI
 	base_color = "#066000"
+
+
+	heat_discomfort_level = 295
+	heat_discomfort_strings = list(
+		"You feel soothingly warm.",
+		"You feel the heat sink into your bones.",
+		"You feel warm enough to take a nap."
+		)
+
+	cold_discomfort_level = 292
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You feel sluggish and cold.",
+		"Your scales bristle against the cold."
+		)
 
 /datum/species/tajaran
 	name = "Tajara"
@@ -71,9 +88,18 @@
 	primitive = /mob/living/carbon/monkey/tajara
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	dietflags = DIET_OMNI
 
 	flesh_color = "#AFA59E"
 	base_color = "#333333"
+
+	heat_discomfort_level = 292
+	heat_discomfort_strings = list(
+		"Your fur prickles in the heat.",
+		"You feel uncomfortably warm.",
+		"Your overheated skin itches."
+		)
+	cold_discomfort_level = 275
 
 /datum/species/skrell
 	name = "Skrell"
@@ -91,6 +117,7 @@
 	the secrets of their empire to their allies."
 
 	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	dietflags = DIET_HERB
 
 	flesh_color = "#8CD7A3"
 	blood_color = "#1D2CBF"
@@ -110,6 +137,8 @@
 	rarity_value = 3
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
+	eyes = "blank_eyes"
+	show_ssd = "completely quiescent"
 
 	blurb = "Commonly referred to (erroneously) as 'plant people', the Dionaea are a strange space-dwelling collective \
 	species hailing from Epsilon Ursae Minoris. Each 'diona' is a cluster of numerous cat-sized organisms called nymphs; \
@@ -120,12 +149,30 @@
 	water and other radiation."
 
 	has_organ = list(
-		"nutrient channel" =   /datum/organ/internal/diona/nutrients,
-		"neural strata" =      /datum/organ/internal/diona/strata,
-		"response node" =      /datum/organ/internal/diona/node,
-		"gas bladder" =        /datum/organ/internal/diona/bladder,
-		"polyp segment" =      /datum/organ/internal/diona/polyp,
-		"anchoring ligament" = /datum/organ/internal/diona/ligament
+		"nutrient channel" =   /obj/item/organ/diona/nutrients,
+		"neural strata" =      /obj/item/organ/diona/strata,
+		"response node" =      /obj/item/organ/diona/node,
+		"gas bladder" =        /obj/item/organ/diona/bladder,
+		"polyp segment" =      /obj/item/organ/diona/polyp,
+		"anchoring ligament" = /obj/item/organ/diona/ligament
+		)
+
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/diona/chest),
+		"groin" =  list("path" = /obj/item/organ/external/diona/groin),
+		"head" =   list("path" = /obj/item/organ/external/diona/head),
+		"l_arm" =  list("path" = /obj/item/organ/external/diona/arm),
+		"r_arm" =  list("path" = /obj/item/organ/external/diona/arm/right),
+		"l_leg" =  list("path" = /obj/item/organ/external/diona/leg),
+		"r_leg" =  list("path" = /obj/item/organ/external/diona/leg/right),
+		"l_hand" = list("path" = /obj/item/organ/external/diona/hand),
+		"r_hand" = list("path" = /obj/item/organ/external/diona/hand/right),
+		"l_foot" = list("path" = /obj/item/organ/external/diona/foot),
+		"r_foot" = list("path" = /obj/item/organ/external/diona/foot/right)
+		)
+
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/diona_split_nymph
 		)
 
 	warning_low_pressure = 50
@@ -142,6 +189,7 @@
 	body_temperature = T0C + 15		//make the plant people have a bit lower body temperature, why not
 
 	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | IS_PLANT | NO_BLOOD | NO_PAIN | NO_SLIP | HAS_EYE_COLOR
+	dietflags = 0		//Diona regenerate nutrition in light, no diet necessary
 
 	blood_color = "#004400"
 	flesh_color = "#907E4A"
@@ -169,13 +217,19 @@
 		if(D.client)
 			D.loc = H.loc
 		else
-			del(D)
+			qdel(D)
 
 	H.visible_message("\red[H] splits apart with a wet slithering noise!")
 
 /datum/species/machine
 	name = "Machine"
 	name_plural = "machines"
+
+	blurb = "Positronic intelligence really took off in the 26th century, and it is not uncommon to see independant, free-willed \
+	robots on many human stations, particularly in fringe systems where standards are slightly lax and public opinion less relevant \
+	to corporate operations. IPCs (Integrated Positronic Chassis) are a loose category of self-willed robots with a humanoid form, \
+	generally self-owned after being 'born' into servitude; they are reliable and dedicated workers, albeit more than slightly \
+	inhuman in outlook and perspective."
 
 	icobase = 'icons/mob/human_races/r_machine.dmi'
 	deform = 'icons/mob/human_races/r_machine.dmi'
@@ -186,6 +240,7 @@
 	eyes = "blank_eyes"
 	brute_mod = 0.5
 	burn_mod = 1
+	show_ssd = "flashing a 'system offline' glyph on their monitor"
 
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
@@ -201,15 +256,33 @@
 	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	dietflags = 0		//IPCs can't eat, so no diet
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"
 
-	has_organ = list() //TODO: Positronic brain.
+	has_organ = list(
+		"brain" = /obj/item/organ/mmi_holder/posibrain,
+		"cell" = /obj/item/organ/cell,
+		"optics" = /obj/item/organ/optical_sensor
+		)
+
+	has_limbs = list(
+		"chest" =  list("path" = /obj/item/organ/external/chest/ipc),
+		"groin" =  list("path" = /obj/item/organ/external/groin/ipc),
+		"head" =   list("path" = /obj/item/organ/external/head/ipc),
+		"l_arm" =  list("path" = /obj/item/organ/external/arm/ipc),
+		"r_arm" =  list("path" = /obj/item/organ/external/arm/right/ipc),
+		"l_leg" =  list("path" = /obj/item/organ/external/leg/ipc),
+		"r_leg" =  list("path" = /obj/item/organ/external/leg/right/ipc),
+		"l_hand" = list("path" = /obj/item/organ/external/hand/ipc),
+		"r_hand" = list("path" = /obj/item/organ/external/hand/right/ipc),
+		"l_foot" = list("path" = /obj/item/organ/external/foot/ipc),
+		"r_foot" = list("path" = /obj/item/organ/external/foot/right/ipc)
+		)
 
 /datum/species/machine/handle_death(var/mob/living/carbon/human/H)
 	..()
-	if(flags & IS_SYNTHETIC)
-		H.h_style = ""
-		spawn(100)
-			if(H) H.update_hair()
+	H.h_style = ""
+	spawn(100)
+		if(H) H.update_hair()

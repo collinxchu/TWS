@@ -59,7 +59,7 @@
 				if(O.reagents.has_reagent("pacid", 1))
 					user << "The acid chews through the balloon!"
 					O.reagents.reaction(user)
-					del(src)
+					qdel(src)
 				else
 					src.desc = "A translucent balloon with some form of liquid sloshing around in it."
 					user << "\blue You fill the balloon with the contents of [O]."
@@ -76,7 +76,7 @@
 		src.icon_state = "burst"
 		spawn(5)
 			if(src)
-				del(src)
+				qdel(src)
 	return
 
 /obj/item/toy/balloon/update_icon()
@@ -221,7 +221,7 @@
 		if(istype(I, /obj/item/toy/ammo/crossbow))
 			if(bullets <= 4)
 				user.drop_item()
-				del(I)
+				qdel(I)
 				bullets++
 				user << "\blue You load the foam dart into the crossbow."
 			else
@@ -253,21 +253,21 @@
 						for(var/mob/O in viewers(world.view, D))
 							O.show_message(text("\red [] was hit by the foam dart!", M), 1)
 						new /obj/item/toy/ammo/crossbow(M.loc)
-						del(D)
+						qdel(D)
 						return
 
 					for(var/atom/A in D.loc)
 						if(A == user) continue
 						if(A.density)
 							new /obj/item/toy/ammo/crossbow(A.loc)
-							del(D)
+							qdel(D)
 
 				sleep(1)
 
 			spawn(10)
 				if(D)
 					new /obj/item/toy/ammo/crossbow(D.loc)
-					del(D)
+					qdel(D)
 
 			return
 		else if (bullets == 0)
@@ -394,29 +394,36 @@
 	icon_state = "snappop"
 	w_class = 1
 
-	throw_impact(atom/hit_atom)
-		..()
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
-		s.set_up(3, 1, src)
-		s.start()
-		new /obj/effect/decal/cleanable/ash(src.loc)
-		src.visible_message("\red The [src.name] explodes!","\red You hear a snap!")
-		playsound(src, 'sound/effects/snap.ogg', 50, 1)
-		del(src)
 
+/obj/item/toy/snappop/proc/pop_burst()
+	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	s.set_up(3, 1, src)
+	s.start()
+	new /obj/effect/decal/cleanable/ash(loc)
+	visible_message("<span class='warning'>The [src.name] explodes!</span>","<span class='italics'>You hear a snap!</span>")
+	playsound(src, 'sound/effects/snap.ogg', 50, 1)
+	qdel(src)
+
+/obj/item/toy/snappop/fire_act()
+	pop_burst()
+	return
+
+/obj/item/toy/snappop/throw_impact(atom/hit_atom)
+	if(!..())
+		pop_burst()
 /obj/item/toy/snappop/Crossed(H as mob|obj)
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
 		if(M.m_intent == "run")
-			M << "\red You step on the snap pop!"
+			M << "<span class='danger'>You step on the snap pop!</span>"
 
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(2, 0, src)
 			s.start()
 			new /obj/effect/decal/cleanable/ash(src.loc)
-			src.visible_message("\red The [src.name] explodes!","\red You hear a snap!")
+			src.visible_message("<span class='danger'>The [src.name] explodes!</span>","<span class='italics'>You hear a snap!</span>")
 			playsound(src, 'sound/effects/snap.ogg', 50, 1)
-			del(src)
+			qdel(src)
 
 /*
  * Water flower
@@ -478,7 +485,7 @@
 					if(ismob(T) && T:client)
 						T:client << "\red [user] has sprayed you with water!"
 				sleep(4)
-			del(D)
+			qdel(D)
 
 		return
 

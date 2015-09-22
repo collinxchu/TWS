@@ -68,21 +68,24 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 /obj/item/Destroy()
 	if(ismob(loc))
 		var/mob/m = loc
-		m.unEquip(src, 1)
+		m.drop_from_inventory(src)
+		m.update_inv_r_hand()
+		m.update_inv_l_hand()
+		src.loc = null
 	return ..()
 
 /obj/item/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(5))
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -132,12 +135,29 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 /obj/item/attack_hand(mob/user as mob)
 	if (!user) return
 	if (hasorgans(user))
-		var/datum/organ/external/temp = user:organs_by_name["r_hand"]
+		var/obj/item/organ/external/temp = user:organs_by_name["r_hand"]
 		if (user.hand)
 			temp = user:organs_by_name["l_hand"]
 		if(temp && !temp.is_usable())
-			user << "<span class='notice'>You try to move your [temp.display_name], but cannot!"
+			user << "<span class='notice'>You try to move your [temp.name], but cannot!"
 			return
+
+	if(burn_state == 1)
+		var/mob/living/carbon/human/H = user
+		if(istype(H))
+			if(H.gloves && (H.gloves.max_heat_protection_temperature > 360))
+				extinguish()
+				user << "<span class='notice'>You put out the fire on [src].</span>"
+			else
+				user << "<span class='warning'>You burn your hand on [src]!</span>"
+				var/obj/item/organ/external/affecting = H.get_organ("[user.hand ? "l" : "r" ]_arm")
+				affecting.take_damage(0, 5)
+				//if(affecting.take_damage( 0, 5 ))		// 5 burn damage
+					//H.update_damage_overlays(0)  #TOREMOVE - does not exist
+				H.updatehealth()
+				return
+		else
+			extinguish()
 
 	if (istype(src.loc, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = src.loc
@@ -149,7 +169,7 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 		if(!src.canremove)
 			return
 		else
-			user.u_equip(src)
+			user.unEquip(src)
 	else
 		if(isliving(src.loc))
 			return
@@ -172,31 +192,35 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 // Due to storage type consolidation this should get used more now.
 // I have cleaned it up a little, but it could probably use more.  -Sayu
-/obj/item/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/attackby(obj/item/weapon/W, mob/user, params)
 	if(istype(W,/obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
 		if(S.use_to_pickup)
-			if(S.collection_mode) //Mode is set to collect all items on a tile and we clicked on a valid one.
+			if(S.collection_mode) //Mode is set to collect multiple items on a tile and we clicked on a valid one.
 				if(isturf(src.loc))
 					var/list/rejections = list()
 					var/success = 0
 					var/failure = 0
 
 					for(var/obj/item/I in src.loc)
+						if(S.collection_mode == 2 && !istype(I,src.type)) // We're only picking up items of the target type
+							failure = 1
+							continue
 						if(I.type in rejections) // To limit bag spamming: any given type only complains once
 							continue
 						if(!S.can_be_inserted(I))	// Note can_be_inserted still makes noise when the answer is no
 							rejections += I.type	// therefore full bags are still a little spammy
 							failure = 1
 							continue
+
 						success = 1
 						S.handle_item_insertion(I, 1)	//The 1 stops the "You put the [src] into [S]" insertion message from being displayed.
 					if(success && !failure)
-						user << "<span class='notice'>You put everything in [S].</span>"
+						user << "<span class='notice'>You put everything [S.preposition] [S].</span>"
 					else if(success)
-						user << "<span class='notice'>You put some things in [S].</span>"
+						user << "<span class='notice'>You put some things [S.preposition] [S].</span>"
 					else
-						user << "<span class='notice'>You fail to pick anything up with [S].</span>"
+						user << "<span class='warning'>You fail to pick anything up with [S]!</span>"
 
 			else if(S.can_be_inserted(src))
 				S.handle_item_insertion(src)
@@ -553,7 +577,7 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 	if(istype(M, /mob/living/carbon/human))
 
-		var/datum/organ/internal/eyes/eyes = H.internal_organs_by_name["eyes"]
+		var/obj/item/organ/eyes/eyes = H.internal_organs_by_name["eyes"]
 
 		if(M != user)
 			for(var/mob/O in (viewers(M) - user - M))
@@ -581,7 +605,7 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 			if (eyes.damage >= eyes.min_broken_damage)
 				if(M.stat != 2)
 					M << "\red You go blind!"
-		var/datum/organ/external/affecting = M:get_organ("head")
+		var/obj/item/organ/external/affecting = M:get_organ("head")
 		if(affecting.take_damage(7))
 			M:UpdateDamageIcon()
 	else
@@ -729,3 +753,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		S.remove_from_storage(src,newLoc)
 		return 1
 	return 0
+
+
+/obj/item/proc/pwr_drain()
+	return 0 // Process Kill

@@ -2,6 +2,8 @@
 	name = "booze closet"
 	req_access = list(access_bar)
 	icon_state = "cabinet"
+	burn_state = 0 //Burnable
+	burntime = 20
 
 
 	New()

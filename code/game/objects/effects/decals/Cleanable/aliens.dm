@@ -11,6 +11,9 @@
 	random_icon_states = list("xgib1", "xgib2", "xgib3", "xgib4", "xgib5", "xgib6")
 	basecolor = "#05EE05"
 
+/obj/effect/decal/cleanable/blood/gibs/xeno/ex_act()
+	return
+
 /obj/effect/decal/cleanable/blood/gibs/xeno/update_icon()
 	color = "#FFFFFF"
 

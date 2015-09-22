@@ -11,7 +11,7 @@
 	..()
 	if (!prob(spawn_nothing_percentage))
 		spawn_item()
-	del src
+	qdel(src)
 
 
 // this function should return a specific item to spawn
@@ -103,4 +103,4 @@
 					prob(2);/obj/random/toolbox,\
 					prob(2);/obj/item/weapon/storage/belt/utility,\
 					prob(5);/obj/random/tool,\
-					prob(2);/obj/item/weapon/tape_roll)
+					prob(2);/obj/item/tape_roll)

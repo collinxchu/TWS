@@ -9,6 +9,7 @@
 	var/icon_base = "magboots"
 	icon_action_button = "action_blank"
 	action_button_name = "Toggle the magboots"
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/shoes/magboots/attack_self(mob/user)
 	if(magpulse)

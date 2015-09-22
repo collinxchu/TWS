@@ -53,12 +53,12 @@
 		else
 			error = 1
 
-	del(milled_item)
+	qdel(milled_item)
 	busy = 0
 
 /obj/machinery/mill/attackby(var/obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food))
-		user.u_equip(W)
+		user.unEquip(W)
 		W.loc = src
 		input += W
 	else
@@ -123,12 +123,12 @@
 		else
 			error = 1
 
-	del(fermenting_item)
+	qdel(fermenting_item)
 	busy = 0
 
 /obj/machinery/fermenter/attackby(var/obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food))
-		user.u_equip(W)
+		user.unEquip(W)
 		W.loc = src
 		input += W
 	else
@@ -184,12 +184,12 @@
 		else
 			error = 1
 
-	del(destilling_item)
+	qdel(destilling_item)
 	busy = 0
 
 /obj/machinery/still/attackby(var/obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food))
-		user.u_equip(W)
+		user.unEquip(W)
 		W.loc = src
 		input += W
 	else
@@ -274,7 +274,7 @@
 
 /obj/machinery/centrifuge/attackby(var/obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/reagent_containers/food))
-		user.u_equip(W)
+		user.unEquip(W)
 		W.loc = src
 		input += W
 	else

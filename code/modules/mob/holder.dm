@@ -11,7 +11,7 @@
 	..()
 	processing_objects.Add(src)
 
-/obj/item/weapon/holder/Del()
+/obj/item/weapon/holder/Destroy()
 	processing_objects.Remove(src)
 	..()
 
@@ -26,7 +26,7 @@
 			mob_container.forceMove(get_turf(src))
 			M.reset_view()
 
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/holder/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	for(var/mob/M in src.contents)
@@ -51,10 +51,49 @@
 	grabber << "You scoop up [src]."
 	src << "[grabber] scoops you up."
 	grabber.status_flags |= PASSEMOTES
-	return
+//	H.sync(src) #TOREMOVE unimplemented
+	return H
+/*
+/obj/item/weapon/holder/human
+	icon = 'icons/mob/holder_complex.dmi'
+	var/list/generate_for_slots = list(slot_l_hand_str, slot_r_hand_str, slot_back_str)
+	slot_flags = SLOT_BACK
 
+/obj/item/weapon/holder/human/sync(var/mob/living/M)
+
+	// Generate appropriate on-mob icons.
+	var/mob/living/carbon/human/owner = M
+	if(istype(owner) && owner.species)
+
+		var/skin_colour = rgb(owner.r_skin, owner.g_skin, owner.b_skin)
+		var/hair_colour = rgb(owner.r_hair, owner.g_hair, owner.b_hair)
+		var/eye_colour =  rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes)
+		var/species_name = lowertext(owner.species.get_bodytype())
+
+		for(var/cache_entry in generate_for_slots)
+			var/cache_key = "[owner.species]-[cache_entry]-[skin_colour]-[hair_colour]"
+			if(!holder_mob_icon_cache[cache_key])
+
+				// Generate individual icons.
+				var/icon/mob_icon = icon(icon, "[species_name]_holder_[cache_entry]_base")
+				mob_icon.Blend(skin_colour, ICON_ADD)
+				var/icon/hair_icon = icon(icon, "[species_name]_holder_[cache_entry]_hair")
+				hair_icon.Blend(hair_colour, ICON_ADD)
+				var/icon/eyes_icon = icon(icon, "[species_name]_holder_[cache_entry]_eyes")
+				eyes_icon.Blend(eye_colour, ICON_ADD)
+
+				// Blend them together.
+				mob_icon.Blend(eyes_icon, ICON_OVERLAY)
+				mob_icon.Blend(hair_icon, ICON_OVERLAY)
+
+				// Add to the cache.
+				holder_mob_icon_cache[cache_key] = mob_icon
+			item_icons[cache_entry] = holder_mob_icon_cache[cache_key]
+
+	// Handle the rest of sync().
+	..(M)
+*/
 //Mob specific holders.
-
 /obj/item/weapon/holder/diona
 	name = "diona nymph"
 	desc = "It's a tiny plant critter."
@@ -79,3 +118,23 @@
 	desc = "It's a slimy brain slug. Gross."
 	icon_state = "borer"
 	origin_tech = "biotech=6"
+
+/obj/item/weapon/holder/monkey
+	name = "monkey"
+	desc = "It's a monkey. Ook."
+	icon_state = "monkey"
+
+/obj/item/weapon/holder/monkey/farwa
+	name = "farwa"
+	desc = "It's a farwa."
+	icon_state = "farwa"
+
+/obj/item/weapon/holder/monkey/stok
+	name = "stok"
+	desc = "It's a stok. stok."
+	icon_state = "stok"
+
+/obj/item/weapon/holder/monkey/neaera
+	name = "neaera"
+	desc = "It's a neaera."
+	icon_state = "neaera"

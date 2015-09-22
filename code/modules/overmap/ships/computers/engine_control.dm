@@ -3,6 +3,7 @@
 /obj/machinery/computer/engines
 	name = "engine control console"
 	icon_state = "id"
+	light_color = LIGHT_COLOR_PURE_BLUE
 	var/state = "status"
 	var/list/engines = list()
 	var/obj/effect/map/ship/linked
@@ -86,12 +87,12 @@
 	add_fingerprint(usr)
 	updateUsrDialog()
 
-/obj/machinery/computer/engines/proc/burn()
+/obj/machinery/computer/engines/proc/eburn()
 	if(engines.len == 0)
 		return 0
 	var/res = 0
 	for(var/datum/ship_engine/E in engines)
-		res |= E.burn()
+		res |= E.eburn()
 	return res
 
 /obj/machinery/computer/engines/proc/get_total_thrust()

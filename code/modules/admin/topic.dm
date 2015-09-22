@@ -831,7 +831,7 @@
 			log_admin("[key_name(usr)] booted [key_name(M)].")
 			message_admins("\blue [key_name_admin(usr)] booted [key_name_admin(M)].", 1)
 			//M.client = null
-			del(M.client)
+			qdel(M.client)
 /*
 	//Player Notes
 	else if(href_list["notes"])
@@ -897,7 +897,7 @@
 				log_admin("[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 				message_admins("\blue[usr.client.ckey] has banned [M.ckey].\nReason: [reason]\nThis will be removed in [mins] minutes.")
 
-				del(M.client)
+				qdel(M.client)
 				//del(M)	// See no reason why to delete mob. Important stuff can be lost. And ban can be lifted before round ends.
 			if("No")
 				if(!check_rights(R_BAN))   return
@@ -922,7 +922,7 @@
 				feedback_inc("ban_perma",1)
 				DB_ban_record(BANTYPE_PERMA, M, -1, reason)
 
-				del(M.client)
+				qdel(M.client)
 				//del(M)
 			if("Cancel")
 				return
@@ -1054,7 +1054,7 @@
 
 		//strip their stuff and stick it in the crate
 		for(var/obj/item/I in M)
-			M.u_equip(I)
+			M.unEquip(I)
 			if(I)
 				I.loc = locker
 				I.layer = initial(I.layer)
@@ -1091,7 +1091,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
+			M.unEquip(I)
 			if(I)
 				I.loc = M.loc
 				I.layer = initial(I.layer)
@@ -1120,7 +1120,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
+			M.unEquip(I)
 			if(I)
 				I.loc = M.loc
 				I.layer = initial(I.layer)
@@ -1171,7 +1171,7 @@
 			return
 
 		for(var/obj/item/I in M)
-			M.u_equip(I)
+			M.unEquip(I)
 			if(I)
 				I.loc = M.loc
 				I.layer = initial(I.layer)
@@ -1441,7 +1441,7 @@
 		S.victim = M
 		S.loc = M.loc
 		spawn(20)
-			del(S)
+			qdel(S)
 
 		var/turf/simulated/floor/T = get_turf(M)
 		if(istype(T))
@@ -1557,7 +1557,7 @@
 			src.owner << "\red Message reply failed."
 
 		spawn(100)
-			del(P)
+			qdel(P)
 		return
 
 	else if(href_list["SolGovFaxReply"])
@@ -1802,21 +1802,21 @@
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SC")
 				for(var/obj/item/clothing/under/O in world)
-					del(O)
+					qdel(O)
 				ok = 1
 			if("sec_all_clothes")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SAC")
 				for(var/obj/item/clothing/O in world)
-					del(O)
+					qdel(O)
 				ok = 1
 			if("sec_classic1")
 				feedback_inc("admin_secrets_fun_used",1)
 				feedback_add_details("admin_secrets_fun_used","SC1")
 				for(var/obj/item/clothing/suit/fire/O in world)
-					del(O)
+					qdel(O)
 				for(var/obj/structure/grille/O in world)
-					del(O)
+					qdel(O)
 /*					for(var/obj/machinery/vehicle/pod/O in world)
 					for(var/mob/M in src)
 						M.loc = src.loc
@@ -1958,10 +1958,10 @@
 					if(!security)
 						//strip their stuff before they teleport into a cell :downs:
 						for(var/obj/item/weapon/W in H)
-							if(istype(W, /datum/organ/external))
+							if(istype(W, /obj/item/organ/external))
 								continue
 								//don't strip organs
-							H.u_equip(W)
+							H.unEquip(W)
 							if (H.client)
 								H.client.screen -= W
 							if (W)
@@ -2217,7 +2217,7 @@
 				var/turf/T = pick(blobstart)
 				var/obj/effect/bhole/bh = new /obj/effect/bhole( T.loc, 30 )
 				spawn(rand(100, 600))
-					del(bh)
+					qdel(bh)
 
 			if("timeanomalies")	//dear god this code was awful :P Still needs further optimisation
 				feedback_inc("admin_secrets_fun_used",1)

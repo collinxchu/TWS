@@ -2,52 +2,62 @@
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair"
-
+	buckle_lying = 0 //you sit in a chair, not lay
+	burn_state = -1 //Not Burnable
 	var/propelled = 0 // Check for fire-extinguisher-driven chairs
-
-/obj/structure/stool/MouseDrop(atom/over_object)
-	return
 
 /obj/structure/stool/bed/chair/New()
 	..()
 	spawn(3)	//sorry. i don't think there's a better way to do this.
-		update_layer()
+		handle_layer()
 	return
 
-/obj/structure/stool/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/stool/bed/chair/Move(atom/newloc, direct)
+	..()
+	handle_rotation()
+
+/obj/structure/stool/bed/chair/attackby(obj/item/weapon/W, mob/user, params)
 	..()
 	if(istype(W, /obj/item/assembly/shock_kit))
-		var/obj/item/assembly/shock_kit/SK = W
-		if(!SK.status)
-			user << "<span class='notice'>[SK] is not ready to be attached!</span>"
+		if(!user.drop_item())
 			return
-		user.drop_item()
+		var/obj/item/assembly/shock_kit/SK = W
 		var/obj/structure/stool/bed/chair/e_chair/E = new /obj/structure/stool/bed/chair/e_chair(src.loc)
 		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
-		E.set_dir(dir)
+		E.dir = dir
 		E.part = SK
 		SK.loc = E
 		SK.master = E
-		del(src)
-
-/obj/structure/stool/bed/chair/attack_tk(mob/user as mob)
+		qdel(src)
+/obj/structure/stool/bed/chair/attack_tk(mob/user)
 	if(buckled_mob)
 		..()
 	else
 		rotate()
 	return
 
-/obj/structure/stool/bed/chair/proc/update_layer()
-	if(src.dir == NORTH)
+/obj/structure/stool/bed/chair/proc/handle_rotation(direction)
+	if(buckled_mob)
+		buckled_mob.buckled = null //Temporary, so Move() succeeds.
+		if(!direction || !buckled_mob.Move(get_step(src, direction), direction))
+			buckled_mob.buckled = src
+			dir = buckled_mob.dir
+			return 0
+		buckled_mob.buckled = src //Restoring
+	handle_layer()
+	return 1
+
+/obj/structure/stool/bed/chair/proc/handle_layer()
+	if(dir == NORTH)
 		src.layer = FLY_LAYER
 	else
 		src.layer = OBJ_LAYER
 
-/obj/structure/stool/bed/chair/set_dir()
-	..()
-	update_layer()
+/obj/structure/stool/bed/chair/proc/spin()
+	src.dir = turn(src.dir, 90)
+	handle_layer()
 	if(buckled_mob)
-		buckled_mob.set_dir(dir)
+		buckled_mob.dir = dir
 
 /obj/structure/stool/bed/chair/verb/rotate()
 	set name = "Rotate Chair"
@@ -55,25 +65,19 @@
 	set src in oview(1)
 
 	if(config.ghost_interaction)
-		src.set_dir(turn(src.dir, 90))
-		return
+		spin()
 	else
-		if(istype(usr,/mob/living/simple_animal/mouse))
-			return
 		if(!usr || !isturf(usr.loc))
 			return
 		if(usr.stat || usr.restrained())
 			return
-
-		src.set_dir(turn(src.dir, 90))
-		return
-
-/obj/structure/stool/bed/chair/MouseDrop_T(mob/M as mob, mob/user as mob)
-	if(!istype(M)) return
-	buckle_mob(M, user)
-	return
+		spin()
 
 // Chair types
+/obj/structure/stool/bed/chair/wood
+	burn_state = 0 //Burnable
+	burntime = 20
+
 /obj/structure/stool/bed/chair/wood/normal
 	icon_state = "wooden_chair"
 	name = "wooden chair"
@@ -88,7 +92,7 @@
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		new /obj/item/stack/sheet/wood(src.loc)
-		del(src)
+		qdel(src)
 	else
 		..()
 
@@ -97,6 +101,8 @@
 	desc = "It looks comfy."
 	icon_state = "comfychair"
 	color = rgb(255,255,255)
+	burn_state = 0 //Burnable
+	burntime = 30
 	var/image/armrest = null
 
 /obj/structure/stool/bed/chair/comfy/New()
@@ -105,7 +111,7 @@
 
 	return ..()
 
-/obj/structure/stool/bed/chair/comfy/afterbuckle()
+/obj/structure/stool/bed/chair/comfy/post_buckle_mob()
 	if(buckled_mob)
 		overlays += armrest
 	else
@@ -122,7 +128,7 @@
 
 /obj/structure/stool/bed/chair/office
 	anchored = 0
-	movable = 1
+	buckle_movable = 1
 
 /obj/structure/stool/bed/chair/comfy/black
 	color = rgb(167,164,153)
@@ -133,28 +139,12 @@
 /obj/structure/stool/bed/chair/comfy/red
 	color = rgb(247,77,94)
 
-/obj/structure/stool/bed/chair/office/Move()
-	..()
-	if(buckled_mob)
-		var/mob/living/occupant = buckled_mob
-		occupant.buckled = null
-		occupant.Move(src.loc)
-		occupant.buckled = src
-		if (occupant && (src.loc != occupant.loc))
-			if (propelled)
-				for (var/mob/O in src.loc)
-					if (O != occupant)
-						Bump(O)
-			else
-				unbuckle()
-
 /obj/structure/stool/bed/chair/office/Bump(atom/A)
 	..()
 	if(!buckled_mob)	return
 
 	if(propelled)
-		var/mob/living/occupant = buckled_mob
-		unbuckle()
+		var/mob/living/occupant = unbuckle_mob()
 
 		var/def_zone = ran_zone()
 		var/blocked = occupant.run_armor_check(def_zone, "melee")
@@ -184,6 +174,8 @@
 	name = "old ratty sofa"
 	icon_state = "sofamiddle"
 	anchored = 1
+	burn_state = 0 //Burnable
+	burntime = 30
 
 /obj/structure/stool/bed/chair/sofa/left
 	icon_state = "sofaend_left"

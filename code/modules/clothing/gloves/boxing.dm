@@ -28,6 +28,7 @@
 	icon_state = "latex"
 	item_state = "lgloves"
 	item_color="mime"
+	burn_state = -1 //Won't burn in fires
 
 	redcoat
 		item_color = "redcoat"		//Exists for washing machines. Is not different from white gloves in any way.

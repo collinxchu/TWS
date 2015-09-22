@@ -131,6 +131,9 @@
 		else if(istype(target, /obj/machinery/radiocarbon_spectrometer))
 			return
 
+		else if(istype(target, /obj/machinery/fishtank)) //stop splashing and gimme some of that delicious fishwater
+			return
+
 		else if(reagents.total_volume)
 			user << "\blue You splash the solution onto [target]."
 			src.reagents.reaction(target, TOUCH)
@@ -277,10 +280,10 @@
 	attackby(var/obj/D, mob/user as mob)
 		if(isprox(D))
 			user << "You add [D] to [src]."
-			del(D)
+			qdel(D)
 			user.put_in_hands(new /obj/item/weapon/bucket_sensor)
 			user.drop_from_inventory(src)
-			del(src)
+			qdel(src)
 
 	update_icon()
 		overlays.Cut()

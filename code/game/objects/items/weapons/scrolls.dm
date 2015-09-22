@@ -9,6 +9,7 @@
 	throw_speed = 4
 	throw_range = 20
 	origin_tech = "bluespace=4"
+	burn_state = 0 //Burnable
 
 /obj/item/weapon/teleportation_scroll/attack_self(mob/user as mob)
 	user.set_machine(src)
@@ -69,7 +70,7 @@
 		return
 
 	if(user && user.buckled)
-		user.buckled.unbuckle()
+		user.buckled.unbuckle_mob()
 
 	var/list/tempL = L
 	var/attempt = null

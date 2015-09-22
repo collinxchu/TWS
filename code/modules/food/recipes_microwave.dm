@@ -1168,6 +1168,14 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/stuffing
 
+/datum/recipe/microwave/friedbanana
+	reagents = list("sugar" = 10, "cornoil" = 5)
+//#TOREMOVE	fruit = list("banana" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough,
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/friedbanana
+
 /datum/recipe/tofurkey
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/tofu,

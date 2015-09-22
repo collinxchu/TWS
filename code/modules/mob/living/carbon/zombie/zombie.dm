@@ -149,7 +149,7 @@
 							O.show_message("\red <B>[src.target] has been bitten by [src]!</B>", 1, "\red You hear struggling.", 2)
 						var/mob/living/carbon/human/T = target
 						T.bruteloss += rand(1,7)
-						var/datum/organ/external/affecting
+						var/obj/item/organ/external/affecting
 						if(T.organs["head"]) affecting = T.organs["head"]
 						affecting.take_damage(rand(1,7), 0)
 						playsound(get_turf(src), 'sound/items/eatfood.ogg', 50, 1)
@@ -187,7 +187,7 @@
 							O.show_message("\red <B>[src.target] has been clawed by [src]!</B>", 1, "\red You hear struggling.", 2)
 						var/mob/living/carbon/human/T = target
 						T.bruteloss += rand(1,7)
-						var/datum/organ/external/affecting
+						var/obj/item/organ/external/affecting
 						if(T.organs["head"]) affecting = T.organs["head"]
 						affecting.take_damage(rand(1,7), 0)
 						if(prob(12.5))
@@ -423,7 +423,7 @@
 	O.update_icons()//update_clothing()
 	src.ghostize()
 	O.loc = src.loc
-	del(src)
+	qdel(src)
 	return
 
 /obj/item/weapon/reagent_containers/glass/bottle/t_virus

@@ -11,6 +11,10 @@
 	search_range = 12
 	has_laser = 1
 
+	var/mob_bump_flag = HEAVY
+	var/mob_swap_flags = ~HEAVY
+	var/mob_push_flags = HEAVY  //#TOREMOVE - make into an actual mob
+
 	preparing_arrest_sounds = new()
 	secbot_assembly = /obj/item/weapon/secbot_assembly/ed209_assembly
 
@@ -68,7 +72,7 @@
 		if(0,1)
 			if( istype(W, /obj/item/robot_parts/l_leg) || istype(W, /obj/item/robot_parts/r_leg) )
 				user.drop_item()
-				del(W)
+				qdel(W)
 				build_step++
 				user << "<span class='notice'>You add the robot leg to [src].</span>"
 				name = "legs/frame assembly"
@@ -86,7 +90,7 @@
 				lasercolor = "b"
 			if( lasercolor || istype(W, /obj/item/clothing/suit/armor/vest) )
 				user.drop_item()
-				del(W)
+				qdel(W)
 				build_step++
 				user << "<span class='notice'>You add the armor to [src].</span>"
 				name = "vest/legs/frame assembly"
@@ -103,7 +107,7 @@
 		if(4)
 			if( istype(W, /obj/item/clothing/head/helmet) )
 				user.drop_item()
-				del(W)
+				qdel(W)
 				build_step++
 				user << "<span class='notice'>You add the helmet to [src].</span>"
 				name = "covered and shielded frame assembly"
@@ -113,7 +117,7 @@
 		if(5)
 			if( isprox(W) )
 				user.drop_item()
-				del(W)
+				qdel(W)
 				build_step++
 				user << "<span class='notice'>You add the prox sensor to [src].</span>"
 				name = "covered, shielded and sensored frame assembly"
@@ -155,7 +159,7 @@
 			src.item_state = "[lasercolor]ed209_taser"
 			src.icon_state = "[lasercolor]ed209_taser"
 			user.drop_item()
-			del(W)
+			qdel(W)
 
 		if(8)
 			if( istype(W, /obj/item/weapon/screwdriver) )
@@ -175,16 +179,16 @@
 				var/turf/T = get_turf(src)
 				new /obj/machinery/bot/secbot/ed209(T,created_name,lasercolor)
 				user.drop_item()
-				del(W)
+				qdel(W)
 				user.drop_from_inventory(src)
-				del(src)
+				qdel(src)
 
 
 /obj/machinery/bot/secbot/ed209/bullet_act(var/obj/item/projectile/Proj)
 	if((src.lasercolor == "b") && (src.disabled == 0))
 		if(istype(Proj, /obj/item/projectile/beam/lastertag/red))
 			src.disabled = 1
-			del (Proj)
+			qdel(Proj)
 			sleep(100)
 			src.disabled = 0
 		else
@@ -192,7 +196,7 @@
 	else if((src.lasercolor == "r") && (src.disabled == 0))
 		if(istype(Proj, /obj/item/projectile/beam/lastertag/blue))
 			src.disabled = 1
-			del (Proj)
+			qdel(Proj)
 			sleep(100)
 			src.disabled = 0
 		else
@@ -202,9 +206,9 @@
 
 /obj/machinery/bot/secbot/ed209/bluetag/New()//If desired, you spawn red and bluetag bots easily
 	new /obj/machinery/bot/secbot/ed209(get_turf(src),null,"b")
-	del(src)
+	qdel(src)
 
 
 /obj/machinery/bot/secbot/ed209/redtag/New()
 	new /obj/machinery/bot/secbot/ed209(get_turf(src),null,"r")
-	del(src)
+	qdel(src)

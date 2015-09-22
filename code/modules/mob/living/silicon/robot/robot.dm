@@ -13,6 +13,10 @@ var/list/robot_verbs_default = list(
 	maxHealth = 200
 	health = 200
 
+	mob_bump_flag = ROBOT
+	mob_swap_flags = ROBOT|MONKEY|SLIME|SIMPLE_ANIMAL
+	mob_push_flags = ~HEAVY //trundle trundle
+
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
 	var/sight_mode = 0
@@ -209,13 +213,22 @@ var/list/robot_verbs_default = list(
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
 //Improved /N
-/mob/living/silicon/robot/Del()
-	if(mmi)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
+/mob/living/silicon/robot/Destroy()
+	if(mmi && mind)//Safety for when a cyborg gets dust()ed. Or there is no MMI inside.
 		var/turf/T = get_turf(loc)//To hopefully prevent run time errors.
 		if(T)	mmi.loc = T
-		if(mind)	mind.transfer_to(mmi.brainmob)
+		if(mmi.brainmob)
+			mind.transfer_to(mmi.brainmob)
+		else
+			src << "<span class='danger'>Oops! Something went very wrong, your MMI was unable to receive your mind. You have been ghosted. Please make a bug report so we can fix this bug.</span>"
+			ghostize()
+			//ERROR("A borg has been destroyed, but its MMI lacked a brainmob, so the mind could not be transferred. Player: [ckey].")
 		mmi = null
-	..()
+	if(connected_ai)
+		connected_ai.connected_robots -= src
+	qdel(wires)
+	wires = null
+ 	return ..()
 
 /mob/living/silicon/robot/proc/pick_module()
 	if(module)
@@ -439,8 +452,8 @@ var/list/robot_verbs_default = list(
 
 
 /mob/living/silicon/robot/proc/robot_alerts()
-	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += "<A HREF='?src=\ref[src];mach_close=robotalerts'>Close</A><BR><BR>"
+//	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
+/*	dat += "<A HREF='?src=\ref[src];mach_close=robotalerts'>Close</A><BR><BR>"
 	for (var/cat in alarms)
 		dat += text("<B>[cat]</B><BR>\n")
 		var/list/alarmlist = alarms[cat]
@@ -457,7 +470,7 @@ var/list/robot_verbs_default = list(
 		dat += "<BR>\n"
 
 	viewalerts = 1
-	src << browse(dat, "window=robotalerts&can_close=0")
+	src << browse(dat, "window=robotalerts&can_close=0") #TOREMOVE */
 
 /mob/living/silicon/robot/proc/self_diagnosis()
 	if(!is_component_functioning("diagnosis unit"))
@@ -477,9 +490,9 @@ var/list/robot_verbs_default = list(
 	lights_on = !lights_on
 	usr << "You [lights_on ? "enable" : "disable"] your integrated light."
 	if(lights_on)
-		SetLuminosity(integrated_light_power) // 1.5x luminosity of flashlight
+		set_light(integrated_light_power) // 1.5x luminosity of flashlight
 	else
-		SetLuminosity(0)
+		set_light(0)
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -625,25 +638,25 @@ var/list/robot_verbs_default = list(
 		return
 	return
 
-
+/*
 /mob/living/silicon/robot/triggerAlarm(var/class, area/A, list/cameralist, var/source)
 	if (stat == 2)
 		return 1
 
 	..()
 
-	queueAlarm(text("--- [class] alarm detected in [A.name]!"), class)
+//	queueAlarm(text("--- [class] alarm detected in [A.name]!"), class) #TOREMOVE
 
 
 /mob/living/silicon/robot/cancelAlarm(var/class, area/A as area, obj/origin)
 	var/has_alarm = ..()
 
 	if (!has_alarm)
-		queueAlarm(text("--- [class] alarm in [A.name] has been cleared."), class, 0)
+//		queueAlarm(text("--- [class] alarm in [A.name] has been cleared."), class, 0) #TOREMOVE
 //		if (viewalerts) robot_alerts()
 	return has_alarm
 
-
+*/
 /mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
 		return
@@ -719,7 +732,7 @@ var/list/robot_verbs_default = list(
 				C.r_arm = new/obj/item/robot_parts/r_arm(C)
 				C.updateicon()
 				new/obj/item/robot_parts/chest(loc)
-				src.Del()
+				src.Destroy()
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
 				var/list/removable_components = list()
@@ -862,7 +875,7 @@ var/list/robot_verbs_default = list(
 					src << "\red \b ALERT: [user.real_name] is your new master. Obey your new laws and his commands."
 					if(src.module && istype(src.module, /obj/item/weapon/robot_module/miner))
 						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
-							del(D)
+							qdel(D)
 						src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
 						src.module.rebuild()
 					updateicon()
@@ -995,7 +1008,7 @@ var/list/robot_verbs_default = list(
 //Call when target overlay should be added/removed
 /mob/living/silicon/robot/update_targeted()
 	if(!targeted_by && target_locked)
-		del(target_locked)
+		qdel(target_locked)
 	updateicon()
 	if (targeted_by && target_locked)
 		overlays += target_locked
@@ -1145,7 +1158,7 @@ var/list/robot_verbs_default = list(
 				for(var/A in tile)
 					if(istype(A, /obj/effect))
 						if(istype(A, /obj/effect/rune) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay))
-							del(A)
+							qdel(A)
 					else if(istype(A, /obj/item))
 						var/obj/item/cleaned_item = A
 						cleaned_item.clean_blood()

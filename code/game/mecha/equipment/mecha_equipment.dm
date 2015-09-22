@@ -59,7 +59,7 @@
 		else
 			chassis.occupant << sound('sound/mecha/critdestr.ogg',volume=50)
 	spawn
-		del src
+		qdel(src)
 	return
 
 /obj/item/mecha_parts/mecha_equipment/proc/critfail()
@@ -100,11 +100,11 @@
 
 	if (ispath(required_type))
 		return istype(M, required_type)
-	
+
 	for (var/path in required_type)
 		if (istype(M, path))
 			return 1
-	
+
 	return 0
 
 /obj/item/mecha_parts/mecha_equipment/proc/attach(obj/mecha/M as obj)

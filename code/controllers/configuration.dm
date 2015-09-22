@@ -17,6 +17,7 @@
 	var/log_adminchat = 0				// log admin chat messages
 	var/log_adminwarn = 0				// log warnings admins get about bomb construction and such
 	var/log_pda = 0						// log pda messages
+	var/log_world_output = 0	// log world.log << messages
 	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
 	var/log_runtime = 0					// logs world.log to a file
 	var/sql_enabled = 1					// for sql switching
@@ -110,6 +111,13 @@
 
 	var/organ_health_multiplier = 1
 	var/organ_regeneration_multiplier = 1
+	var/organs_decay
+	var/default_brain_health = 400
+
+
+	//Paincrit knocks someone down once they hit 60 shock_stage, so by default make it so that close to 100 additional damage needs to be dealt,
+	//so that it's similar to HALLOSS. Lowered it a bit since hitting paincrit takes much longer to wear off than a halloss stun.
+	var/organ_damage_spillover_multiplier = 0.5
 
 	var/bones_can_break = 0
 	var/limbs_can_break = 0
@@ -197,6 +205,8 @@
 	var/ooc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
+
+	var/starlight = 1	// Whether space turfs have ambient light or not
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode

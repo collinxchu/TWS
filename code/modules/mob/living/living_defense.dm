@@ -59,7 +59,7 @@
 	if(istype(P, /obj/item/projectile/beam/stun) || istype(P, /obj/item/projectile/bullet/stunshot))
 		stun_effect_act(0, P.agony, def_zone, P)
 		src <<"\red You have been hit by [P]!"
-		del P
+		qdel(P)
 		return
 
 	//Armor
@@ -191,3 +191,128 @@
 	src.visible_message("<span class='danger'>[user] has [attack_message] [src]!</span>")
 	spawn(1) updatehealth()
 	return 1
+
+//Mobs on Fire
+/mob/living/proc/IgniteMob()
+	if(fire_stacks > 0 && !on_fire)
+		on_fire = 1
+		set_light(light_range + 3,l_color = "#ED9200")
+		update_fire()
+
+/mob/living/proc/ExtinguishMob()
+	if(on_fire)
+		on_fire = 0
+		fire_stacks = 0
+		set_light(max(0, light_range - 3))
+		update_fire()
+
+/mob/living/proc/update_fire()
+	return
+
+/mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
+    fire_stacks = Clamp(fire_stacks + add_fire_stacks, min = FIRE_MIN_STACKS, max = FIRE_MAX_STACKS)
+   //	if(on_fire && fire_stacks <= 0)
+		//ExtinguishMob()
+
+/mob/living/proc/handle_fire()
+	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
+		fire_stacks = min(0, fire_stacks + 1)//So we dry ourselves back to default, nonflammable.
+	if(!on_fire)
+		return 1
+	if(fire_stacks > 0)
+		adjust_fire_stacks(-0.1) //the fire is slowly consumed
+	else
+		ExtinguishMob()
+		return
+	var/datum/gas_mixture/G = loc.return_air() // Check if we're standing in an oxygenless environment
+	if(G.gas["oxygen"] < 1)
+		ExtinguishMob() //If there's no oxygen in the tile we're on, put out the fire
+		return 1
+
+	var/turf/location = get_turf(src)
+	location.hotspot_expose(fire_burn_temperature(), 50, 1)
+
+/mob/living/fire_act()
+	adjust_fire_stacks(3)
+	IgniteMob()
+
+//Share fire evenly between the two mobs
+//Called in MobBump() and Crossed()
+/mob/living/proc/spreadFire(mob/living/L)
+	if(!istype(L))
+		return
+	var/L_old_on_fire = L.on_fire
+
+	if(on_fire) //Only spread fire stacks if we're on fire
+		fire_stacks /= 2
+		L.fire_stacks += fire_stacks
+		L.IgniteMob()
+
+	if(L_old_on_fire) //Only ignite us and gain their stacks if they were onfire before we bumped them
+		L.fire_stacks /= 2
+		fire_stacks += L.fire_stacks
+		IgniteMob()
+
+//Mobs on Fire end
+
+//Finds the effective temperature that the mob is burning at.
+/mob/living/proc/fire_burn_temperature()
+	if (fire_stacks <= 0)
+		return 0
+
+	//Scale quadratically so that single digit numbers of fire stacks don't burn ridiculously hot.
+	return round(FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE*(fire_stacks/FIRE_MAX_FIRESUIT_STACKS)**2)
+
+/mob/living/incapacitated()
+	if(stat || paralysis || stunned || weakened || restrained())
+		return 1
+
+//If simple_animals are ever moved under carbon, then this can probably be moved to carbon as well
+/mob/living/proc/attack_throat(obj/item/W, obj/item/weapon/grab/G, mob/user)
+
+	// Knifing
+	if(!W.edge || !W.force || W.damtype != BRUTE) return //unsuitable weapon
+
+	user.visible_message("<span class='danger'>\The [user] begins to slit [src]'s throat with \the [W]!</span>")
+
+	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
+	if(!do_after(user, 20))
+		return
+	if(!(G && G.assailant == user && G.affecting == src)) //check that we still have a grab
+		return
+
+	var/damage_mod = 1
+	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
+	var/obj/item/clothing/head/helmet = get_equipped_item(slot_head)
+	if(istype(helmet) && (helmet.body_parts_covered & HEAD)) //&& (helmet.item_flags & STOPPRESSUREDAMAGE)) #TOREMOVE - this flag is not yet implemented
+		//we don't do an armor_check here because this is not an impact effect like a weapon swung with momentum, that either penetrates or glances off.
+		damage_mod = 1.0 - (helmet.armor["melee"]/100)
+
+	var/total_damage = 0
+	for(var/i in 1 to 3)
+		var/damage = min(W.force*1.5, 20)*damage_mod
+		apply_damage(damage, W.damtype, "head", 0, sharp=W.sharp, edge=W.edge)
+		total_damage += damage
+
+	var/oxyloss = total_damage
+	if(total_damage >= 40) //threshold to make someone pass out
+		oxyloss = 60 // Brain lacks oxygen immediately, pass out
+
+	adjustOxyLoss(min(oxyloss, 100 - getOxyLoss())) //don't put them over 100 oxyloss
+
+	if(total_damage)
+		if(oxyloss >= 40)
+			user.visible_message("<span class='danger'>\The [user] slit [src]'s throat open with \the [W]!</span>")
+		else
+			user.visible_message("<span class='danger'>\The [user] cut [src]'s neck with \the [W]!</span>")
+
+		if(W.hitsound)
+			playsound(loc, W.hitsound, 50, 1, -1)
+
+	G.last_action = world.time
+	flick(G.hud.icon_state, G.hud)
+
+	user.attack_log += "\[[time_stamp()]\]<font color='red'> Knifed [name] ([ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
+	src.attack_log += "\[[time_stamp()]\]<font color='orange'> Got knifed by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
+	msg_admin_attack("[key_name(user)] knifed [key_name(src)] with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])" )
+	return

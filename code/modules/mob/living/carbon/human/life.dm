@@ -98,6 +98,8 @@
 		//stuff in the stomach
 		handle_stomach()
 
+		update_pulling()  //#TOREMOVE - refactor Life() to go under mob/living instead
+
 		handle_shock()
 
 		handle_pain()
@@ -274,7 +276,7 @@
 		radiation = Clamp(radiation,0,100)
 
 		if (radiation)
-			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in internal_organs
+			var/obj/item/organ/diona/nutrients/rad_organ = locate() in internal_organs
 			if(rad_organ && !rad_organ.is_broken())
 				var/rads = radiation/25
 				radiation -= rads
@@ -321,7 +323,7 @@
 				adjustToxLoss(damage * RADIATION_SPEED_COEFFICIENT)
 				updatehealth()
 				if(organs.len)
-					var/datum/organ/external/O = pick(organs)
+					var/obj/item/organ/external/O = pick(organs)
 					if(istype(O)) O.add_autopsy_data("Radiation Poisoning", damage)
 
 	proc/breathe()
@@ -458,7 +460,7 @@
 
 		// Lung damage increases the minimum safe pressure.
 		if(species.has_organ["lungs"])
-			var/datum/organ/internal/lungs/L = internal_organs_by_name["lungs"]
+			var/obj/item/organ/lungs/L = internal_organs_by_name["lungs"]
 			if(!L)
 				safe_pressure_min = INFINITY //No lungs, how are you breathing?
 			else if(L.is_broken())
@@ -598,35 +600,37 @@
 			failed_last_breath = 0
 			adjustOxyLoss(-5)
 
-		// Hot air hurts :(
-		if( (breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
+// Hot air hurts :(
+		if((breath.temperature < species.cold_level_1 || breath.temperature > species.heat_level_1) && !(COLD_RESISTANCE in mutations))
 
-			if(breath.temperature < species.cold_level_1)
+			if(breath.temperature <= species.cold_level_1)
 				if(prob(20))
 					src << "<span class='danger'>You feel your face freezing and icicles forming in your lungs!</span>"
-			else if(breath.temperature > species.heat_level_1)
+			else if(breath.temperature >= species.heat_level_1)
 				if(prob(20))
 					src << "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>"
 
-			switch(breath.temperature)
-				if(-INFINITY to species.cold_level_3)
-					apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Cold")
-					fire_alert = max(fire_alert, 1)
-				if(species.cold_level_3 to species.cold_level_2)
-					apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Cold")
-					fire_alert = max(fire_alert, 1)
-				if(species.cold_level_2 to species.cold_level_1)
-					apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Cold")
-					fire_alert = max(fire_alert, 1)
-				if(species.heat_level_1 to species.heat_level_2)
+			if(breath.temperature >= species.heat_level_1)
+				if(breath.temperature < species.heat_level_2)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-				if(species.heat_level_2 to species.heat_level_3)
+				else if(breath.temperature < species.heat_level_3)
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
-				if(species.heat_level_3 to INFINITY)
+				else
 					apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Heat")
 					fire_alert = max(fire_alert, 2)
+
+			else if(breath.temperature <= species.cold_level_1)
+				if(breath.temperature > species.cold_level_2)
+					apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, "head", used_weapon = "Excessive Cold")
+					fire_alert = max(fire_alert, 1)
+				else if(breath.temperature > species.cold_level_3)
+					apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, "head", used_weapon = "Excessive Cold")
+					fire_alert = max(fire_alert, 1)
+				else
+					apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, "head", used_weapon = "Excessive Cold")
+					fire_alert = max(fire_alert, 1)
 
 			//breathing in hot/cold air also heats/cools you a bit
 			var/temp_adj = breath.temperature - bodytemperature
@@ -643,9 +647,15 @@
 			//world << "Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]"
 			bodytemperature += temp_adj
 
+		else if(breath.temperature >= species.heat_discomfort_level)
+			species.get_environment_discomfort(src,"heat")
+		else if(breath.temperature <= species.cold_discomfort_level)
+			species.get_environment_discomfort(src,"cold")
+
 
 		breath.update_values()
 		return 1
+
 
 	proc/handle_environment(datum/gas_mixture/environment)
 
@@ -692,43 +702,38 @@
 
 			//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
 			var/relative_density = environment.total_moles / MOLES_CELLSTANDARD
-			temp_adj *= relative_density
-
-			if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
-			if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-			//world << "Environment: [loc_temp], [src]: [bodytemperature], Adjusting: [temp_adj]"
-			bodytemperature += temp_adj
+			bodytemperature += between(BODYTEMP_COOLING_MAX, temp_adj*relative_density, BODYTEMP_HEATING_MAX)
 
 		// +/- 50 degrees from 310.15K is the 'safe' zone, where no damage is dealt.
-		if(bodytemperature > species.heat_level_1)
+		if(bodytemperature >= species.heat_level_1)
 			//Body temperature is too hot.
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
-			switch(bodytemperature)
-				if(species.heat_level_1 to species.heat_level_2)
-					take_overall_damage(burn=HEAT_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
-					fire_alert = max(fire_alert, 2)
-				if(species.heat_level_2 to species.heat_level_3)
-					take_overall_damage(burn=HEAT_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
-					fire_alert = max(fire_alert, 2)
-				if(species.heat_level_3 to INFINITY)
-					take_overall_damage(burn=HEAT_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
-					fire_alert = max(fire_alert, 2)
 
-		else if(bodytemperature < species.cold_level_1)
+			if(bodytemperature < species.heat_level_2)
+				take_overall_damage(burn=HEAT_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
+				fire_alert = max(fire_alert, 2)
+			else if(bodytemperature < species.heat_level_3)
+				take_overall_damage(burn=HEAT_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
+				fire_alert = max(fire_alert, 2)
+			else
+				take_overall_damage(burn=HEAT_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
+				fire_alert = max(fire_alert, 2)
+
+		else if(bodytemperature <= species.cold_level_1)
 			fire_alert = max(fire_alert, 1)
 			if(status_flags & GODMODE)	return 1	//godmode
+
 			if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-				switch(bodytemperature)
-					if(species.cold_level_2 to species.cold_level_1)
-						take_overall_damage(burn=COLD_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
-						fire_alert = max(fire_alert, 1)
-					if(species.cold_level_3 to species.cold_level_2)
-						take_overall_damage(burn=COLD_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
-						fire_alert = max(fire_alert, 1)
-					if(-INFINITY to species.cold_level_3)
-						take_overall_damage(burn=COLD_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
-						fire_alert = max(fire_alert, 1)
+				if(bodytemperature > species.cold_level_2)
+					take_overall_damage(burn=COLD_DAMAGE_LEVEL_1, used_weapon = "High Body Temperature")
+					fire_alert = max(fire_alert, 1)
+				else if(bodytemperature > species.cold_level_3)
+					take_overall_damage(burn=COLD_DAMAGE_LEVEL_2, used_weapon = "High Body Temperature")
+					fire_alert = max(fire_alert, 1)
+				else
+					take_overall_damage(burn=COLD_DAMAGE_LEVEL_3, used_weapon = "High Body Temperature")
+					fire_alert = max(fire_alert, 1)
 
 		// Account for massive pressure differences.  Done by Polymorph
 		// Made it possible to actually have something that can protect against high pressure... Done by Errorage. Polymorph now has an axe sticking from his head for his previous hardcoded nonsense!
@@ -936,15 +941,16 @@
 
 		if(status_flags & GODMODE)	return 0	//godmode
 
-		var/datum/organ/internal/diona/node/light_organ = locate() in internal_organs
+		var/obj/item/organ/diona/node/light_organ = locate() in internal_organs
 		if(light_organ && !light_organ.is_broken())
 			var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 			if(isturf(loc)) //else, there's considered to be no light
 				var/turf/T = loc
-				var/area/A = T.loc
-				if(A)
-					if(A.lighting_use_dynamic)	light_amount = min(10,T.lighting_lumcount) - 5 //hardcapped so it's not abused by having a ton of flashlights
-					else						light_amount =  5
+				var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
+				if(L)
+					light_amount = min(10,L.lum_r + L.lum_g + L.lum_b) - 5 //hardcapped so it's not abused by having a ton of flashlights
+				else
+					light_amount =  5
 			nutrition += light_amount
 			traumatic_shock -= light_amount
 
@@ -962,10 +968,11 @@
 			var/light_amount = 0
 			if(isturf(loc))
 				var/turf/T = loc
-				var/area/A = T.loc
-				if(A)
-					if(A.lighting_use_dynamic)	light_amount = T.lighting_lumcount
-					else						light_amount =  10
+				var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
+				if(L)
+					light_amount = L.lum_r + L.lum_g + L.lum_b //hardcapped so it's not abused by having a ton of flashlights
+				else
+					light_amount =  10
 			if(light_amount > species.light_dam) //if there's enough light, start dying
 				take_overall_damage(1,1)
 			else //heal in the dark
@@ -1035,7 +1042,7 @@
 
 			else
 				for(var/atom/a in hallucinations)
-					del a
+					qdel(a)
 
 				if(halloss > 100)
 					src << "<span class='notice'>You're in too much pain to keep going...</span>"
@@ -1071,9 +1078,7 @@
 
 			//Periodically double-check embedded_flag
 			if(embedded_flag && !(life_tick % 10))
-				var/list/E
-				E = get_visible_implants(0)
-				if(!E.len)
+				if(!embedded_needs_process())
 					embedded_flag = 0
 
 			//Eyes
@@ -1304,6 +1309,29 @@
 								if(0 to 20)				healths.icon_state = "health5"
 								else					healths.icon_state = "health6"
 
+		if(healthdoll)
+			healthdoll.overlays.Cut()
+			if(stat == DEAD)
+				healthdoll.icon_state = "healthdoll_DEAD"
+			else
+				healthdoll.icon_state = "healthdoll_OVERLAY"
+				for(var/obj/item/organ/external/O in organs)
+					var/damage = O.burn_dam + O.brute_dam
+					var/comparison = (O.max_damage/5)
+					var/icon_num = 0
+					if(damage)
+						icon_num = 1
+					if(damage > (comparison))
+						icon_num = 2
+					if(damage > (comparison*2))
+						icon_num = 3
+					if(damage > (comparison*3))
+						icon_num = 4
+					if(damage > (comparison*4))
+						icon_num = 5
+					if(icon_num)
+						healthdoll.overlays += image('icons/mob/screen_gen.dmi',"[O.limb_name][icon_num]")
+
 			if(nutrition_icon)
 				switch(nutrition)
 					if(450 to INFINITY)				nutrition_icon.icon_state = "nutrition0"
@@ -1447,8 +1475,9 @@
 
 		//0.1% chance of playing a scary sound to someone who's in complete darkness
 		if(isturf(loc) && rand(1,1000) == 1)
-			var/turf/currentTurf = loc
-			if(!currentTurf.lighting_lumcount)
+			var/turf/T = loc
+			var/atom/movable/lighting_overlay/L = locate(/atom/movable/lighting_overlay) in T
+			if(L && L.lum_r + L.lum_g + L.lum_b == 0)
 				playsound_local(src,pick(scarySounds),50, 1, -1)
 
 	proc/handle_virus_updates()
@@ -1502,7 +1531,7 @@
 					if(M.stat == 2)
 						M.death(1)
 						stomach_contents.Remove(M)
-						del(M)
+						qdel(M)
 						continue
 					if(air_master.current_cycle%3==1)
 						if(!(M.status_flags & GODMODE))
@@ -1770,6 +1799,11 @@
 	if(..())
 		speech_problem_flag = 1
 	return stuttering
+
+/mob/living/proc/update_pulling()
+	if(pulling)
+		if(incapacitated())
+			stop_pulling()  //#TOREMOVE - move to living/life
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS

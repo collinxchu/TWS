@@ -15,6 +15,8 @@ var/global/list/cached_icons = list()
 	volume = 70
 	flags = OPENCONTAINER
 	var/paint_type = ""
+	burn_state = 0 //Burnable
+	burntime = 5
 
 	afterattack(turf/simulated/target, mob/user, proximity)
 		if(!proximity) return

@@ -6,67 +6,16 @@
 	icon = 'icons/obj/structures.dmi'
 	icon_state = "table"
 	density = 1
-	anchored = 1
+	anchored = 1.0
 	layer = 2.8
-	throwpass = 1
+	throwpass = 1	//You can throw objects over this, despite it's density.")
 	climbable = 1
-	breakable = 1
-	parts = /obj/item/weapon/table_parts
-
-	var/flipped = 0
-	var/health = 100
 
 	var/frame = /obj/structure/table_frame
-
-
-
-/obj/structure/table/woodentable
-	name = "wooden table"
-	desc = "Do not apply fire to this. Rumour says it burns easily."
-	icon_state = "wood_table"
-	frame = /obj/structure/table_frame/wood
-	parts = /obj/item/weapon/table_parts/wood
-	health = 50
-
-/obj/structure/table/glasstable
-	name = "glass table"
-	desc = "What did I say about leaning on the glass tables? Now you need surgery."
-	icon_state = "glass_table"
-	parts = /obj/item/stack/sheet/glass
-	health = 50
-
-
-/obj/structure/table/gamblingtable
-	name = "gambling table"
-	desc = "A curved wooden table with a thin carpet of green fabric."
-	icon_state = "gamble_table"
-	parts = /obj/item/weapon/table_parts/gambling
-	health = 50
-
-/obj/structure/table/reinforced
-	icon_state = "reinf_table"
-	health = 200
-	parts = /obj/item/weapon/table_parts/reinforced
-
-/obj/structure/table/rack
-	name = "rack"
-	desc = "Different from the Middle Ages version."
-	icon = 'icons/obj/objects.dmi'
-	icon_state = "rack"
-	health = 100
-	parts = /obj/item/weapon/table_parts/rack
-	flipped = -1 //Cannot flip.
-
-/obj/structure/table/rack/grave
-	name = "grave"
-	desc = "A gravestone where someone has been apparently buried. You can place flowers and gifts on it."
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "grave1"
-
-/obj/structure/table/examine()
-	..()
-	if(health > 100)
-		usr << "This one looks like it has been reinforced."
+	parts = /obj/item/weapon/table_parts
+	var/flipped = 0
+	var/health = 100
+	var/busy = 0
 
 /obj/structure/table/proc/update_adjacent()
 	for(var/direction in list(1,2,4,8,5,6,9,10))
@@ -78,43 +27,43 @@
 	..()
 	for(var/obj/structure/table/T in src.loc)
 		if(T != src)
-			del(T)
+			qdel(T)
 	update_icon()
 	update_adjacent()
 
-/obj/structure/table/Del()
+/obj/structure/table/Destroy()
 	update_adjacent()
-	..()
+	return ..()
+
+/obj/structure/table/proc/destroy()
+	new parts(loc)
+	density = 0
+	qdel(src)
 
 /obj/structure/table/update_icon()
+	if(flipped)
+		var/type = 0
+		var/tabledirs = 0
+		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
+			if (T && T.flipped)
+				type++
+				tabledirs |= direction
+		var/base = "table"
+		if (istype(src, /obj/structure/table/wooden))
+			base = "wood"
+		if (istype(src, /obj/structure/table/reinforced))
+			base = "rtable"
 
-	if(health > 100)
-		name = "reinforced [initial(name)]"
+		icon_state = "[base]flip[type]"
+		if (type==1)
+			if (tabledirs & turn(dir,90))
+				icon_state = icon_state+"-"
+			if (tabledirs & turn(dir,-90))
+				icon_state = icon_state+"+"
+		return 1
 
 	spawn(2) //So it properly updates when deleting
-
-		if(flipped == 1)
-			var/type = 0
-			var/tabledirs = 0
-			for(var/direction in list(turn(dir,90), turn(dir,-90)) )
-				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-				if (T && T.flipped == 1 && T.dir == src.dir)
-					type++
-					tabledirs |= direction
-			var/base = "table"
-			if (istype(src, /obj/structure/table/woodentable))
-				base = "wood"
-			if (istype(src, /obj/structure/table/reinforced))
-				base = "rtable"
-
-			icon_state = "[base]flip[type]"
-			if (type==1)
-				if (tabledirs & turn(dir,90))
-					icon_state = icon_state+"-"
-				if (tabledirs & turn(dir,-90))
-					icon_state = icon_state+"+"
-			return 1
-
 		var/dir_sum = 0
 		for(var/direction in list(1,2,4,8,5,6,9,10))
 			var/skip_sum = 0
@@ -146,7 +95,7 @@
 					continue
 			if(!skip_sum) //means there is a window between the two tiles in this direction
 				var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,direction))
-				if(T && T.flipped == 0) // This should let us ignore racks for table icons/flipping. Should.
+				if(T && !T.flipped)
 					if(direction <5)
 						dir_sum += direction
 					else
@@ -247,7 +196,23 @@
 					icon_state = "reinf_tabledir2"
 				if(6)
 					icon_state = "reinf_tabledir3"
-		else if(istype(src,/obj/structure/table/woodentable))
+		else if(istype(src,/obj/structure/table/wooden/gamblingtable))
+			switch(table_type)
+				if(0)
+					icon_state = "gamble_table"
+				if(1)
+					icon_state = "gamble_1tileendtable"
+				if(2)
+					icon_state = "gamble_1tilethick"
+				if(3)
+					icon_state = "gamble_tabledir"
+				if(4)
+					icon_state = "gamble_middle"
+				if(5)
+					icon_state = "gamble_tabledir2"
+				if(6)
+					icon_state = "gamble_tabledir3"
+		else if(istype(src,/obj/structure/table/wooden))
 			switch(table_type)
 				if(0)
 					icon_state = "wood_table"
@@ -268,33 +233,17 @@
 				if(0)
 					icon_state = "glass_table"
 				if(1)
-					icon_state = "glass_1tileendtable"
+					icon_state = "glass_table_1tileendtable"
 				if(2)
-					icon_state = "glass_1tilethick"
+					icon_state = "glass_table_1tilethick"
 				if(3)
-					icon_state = "glass_tabledir"
+					icon_state = "glass_table_dir"
 				if(4)
-					icon_state = "glass_middle"
+					icon_state = "glass_table_middle"
 				if(5)
 					icon_state = "glass_tabledir2"
 				if(6)
 					icon_state = "glass_tabledir3"
-		else if(istype(src,/obj/structure/table/gamblingtable))
-			switch(table_type)
-				if(0)
-					icon_state = "gamble_table"
-				if(1)
-					icon_state = "gamble_1tileendtable"
-				if(2)
-					icon_state = "gamble_1tilethick"
-				if(3)
-					icon_state = "gamble_tabledir"
-				if(4)
-					icon_state = "gamble_middle"
-				if(5)
-					icon_state = "gamble_tabledir2"
-				if(6)
-					icon_state = "gamble_tabledir3"
 		else
 			switch(table_type)
 				if(0)
@@ -312,9 +261,99 @@
 				if(6)
 					icon_state = "tabledir3"
 		if (dir_sum in list(1,2,4,8,5,6,9,10))
-			set_dir(dir_sum)
+			dir = dir_sum
 		else
-			set_dir(2)
+			dir = 2
+
+/obj/structure/table/wooden
+	name = "wooden table"
+	desc = "Do not apply fire to this. Rumour says it burns easily."
+	icon_state = "wood_table"
+	frame = /obj/structure/table_frame/wood
+	parts = /obj/item/weapon/table_parts/wood
+	health = 50
+	burn_state = 0 //Burnable
+	burntime = 20
+
+/obj/structure/table/wooden/fire_act()
+	parts = null //won't drop its parts
+	..()
+
+/obj/structure/table/glasstable
+	name = "glass table"
+	desc = "What did I say about leaning on the glass tables? Now you need surgery."
+	icon_state = "glass_table"
+	parts = /obj/item/weapon/shard
+	health = 50
+
+/obj/structure/table/wooden/gamblingtable
+	name = "gambling table"
+	desc = "A curved wooden table with a thin carpet of green fabric."
+	icon_state = "gamble_table"
+	parts = /obj/item/weapon/table_parts/gambling
+
+/obj/structure/table/reinforced
+	icon_state = "reinf_table"
+	health = 200
+	parts = /obj/item/weapon/table_parts/reinforced
+	var/status = 2
+
+/obj/structure/table/reinforced/flip(var/direction)
+	if (status == 2)
+		return 0
+	else
+		return ..()
+
+/obj/structure/table/reinforced/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if (istype(W, /obj/item/weapon/weldingtool))
+		var/obj/item/weapon/weldingtool/WT = W
+		if(WT.remove_fuel(0, user))
+			if(src.status == 2)
+				user << "\blue Now weakening the reinforced table"
+				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+				if (do_after(user, 50))
+					if(!src || !WT.isOn()) return
+					user << "\blue Table weakened"
+					src.status = 1
+			else
+				user << "\blue Now strengthening the reinforced table"
+				playsound(src.loc, 'sound/items/Welder.ogg', 50, 1)
+				if (do_after(user, 50))
+					if(!src || !WT.isOn()) return
+					user << "\blue Table strengthened"
+					src.status = 2
+			return
+		return
+
+	if (istype(W, /obj/item/weapon/wrench))
+		if(src.status == 2)
+			return
+
+	..()
+
+/obj/structure/table/rack
+	name = "rack"
+	desc = "Different from the Middle Ages version."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "rack"
+	health = 100
+	parts = /obj/item/weapon/table_parts/rack
+	flipped = -1 //Cannot flip.
+
+/obj/structure/table/rack/grave
+	name = "grave"
+	desc = "A gravestone where someone has been apparently buried. You can place flowers and gifts on it."
+	icon = 'icons/obj/decor.dmi'
+	icon_state = "grave1"
+
+/obj/structure/table/examine()
+	..()
+	if(health > 100)
+		usr << "This one looks like it has been reinforced."
+
+/obj/structure/table/Destroy() //#TOREMOVE
+	update_adjacent()
+	..()
 
 /obj/structure/table/attack_tk() // no telehulk sorry
 	return
@@ -323,11 +362,15 @@
 	if(air_group || (height==0)) return 1
 	if(istype(mover,/obj/item/projectile))
 		return (check_cover(mover,target))
+	if(ismob(mover))
+		var/mob/M = mover
+		if(M.flying)
+			return 1
 	if(istype(mover) && mover.checkpass(PASSTABLE))
 		return 1
 	if(locate(/obj/structure/table) in get_turf(mover))
 		return 1
-	if (flipped == 1)
+	if (flipped)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
@@ -336,13 +379,7 @@
 
 //checks if projectile 'P' from turf 'from' can hit whatever is behind the table. Returns 1 if it can, 0 if bullet stops.
 /obj/structure/table/proc/check_cover(obj/item/projectile/P, turf/from)
-	var/turf/cover
-	if(flipped==1)
-		cover = get_turf(src)
-	else if(flipped==0)
-		cover = get_step(loc, get_dir(from, loc))
-	if(!cover)
-		return 1
+	var/turf/cover = flipped ? get_turf(src) : get_step(loc, get_dir(from, loc))
 	if (get_dist(P.starting, loc) <= 1) //Tables won't help you if people are THIS close
 		return 1
 	if (get_turf(P.original) == cover)
@@ -351,7 +388,7 @@
 			var/mob/M = P.original
 			if (M.lying)
 				chance += 20				//Lying down lets you catch less bullets
-		if(flipped==1)
+		if(flipped)
 			if(get_dir(loc, from) == dir)	//Flipped tables catch mroe bullets
 				chance += 20
 			else
@@ -370,7 +407,7 @@
 /obj/structure/table/CheckExit(atom/movable/O as mob|obj, target as turf)
 	if(istype(O) && O.checkpass(PASSTABLE))
 		return 1
-	if (flipped==1)
+	if (flipped)
 		if (get_dir(loc, target) == dir)
 			return !density
 		else
@@ -378,12 +415,13 @@
 	return 1
 
 /obj/structure/table/MouseDrop_T(obj/O as obj, mob/user as mob)
-
+	..()
 	if ((!( istype(O, /obj/item/weapon) ) || user.get_active_hand() != O))
-		return ..()
+		return
 	if(isrobot(user))
 		return
-	user.drop_item()
+	if(!user.drop_item())
+		return
 	if (O.loc != src.loc)
 		step(O, get_dir(O, src))
 	return
@@ -394,9 +432,8 @@
 	playsound(src, "shatter", 70, 1)
 	if(display_message)
 		visible_message("[src] shatters!")
-		new /obj/item/weapon/shard(loc)
 		new frame(src.loc)
-	del(src)
+	qdel(src)
 	return
 
 /obj/structure/table/glasstable/tablepush(obj/item/W, mob/user)
@@ -419,7 +456,7 @@
 					M.adjustBruteLoss(5)
 					if(prob(50))
 						var/obj/item/weapon/shard/S = new(M)
-						var/datum/organ/external/affecting = M.get_organ("head")
+						var/obj/item/organ/external/affecting = M.get_organ("head")
 						S.add_blood(M)
 						affecting.embed(S) //Lodge the object into the limb
 						visible_message("<span class='warning'>The [S] has embedded into [M]'s head!</span>",
@@ -433,7 +470,7 @@
 				G.affecting.loc = src.loc
 				G.affecting.Weaken(5)
 				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-			del(W)
+			qdel(W)
 		else
 			if (G.state < 2)
 				if(user.a_intent == "hurt")
@@ -448,7 +485,7 @@
 				G.affecting.loc = src.loc
 				G.affecting.Weaken(5)
 				visible_message("<span class='danger'>[G.assailant] puts [G.affecting] on \the [src].</span>")
-			del(W)
+			qdel(W)
 		return
 
 /obj/structure/table/proc/tablepush(obj/item/W, mob/user)
@@ -478,11 +515,11 @@
 										"<span class='userdanger'>[G.assailant] pushes [G.affecting] onto [src].</span>")
 			add_logs(G.assailant, G.affecting, "tabled")
 			M = G.affecting
-			del(W)
+			qdel(W)
 			return M
-	del(W)
+	qdel(W)
 
-/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob)
+/obj/structure/table/attackby(obj/item/W as obj, mob/user as mob, params)
 	if (!W) return
 
 	// Handle harm intent grabbing/tabling.
@@ -498,7 +535,7 @@
 		user << "<span class='notice'>You locate the bolts and begin disassembling \the [src]...</span>"
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user,50))
-			destroy()
+			qdel(src)
 		return
 
 	// Handle weakening.
@@ -526,8 +563,6 @@
 				user << "<span class='notice'>\The [src] is too flimsy to be reinforced or weakened.</span>"
 			return
 
-
-	// Handle dismantling or placing things on the table from here on.
 	if(isrobot(user))
 		return
 
@@ -541,7 +576,18 @@
 		playsound(src.loc, 'sound/weapons/blade1.ogg', 50, 1)
 		playsound(src.loc, "sparks", 50, 1)
 		user.visible_message("<span class='danger'>The [src] was sliced apart by [user]!</span>")
-		destroy()
+		qdel(src)
+
+	if(!(W.flags & ABSTRACT)) //rip more parems rip in peace ;_;
+		if(user.drop_item())
+			W.Move(loc)
+			var/list/click_params = params2list(params)
+			//Center the icon where the user clicked.
+			if(!click_params || !click_params["icon-x"] || !click_params["icon-y"])
+				return
+			//Clamp it so that the icon never moves more than 16 pixels in either direction (thus leaving the table turf)
+			W.pixel_x = Clamp(text2num(click_params["icon-x"]) - 16, -(world.icon_size/2), world.icon_size/2)
+			W.pixel_y = Clamp(text2num(click_params["icon-y"]) - 16, -(world.icon_size/2), world.icon_size/2)
 
 	user.drop_item(src)
 	return
@@ -550,27 +596,27 @@
 	var/obj/structure/table/T
 	for(var/angle in list(-90,90))
 		T = locate() in get_step(src.loc,turn(direction,angle))
-		if(T && T.flipped == 0)
+		if(T && !T.flipped)
 			return 0
 	T = locate() in get_step(src.loc,direction)
-	if (!T || T.flipped == 1)
+	if (!T || T.flipped)
 		return 1
 	if (istype(T,/obj/structure/table/reinforced/))
 		var/obj/structure/table/reinforced/R = T
-		if (R.health > 100)
+		if (R.status == 2)
 			return 0
 	return T.straight_table_check(direction)
 
 /obj/structure/table/verb/do_flip()
 	set name = "Flip table"
 	set desc = "Flips a non-reinforced table"
-	set category = "Object"
+	set category = null
 	set src in oview(1)
 
 	if (!can_touch(usr) || ismouse(usr))
 		return
 
-	if(flipped < 0 || !flip(get_cardinal_dir(usr,src)))
+	if(!flip(get_cardinal_dir(usr,src)))
 		usr << "<span class='notice'>It won't budge.</span>"
 		return
 
@@ -581,44 +627,21 @@
 
 	return
 
-/obj/structure/table/proc/unflipping_check(var/direction)
-
-	for(var/mob/M in oview(src,0))
-		return 0
-
-	var/obj/occupied = turf_is_crowded()
-	if(occupied)
-		usr << "There's \a [occupied] in the way."
-		return 0
-
-	var/list/L = list()
-	if(direction)
-		L.Add(direction)
-	else
-		L.Add(turn(src.dir,-90))
-		L.Add(turn(src.dir,90))
-	for(var/new_dir in L)
-		var/obj/structure/table/T = locate() in get_step(src.loc,new_dir)
-		if(T)
-			if(T.flipped == 1 && T.dir == src.dir && !T.unflipping_check(new_dir))
-				return 0
-	return 1
-
 /obj/structure/table/proc/do_put()
 	set name = "Put table back"
 	set desc = "Puts flipped table back"
 	set category = "Object"
 	set src in oview(1)
 
-	if (!can_touch(usr))
-		return
-
-	if (!unflipping_check())
+	if (!unflip())
 		usr << "<span class='notice'>It won't budge.</span>"
 		return
-	unflip()
+
 
 /obj/structure/table/proc/flip(var/direction)
+	if (flipped)
+		return 0
+
 	if( !straight_table_check(turn(direction,90)) || !straight_table_check(turn(direction,-90)) )
 		return 0
 
@@ -631,15 +654,14 @@
 			spawn(0)
 				A.throw_at(pick(targets),1,1)
 
-	set_dir(direction)
+	dir = direction
 	if(dir != NORTH)
 		layer = 5
-	climbable = 0 //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
 	flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
-		var/obj/structure/table/T = locate() in get_step(src,D)
-		if(T && T.flipped == 0)
+		if(locate(/obj/structure/table,get_step(src,D)))
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,D))
 			T.flip(direction)
 	update_icon()
 	update_adjacent()
@@ -647,16 +669,25 @@
 	return 1
 
 /obj/structure/table/proc/unflip()
+	if (!flipped)
+		return 0
+
+	var/can_flip = 1
+	for (var/mob/A in oview(src,0))//src.loc)
+		if (istype(A))
+			can_flip = 0
+	if (!can_flip)
+		return 0
+
 	verbs -=/obj/structure/table/proc/do_put
 	verbs +=/obj/structure/table/verb/do_flip
 
 	layer = initial(layer)
 	flipped = 0
-	climbable = initial(climbable)
 	flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
-		var/obj/structure/table/T = locate() in get_step(src.loc,D)
-		if(T && T.flipped == 1 && T.dir == src.dir)
+		if(locate(/obj/structure/table,get_step(src,D)))
+			var/obj/structure/table/T = locate(/obj/structure/table,get_step(src,D))
 			T.unflip()
 	update_icon()
 	update_adjacent()

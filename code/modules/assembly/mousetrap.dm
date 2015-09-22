@@ -40,7 +40,7 @@
 /obj/item/device/assembly/mousetrap/proc/triggered(mob/target, type = "feet")
 	if(!armed)
 		return
-	var/datum/organ/external/affecting = null
+	var/obj/item/organ/external/affecting = null
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		switch(type)

@@ -36,11 +36,16 @@
 	if(istype(O, /obj/item/weapon/reagent_containers/glass))
 		if(beaker)
 			user << "\red A container is already loaded into the machine."
+			return
 		else
-			user.before_take_item(O)
+			user.unEquip(O)
 			O.loc = src
 			beaker = O
+			user << "<span class='notice'>You add the container to the machine.</span>"
 			updateUsrDialog()
+			update_icon()
+			return
+
 	else if(processing)
 		user << "\red The biogenerator is currently processing."
 	else if(istype(O, /obj/item/weapon/storage/bag/plants))
@@ -84,7 +89,7 @@
 		if(plants_in_biogenerator >= 10)
 			user << "\red The biogenerator is full! Activate it."
 		else
-			user.before_take_item(O)
+			user.unEquip(O)
 			O.loc = src
 			user << "\blue You put [O.name] in [src.name]"
 	update_icon()
@@ -151,7 +156,7 @@
 		if(I.reagents.get_reagent_amount("nutriment") < 0.1)
 			points += 1
 		else points += I.reagents.get_reagent_amount("nutriment")*10
-		del(I)
+		qdel(I)
 	if(S)
 		processing = 1
 		update_icon()

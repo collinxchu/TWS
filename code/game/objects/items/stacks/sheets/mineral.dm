@@ -55,6 +55,7 @@ var/global/list/datum/stack_recipe/iron_recipes = list ( \
 )
 
 /obj/item/stack/sheet/mineral
+	icon = 'icons/obj/mining.dmi'
 	force = 5.0
 	throwforce = 5
 	w_class = 3.0
@@ -125,6 +126,18 @@ obj/item/stack/sheet/mineral/iron/New()
 /obj/item/stack/sheet/mineral/plasma/New()
 	..()
 	recipes = plasma_recipes
+
+/obj/item/stack/sheet/mineral/plasma/attackby(obj/item/weapon/W as obj, mob/user as mob, params)
+	if(is_hot(W) > 300)//If the temperature of the object is over 300, then ignite
+		message_admins("Plasma sheets ignited by [key_name_admin(user)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) (<A HREF='?_src_=holder;adminplayerobservefollow=\ref[user]'>FLW</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+		log_game("Plasma sheets ignited by [key_name(user)] in ([x],[y],[z])")
+		fire_act()
+	else
+		..()
+
+/obj/item/stack/sheet/mineral/plasma/fire_act()
+	//atmos_spawn_air(SPAWN_HEAT | SPAWN_TOXINS, amount*10) #TOREMOVE once linda is in place
+	qdel(src)
 
 /obj/item/stack/sheet/mineral/plastic
 	name = "Plastic"

@@ -506,9 +506,9 @@ datum/mind
 			switch(href_list["implant"])
 				if("remove")
 					for(var/obj/item/weapon/implant/loyalty/I in H.contents)
-						for(var/datum/organ/external/organs in H.organs)
+						for(var/obj/item/organ/external/organs in H.organs)
 							if(I in organs.implants)
-								I.Del()
+								I.Destroy()
 								break
 					H << "\blue <Font size =3><B>Your loyalty implant has been deactivated.</B></FONT>"
 
@@ -614,7 +614,7 @@ datum/mind
 					var/obj/item/device/flash/flash = locate() in L
 					if (!flash)
 						usr << "\red Deleting flash failed!"
-					del(flash)
+					qdel(flash)
 
 				if("repairflash")
 					var/list/L = current.get_contents()
@@ -627,7 +627,7 @@ datum/mind
 				if("reequip")
 					var/list/L = current.get_contents()
 					var/obj/item/device/flash/flash = locate() in L
-					del(flash)
+					qdel(flash)
 					take_uplink()
 					var/fail = 0
 					fail |= !ticker.mode.equip_traitor(current, 1)
@@ -724,7 +724,7 @@ datum/mind
 						special_role = null
 						current.remove_changeling_powers()
 						current.verbs -= /datum/changeling/proc/EvolutionMenu
-						if(changeling)	del(changeling)
+						if(changeling)	qdel(changeling)
 						current << "<FONT color='red' size = 3><B>You grow weak and lose your powers! You are no longer a changeling and are stuck in your current form!</B></FONT>"
 						log_admin("[key_name_admin(usr)] has de-changeling'ed [current].")
 				if("changeling")
@@ -780,16 +780,16 @@ datum/mind
 				if("lair")
 					current.loc = pick(synd_spawn)
 				if("dressup")
-					del(H.belt)
-					del(H.back)
-					del(H.l_ear)
-					del(H.r_ear)
-					del(H.gloves)
-					del(H.head)
-					del(H.shoes)
-					del(H.wear_id)
-					del(H.wear_suit)
-					del(H.w_uniform)
+					qdel(H.belt)
+					qdel(H.back)
+					qdel(H.l_ear)
+					qdel(H.r_ear)
+					qdel(H.gloves)
+					qdel(H.head)
+					qdel(H.shoes)
+					qdel(H.wear_id)
+					qdel(H.wear_suit)
+					qdel(H.w_uniform)
 
 					if (!ticker.mode.equip_syndicate(current))
 						usr << "\red Equipping an operative failed!"
@@ -885,7 +885,7 @@ datum/mind
 						src = null
 						m2h.inject(M)
 						src = mobfinder.loc:mind
-						del(mobfinder)
+						qdel(mobfinder)
 						current.radiation -= 50
 
 		else if (href_list["silicon"])
@@ -908,7 +908,7 @@ datum/mind
 							/client/proc/reactivate_camera)
 
 						current:laws = new /datum/ai_laws/nanotrasen
-						del(current:malf_picker)
+						qdel(current:malf_picker)
 						current:show_laws()
 						current.icon_state = "ai"
 
@@ -1027,7 +1027,7 @@ datum/mind
 	proc/take_uplink()
 		var/obj/item/device/uplink/hidden/H = find_syndicate_uplink()
 		if(H)
-			del(H)
+			qdel(H)
 
 
 	proc/make_AI_Malf()
@@ -1069,16 +1069,16 @@ datum/mind
 			current.loc = pick(synd_spawn)
 
 			var/mob/living/carbon/human/H = current
-			del(H.belt)
-			del(H.back)
-			del(H.l_ear)
-			del(H.r_ear)
-			del(H.gloves)
-			del(H.head)
-			del(H.shoes)
-			del(H.wear_id)
-			del(H.wear_suit)
-			del(H.w_uniform)
+			qdel(H.belt)
+			qdel(H.back)
+			qdel(H.l_ear)
+			qdel(H.r_ear)
+			qdel(H.gloves)
+			qdel(H.head)
+			qdel(H.shoes)
+			qdel(H.wear_id)
+			qdel(H.wear_suit)
+			qdel(H.w_uniform)
 
 			ticker.mode.equip_syndicate(current)
 
@@ -1168,7 +1168,7 @@ datum/mind
 
 		var/list/L = current.get_contents()
 		var/obj/item/device/flash/flash = locate() in L
-		del(flash)
+		qdel(flash)
 		take_uplink()
 		var/fail = 0
 	//	fail |= !ticker.mode.equip_traitor(current, 1)

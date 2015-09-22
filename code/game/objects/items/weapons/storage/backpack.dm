@@ -8,10 +8,13 @@
 	desc = "You wear this on your back and put items into it."
 	icon_state = "backpack"
 	item_state = "backpack"
-	w_class = 4.0
+	w_class = 4
 	slot_flags = SLOT_BACK	//ERROOOOO
 	max_w_class = 3
 	max_combined_w_class = 21
+	storage_slots = 21
+	burn_state = 0 //Burnable
+	burntime = 20
 
 /obj/item/weapon/storage/backpack/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
@@ -39,46 +42,59 @@
 	desc = "A backpack that opens into a localized pocket of Blue Space."
 	origin_tech = "bluespace=4"
 	icon_state = "holdingpack"
-	max_w_class = 4
-	max_combined_w_class = 28
+	max_w_class = 5
+	max_combined_w_class = 35
+	burn_state = -1 // NotBurnable
+	var/pshoom = 'sound/items/PSHOOM.ogg'
+	var/alt_sound = 'sound/items/PSHOOM_2.ogg'
 
-	New()
-		..()
+/obj/item/weapon/storage/backpack/holding/content_can_dump(atom/dest_object, mob/user)
+	if(Adjacent(user))
+		if(get_dist(user, dest_object) < 8)
+			if(dest_object.storage_contents_dump_act(src, user))
+				if(alt_sound && prob(1))
+					playsound(src, alt_sound, 40, 1)
+				else
+					playsound(src, pshoom, 40, 1)
+				user.Beam(dest_object,icon_state="rped_upgrade",icon='icons/effects/effects.dmi',time=5)
+				return 1
+		user << "The [src.name] buzzes."
+		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 0)
+	return 0
+
+/obj/item/weapon/storage/backpack/holding/handle_item_insertion(obj/item/W, prevent_warning = 0, mob/user)
+	if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
+		var/safety = alert(user, "You feel this may not be the best idea.", "Put in [name]?", "Proceed", "Abort")
+		if(safety == "Abort" || !in_range(src, user) || !src || !W || user.incapacitated())
+			return
+		investigate_log("has become a singularity. Caused by [user.key]","singulo")
+		user << "<span class='danger'>The Bluespace interfaces of the two devices catastrophically malfunction!</span>"
+		qdel(W)
+	//	var/obj/singularity/singulo = new /obj/singularity (get_turf(src))
+	//	singulo.energy = 300 //should make it a bit bigger~
+	//	message_admins("[key_name_admin(user)] detonated a bag of holding")
+	//	log_game("[key_name(user)] detonated a bag of holding")
+		explosion(src.loc, 2, 3, 4, 4)  //instead of creating a singularity, cause a medium explosion
+		qdel(src)
+	//	singulo.process()
 		return
+	..()
 
-	attackby(obj/item/weapon/W as obj, mob/user as mob)
-		if(crit_fail)
-			user << "\red The Bluespace generator isn't working."
-			return
-		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
-			user << "\red The Bluespace interfaces of the two devices conflict and malfunction."
-			del(W)
-			return
-			/* //BoH+BoH=Singularity, commented out.
-		if(istype(W, /obj/item/weapon/storage/backpack/holding) && !W.crit_fail)
-			investigate_log("has become a singularity. Caused by [user.key]","singulo")
-			user << "\red The Bluespace interfaces of the two devices catastrophically malfunction!"
-			del(W)
-			var/obj/machinery/singularity/singulo = new /obj/machinery/singularity (get_turf(src))
-			singulo.energy = 300 //should make it a bit bigger~
-			message_admins("[key_name_admin(user)] detonated a bag of holding")
-			log_game("[key_name(user)] detonated a bag of holding")
-			del(src)
-			return
-			*/
-		..()
+/obj/item/weapon/storage/backpack/holding/proc/failcheck(mob/user)
+	if (prob(src.reliability)) return 1 //No failure
+	if (prob(src.reliability))
+		user << "<span class='danger'>The Bluespace portal resists your attempt to add another item.</span>" //light failure
+	else
+		user << "<span class='danger'>The Bluespace generator malfunctions!</span>"
+		for (var/obj/O in src.contents) //it broke, delete what was in it
+			qdel(O)
+		crit_fail = 1
+		icon_state = "brokenpack"
 
-	proc/failcheck(mob/user as mob)
-		if (prob(src.reliability)) return 1 //No failure
-		if (prob(src.reliability))
-			user << "\red The Bluespace portal resists your attempt to add another item." //light failure
-		else
-			user << "\red The Bluespace generator malfunctions!"
-			for (var/obj/O in src.contents) //it broke, delete what was in it
-				del(O)
-			crit_fail = 1
-			icon_state = "brokenpack"
-
+/*/obj/item/weapon/storage/backpack/holding/singularity_act(current_size)
+	var/dist = max((current_size - 2),1)
+	explosion(src.loc,(dist),(dist*2),(dist*4))
+	return */
 
 /obj/item/weapon/storage/backpack/santabag
 	name = "\improper Santa's gift bag"
@@ -118,18 +134,21 @@
 	desc = "It's a special backpack made exclusively for Nanotrasen officers."
 	icon_state = "captainpack"
 	item_state = "captainpack"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/industrial
 	name = "industrial backpack"
 	desc = "It's a tough backpack for the daily grind of station life."
 	icon_state = "engiepack"
 	item_state = "engiepack"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/toxins
 	name = "laboratory backpack"
 	desc = "It's a light backpack modeled for use in laboratories and other scientific institutions."
 	icon_state = "toxpack"
 	item_state = "toxpack"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/hydroponics
 	name = "herbalist's backpack"
@@ -148,6 +167,7 @@
 	desc = "It's a sterile backpack able to withstand different pathogens from entering its fabric."
 	icon_state = "viropack"
 	item_state = "viropack"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/chemistry
 	name = "chemistry backpack"
@@ -163,6 +183,7 @@
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
 	icon_state = "satchel"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
 	New()
@@ -179,6 +200,7 @@
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
 	item_state = "engiepack"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/satchel_med
 	name = "medical satchel"
@@ -205,6 +227,7 @@
 	name = "scientist satchel"
 	desc = "Useful for holding research materials."
 	icon_state = "satchel-tox"
+	burn_state = -1 //Not Burnable
 
 /obj/item/weapon/storage/backpack/satchel_sec
 	name = "security satchel"
@@ -222,6 +245,7 @@
 	desc = "An exclusive satchel for Nanotrasen officers."
 	icon_state = "satchel-cap"
 	item_state = "captainpack"
+	burn_state = -1 //Not Burnable
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
@@ -229,6 +253,7 @@
 	desc = "A spacious backpack with lots of pockets, used by members of the Nanotrasen Emergency Response Team."
 	icon_state = "ert_commander"
 	item_state = "backpack"
+	burn_state = -1 //Not Burnable
 
 //Commander
 /obj/item/weapon/storage/backpack/ert/commander

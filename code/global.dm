@@ -5,6 +5,8 @@
 var/global/obj/effect/datacore/data_core = null
 var/global/list/all_areas = list()
 var/global/list/processing_objects = list()
+var/global/list/burning_objects = list()
+var/global/list/processing_power_items = list()
 var/global/list/active_diseases = list()
 var/global/list/med_hud_users = list() //list of all entities using a medical HUD.
 var/global/list/sec_hud_users = list() //list of all entities using a security HUD.
@@ -25,6 +27,8 @@ var/list/paper_tag_whitelist = list("center","p","div","span","h1","h2","h3","h4
 var/list/paper_blacklist = list("java","onblur","onchange","onclick","ondblclick","onfocus","onkeydown",	\
 	"onkeypress","onkeyup","onload","onmousedown","onmousemove","onmouseout","onmouseover",	\
 	"onmouseup","onreset","onselect","onsubmit","onunload")
+
+var/global/datum/universal_state/universe = new
 
 // The way blocks are handled badly needs a rewrite, this is horrible.
 // Too much of a project to handle at the moment, TODO for later.
@@ -134,6 +138,8 @@ var/datum/nanomanager/nanomanager = new()
 // event manager, the manager for events
 var/datum/event_manager/event_manager = new()
 
+var/datum/subsystem/alarm/alarm_manager = new() // Alarm Manager, the manager for alarms.
+
 // MySQL configuration
 var/sqladdress = "localhost"
 var/sqlport = "3306"
@@ -188,3 +194,7 @@ var/static/list/scarySounds = list('sound/weapons/thudswoosh.ogg','sound/weapons
 
 // Bomb cap!
 var/max_explosion_range = 14
+
+
+var/global/const/TICKS_IN_DAY = 864000
+var/global/const/TICKS_IN_SECOND = 10

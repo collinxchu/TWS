@@ -4,6 +4,7 @@
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "seed"
 	w_class = 2.0
+	burn_state = 0 //Burnable
 
 	var/seed_type
 	var/datum/seed/seed

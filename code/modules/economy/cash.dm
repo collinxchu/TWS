@@ -15,6 +15,7 @@
 	var/access = list()
 	access = access_crate_cash
 	var/worth = 0
+	burn_state = 0 //Burnable
 
 /obj/item/weapon/spacecash/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/spacecash))
@@ -26,7 +27,7 @@
 			user.drop_from_inventory(cash)
 			bundle = new (src.loc)
 			bundle.worth += cash.worth
-			del(cash)
+			qdel(cash)
 		else //is bundle
 			bundle = W
 		bundle.worth += src.worth
@@ -37,7 +38,7 @@
 			h_user.drop_from_inventory(bundle)
 			h_user.put_in_hands(bundle)
 		user << "<span class='notice'>You add [src.worth] credits worth of money to the bundles.<br>It holds [bundle.worth] Credits now.</span>"
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/spacecash/bundle
 	name = "pile of credits"
@@ -87,7 +88,7 @@
 		bundle.update_icon()
 		usr.put_in_hands(bundle)
 	if(!worth)
-		del(src)
+		qdel(src)
 
 /obj/item/weapon/spacecash/c1
 	name = "1 credits"

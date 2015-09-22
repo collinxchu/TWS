@@ -3,6 +3,8 @@
 	desc = "Old will forever be in fashion."
 	icon_state = "cabinet"
 	icon_door = "classic_cabinet"
+	burn_state = 0 //Burnable
+	burntime = 20
 
 /obj/structure/closet/acloset
 	name = "strange closet"

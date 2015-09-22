@@ -17,6 +17,7 @@
 	icon = 'icons/obj/food.dmi'
 	icon_state = "donutbox6"
 	name = "donut box"
+	burn_state = 0 //Burnable
 	var/icon_type = "donut"
 
 /obj/item/weapon/storage/fancy/update_icon(var/itemremoved = 0)
@@ -27,15 +28,10 @@
 /obj/item/weapon/storage/fancy/examine(mob/user)
 	if(!..(user, 1))
 		return
-	
-	if(contents.len <= 0)
-		user << "There are no [src.icon_type]s left in the box."
-	else if(contents.len == 1)
-		user << "There is one [src.icon_type] left in the box."
+	if(contents.len == 1)
+		user << "There is one [src.icon_type] left."
 	else
-		user << "There are [src.contents.len] [src.icon_type]s in the box."
-
-	return
+		user << "There are [contents.len <= 0 ? "no" : "[src.contents.len]"] [src.icon_type]s left."
 
 /*
  * Egg Box
@@ -144,8 +140,8 @@
 		new /obj/item/clothing/mask/cigarette(src)
 	create_reagents(15 * storage_slots)//so people can inject cigarettes without opening a packet, now with being able to inject the whole one
 
-/obj/item/weapon/storage/fancy/cigarettes/Del()
-	del(reagents)
+/obj/item/weapon/storage/fancy/cigarettes/Destroy()
+	qdel(reagents)
 	..()
 
 
@@ -200,8 +196,8 @@
 		new /obj/item/clothing/mask/cigarette/cigar(src)
 	create_reagents(15 * storage_slots)
 
-/obj/item/weapon/storage/fancy/cigar/Del()
-	del(reagents)
+/obj/item/weapon/storage/fancy/cigar/Destroy()
+	qdel(reagents)
 	..()
 
 /obj/item/weapon/storage/fancy/cigar/update_icon()

@@ -1,79 +1,135 @@
-"aa" = (/turf/space,/area/planets)
+"aa" = (/turf/space,/area/space)
 "ab" = (/turf/simulated/wall,/area/planets)
 "ac" = (/obj/machinery/door/airlock,/turf/simulated/wall,/area/planets)
 "ad" = (/turf/simulated,/area/planets)
-"ae" = (/turf/simulated/floor,/area/planets)
-"af" = (/turf/simulated/floor{dir = 2; icon_state = "carpet"},/area/planets)
-"ag" = (/obj/structure/table/woodentable,/turf/simulated/floor{dir = 2; icon_state = "carpet"},/area/planets)
-"ah" = (/turf/simulated/floor{icon_state = "grimy"},/area/planets)
-"ai" = (/obj/machinery/door/window{base_state = "left"; dir = 8; icon_state = "left"; name = "Door"; req_access_txt = "0"},/turf/simulated/floor{dir = 2; icon_state = "carpet"},/area/planets)
-"aj" = (/obj/structure/table/woodentable,/turf/simulated/wall,/area/planets)
+"ae" = (/obj/structure/sign/double/barsign,/turf/simulated/wall,/area/planets)
+"af" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"ag" = (/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"ah" = (/obj/machinery/cooker/deepfryer,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"ai" = (/obj/structure/sign/neon/exit,/turf/simulated/wall,/area/planets)
+"aj" = (/obj/structure/closet/crate/bin,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
 "ak" = (/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
-"al" = (/obj/structure/stool/bed/chair/sofa/right,/turf/simulated/floor{icon_state = "grimy"},/area/planets)
-"am" = (/obj/structure/stool/bed/chair/sofa/left,/turf/simulated/floor{icon_state = "grimy"},/area/planets)
-"an" = (/turf/simulated/floor{icon_state = "redfull"; dir = 9},/area/planets)
-"ao" = (/obj/structure/table/woodentable,/turf/simulated/floor{icon_state = "grimy"},/area/planets)
-"ap" = (/turf/simulated/floor{dir = 8; icon_state = "Road"},/area/planets)
-"aq" = (/turf/simulated/floor{icon_state = "light_on-r"; name = "disco floor"},/area/planets)
-"ar" = (/turf/simulated/floor{icon_state = "dark"},/area/planets)
-"as" = (/turf/simulated/floor{icon_state = "vault"; dir = 5},/area/planets)
-"at" = (/obj/structure/transit_tube{icon_state = "D-SE"},/turf/simulated/wall,/area/planets)
-"au" = (/obj/structure/transit_tube{icon_state = "E-SW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"av" = (/obj/structure/transit_tube/station,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/planets)
-"aw" = (/obj/structure/transit_tube,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"ax" = (/obj/structure/transit_tube,/turf/simulated/wall,/area/planets)
-"ay" = (/obj/structure/transit_tube,/turf/simulated/floor{dir = 8; icon_state = "Road"},/area/planets)
-"az" = (/obj/structure/transit_tube,/turf/simulated/floor{dir = 8; icon_state = "Road1"},/area/planets)
-"aA" = (/obj/structure/transit_tube{icon_state = "W-SE"},/turf/simulated/wall,/area/planets)
-"aB" = (/obj/structure/transit_tube{icon_state = "D-SW"},/turf/simulated/wall,/area/planets)
-"aC" = (/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
-"aD" = (/obj/structure/transit_tube{icon_state = "NE-SW"},/turf/simulated/wall,/area/planets)
-"aE" = (/obj/structure/transit_tube{icon_state = "D-NW"},/turf/simulated/wall,/area/planets)
-"aF" = (/turf/unsimulated/floor{dir = 2; icon_state = "rampbottom"},/area/planets)
-"aG" = (/turf/simulated/floor{dir = 4; icon_state = "warning"},/area/planets)
-"aH" = (/turf/simulated/floor{dir = 8; icon_state = "Road1"},/area/planets)
-"aI" = (/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/planets)
-"aJ" = (/obj/structure/transit_tube{icon_state = "D-NE"},/turf/simulated/wall,/area/planets)
-"aK" = (/obj/structure/transit_tube{icon_state = "NW-SE"},/turf/simulated/wall,/area/planets)
-"aL" = (/obj/structure/transit_tube{icon_state = "S-NE"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"aM" = (/obj/structure/transit_tube{icon_state = "D-NW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"aN" = (/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"aO" = (/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
-"aP" = (/obj/structure/transit_tube{icon_state = "D-NE"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
-"aQ" = (/obj/structure/transit_tube{icon_state = "S-NW"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
-"aR" = (/obj/structure/sign/double/barsign,/turf/simulated/wall,/area/planets)
-"aS" = (/obj/structure/window/reinforced{color = "red"; dir = 5; health = 1e+007; name = "red reinforced window"},/turf/simulated/wall,/area/planets)
-"aT" = (/obj/structure/window/reinforced{color = "red"; dir = 5; health = 1e+007; name = "red reinforced window"},/obj/structure/sign/decor/beer,/turf/simulated/wall,/area/planets)
-"aU" = (/obj/machinery/door/airlock/plasma,/turf/simulated/wall,/area/planets)
-"aV" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/turf/simulated/wall,/area/planets)
-"aW" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/obj/structure/sign/decor/inn,/turf/simulated/wall,/area/planets)
-"aX" = (/turf/simulated/floor{icon_state = "ramptop"; name = "stairs"},/area/planets)
-"aY" = (/obj/machinery/firealarm,/turf/simulated/wall,/area/planets)
-"aZ" = (/obj/structure/transit_tube{icon_state = "N-S"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"ba" = (/obj/structure/transit_tube{icon_state = "N-S"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
-"bb" = (/obj/machinery/door/airlock/glass,/turf/simulated/wall,/area/planets)
-"bc" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
-"bd" = (/obj/structure/transit_tube{icon_state = "N-S"},/turf/simulated/floor,/area/planets)
-"be" = (/mob/living/simple_animal/mouse,/turf/simulated/floor,/area/planets)
-"bf" = (/turf/unsimulated/floor{dir = 4; icon_state = "rampbottom"},/area/planets)
-"bg" = (/obj/vehicle/car/sportscar{dir = 3},/turf/simulated/floor{dir = 4; icon_state = "warning"},/area/planets)
-"bh" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor,/area/planets)
-"bi" = (/obj/structure/sign/toilets,/turf/simulated/wall,/area/planets)
-"bj" = (/obj/structure/sign/double/maltesefalcon/left,/turf/simulated/wall,/area/planets)
-"bk" = (/obj/structure/sign/double/maltesefalcon/right,/turf/simulated/wall,/area/planets)
-"bl" = (/obj/structure/window/reinforced{color = "#CCCC7A"; dir = 5; health = 1e+007; name = "yellow reinforced window"},/turf/simulated/wall,/area/planets)
-"bm" = (/obj/structure/window/reinforced{color = "#CCCC7A"; dir = 5; health = 1e+007; name = "yellow reinforced window"},/obj/structure/sign/bar,/turf/simulated/wall,/area/planets)
-"bn" = (/obj/machinery/door/airlock/woodglass,/turf/simulated/wall,/area/planets)
-"bo" = (/obj/structure/window/reinforced{color = "#CCCC7A"; dir = 5; health = 1e+007; name = "yellow reinforced window"},/obj/structure/sign/decor/cafe,/turf/simulated/wall,/area/planets)
-"bp" = (/obj/structure/extinguisher_cabinet,/turf/simulated/wall,/area/planets)
-"bq" = (/obj/structure/transit_tube{icon_state = "N-S"},/obj/structure/transit_tube_pod,/turf/simulated/wall,/area/planets)
-"br" = (/obj/structure/transit_tube{icon_state = "N-SE"},/turf/simulated/wall,/area/planets)
-"bs" = (/obj/structure/transit_tube{icon_state = "D-SW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"bt" = (/obj/structure/transit_tube{icon_state = "D-SE"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"bu" = (/obj/structure/transit_tube{icon_state = "N-SW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
-"bv" = (/obj/structure/transit_tube{icon_state = "E-NW"},/turf/simulated/wall,/area/planets)
-"bw" = (/obj/structure/transit_tube{icon_state = "W-NE"},/turf/simulated/wall,/area/planets)
-"bx" = (/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets)
+"al" = (/obj/structure/filingcabinet,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
+"am" = (/obj/structure/stool/bed/chair/sofa,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/planets)
+"an" = (/obj/structure/stool/bed/chair/sofa,/turf/simulated/floor/wood,/area/planets)
+"ao" = (/turf/simulated/floor/wood,/area/planets)
+"ap" = (/obj/structure/stool/bar{dir = 4},/turf/simulated/floor/wood,/area/planets)
+"aq" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Tai,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"ar" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"as" = (/obj/machinery/door/airlock/command,/turf/simulated/wall,/area/planets)
+"at" = (/obj/structure/stool/bed/chair/office/dark,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
+"au" = (/obj/structure/table,/turf/simulated/floor/wood,/area/planets)
+"av" = (/obj/structure/table,/turf/simulated/floor{icon_state = "redfull"; dir = 9},/area/planets)
+"aw" = (/turf/simulated/floor{icon_state = "redfull"; dir = 9},/area/planets)
+"ax" = (/obj/machinery/door/window{base_state = "left"; dir = 8; icon_state = "left"; name = "Door"; req_access_txt = "0"},/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"ay" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets)
+"az" = (/obj/structure/table,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aA" = (/obj/structure/table/reinforced,/obj/machinery/party/mixer,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
+"aB" = (/obj/structure/table/reinforced,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
+"aC" = (/obj/structure/table/reinforced,/obj/machinery/party/turntable,/turf/simulated/floor{icon_state = "cult"; dir = 2},/area/planets)
+"aD" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Sake,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aE" = (/obj/structure/table,/obj/machinery/microwave,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aF" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/obj/structure/grille,/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets)
+"aG" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 0},/obj/structure/grille,/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets)
+"aH" = (/obj/structure/stool/bed/chair/sofa{dir = 1},/turf/simulated/floor/wood,/area/planets)
+"aI" = (/obj/structure/stool/bed/chair/sofa{dir = 1},/turf/simulated/floor{icon_state = "redfull"; dir = 9},/area/planets)
+"aJ" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Tobiko,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aK" = (/obj/structure/table/reinforced,/obj/machinery/door/blast/shutters{density = 0; dir = 4; icon_state = "shutter0"; id = "chemcounter"; name = "Pharmacy Counter Shutters"; opacity = 0},/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/planets)
+"aL" = (/obj/structure/table,/obj/machinery/reagentgrinder,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aM" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/planets)
+"aN" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Masago,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aO" = (/obj/structure/closet/secure_closet/freezer/kitchen,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aP" = (/obj/structure/closet/secure_closet/freezer/kitchen,/obj/machinery/light/small,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aQ" = (/obj/machinery/party/lasermachine{dir = 8},/turf/simulated/floor/light/red,/area/planets)
+"aR" = (/turf/simulated/floor/light/purple,/area/planets)
+"aS" = (/obj/machinery/party/lasermachine,/turf/simulated/floor/light/red,/area/planets)
+"aT" = (/obj/structure/stool/bed/chair/sofa,/turf/simulated/floor{icon_state = "redfull"; dir = 9},/area/planets)
+"aU" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_SmokedSalmon,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aV" = (/turf/simulated/floor/road,/area/planets)
+"aW" = (/turf/simulated/floor/road/vertical,/area/planets)
+"aX" = (/turf/simulated/floor/light/red,/area/planets)
+"aY" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Inari,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"aZ" = (/obj/structure/transit_tube{icon_state = "D-SE"},/turf/simulated/wall,/area/planets)
+"ba" = (/obj/structure/transit_tube{icon_state = "E-SW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"bb" = (/obj/structure/transit_tube/station,/turf/simulated/floor{icon_state = "bot"; dir = 1},/area/planets)
+"bc" = (/obj/structure/transit_tube,/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"bd" = (/obj/structure/transit_tube,/turf/simulated/wall,/area/planets)
+"be" = (/obj/structure/transit_tube,/turf/simulated/floor/road,/area/planets)
+"bf" = (/obj/structure/transit_tube,/obj/machinery/light/overhead_blue,/turf/simulated/floor/road/vertical,/area/planets)
+"bg" = (/obj/structure/transit_tube{icon_state = "W-SE"},/turf/simulated/wall,/area/planets)
+"bh" = (/obj/structure/transit_tube{icon_state = "D-SW"},/turf/simulated/wall,/area/planets)
+"bi" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Unagi,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"bj" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_TobikoEgg,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"bk" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Ebi,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"bl" = (/obj/structure/table,/obj/item/weapon/reagent_containers/food/snacks/sushi_Ikura,/turf/simulated/floor{icon_state = "showroomfloor"},/area/planets)
+"bm" = (/obj/structure/transit_tube{icon_state = "NE-SW"},/turf/simulated/wall,/area/planets)
+"bn" = (/obj/structure/transit_tube{icon_state = "D-NW"},/turf/simulated/wall,/area/planets)
+"bo" = (/turf/simulated/floor/stairs,/area/planets)
+"bp" = (/obj/machinery/computer/guestpass,/turf/simulated/wall,/area/planets)
+"bq" = (/turf/simulated/floor{dir = 4; icon_state = "warning"},/area/planets)
+"br" = (/turf/simulated/floor{dir = 8; icon_state = "warning"},/area/planets)
+"bs" = (/obj/structure/transit_tube{icon_state = "D-NE"},/turf/simulated/wall,/area/planets)
+"bt" = (/obj/structure/transit_tube{icon_state = "NW-SE"},/turf/simulated/wall,/area/planets)
+"bu" = (/obj/structure/stool/bed/chair/sofa{dir = 1},/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/planets)
+"bv" = (/obj/structure/stool/bar{dir = 1},/turf/simulated/floor/wood,/area/planets)
+"bw" = (/obj/machinery/light/small{dir = 4},/obj/structure/stool/bar{dir = 1},/turf/simulated/floor/wood,/area/planets)
+"bx" = (/obj/structure/transit_tube{icon_state = "S-NE"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"by" = (/obj/structure/transit_tube{icon_state = "D-NW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"bz" = (/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"bA" = (/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bB" = (/obj/structure/transit_tube{icon_state = "D-NE"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bC" = (/obj/structure/transit_tube{icon_state = "S-NW"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bD" = (/obj/structure/window/reinforced{color = "red"; dir = 5; health = 1e+007; name = "red reinforced window"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bE" = (/obj/structure/window/reinforced{color = "red"; dir = 5; health = 1e+007; name = "red reinforced window"},/obj/structure/sign/neon/beer,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bF" = (/obj/machinery/door/airlock/plasma,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bG" = (/obj/structure/window/reinforced{color = "red"; dir = 5; health = 1e+007; name = "red reinforced window"},/obj/structure/sign/neon/flashhotel,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bH" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bI" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/obj/structure/sign/neon/inn,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bJ" = (/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/obj/structure/sign/neon/sushi,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bK" = (/obj/machinery/firealarm,/turf/simulated/wall,/area/planets)
+"bL" = (/obj/structure/transit_tube{icon_state = "N-S"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"bM" = (/obj/effect/landmark/start,/turf/simulated/floor/road,/area/planets)
+"bN" = (/obj/machinery/computer/pod,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bO" = (/obj/structure/transit_tube{icon_state = "N-S"},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bP" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"bQ" = (/turf/simulated/floor,/area/planets)
+"bR" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor,/area/planets)
+"bS" = (/obj/structure/transit_tube{icon_state = "N-S"},/turf/simulated/floor,/area/planets)
+"bT" = (/mob/living/simple_animal/mouse,/turf/simulated/floor,/area/planets)
+"bU" = (/turf/simulated/floor/stairs/east,/area/planets)
+"bV" = (/obj/vehicle/car/sportscar{dir = 3},/turf/simulated/floor{dir = 4; icon_state = "warning"},/area/planets)
+"bW" = (/turf/simulated/floor/stairs/west,/area/planets)
+"bX" = (/obj/machinery/light/small,/turf/simulated/floor/stairs/east,/area/planets)
+"bY" = (/obj/machinery/light/small,/turf/simulated/floor/stairs/west,/area/planets)
+"bZ" = (/obj/machinery/light/small,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"ca" = (/obj/machinery/light/small/red{dir = 8},/turf/simulated/floor{dir = 4; icon_state = "warning"},/area/planets)
+"cb" = (/obj/machinery/door/airlock,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"cc" = (/obj/structure/sign/toilets,/turf/simulated/wall,/area/planets)
+"cd" = (/obj/machinery/door/airlock/woodframe,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"ce" = (/obj/structure/sign/neon/peace,/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"cf" = (/obj/structure/sign/neon/open,/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"cg" = (/obj/structure/sign/neon/sale,/obj/structure/window/reinforced{dir = 5; health = 1e+007; opacity = 1},/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"ch" = (/obj/machinery/door/airlock/woodglass,/turf/simulated/floor{icon_state = "vault"; dir = 1},/area/planets)
+"ci" = (/obj/structure/window/reinforced{color = "#CCCC7A"; dir = 5; health = 1e+007; name = "yellow reinforced window"},/turf/simulated/wall,/area/planets)
+"cj" = (/obj/structure/window/reinforced{color = "#CCCC7A"; dir = 5; health = 1e+007; name = "yellow reinforced window"},/obj/structure/sign/neon/bar,/turf/simulated/wall,/area/planets)
+"ck" = (/obj/structure/window/reinforced{color = "#CCCC7A"; dir = 5; health = 1e+007; name = "yellow reinforced window"},/obj/structure/sign/neon/cafe,/turf/simulated/wall,/area/planets)
+"cl" = (/obj/structure/extinguisher_cabinet,/turf/simulated/wall,/area/planets)
+"cm" = (/obj/structure/transit_tube{icon_state = "N-S"},/obj/structure/transit_tube_pod,/turf/simulated/wall,/area/planets)
+"cn" = (/obj/structure/transit_tube{icon_state = "N-SE"},/turf/simulated/wall,/area/planets)
+"co" = (/obj/structure/transit_tube{icon_state = "D-SW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"cp" = (/obj/structure/transit_tube{icon_state = "D-SE"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"cq" = (/obj/structure/transit_tube{icon_state = "N-SW"},/turf/simulated/floor{icon_state = "vault"; dir = 8},/area/planets)
+"cr" = (/obj/machinery/light_switch,/turf/simulated/wall,/area/planets)
+"cs" = (/obj/structure/transit_tube{icon_state = "E-NW"},/turf/simulated/wall,/area/planets)
+"ct" = (/obj/structure/transit_tube,/obj/machinery/light/overhead_blue,/turf/simulated/floor/road,/area/planets)
+"cu" = (/obj/structure/transit_tube{icon_state = "W-NE"},/turf/simulated/wall,/area/planets)
+"cv" = (/turf/simulated/wall/mineral/wood,/area/planets)
+"cw" = (/obj/machinery/fireplace,/turf/simulated/wall/mineral/wood,/area/planets)
+"cx" = (/obj/machinery/door/airlock/woodframe,/turf/simulated/floor/wood,/area/planets)
+"cy" = (/turf/simulated/wall,/area/space)
+"cz" = (/turf/simulated/floor{icon_state = "vault"; dir = 5},/area/space)
+"cA" = (/turf/simulated/floor{dir = 4; icon_state = "vault"; name = "Mainframe floor"; nitrogen = 100; oxygen = 0; temperature = 80},/area/space)
+"cB" = (/turf/simulated/floor,/area/space)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -93,36 +149,36 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababab
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababacadadadacabababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababadadadababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababababababababababadadadababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababacabababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababaeafafafadagafabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababaeafafafahaiafabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababaeahadahahajafabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababaeahahahahajafabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababakakakakakakakakabaealamadahajafabababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababananananananananabaeadahahahaoaoababababababababababapapapapapababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababakaqarasasaraqakabaeahahahahahadaeaeababatauavawaxaxayayazayayaxaxaxavaAaBababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaqarasararasaraqabaeahahaCaCadahaeaeabataDaEaFababaGapapaHapapaIababaFaJaKaBabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababasararasasararasabaeahaCaCaCaCahaeaeabaLaMaNaNaNabaGapapapapapaIabaOaOaOaPaQabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaRababaSaTaSaUaUaSaSaSabaVabaWaXaXaVabaVaYabaZaNaNaNaNabaGapapapapapaIabaOaOaOaObaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaNaNaNbbaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaObbaZaNaNaNaNabaGapapaHapapaIabaOaOaOaObabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaeaeaebbaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaebbbdaebeaeaebfbgapapaHapapaIbfaeaeaeaebdbhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaeaeaebbaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaeaebbbdaeaeaeaebfaGapapapapapaIbfaeaeaeaebdbhaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababaNaNaNbbaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaOaObbaZaNaNaNaNabaGapapapapapaIabaOaOaOaObabcaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababacbiababababababbjbkabababblabbmbnbnboabblbpabbqaNaNaNaNabaGapapapapapaIabaNaNaNaNaZabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababaeaeabaeaeaeaeaeaeaeaeaeabaeaeaeaeaeaeaeaeaeabbrbsaNaNaNabaGapapaHapapaIabaNaNaNbtbuabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababaeaeabaeaeaeaeaeaeaeaeaeabaeaeaeaeaeaeaeaeaeabaJaKaBabababaGapapaHapapaIabababataDaEabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababaeaeabaeaeaeaeaeaeaeaeaeabaeaeaeaeaeaeaeaeaeababaJbvaxaxaxaxayayayayayaxaxaxaxbwaEababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababaeaeabaeaeaeaeaeaeaeaeaeabaeaeaeaeaeaeaeaeaeababababababababapapapapapababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababaeaeaeabaeaeaeababababababababababababababapapaHapapababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaeaeaeaeaeabaeaeaeabaeaeaeabaeaeaeaeaeababababababababapapaHapapababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaeaeaeaeaeabaeaeaeabaeaeaeabaeaeaeaeaeababababababababapapapapapababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababaeaeaeaeaeabaeaeaeabaeaeaeabaeaeaeaeaeabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababaeabababababababacabababababafagahagababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababaiajakakalabababamanaoaoapaqarabagagagagababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababasakakatakabababauavaoawaoaxagayagazagazababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaAaBaCaBabababauavaoawapaDagabagazagaEababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababababaFaGaGaFabababaHaIaoawapaJagaKagagagaLababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababawawakakakakawawabaMawaoawapaNarabagagaOaPababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababawakaQaRaRaSakawabanaTaoawapaUagababababababababababaVaVaWaVaVababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababakaXaRaXaXaRaXakabauavaoawapaYagagagababaZbabbbcbdbdbebebfbebebdbdbdbbbgbhababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaXaRaXaRaRaXaRaXabauavaoawapbibjbkblabaZbmbnbobpabbqaVaVaVaVaVbrababbobsbtbhabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababababababaRaXaRaRaRaRaXaRabbuaHaoaoaobvbvbvbwabbxbybzbzbzabbqaVaVaVaVaVbrabbAbAbAbBbCabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababaeababbDbEbDbFbFbDbGbDabbHabbIbobobJabbHbKabbLbzbzbzbzabbqaVaVaVaVbMbrabbAbNbNbAbOabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababbzbzbzbPbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbAbPbLbzbzbzbzabbqaVaVaWaVaVbrabbAbAbAbAbObPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababbQbQbQbRbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbRbSbQbTbQbQbUbVaVaVaWaVaVbrbWbQbQbQbQbSbRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababbQbQbQbRbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbQbRbSbQbQbQbQbXbqaVaVaVaVaVbrbYbQbQbQbQbSbRaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababbzbzbzbPbAbAbZbAbAbAbAbAbAbAbAbAbAbAbZbAbAbAbAbAbAbAbPbLbzbzbzbzabcaaVaVaVaVaVbrabbAbAbAbAbObPaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababcbccabcdcebHabcfcgchbHababciabcjchchckabciclabcmbzbzbzbzabbqaVaVaVaVaVbrabbzbzbzbzbLabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababbQbQabbQbQbQbQbQbQbQbQbQabbQbQbQbQbQbQbQbQbQabcncobzbzbzabbqaVaVaWaVaVbrabbzbzbzcpcqabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababbQbQabbQbQbQbQbQbQbQbQbQabbQbQbQbQbQbQbQbQbQabbsbtbhcrababbqaVaVaWaVaVbrabababaZbmbnabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababbQbQabbQbQbQbQbQbQbQbQbQabbQbQbQbQbQbQbQbQbQababbscsbdbdbdbdbebectbebebdbdbdbdcubnababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabababababababababbQbQabbQbQbQbQbQbQbQbQbQabbQbQbQbQbQbQbQbQbQababababababababaVaVaVaVaVababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababbQbQbQabbQbQbQababababababababababababababaVaVaVaVaVababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababbQbQbQbQbQabbQbQbQabbQbQbQabbQbQbQbQbQababababababababaVaVaWaVaVababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababbQbQbQbQbQabbQbQbQabbQbQbQabbQbQbQbQbQababababababababaVaVaWaVaVababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcvcvcwcvcvababababababbQbQbQbQbQabbQbQbQabbQbQbQabbQbQbQbQbQabababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcvaoaoaocvababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcvaoaoaocvababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcvaoaoaocvababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabcvcvcxcvcvababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -161,19 +217,19 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasasasasasasasasasasasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasasasasasasasasasasasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasasasasasasasasasasasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasasasasasasasasasasasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasasasasasasasasasasasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabasasasasasasasasasasasasasasasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxbxbxbxbxbxbxbxbxbxbxbxbxbxasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeaeaeaeaeaeasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaeaeaeaeaeaeaeaeaeaeaeaeaeaeasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabxbxbxbxbxbxbxbxbxbxbxbxbxbxasasasasasasasasasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaababababababababababababababababababababababababaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyczczczczczczczczczczczczczczczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyczczczczczczczczczczczczczczczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyczczczczczczczczczczczczczczczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyczczczczczczczczczczczczczczczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyczczczczczczczczczczczczczczczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyczczczczczczczczczczczczczczczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacycycycycycycycycycycycycycycycycycycycycycycycyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacAcAcAcAcAcAcAcAcAcAcAcAcAcAczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacBcBcBcBcBcBcBcBcBcBcBcBcBcBczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacBcBcBcBcBcBcBcBcBcBcBcBcBcBczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacAcAcAcAcAcAcAcAcAcAcAcAcAcAczczczczczczczczczaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacycycycycycycycycycycycycycycycycycycycycycycycyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaacyaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}

@@ -170,6 +170,7 @@
 	S["skills"]				>> skills
 	S["skill_specialization"] >> skill_specialization
 	S["organ_data"]			>> organ_data
+	S["rlimb_data"] 		>> rlimb_data
 	S["gear"]				>> gear
 	S["home_system"] 		>> home_system
 	S["citizenship"] 		>> citizenship
@@ -235,6 +236,7 @@
 	if(isnull(disabilities)) disabilities = 0
 	if(!player_alt_titles) player_alt_titles = new()
 	if(!organ_data) src.organ_data = list()
+	if(!rlimb_data) src.rlimb_data = list()
 	if(!gear) src.gear = list()
 	//if(!skin_style) skin_style = "Default"
 
@@ -319,6 +321,7 @@
 	S["skills"]				<< skills
 	S["skill_specialization"] << skill_specialization
 	S["organ_data"]			<< organ_data
+	S["rlimb_data"] << rlimb_data
 	S["gear"]				<< gear
 	S["home_system"] 		<< home_system
 	S["citizenship"] 		<< citizenship

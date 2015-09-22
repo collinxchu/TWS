@@ -7,6 +7,7 @@
 /obj/machinery/computer/telecomms/traffic
 	name = "Telecommunications Traffic Control"
 	icon_state = "computer_generic"
+	light_color = LIGHT_COLOR_DARKGREEN
 
 	var/screen = 0				// the screen number:
 	var/list/servers = list()	// the servers located by the computer
@@ -221,7 +222,7 @@
 					A.state = 3
 					A.icon_state = "3"
 					A.anchored = 1
-					del(src)
+					qdel(src)
 				else
 					user << "\blue You disconnect the monitor."
 					var/obj/structure/computerframe/A = new /obj/structure/computerframe( src.loc )
@@ -232,7 +233,7 @@
 					A.state = 4
 					A.icon_state = "4"
 					A.anchored = 1
-					del(src)
+					qdel(src)
 		else if(istype(D, /obj/item/weapon/card/emag) && !emagged)
 			playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
 			emagged = 1

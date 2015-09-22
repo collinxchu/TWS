@@ -7,7 +7,6 @@
  *		Kitchen knives
  *		Butcher's cleaver
  *		Rolling Pins
- *		Trays
  */
 
 /obj/item/weapon/kitchen
@@ -40,7 +39,7 @@
 	if(!istype(M))
 		return ..()
 
-	if(user.a_intent != "help")
+	if(user.a_intent != I_HELP)
 		if(user.zone_sel.selecting == "head" || user.zone_sel.selecting == "eyes")
 			if((CLUMSY in user.mutations) && prob(50))
 				M = user
@@ -49,20 +48,19 @@
 			return ..()
 
 	if (reagents.total_volume > 0)
-		reagents.trans_to_ingest(M, reagents.total_volume)
 		if(M == user)
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\blue [] eats some [] from \the [].", user, loaded, src), 1)
-				M.reagents.add_reagent("nutriment", 1)
+			M.visible_message("<span class='notice'>\The [user] eats some [loaded] from \the [src].</span>")
+			reagents.trans_to_ingest(M, reagents.total_volume)
 		else
-			for(var/mob/O in viewers(M, null))
-				O.show_message(text("\blue [] feeds [] some [] from \the []", user, M, loaded, src), 1)
-				M.reagents.add_reagent("nutriment", 1)
+			M.visible_message("<span class='warning'>\The [user] attempts to feed some [loaded] to \the [M] with \the [src].</span>")
+			if(!do_mob(user, M)) return
+			M.visible_message("<span class='warning'>\The [user] feeds some [loaded] to \the [M] with \the [src].</span>")
+			reagents.trans_to_ingest(M, reagents.total_volume)
+			M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been utensil fed by [user.name] ([user.ckey]) with [src.name]</font>")
+			user.attack_log += text("\[[time_stamp()]\] <font color='red'>Utensil fed [M.name] ([M.ckey]) with [src.name]</font>")
 		playsound(M.loc,'sound/items/eatfood.ogg', rand(10,40), 1)
 		overlays.Cut()
 		return
-	else
-		..()
 
 /obj/item/weapon/kitchen/utensil/fork
 	name = "fork"
@@ -232,6 +230,8 @@
 				H.visible_message("\red [user] tried to knock [H] unconscious!", "\red [user] tried to knock you unconscious!")
 				H.eye_blurry += 3
 	return ..()
+
+/* Moved to bags
 
 /*
  * Trays - Agouri
@@ -460,3 +460,4 @@
 					if(I)
 						step(I, pick(NORTH,SOUTH,EAST,WEST))
 						sleep(rand(2,4))
+*/

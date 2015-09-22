@@ -8,19 +8,19 @@
 /obj/structure/sign/ex_act(severity)
 	switch(severity)
 		if(1.0)
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
-			del(src)
+			qdel(src)
 			return
 		if(3.0)
-			del(src)
+			qdel(src)
 			return
 		else
 	return
 
 /obj/structure/sign/blob_act()
-	del(src)
+	qdel(src)
 	return
 
 /obj/structure/sign/attackby(obj/item/tool as obj, mob/user as mob)	//deconstruction
@@ -33,7 +33,7 @@
 		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
 		//S.icon = I.Scale(24, 24)
 		S.sign_state = icon_state
-		del(src)
+		qdel(src)
 	else ..()
 
 /obj/item/sign
@@ -62,13 +62,153 @@
 		S.desc = desc
 		S.icon_state = sign_state
 		user << "You fasten \the [S] with your [tool]."
-		del(src)
+		qdel(src)
 	else ..()
+
+/*|	                                             */
+/*| Neon Signs
+   ----------------------------------------------*/
+
+   //| Note: for a more varied range of colors, I chose not to use the pre- #defined colors and instead individually converted the RGB values from each sprite into hex code - Mal
+
+/obj/structure/sign/neon/Destroy()
+	set_light(0)
+	return ..()
+
+/obj/structure/sign/neon
+	desc = "This should not exist in the world"
+	icon = 'icons/obj/neondecor.dmi'
+	light_range = 4
+	light_power = 2
+
+/obj/structure/sign/neon/item
+	name = "item store"
+	icon_state = "item"
+	light_color = "#B79F41" //copper
+
+/obj/structure/sign/neon/motel
+	name = "motel"
+	icon_state = "motel"
+	light_color = "#59FF9B" //teal
+
+/obj/structure/sign/neon/hotel
+	name = "hotel"
+	icon_state = "hotel"
+	light_color = "#59FF9B" //teal
+
+/obj/structure/sign/neon/flashhotel
+	name = "hotel"
+	icon_state = "flashhotel"
+	light_color = "#FF8FF8" //hot pink
+
+/obj/structure/sign/neon/lovehotel
+	name = "hotel"
+	icon_state = "lovehotel"
+	light_color = "#59FF9B" //teal
+
+/obj/structure/sign/neon/sushi
+	name = "sushi"
+	icon_state = "sushi"
+	light_color = "#7DD3FF"  //sky blue
+
+/obj/structure/sign/neon/bakery
+	name = "bakery"
+	icon_state = "bakery"
+	light_color = "#FF8FEE" //hot pink
+
+/obj/structure/sign/neon/beer
+	name = "pub"
+	icon_state = "beer"
+	light_color = "#CBDC54" //yellow
+
+/obj/structure/sign/neon/inn
+	name = "inn"
+	icon_state = "inn"
+	light_color = "#F070FF"  //deeper hot pink
+
+/obj/structure/sign/neon/cafe
+	name = "cafe"
+	icon_state = "cafe"
+	light_color = "#FF8FEE" //hot pink
+
+/obj/structure/sign/neon/diner
+	name = "diner"
+	icon_state = "diner"
+	light_color = "#59FF9B" //teal
+
+/obj/structure/sign/neon/bar
+	name = "bar"
+	icon_state = "bar"
+	light_color = "#39FFA4" //teal
+
+/obj/structure/sign/neon/casino
+	name = "casino"
+	icon_state = "casino"
+	light_color = "#6CE08A" //teal
+
+/obj/structure/sign/neon/cupcake
+	name = "casino"
+	icon_state = "casino"
+	light_color = "#F4A9D8" //pink!
+
+/obj/structure/sign/neon/peace
+	name = "peace"
+	icon_state = "peace"
+	light_color = "#8559FF" //a cross between the blue and purple
+
+/obj/structure/sign/neon/sale
+	name = "sale"
+	icon_state = "sale"
+	light_color = "#6EB6FF" //sky blue
+
+/obj/structure/sign/neon/exit
+	name = "exit"
+	icon_state = "exit"
+	light_color = "#7FEA6A" //lime green
+
+/obj/structure/sign/neon/close
+	name = "close"
+	icon_state = "close"
+	light_color = "#7FEA6A" //lime green
+
+/obj/structure/sign/neon/open
+	name = "open"
+	icon_state = "open"
+	light_color = "#FFFFFF" //white
+
+/obj/structure/sign/neon/phone
+	name = "phone"
+	icon_state = "phone"
+	light_color = "#7FEA6A" //lime green
+
+/obj/structure/sign/neon/armory
+	name = "armory"
+	icon_state = "armory"
+	light_color = "#7FEA6A" //lime green
+
+/obj/structure/sign/neon/pizza
+	name = "pizza"
+	icon_state = "pizza"
+	light_color = "#33CC00" //green
+
+/obj/structure/sign/neon/clothes
+	name = "clothes"
+	icon_state = "clothes"
+	light_color = "#FF9326" //orange
+
+/obj/structure/sign/neon/bar
+	name = "bar sign"
+	desc = "The sign says 'Bar' on it."
+	icon_state = "bar"
+	light_color = "#63C4D6" //light blue
+
+/*|	                                             */
+/*| Double Signs
+   ----------------------------------------------*/
 
 /obj/structure/sign/double/map
 	name = "station map"
 	desc = "A framed picture of the station."
-
 
 /obj/structure/sign/double/map/left
 	icon_state = "map-left"
@@ -76,87 +216,37 @@
 /obj/structure/sign/double/map/right
 	icon_state = "map-right"
 
-/obj/structure/sign/securearea
-	name = "\improper SECURE AREA"
-	desc = "A warning sign which reads 'SECURE AREA'."
-	icon_state = "securearea"
+/obj/structure/sign/double/gamecenter/
+	name = "Game Center"
+	desc = "A flashing sign which reads 'Game Center'."
+	icon = 'icons/obj/neondecor.dmi'
+	light_color = "#FFA851" //orange
+	light_range = 4
+	light_power = 2
 
+/obj/structure/sign/double/gamecenter/right
+	icon_state = "gamecenter-right"
 
-/obj/structure/sign/rent
-	name = "Rent sign"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "rent"
-	desc = "A sign that says 'For Rent' on it. This house might be vacant."
+/obj/structure/sign/double/gamecenter/left
+	icon_state = "gamecenter-left"
+
+/obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
+	name = "The Maltese Falcon"
+	desc = "The Maltese Falcon, Space Bar and Grill."
+
+/obj/structure/sign/double/maltesefalcon/left
+	icon_state = "maltesefalcon-left"
+
+/obj/structure/sign/double/maltesefalcon/right
+	icon_state = "maltesefalcon-right"
+
+/*|	                                             */
+/*| Misc Wall Decor
+   ----------------------------------------------*/
 
 /obj/structure/sign/decor
 	name = "Decoration"
 	icon = 'icons/obj/decor.dmi'
-	icon_state = "item"
-
-/obj/structure/sign/decor/number
-	name = "Door Number"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "door1"
-
-/obj/structure/sign/decor/item
-	name = "item store"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "item"
-
-/obj/structure/sign/decor/motel
-	name = "motel"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "motel"
-
-/obj/structure/sign/decor/hotel
-	name = "hotel"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "hotel"
-
-/obj/structure/sign/decor/hotel2
-	name = "hotel"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "flashhotel"
-
-/obj/structure/sign/decor/hotel3
-	name = "hotel"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "lovehotel"
-
-/obj/structure/sign/decor/bakery
-	name = "bakery"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "bakery"
-
-/obj/structure/sign/decor/beer
-	name = "pub"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "beer"
-
-/obj/structure/sign/decor/inn
-	name = "inn"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "inn"
-
-/obj/structure/sign/decor/cafe
-	name = "cafe"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "cafe"
-
-/obj/structure/sign/decor/diner
-	name = "diner"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "diner"
-
-/obj/structure/sign/decor/bar
-	name = "bar"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "bar"
-
-/obj/structure/sign/decor/casino
-	name = "casino"
-	icon = 'icons/obj/decor.dmi'
-	icon_state = "casino"
 
 /obj/structure/sign/decor/painting
 	name = "painting"
@@ -164,15 +254,30 @@
 	icon_state = "0,0"
 	pixel_y = 32
 
+/obj/structure/sign/decor/number
+	name = "Door Number"
+	icon = 'icons/obj/decor.dmi'
+	icon_state = "door1"
+
+/*|	                                             */
+/*| Normal Signs
+   ----------------------------------------------*/
+
+/obj/structure/sign/rent
+	name = "Rent sign"
+	icon = 'icons/obj/decor.dmi'
+	icon_state = "rent"
+	desc = "A sign that says 'For Rent' on it. This house might be vacant."
+
+/obj/structure/sign/securearea
+	name = "\improper SECURE AREA"
+	desc = "A warning sign which reads 'SECURE AREA'."
+	icon_state = "securearea"
+
 /obj/structure/sign/coffee
 	name = "Coffee And Sweets"
 	desc = "A sign which reads 'Coffee and Sweets'."
 	icon_state = "coffee-left"
-
-/obj/structure/sign/game
-	name = "Game Center"
-	desc = "A flashing sign which reads 'Game Center'."
-	icon_state = "gamecenter-left"
 
 /obj/structure/sign/biohazard
 	name = "\improper BIOHAZARD"
@@ -229,11 +334,6 @@
 	desc = "Toilets ahead."
 	icon_state = "toilets"
 
-/obj/structure/sign/bar
-	name = "bar sign"
-	desc = "The sign says 'Bar' on it."
-	icon_state = "bar"
-
 /obj/structure/sign/greencross
 	name = "medbay"
 	desc = "The Intergalactic symbol of Medical institutions. You'll probably get help here."
@@ -253,16 +353,6 @@
 	name = "\improper FEA atmospherics division plaque"
 	desc = "This plaque commemorates the fall of the Atmos FEA division. For all the charred, dizzy, and brittle men who have died in its hands."
 	icon_state = "atmosplaque"
-
-/obj/structure/sign/double/maltesefalcon	//The sign is 64x32, so it needs two tiles. ;3
-	name = "The Maltese Falcon"
-	desc = "The Maltese Falcon, Space Bar and Grill."
-
-/obj/structure/sign/double/maltesefalcon/left
-	icon_state = "maltesefalcon-left"
-
-/obj/structure/sign/double/maltesefalcon/right
-	icon_state = "maltesefalcon-right"
 
 /obj/structure/sign/science			//These 3 have multiple types, just var-edit the icon_state to whatever one you want on the map
 	name = "\improper SCIENCE!"

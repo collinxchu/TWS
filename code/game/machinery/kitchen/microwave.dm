@@ -113,7 +113,9 @@
 				"\blue You add one of [O] to \the [src].")
 		else
 		//	user.before_take_item(O)	//This just causes problems so far as I can tell. -Pete
-			user.drop_item()
+			if(!user.drop_item())
+				user << "<span class='notice'>\The [O] is stuck to your hand, you cannot put it in \the [src]</span>"
+				return 0
 			O.loc = src
 			user.visible_message( \
 				"\blue [user] has added \the [O] to \the [src].", \
@@ -131,10 +133,10 @@
 		//G.reagents.trans_to(src,G.amount_per_transfer_from_this)
 	else if(istype(O,/obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = O
-		user << "\red This is ridiculous. You can not fit \the [G.affecting] in this [src]."
+		user << "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>"
 		return 1
 	else
-		user << "\red You have no idea what you can cook with this [O]."
+		user << "<span class='warning'>You have no idea what you can cook with this [O].</span>"
 		return 1
 	src.updateUsrDialog()
 
@@ -350,7 +352,7 @@
 			var/id = O.reagents.get_master_reagent_id()
 			if (id)
 				amount+=O.reagents.get_reagent_amount(id)
-		del(O)
+		qdel(O)
 	src.reagents.clear_reagents()
 	ffuu.reagents.add_reagent("carbon", amount)
 	ffuu.reagents.add_reagent("toxin", amount/10)

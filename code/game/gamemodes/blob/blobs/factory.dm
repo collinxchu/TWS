@@ -12,7 +12,7 @@
 	update_icon()
 		if(health <= 0)
 			playsound(src.loc, 'sound/effects/splat.ogg', 50, 1)
-			del(src)
+			qdel(src)
 			return
 		return
 
@@ -58,9 +58,12 @@
 		..(loc)
 		return
 	death()
-		..()
-		if(factory)
-			factory.spores -= src
-		..()
-		del(src)
+		qdel(src)
+
+/mob/living/simple_animal/hostile/blobspore/Destroy()
+	if(factory)
+		factory.spores -= src
+		factory = null
+	..()
+
 

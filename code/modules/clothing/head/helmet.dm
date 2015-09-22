@@ -12,6 +12,7 @@
 	max_heat_protection_temperature = HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.7
 	w_class = 3
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/head/helmet/warden
 	name = "warden's hat"
@@ -86,7 +87,7 @@
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		)
-	
+
 	armor = list(melee = 62, bullet = 50, laser = 50,energy = 35, bomb = 10, bio = 2, rad = 0)
 	flags_inv = HIDEEARS
 	siemens_coefficient = 0.7

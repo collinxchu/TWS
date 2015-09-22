@@ -2,27 +2,44 @@
 	mob_list -= src
 	dead_mob_list -= src
 	living_mob_list -= src
-	del(hud_used)
+	unset_machine()
+	qdel(hud_used)
+	if(client)
+		remove_screen_obj_references()
+		for(var/atom/movable/AM in client.screen)
+			qdel(AM)
+		client.screen = list()
 	if(mind && mind.current == src)
 		spellremove(src)
 	for(var/infection in viruses)
-		del(infection)
+		qdel(infection)
 	ghostize()
 	..()
 
-/mob/Del()//This makes sure that mobs with clients/keys are not just deleted from the game.
-	mob_list -= src
-	dead_mob_list -= src
-	living_mob_list -= src
-	ghostize()
-	..()
-
-/mob/Destroy()//This makes sure that mobs with clients/keys are not just deleted from the game.
-	mob_list -= src
-	dead_mob_list -= src
-	living_mob_list -= src
-	ghostize()
-	..()
+/mob/proc/remove_screen_obj_references()
+	flash = null
+	blind = null
+	hands = null
+	pullin = null
+//	purged = null #toremove
+	internals = null
+	oxygen = null
+	i_select = null
+	m_select = null
+	toxin = null
+	fire = null
+	bodytemp = null
+	healths = null
+	throw_icon = null
+	nutrition_icon = null
+	pressure = null
+	damageoverlay = null
+	pain = null
+	item_use_icon = null
+	gun_move_icon = null
+	gun_run_icon = null
+	gun_setting_icon = null
+	zone_sel = null
 
 var/next_mob_id = 0
 /mob/New()
@@ -134,9 +151,6 @@ var/next_mob_id = 0
 	return 0
 
 /mob/proc/Life()
-//	if(organStructure)
-//		organStructure.ProcessOrgans()
-	//handle_typing_indicator() //You said the typing indicator would be fine. The test determined that was a lie.
 	return
 
 /mob/proc/get_item_by_slot(slot_id)
@@ -176,13 +190,16 @@ var/next_mob_id = 0
 				var/list/temp = list(  )
 				temp += L.container
 				//L = null
-				del(L)
+				qdel(L)
 				return temp
 			else
 				return L.container
 	return
 
 /mob/proc/restrained()
+	return
+
+/mob/proc/incapacitated()
 	return
 
 //This proc is called whenever someone clicks an inventory ui slot.
@@ -207,7 +224,7 @@ var/next_mob_id = 0
 
 	if(!W.mob_can_equip(src, slot))
 		if(del_on_fail)
-			del(W)
+			qdel(W)
 		else
 			if(!disable_warning)
 				src << "\red You are unable to equip that." //Only print if del_on_fail is false
@@ -296,7 +313,7 @@ var/list/slot_equipment_priority = list( \
 
 	if((is_blind(src) || usr.stat) && !isobserver(src))
 		src << "<span class='notice'>Something is there but you can't see it.</span>"
-		return
+		return 1
 
 	face_atom(A)
 	A.examine(src)
@@ -318,7 +335,7 @@ var/list/slot_equipment_priority = list( \
 	P.invisibility = invisibility
 	spawn (20)
 		if(P)
-			del(P)
+			qdel(P)
 
 	face_atom(A)
 	return 1
@@ -340,8 +357,6 @@ var/list/slot_equipment_priority = list( \
 		if (W)
 			W.attack_self(src)
 			update_inv_r_hand()
-	if(next_move < world.time)
-		next_move = world.time + 2
 	return
 
 /*
@@ -393,12 +408,9 @@ var/list/slot_equipment_priority = list( \
 	set src in usr
 	if(usr != src)
 		usr << "No."
-	var/msg = input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null
+	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
 
 	if(msg != null)
-		msg = copytext(msg, 1, MAX_MESSAGE_LEN)
-		msg = html_encode(msg)
-
 		flavor_text = msg
 
 /mob/proc/warn_flavor_changed()
@@ -431,7 +443,7 @@ var/list/slot_equipment_priority = list( \
 	if ((stat != 2 || !( ticker )))
 		usr << "<span class='notice'><B>You must be dead to use this!</B></span>"
 		return
-	if (ticker.mode.name == "meteor" || ticker.mode.name == "epidemic") //BS12 EDIT
+	if (ticker.mode.deny_respawn) //BS12 EDIT
 		usr << "<span class='notice'>Respawn is disabled for this roundtype.</span>"
 		return
 	else
@@ -475,7 +487,7 @@ var/list/slot_equipment_priority = list( \
 	var/mob/new_player/M = new /mob/new_player()
 	if(!client)
 		log_game("[usr.key] AM failed due to disconnect.")
-		del(M)
+		qdel(M)
 		return
 
 	M.key = key
@@ -600,10 +612,6 @@ var/list/slot_equipment_priority = list( \
 	set category = "OOC"
 	reset_view(null)
 	unset_machine()
-	if(istype(src, /mob/living))
-		var/mob/living/M = src
-		if(M.cameraFollow)
-			M.cameraFollow = null
 
 /mob/Topic(href, href_list)
 	if(href_list["mach_close"])
@@ -625,8 +633,8 @@ var/list/slot_equipment_priority = list( \
 		var/mob/living/carbon/human/H = src
 		if(H.health - H.halloss <= config.health_threshold_softcrit)
 			for(var/name in H.organs_by_name)
-				var/datum/organ/external/e = H.organs_by_name[name]
-				if(H.lying)
+				var/obj/item/organ/external/e = H.organs_by_name[name]
+				if(e && H.lying)
 					if(((e.status & ORGAN_BROKEN && !(e.status & ORGAN_SPLINTED)) || e.status & ORGAN_BLEEDING) && (H.getBruteLoss() + H.getFireLoss() >= 100))
 						return 1
 						break
@@ -649,6 +657,9 @@ var/list/slot_equipment_priority = list( \
 	if(pulling)
 		pulling.pulledby = null
 		pulling = null
+		if(pullin)
+			pullin.update_icon(src)
+
 
 /mob/proc/start_pulling(var/atom/movable/AM)
 	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
@@ -674,6 +685,8 @@ var/list/slot_equipment_priority = list( \
 
 	src.pulling = AM
 	AM.pulledby = src
+	if(pullin)
+		pullin.update_icon(src)
 
 	if(ishuman(AM))
 		var/mob/living/carbon/human/H = AM
@@ -715,135 +728,7 @@ var/list/slot_equipment_priority = list( \
 	for(var/mob/M in viewers())
 		M.see(message)
 
-/*
-adds a dizziness amount to a mob
-use this rather than directly changing var/dizziness
-since this ensures that the dizzy_process proc is started
-currently only humans get dizzy
-
-value of dizziness ranges from 0 to 1000
-below 100 is not dizzy
-*/
-/mob/proc/make_dizzy(var/amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
-		return
-
-	dizziness = min(1000, dizziness + amount)	// store what will be new value
-													// clamped to max 1000
-	if(dizziness > 100 && !is_dizzy)
-		spawn(0)
-			dizzy_process()
-
-
-/*
-dizzy process - wiggles the client's pixel offset over time
-spawned from make_dizzy(), will terminate automatically when dizziness gets <100
-note dizziness decrements automatically in the mob's Life() proc.
-*/
-/mob/proc/dizzy_process()
-	is_dizzy = 1
-	while(dizziness > 100)
-		if(client)
-			var/amplitude = dizziness*(sin(dizziness * 0.044 * world.time) + 1) / 70
-			client.pixel_x = amplitude * sin(0.008 * dizziness * world.time)
-			client.pixel_y = amplitude * cos(0.008 * dizziness * world.time)
-
-		sleep(1)
-	//endwhile - reset the pixel offsets to zero
-	is_dizzy = 0
-	if(client)
-		client.pixel_x = 0
-		client.pixel_y = 0
-
-// jitteriness - copy+paste of dizziness
-
-/mob/proc/make_jittery(var/amount)
-	if(!istype(src, /mob/living/carbon/human)) // for the moment, only humans get dizzy
-		return
-
-	jitteriness = min(1000, jitteriness + amount)	// store what will be new value
-													// clamped to max 1000
-	if(jitteriness > 100 && !is_jittery)
-		spawn(0)
-			jittery_process()
-
-
-// Typo from the oriignal coder here, below lies the jitteriness process. So make of his code what you will, the previous comment here was just a copypaste of the above.
-/mob/proc/jittery_process()
-	//var/old_x = pixel_x
-	//var/old_y = pixel_y
-	is_jittery = 1
-	while(jitteriness > 100)
-//		var/amplitude = jitteriness*(sin(jitteriness * 0.044 * world.time) + 1) / 70
-//		pixel_x = amplitude * sin(0.008 * jitteriness * world.time)
-//		pixel_y = amplitude * cos(0.008 * jitteriness * world.time)
-
-		var/amplitude = min(4, jitteriness / 100)
-		pixel_x = old_x + rand(-amplitude, amplitude)
-		pixel_y = old_y + rand(-amplitude/3, amplitude/3)
-
-		sleep(1)
-	//endwhile - reset the pixel offsets to zero
-	is_jittery = 0
-	pixel_x = old_x
-	pixel_y = old_y
-
-
-//handles up-down floaty effect in space
-/mob/proc/make_floating(var/n)
-
-	floatiness = n
-
-	if(floatiness && !is_floating)
-		start_floating()
-	else if(!floatiness && is_floating)
-		stop_floating()
-
-/mob/proc/start_floating()
-
-	is_floating = 1
-
-	var/amplitude = 2 //maximum displacement from original position
-	var/period = 36 //time taken for the mob to go up >> down >> original position, in deciseconds. Should be multiple of 4
-
-	var/top = old_y + amplitude
-	var/bottom = old_y - amplitude
-	var/half_period = period / 2
-	var/quarter_period = period / 4
-
-	animate(src, pixel_y = top, time = quarter_period, easing = SINE_EASING | EASE_OUT, loop = -1)		//up
-	animate(pixel_y = bottom, time = half_period, easing = SINE_EASING, loop = -1)						//down
-	animate(pixel_y = old_y, time = quarter_period, easing = SINE_EASING | EASE_IN, loop = -1)			//back
-
-/mob/proc/stop_floating()
-	animate(src, pixel_y = old_y, time = 5, easing = SINE_EASING | EASE_IN) //halt animation
-	//reset the pixel offsets to zero
-	is_floating = 0
-
-
-
 /mob/Stat()
-	..()
-
-	if(statpanel("Status"))	//not looking at that panel
-
-		if(client && client.holder)
-			stat(null,"Location:\t([x], [y], [z])")
-			stat(null,"CPU:\t[world.cpu]")
-			stat(null,"Instances:\t[world.contents.len]")
-/*
-			if(master_controller)
-				//stat(null,"MasterController-[last_tick_duration] ([master_controller.processing?"On":"Off"]-[controller_iteration])")
-				stat(null,"Air-[master_controller.air_cost]\tSun-[master_controller.sun_cost]")
-				stat(null,"Mob-[master_controller.mobs_cost]\t#[mob_list.len]")
-				stat(null,"Dis-[master_controller.diseases_cost]\t#[SSdisease.processing.len]")
-				stat(null,"Mch-[master_controller.machines_cost]\t#[SSmachines.processing.len]")
-				stat(null,"Obj-[master_controller.objects_cost]\t#[SSobj.processing.len]")
-				stat(null,"Net-[master_controller.networks_cost]\tPnet-[master_controller.powernets_cost]")
-				stat(null,"NanoUI-[master_controller.nano_cost]\t#[SSnano.processing_uis.len]")
-				stat(null,"Tick-[master_controller.ticker_cost]\tALL-[master_controller.total_cost]")
-			else
-				stat(null,"MasterController-ERROR") */
 
 	if(listed_turf && client)
 		if(!TurfAdjacent(listed_turf))
@@ -851,11 +736,31 @@ note dizziness decrements automatically in the mob's Life() proc.
 		else
 			statpanel(listed_turf.name, null, listed_turf)
 			for(var/atom/A in listed_turf)
+				if(!A.mouse_opacity)
+					continue
 				if(A.invisibility > see_invisible)
 					continue
 				if(is_type_in_list(A, shouldnt_see))
 					continue
 				statpanel(listed_turf.name, null, A)
+
+	if(statpanel("Status") && ticker && ticker.current_state != GAME_STATE_PREGAME)
+		stat("Station Time", worldtime2text())
+		stat("Round Duration", round_duration())
+
+	if(client && client.holder)
+		if(statpanel("Status"))
+			stat("Location:","([x], [y], [z])")
+		if(statpanel("Processes"))
+			stat("CPU:","[world.cpu]")
+			stat("Instances:","[world.contents.len]")
+			if(processScheduler && processScheduler.getIsRunning())
+				for(var/datum/controller/process/P in processScheduler.processes)
+					stat(P.getStatName(), P.getTickTime())
+			else
+				stat("processScheduler is not running.")
+
+
 
 	if(spell_list && spell_list.len)
 		for(var/obj/effect/proc_holder/spell/S in spell_list)
@@ -867,14 +772,14 @@ note dizziness decrements automatically in the mob's Life() proc.
 				if("holdervar")
 					statpanel("Spells","[S.holder_var_type] [S.holder_var_amount]",S)
 
-
+	sleep(4) //Prevent updating the stat panel for the next .4 seconds, prevents clientside latency from updates
 
 // facing verbs
 /mob/proc/canface()
 	if(!canmove)						return 0
-	if(client.moving)					return 0
-	if(world.time < client.move_delay)	return 0
-	if(stat==2)							return 0
+//	if(client.moving)					return 0 #TOREMOVE
+//	if(world.time < client.move_delay)	return 0
+//	if(stat==2)							return 0
 	if(anchored)						return 0
 	if(monkeyizing)						return 0
 	return 1
@@ -882,31 +787,28 @@ note dizziness decrements automatically in the mob's Life() proc.
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
 	if(istype(buckled, /obj/vehicle))
-		//var/obj/vehicle/V = buckled
+		var/obj/vehicle/V = buckled
 		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 			lying = 1
 			canmove = 0
 			//pixel_y = V.mob_offset_y - 5
 		else
-			lying = 0
+			if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
 			canmove = 1
-			//pixel_y = V.mob_offset_y
+			pixel_y = V.mob_offset_y
 	else if(buckled)
-		if (!buckled.movable)
-			anchored = 1
-			canmove = 0
-			if(istype(buckled,/obj/structure/stool/bed/chair) )
-				lying = 0
-			else
-				lying = 1
-		else
-			anchored = 0
-			canmove = 1
-			lying = 0
-	else if( stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
+		anchored = 1
+		canmove = 0
+		if(istype(buckled))
+			if(buckled.buckle_lying != -1)
+				lying = buckled.buckle_lying
+			if(buckled.buckle_movable)
+				anchored = 0
+				canmove = 1
+	else if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 		lying = 1
 		canmove = 0
-	else if( stunned )
+	else if(stunned)
 		canmove = 0
 	else if(captured)
 		anchored = 1
@@ -921,7 +823,12 @@ note dizziness decrements automatically in the mob's Life() proc.
 		drop_l_hand()
 		drop_r_hand()
 	else
-		density = 1
+		density = initial(density)
+
+	for(var/obj/item/weapon/grab/G in grabbed_by)
+		if(G.state >= GRAB_AGGRESSIVE)
+			canmove = 0
+			break
 
 	//Temporarily moved here from the various life() procs
 	//I'm fixing stuff incrementally so this will likely find a better home.
@@ -936,9 +843,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 
 /mob/proc/facedir(var/ndir)
-	if(!canface())	return 0
+	if(!canface() || client.moving || world.time < client.move_delay)
+		return 0
 	set_dir(ndir)
-	if(buckled && buckled.movable)
+	if(buckled && buckled.buckle_movable)
 		buckled.set_dir(ndir)
 	client.move_delay += movement_delay()
 	return 1
@@ -970,6 +878,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/Stun(amount)
 	if(status_flags & CANSTUN)
+		facing_dir = null
 		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
 	return
 
@@ -985,6 +894,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/Weaken(amount)
 	if(status_flags & CANWEAKEN)
+		facing_dir = null
 		weakened = max(max(weakened,amount),0)
 		update_canmove()	//updates lying, canmove and icons
 	return
@@ -1003,11 +913,13 @@ note dizziness decrements automatically in the mob's Life() proc.
 
 /mob/proc/Paralyse(amount)
 	if(status_flags & CANPARALYSE)
+		facing_dir = null
 		paralysis = max(max(paralysis,amount),0)
 	return
 
 /mob/proc/SetParalysis(amount)
 	if(status_flags & CANPARALYSE)
+		facing_dir = null
 		paralysis = max(amount,0)
 	return
 
@@ -1017,6 +929,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return
 
 /mob/proc/Sleeping(amount)
+	facing_dir = null
 	sleeping = max(max(sleeping,amount),0)
 	return
 
@@ -1029,6 +942,7 @@ note dizziness decrements automatically in the mob's Life() proc.
 	return
 
 /mob/proc/Resting(amount)
+	facing_dir = null
 	resting = max(max(resting,amount),0)
 	return
 
@@ -1058,6 +972,10 @@ note dizziness decrements automatically in the mob's Life() proc.
 		if(O.w_class > class)
 			visible_implants += O
 	return visible_implants
+
+
+/mob/proc/embedded_needs_process()
+	return (embedded.len > 0)
 
 mob/proc/yank_out_object()
 	set category = "Object"
@@ -1100,7 +1018,7 @@ mob/proc/yank_out_object()
 	else
 		U << "<span class='warning'>You attempt to get a good grip on [selection] in [S]'s body.</span>"
 
-	if(!do_after(U, 80))
+	if(!do_after(U, 30))
 		return
 	if(!selection || !S || !U)
 		return
@@ -1115,9 +1033,9 @@ mob/proc/yank_out_object()
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		var/datum/organ/external/affected
+		var/obj/item/organ/external/affected
 
-		for(var/datum/organ/external/organ in H.organs) //Grab the organ holding the implant.
+		for(var/obj/item/organ/external/organ in H.organs) //Grab the organ holding the implant.
 			for(var/obj/item/O in organ.implants)
 				if(O == selection)
 					affected = organ
@@ -1135,7 +1053,9 @@ mob/proc/yank_out_object()
 			var/mob/living/carbon/human/human_user = U
 			human_user.bloody_hands(H)
 
-	selection.loc = get_turf(src)
+	selection.forceMove(get_turf(src))
+	if(!(U.l_hand && U.r_hand))
+		U.put_in_hands(selection)
 
 	for(var/obj/item/weapon/O in pinned)
 		if(O == selection)

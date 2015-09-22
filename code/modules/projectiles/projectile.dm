@@ -67,7 +67,7 @@
 		in_chamber.pass_flags = pass_flags //And the pass flags to that of the real projectile...
 		in_chamber.firer = user
 		var/output = in_chamber.process() //Test it!
-		del(in_chamber) //No need for it anymore
+		qdel(in_chamber) //No need for it anymore
 		return output //Send it back to the gun!
 
 	Bump(atom/A as mob|obj|turf|area)
@@ -128,7 +128,7 @@
 					M.bullet_act(src, def_zone)
 			density = 0
 			invisibility = 101
-			del(src)
+			qdel(src)
 		return 1
 
 
@@ -143,13 +143,13 @@
 
 	process()
 		if(kill_count < 1)
-			del(src)
+			qdel(src)
 		kill_count--
 		spawn while(src)
 			if((!( current ) || loc == current))
 				current = locate(min(max(x + xo, 1), world.maxx), min(max(y + yo, 1), world.maxy), z)
 			if((x == 1 || x == world.maxx || y == 1 || y == world.maxy))
-				del(src)
+				qdel(src)
 				return
 			step_towards(src, current)
 			sleep(1)

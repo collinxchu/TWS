@@ -16,7 +16,7 @@
 	// 2 for temperature
 	// Output >= 4 includes gas composition
 	// 4 for oxygen concentration
-	// 8 for plasma concentration
+	// 8 for phoron concentration
 	// 16 for nitrogen concentration
 	// 32 for carbon dioxide concentration
 
@@ -45,14 +45,14 @@
 				if(output&4)
 					signal.data["oxygen"] = round(100*air_sample.gas["oxygen"]/total_moles,0.1)
 				if(output&8)
-					signal.data["plasma"] = round(100*air_sample.gas["plasma"]/total_moles,0.1)
+					signal.data["phoron"] = round(100*air_sample.gas["phoron"]/total_moles,0.1)
 				if(output&16)
 					signal.data["nitrogen"] = round(100*air_sample.gas["nitrogen"]/total_moles,0.1)
 				if(output&32)
 					signal.data["carbon_dioxide"] = round(100*air_sample.gas["carbon_dioxide"]/total_moles,0.1)
 			else
 				signal.data["oxygen"] = 0
-				signal.data["plasma"] = 0
+				signal.data["phoron"] = 0
 				signal.data["nitrogen"] = 0
 				signal.data["carbon_dioxide"] = 0
 		signal.data["sigtype"]="status"
@@ -67,15 +67,15 @@
 /obj/machinery/air_sensor/initialize()
 	set_frequency(frequency)
 
-/obj/machinery/air_sensor/New()
-	..()
-
+obj/machinery/air_sensor/Destroy()
 	if(radio_controller)
-		set_frequency(frequency)
+		radio_controller.remove_object(src,frequency)
+	..()
 
 /obj/machinery/computer/general_air_control
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "tank"
+	light_color = LIGHT_COLOR_CYAN
 
 	name = "Computer"
 
@@ -85,6 +85,11 @@
 	var/list/sensor_information = list()
 	var/datum/radio_frequency/radio_connection
 	circuit = /obj/item/weapon/circuitboard/air_management
+
+obj/machinery/computer/general_air_control/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	..()
 
 /obj/machinery/computer/general_air_control/attack_hand(mob/user)
 	if(..(user))
@@ -118,7 +123,7 @@
 					sensor_part += "   <B>Pressure:</B> [data["pressure"]] kPa<BR>"
 				if(data["temperature"])
 					sensor_part += "   <B>Temperature:</B> [data["temperature"]] K<BR>"
-				if(data["oxygen"]||data["plasma"]||data["nitrogen"]||data["carbon_dioxide"])
+				if(data["oxygen"]||data["phoron"]||data["nitrogen"]||data["carbon_dioxide"])
 					sensor_part += "   <B>Gas Composition :</B>"
 					if(data["oxygen"])
 						sensor_part += "[data["oxygen"]]% O2; "
@@ -126,8 +131,8 @@
 						sensor_part += "[data["nitrogen"]]% N; "
 					if(data["carbon_dioxide"])
 						sensor_part += "[data["carbon_dioxide"]]% CO2; "
-					if(data["plasma"])
-						sensor_part += "[data["plasma"]]% TX; "
+					if(data["phoron"])
+						sensor_part += "[data["phoron"]]% TX; "
 				sensor_part += "<HR>"
 
 			else
@@ -215,21 +220,21 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 
 /obj/machinery/computer/general_air_control/large_tank_control/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
 		pressure_setting = between(0, pressure_setting + change, 50*ONE_ATMOSPHERE)
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 
 	if(href_list["adj_input_flow_rate"])
 		var/change = text2num(href_list["adj_input_flow_rate"])
 		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 
 	if(!radio_connection)
 		return 0
@@ -239,26 +244,32 @@ Max Output Pressure: [output_pressure] kPa<BR>"}
 	if(href_list["in_refresh_status"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "status" = 1)
+		. = 1
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
+		. = 1
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		. = 1
 
 	if(href_list["out_refresh_status"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "status" = 1)
+		. = 1
 
 	if(href_list["out_toggle_power"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
+		. = 1
 
 	if(href_list["out_set_pressure"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "set_internal_pressure" = "[pressure_setting]")
+		. = 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
@@ -329,21 +340,21 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 
 /obj/machinery/computer/general_air_control/supermatter_core/Topic(href, href_list)
 	if(..())
-		return
+		return 1
 
 	if(href_list["adj_pressure"])
 		var/change = text2num(href_list["adj_pressure"])
 		pressure_setting = between(0, pressure_setting + change, 10*ONE_ATMOSPHERE)
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 
 	if(href_list["adj_input_flow_rate"])
 		var/change = text2num(href_list["adj_input_flow_rate"])
 		input_flow_setting = between(0, input_flow_setting + change, ATMOS_DEFAULT_VOLUME_PUMP + 500) //default flow rate limit for air injectors
 		spawn(1)
 			src.updateUsrDialog()
-		return
+		return 1
 
 	if(!radio_connection)
 		return 0
@@ -353,26 +364,32 @@ Min Core Pressure: [pressure_limit] kPa<BR>"}
 	if(href_list["in_refresh_status"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "status" = 1)
+		. = 1
 
 	if(href_list["in_toggle_injector"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "power_toggle" = 1)
+		. = 1
 
 	if(href_list["in_set_flowrate"])
 		input_info = null
 		signal.data = list ("tag" = input_tag, "set_volume_rate" = "[input_flow_setting]")
+		. = 1
 
 	if(href_list["out_refresh_status"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "status" = 1)
+		. = 1
 
 	if(href_list["out_toggle_power"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "power_toggle" = 1)
+		. = 1
 
 	if(href_list["out_set_pressure"])
 		output_info = null
 		signal.data = list ("tag" = output_tag, "set_external_pressure" = "[pressure_setting]", "checks" = 1)
+		. = 1
 
 	signal.data["sigtype"]="command"
 	radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
@@ -506,7 +523,3 @@ Rate: [volume_rate] L/sec<BR>"}
 		)
 
 		radio_connection.post_signal(src, signal, filter = RADIO_ATMOSIA)
-
-
-
-

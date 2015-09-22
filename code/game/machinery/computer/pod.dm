@@ -4,6 +4,7 @@
 	name = "pod launch control console"
 	desc = "A control console for launching pods. Some people prefer firing Mechas."
 	icon_state = "computer_generic"
+	light_color = LIGHT_COLOR_GREEN
 	circuit = /obj/item/weapon/circuitboard/pod
 	var/id = 1.0
 	var/obj/machinery/mass_driver/connected = null
@@ -204,6 +205,7 @@
 	desc = "Criminals often operate on a tight budget. Operates external airlocks."
 	title = "External Airlock Controls"
 	req_access = list(access_syndicate)
+	light_color = "#00FFFF"
 
 /obj/machinery/computer/pod/old/syndicate/attack_hand(var/mob/user as mob)
 	if(!allowed(user))

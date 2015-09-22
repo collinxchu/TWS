@@ -132,7 +132,7 @@
 		return 0
 
 	if (!(access_heads in access))
-		src.visible_message("[src] buzzes, rejecting [ident].")
+		src.visible_message("\The [src] buzzes, rejecting [ident].")
 		return 0
 
 	src.visible_message("[src] beeps as it scans [ident].")

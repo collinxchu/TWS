@@ -1,3 +1,5 @@
+/* #TOREMOVE - now just a regular tray
+
 // A special tray for the service droid. Allow droid to pick up and drop items as if they were using the tray normally
 // Click on table to unload, click on item to load. Otherwise works identically to a tray.
 // Unlike the base item "tray", robotrays ONLY pick up food, drinks and condiments.
@@ -84,7 +86,7 @@
 				user.visible_message("\blue [user] drops all the items on their tray.")
 
 	return ..()
-
+*/
 
 
 

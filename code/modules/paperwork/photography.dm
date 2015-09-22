@@ -16,6 +16,7 @@
 	icon_state = "film"
 	item_state = "electropack"
 	w_class = 1.0
+	burn_state = 0 //Burnable
 
 
 /********
@@ -34,6 +35,7 @@ var/global/photo_count = 0
 	var/scribble	//Scribble on the back.
 	var/icon/tiny
 	var/photo_size = 3
+	burn_state = 0 //Burnable
 
 /obj/item/weapon/photo/New()
 	id = photo_count++
@@ -86,6 +88,8 @@ var/global/photo_count = 0
 	icon = 'icons/obj/items.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
+	burn_state = 0 //Burnable
+	burntime = 5
 	can_hold = list("/obj/item/weapon/photo",)
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
@@ -98,10 +102,10 @@ var/global/photo_count = 0
 		if((!( M.restrained() ) && !( M.stat ) && M.back == src))
 			switch(over_object.name)
 				if("r_hand")
-					M.u_equip(src)
+					M.unEquip(src)
 					M.put_in_r_hand(src)
 				if("l_hand")
-					M.u_equip(src)
+					M.unEquip(src)
 					M.put_in_l_hand(src)
 			add_fingerprint(usr)
 			return
@@ -159,7 +163,7 @@ var/global/photo_count = 0
 			return
 		user << "<span class='notice'>You insert [I] into [src].</span>"
 		user.drop_item()
-		del(I)
+		qdel(I)
 		pictures_left = pictures_max
 		return
 	..()

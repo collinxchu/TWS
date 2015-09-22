@@ -25,16 +25,16 @@
 /*
 /obj/machinery/flasher/New()
 	sleep(4)					//<--- What the fuck are you doing? D=
-	src.sd_SetLuminosity(2)
+	src.sd_set_light(2)
 */
 /obj/machinery/flasher/power_change()
 	..()
 	if ( !(stat & NOPOWER) )
 		icon_state = "[base_state]1"
-//		src.sd_SetLuminosity(2)
+//		src.sd_set_light(2)
 	else
 		icon_state = "[base_state]1-p"
-//		src.sd_SetLuminosity(0)
+//		src.sd_set_light(0)
 
 //Don't want to render prison breaks impossible
 /obj/machinery/flasher/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -80,7 +80,7 @@
 		O.Weaken(strength)
 		if (istype(O, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = O
-			var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+			var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 			if (E && (E.damage > E.min_bruised_damage && prob(E.damage + 50)))
 				flick("e_flash", O:flash)
 				E.damage += rand(1, 5)

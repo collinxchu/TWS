@@ -3,6 +3,7 @@
 	desc = "Does not support Pin ball."
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "arcade"
+	light_color = "#00FF00"
 	circuit = "/obj/item/weapon/circuitboard/arcade"
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners Don't Use Spacedrugs" //Temporary message, for attack messages, etc
@@ -37,6 +38,13 @@
 
 /obj/machinery/computer/arcade
 	var/turtle = 0
+
+/obj/machinery/computer/arcade/power_change()
+	..()
+	if(!(stat & (BROKEN|NOPOWER)))
+		set_light(2)
+	else
+		set_light(0)
 
 /obj/machinery/computer/arcade/New()
 	..()

@@ -7,6 +7,10 @@
 	var/amount_per_transfer_from_this = 5
 	var/possible_transfer_amounts = list(5,10,15,25,30)
 	var/volume = 30
+	var/list/list_reagents = null
+	var/spawned_disease = null
+	var/disease_amount = 20
+	var/spillable = 0
 
 /obj/item/weapon/reagent_containers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"

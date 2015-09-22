@@ -20,6 +20,7 @@
 	friendly = "prods"
 	wander = 0
 	pass_flags = PASSTABLE
+	mob_size = MOB_SIZE_TINY
 	universal_understand = 1
 	holder_type = /obj/item/weapon/holder/borer
 
@@ -102,7 +103,7 @@
 
 	if(istype(host,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = host
-		var/datum/organ/external/head = H.get_organ("head")
+		var/obj/item/organ/external/head = H.get_organ("head")
 		head.implants -= src
 
 	controlling = 0
@@ -145,7 +146,7 @@
 		if(!host.lastKnownIP)
 			host.lastKnownIP = b2h_ip
 
-	del(host_brain)
+	qdel(host_brain)
 
 /mob/living/simple_animal/borer/proc/leave_host()
 

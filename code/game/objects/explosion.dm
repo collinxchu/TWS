@@ -68,9 +68,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 			message_admins("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ([epicenter.x],[epicenter.y],[epicenter.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[epicenter.x];Y=[epicenter.y];Z=[epicenter.z]'>JMP</a>)")
 			log_game("Explosion with size ([devastation_range], [heavy_impact_range], [light_impact_range]) in area [epicenter.loc.name] ")
 
-		var/lighting_controller_was_processing = lighting_controller.processing	//Pause the lighting updates for a bit
-		lighting_controller.processing = 0
-
 
 		var/approximate_intensity = (devastation_range * 3) + (heavy_impact_range * 2) + light_impact_range
 		var/powernet_rebuild_was_deferred_already = defer_powernet_rebuild
@@ -113,7 +110,6 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 
 		sleep(8)
 
-		if(!lighting_controller.processing)	lighting_controller.processing = lighting_controller_was_processing
 		if(!powernet_rebuild_was_deferred_already && defer_powernet_rebuild)
 			makepowernets()
 			defer_powernet_rebuild = 0

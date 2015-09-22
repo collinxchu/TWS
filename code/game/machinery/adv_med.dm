@@ -14,8 +14,14 @@
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 
-/*/obj/machinery/bodyscanner/allow_drop()
-	return 0*/
+	light_color = "#00FF00"
+
+	power_change()
+		..()
+		if(!(stat & (BROKEN|NOPOWER)))
+			set_light(2)
+		else
+			set_light(0)
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)
 	if (user.stat)
@@ -56,7 +62,7 @@
 	src.icon_state = "body_scanner_1"
 	for(var/obj/O in src)
 		//O = null
-		del(O)
+		qdel(O)
 		//Foreach goto(124)
 	src.add_fingerprint(usr)
 	return
@@ -80,10 +86,10 @@
 	if ((!( istype(G, /obj/item/weapon/grab) ) || !( ismob(G.affecting) )))
 		return
 	if (src.occupant)
-		user << "\blue <B>The scanner is already occupied!</B>"
+		user << "<span class='warning'>The scanner is already occupied!</span>"
 		return
 	if (G.affecting.abiotic())
-		user << "\blue <B>Subject cannot have abiotic items on.</B>"
+		user << "<span class='warning'>Subject cannot have abiotic items on.</span>"
 		return
 	var/mob/M = G.affecting
 	if (M.client)
@@ -98,7 +104,7 @@
 		//Foreach goto(154)
 	src.add_fingerprint(user)
 	//G = null
-	del(G)
+	qdel(G)
 	return
 
 /obj/machinery/bodyscanner/ex_act(severity)
@@ -109,7 +115,7 @@
 				ex_act(severity)
 				//Foreach goto(35)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
@@ -118,7 +124,7 @@
 					ex_act(severity)
 					//Foreach goto(108)
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -127,7 +133,7 @@
 					ex_act(severity)
 					//Foreach goto(181)
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -136,19 +142,19 @@
 	if(prob(50))
 		for(var/atom/movable/A as mob|obj in src)
 			A.loc = src.loc
-		del(src)
+		qdel(src)
 
 /obj/machinery/body_scanconsole/ex_act(severity)
 
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		else
 	return
@@ -156,7 +162,7 @@
 /obj/machinery/body_scanconsole/blob_act()
 
 	if(prob(50))
-		del(src)
+		qdel(src)
 
 /obj/machinery/body_scanconsole/power_change()
 	..()
@@ -346,7 +352,7 @@
 	dat += "<th>Other Wounds</th>"
 	dat += "</tr>"
 
-	for(var/datum/organ/external/e in occ["external_organs"])
+	for(var/obj/item/organ/external/e in occ["external_organs"])
 		var/AN = ""
 		var/open = ""
 		var/infected = ""
@@ -362,7 +368,7 @@
 		for(var/datum/wound/W in e.wounds) if(W.internal)
 			internal_bleeding = "<br>Internal bleeding"
 			break
-		if(istype(e, /datum/organ/external/chest) && occ["lung_ruptured"])
+		if(istype(e, /obj/item/organ/external/chest) && occ["lung_ruptured"])
 			lung_ruptured = "Lung ruptured:"
 		if(e.status & ORGAN_SPLINTED)
 			splint = "Splinted:"
@@ -398,18 +404,18 @@
 					imp += "[I] implanted:"
 				else
 					unknown_body++
-			if(unknown_body || e.hidden)
+			if(unknown_body)
 				imp += "Unknown body present:"
 
 		if(!AN && !open && !infected & !imp)
 			AN = "None:"
 		if(!(e.status & ORGAN_DESTROYED))
-			dat += "<td>[e.display_name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
+			dat += "<td>[e.name]</td><td>[e.burn_dam]</td><td>[e.brute_dam]</td><td>[robot][bled][AN][splint][open][infected][imp][internal_bleeding][lung_ruptured]</td>"
 		else
-			dat += "<td>[e.display_name]</td><td>-</td><td>-</td><td>Not Found</td>"
+			dat += "<td>[e.name]</td><td>-</td><td>-</td><td>Not Found</td>"
 		dat += "</tr>"
 
-	for(var/datum/organ/internal/i in occ["internal_organs"])
+	for(var/obj/item/organ/i in occ["internal_organs"])
 
 		var/mech = ""
 		if(i.robotic == 1)

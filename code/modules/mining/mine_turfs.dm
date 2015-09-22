@@ -318,7 +318,7 @@
 		if(!S || S.field_type != get_responsive_reagent(F.find_type))
 			if(X)
 				visible_message("\red<b>[pick("[display_name] crumbles away into dust","[display_name] breaks apart")].</b>")
-				del(X)
+				qdel(X)
 
 	finds.Remove(F)
 
@@ -487,12 +487,12 @@
 	for(var/direction in step_overlays)
 
 		if(istype(get_step(src, step_overlays[direction]), /turf/space))
-			overlays += image('icons/turf/floors.dmi', "asteroid_edge_[direction]")
+			overlays += image('icons/turf/overlays.dmi', "asteroid_edge_[direction]")
 
 		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
 			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]")
 
-	if(overlay_detail) overlays += overlay_detail
+	if(overlay_detail) overlays += image('icons/turf/overlays.dmi', overlay_detail)
 
 	if(update_neighbors)
 		var/list/all_step_directions = list(NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST)

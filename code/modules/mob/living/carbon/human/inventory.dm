@@ -1,3 +1,4 @@
+
 /mob/living/carbon/human/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
@@ -5,30 +6,43 @@
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
 		var/obj/item/I = H.get_active_hand()
+		var/obj/item/weapon/storage/S = H.get_inactive_hand()
 		if(!I)
-			H << "<span class='notice'>You are not holding anything to equip.</span>"
+			H << "<span class='warning'>You are not holding anything to equip!</span>"
 			return
 		if(H.equip_to_appropriate_slot(I))
 			if(hand)
-				update_inv_l_hand(0)
+				update_inv_l_hand()
 			else
-				update_inv_r_hand(0)
+				update_inv_r_hand()
+		else if(s_active && s_active.can_be_inserted(I,1))	//if storage active insert there
+			s_active.handle_item_insertion(I)
+		else if(istype(S, /obj/item/weapon/storage) && S.can_be_inserted(I,1))	//see if we have box in other hand
+			S.handle_item_insertion(I)
 		else
-			H << "\red You are unable to equip that."
+			S = H.get_item_by_slot(slot_belt)
+			if(istype(S, /obj/item/weapon/storage) && S.can_be_inserted(I,1))		//else we put in belt
+				S.handle_item_insertion(I)
+			else
+				S = H.get_item_by_slot(slot_back)	//else we put in backpack
+				if(istype(S, /obj/item/weapon/storage) && S.can_be_inserted(I,1))
+					S.handle_item_insertion(I)
+					playsound(src.loc, "rustle", 50, 1, -5)
+				else
+					H << "<span class='warning'>You are unable to equip that!</span>"
 
 /mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
 		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
 			return slot
 	if (del_on_fail)
-		del(W)
+		qdel(W)
 	return null
 
-
 /mob/living/carbon/human/proc/has_organ(name)
-	var/datum/organ/external/O = organs_by_name[name]
+	var/obj/item/organ/external/O = organs_by_name[name]
 
-	return (O && !(O.status & ORGAN_DESTROYED) )
+	return (O && !(O.status & ORGAN_DESTROYED) && !O.is_stump())
 
 /mob/living/carbon/human/proc/has_organ_for_slot(slot)
 	switch(slot)
@@ -76,7 +90,140 @@
 		if(slot_tie)
 			return 1
 
-/mob/living/carbon/human/u_equip(obj/item/W as obj)
+// Return the item currently in the slot ID
+/mob/living/carbon/human/get_item_by_slot(slot_id)
+	switch(slot_id)
+		if(slot_back)
+			return back
+		if(slot_wear_mask)
+			return wear_mask
+		if(slot_handcuffed)
+			return handcuffed
+		if(slot_legcuffed)
+			return legcuffed
+		if(slot_l_hand)
+			return l_hand
+		if(slot_r_hand)
+			return r_hand
+		if(slot_belt)
+			return belt
+		if(slot_wear_id)
+			return wear_id
+		if(slot_l_ear)
+			return l_ear
+		if(slot_r_ear)
+			return r_ear
+		if(slot_glasses)
+			return glasses
+		if(slot_gloves)
+			return gloves
+		if(slot_head)
+			return head
+		if(slot_shoes)
+			return shoes
+		if(slot_wear_suit)
+			return wear_suit
+		if(slot_w_uniform)
+			return w_uniform
+		if(slot_l_store)
+			return l_store
+		if(slot_r_store)
+			return r_store
+		if(slot_s_store)
+			return s_store
+	return null
+
+/mob/living/carbon/human/unEquip(obj/item/I)
+	. = ..() //See mob.dm for an explanation on this and some rage about people copypasting instead of calling ..() like they should.
+	if(!. || !I)
+		return
+
+	var/obj/item/organ/O = I //Organs shouldn't be removed unless you call droplimb.
+	if(istype(O) && O.owner == src)
+		return
+
+	if(I == wear_suit)
+		if(s_store)
+			unEquip(s_store, 1) //It makes no sense for your suit storage to stay on you if you drop your suit.
+		wear_suit = null
+		if(I.flags_inv & HIDEJUMPSUIT)
+			update_inv_w_uniform()
+		update_inv_wear_suit()
+	else if(I == w_uniform)
+		if(r_store)
+			unEquip(r_store, 1) //Again, makes sense for pockets to drop.
+		if(l_store)
+			unEquip(l_store, 1)
+		if(wear_id)
+			unEquip(wear_id)
+		if(belt)
+			unEquip(belt)
+		w_uniform = null
+		update_inv_w_uniform()
+	else if(I == gloves)
+		gloves = null
+		update_inv_gloves()
+	else if(I == glasses)
+		glasses = null
+		update_inv_glasses()
+	else if(I == head)
+		head = null
+		if(I.flags & BLOCKHAIR || I.flags & BLOCKHEADHAIR)
+			update_hair()	//rebuild hair
+		update_inv_head()
+	else if(I == r_ear)
+		r_ear = null
+		update_inv_ears()
+	else if (I == l_ear)
+		l_ear = null
+		update_inv_ears()
+	else if(I == shoes)
+		shoes = null
+		update_inv_shoes()
+	else if(I == belt)
+		belt = null
+		update_inv_belt()
+	else if(I == wear_mask)
+		wear_mask = null
+		if(I.flags & BLOCKHAIR || I.flags & BLOCKHEADHAIR)
+			update_hair()	//rebuild hair
+		if(internal)
+			if(internals)
+				internals.icon_state = "internal0"
+			internal = null
+		update_inv_wear_mask()
+	else if(I == wear_id)
+		wear_id = null
+		update_inv_wear_id()
+//	else if(I == wear_pda) #TOREMOVE - does not exist
+	//	wear_pda = null
+	//	update_inv_wear_pda()
+	else if(I == r_store)
+		r_store = null
+		update_inv_pockets()
+	else if(I == l_store)
+		l_store = null
+		update_inv_pockets()
+	else if(I == s_store)
+		s_store = null
+		update_inv_s_store()
+	else if(I == back)
+		back = null
+		update_inv_back()
+	else if(I == handcuffed)
+		handcuffed = null
+		update_inv_handcuffed()
+	else if(I == legcuffed)
+		legcuffed = null
+		update_inv_legcuffed()
+	else if(I == r_hand)
+		r_hand = null
+		update_inv_r_hand()
+	else if(I == l_hand)
+		l_hand = null
+		update_inv_l_hand()
+/*
+/mob/living/carbon/human/u_equip(obj/item/W as obj)  //#TOREMOVE - phase this shit out
 	if(!W)	return 0
 
 	var/success
@@ -193,8 +340,7 @@
 			//if(W)
 				//W.layer = initial(W.layer)
 	update_action_buttons()
-	return 1
-
+	return 1 */
 
 
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
@@ -304,7 +450,7 @@
 			update_inv_s_store(redraw_mob)
 		if(slot_in_backpack)
 			if(src.get_active_hand() == W)
-				src.u_equip(W)
+				src.unEquip(W)
 			W.loc = src.back
 		if(slot_tie)
 			var/obj/item/clothing/under/uniform = src.w_uniform
@@ -322,7 +468,7 @@
 
 	W.layer = 20
 
-	return
+	return 1
 
 /obj/effect/equip_e
 	name = "equip e"
@@ -348,9 +494,9 @@
 
 /obj/effect/equip_e/New()
 	if (!ticker)
-		del(src)
+		qdel(src)
 	spawn(100)
-		del(src)
+		qdel(src)
 	..()
 	return
 
@@ -361,22 +507,22 @@
 		switch(place)
 			if("mask")
 				if (!( target.wear_mask ))
-					del(src)
+					qdel(src)
 			if("l_hand")
 				if (!( target.l_hand ))
-					del(src)
+					qdel(src)
 			if("r_hand")
 				if (!( target.r_hand ))
-					del(src)
+					qdel(src)
 			if("suit")
 				if (!( target.wear_suit ))
-					del(src)
+					qdel(src)
 			if("uniform")
 				if (!( target.w_uniform ))
-					del(src)
+					qdel(src)
 			if("back")
 				if (!( target.back ))
-					del(src)
+					qdel(src)
 			if("syringe")
 				return
 			if("pill")
@@ -389,31 +535,31 @@
 				return
 			if("handcuff")
 				if (!( target.handcuffed ))
-					del(src)
+					qdel(src)
 			if("id")
 				if ((!( target.wear_id ) || !( target.w_uniform )))
-					del(src)
+					qdel(src)
 			if("splints")
 				var/count = 0
 				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-					var/datum/organ/external/o = target.organs_by_name[organ]
+					var/obj/item/organ/external/o = target.organs_by_name[organ]
 					if(o.status & ORGAN_SPLINTED)
 						count = 1
 						break
 				if(count == 0)
-					del(src)
+					qdel(src)
 					return
 			if("sensor")
 				if (! target.w_uniform )
-					del(src)
+					qdel(src)
 			if("internal")
 				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && (istype(target.back, /obj/item/weapon/tank) || istype(target.belt, /obj/item/weapon/tank) || istype(target.s_store, /obj/item/weapon/tank)) && !( target.internal )) ) && !( target.internal )))
-					del(src)
+					qdel(src)
 
 	var/list/L = list( "syringe", "pill", "drink", "dnainjector", "fuel", "sensor", "internal", "tie")
 	if ((item && !( L.Find(place) )))
 		if(isrobot(source) && place != "handcuff")
-			del(src)
+			qdel(src)
 		for(var/mob/O in viewers(target, null))
 			O.show_message("\red <B>[source] is trying to put \a [item] on [target]</B>", 1)
 	else
@@ -513,7 +659,7 @@
 				message = "\red <B>[source] is trying to empty [target]'s pockets.</B>"
 			if("CPR")
 				if (!target.cpr_time)
-					del(src)
+					qdel(src)
 				target.cpr_time = 0
 				message = "\red <B>[source] is trying perform CPR on [target]!</B>"
 			if("internal")
@@ -612,13 +758,13 @@ It can still be worn/put on as normal.
 				strip_item = target.shoes
 		if("l_hand")
 			if (istype(target, /obj/item/clothing/suit/straight_jacket))
-				del(src)
+				qdel(src)
 			slot_to_process = slot_l_hand
 			if (target.l_hand)
 				strip_item = target.l_hand
 		if("r_hand")
 			if (istype(target, /obj/item/clothing/suit/straight_jacket))
-				del(src)
+				qdel(src)
 			slot_to_process = slot_r_hand
 			if (target.r_hand)
 				strip_item = target.r_hand
@@ -681,7 +827,7 @@ It can still be worn/put on as normal.
 
 			if(can_reach_splints)
 				for(var/organ in list("l_leg","r_leg","l_arm","r_arm"))
-					var/datum/organ/external/o = target.get_organ(organ)
+					var/obj/item/organ/external/o = target.get_organ(organ)
 					if (o && o.status & ORGAN_SPLINTED)
 						var/obj/item/W = new /obj/item/stack/medical/splint(amount=1)
 						o.status &= ~ORGAN_SPLINTED
@@ -704,11 +850,11 @@ It can still be worn/put on as normal.
 				S.add_fingerprint(source)
 				if (!( istype(S, /obj/item/weapon/dnainjector) ))
 					S.inuse = 0
-					del(src)
+					qdel(src)
 				S.inject(target, source)
 				if (S.s_time >= world.time + 30)
 					S.inuse = 0
-					del(src)
+					qdel(src)
 				S.s_time = world.time
 				for(var/mob/O in viewers(source, null))
 					O.show_message("\red [source] injects [target] with the DNA Injector!", 1)
@@ -757,11 +903,11 @@ It can still be worn/put on as normal.
 			W.add_fingerprint(source)
 			if(slot_to_process == slot_l_store) //pockets! Needs to process the other one too. Snowflake code, wooo! It's not like anyone will rewrite this anytime soon. If I'm wrong then... CONGRATULATIONS! ;)
 				if(target.r_store)
-					target.u_equip(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
+					target.unEquip(target.r_store) //At this stage l_store is already processed by the code above, we only need to process r_store.
 		else
 			if(item && target.has_organ_for_slot(slot_to_process)) //Placing an item on the mob
 				if(item.mob_can_equip(target, slot_to_process, 0))
-					source.u_equip(item)
+					source.unEquip(item)
 					target.equip_to_slot_if_possible(item, slot_to_process, 0, 1, 1)
 					item.dropped(source)
 					source.update_icons()
@@ -770,4 +916,93 @@ It can still be worn/put on as normal.
 	if(source && target)
 		if(source.machine == target)
 			target.show_inv(source)
-	del(src)
+	qdel(src)
+
+//Cycles through all clothing slots and tests them for destruction
+/mob/living/carbon/human/proc/shred_clothing(bomb,shock)
+	var/covered_parts = 0	//The body parts that are protected by exterior clothing/armor
+	var/head_absorbed = 0	//How much of the shock the headgear absorbs when it is shredded. -1=it survives
+	var/suit_absorbed = 0	//How much of the shock the exosuit absorbs when it is shredded. -1=it survives
+
+	//Backpacks can never be protected but are annoying as fuck to lose, so they get a lower chance to be shredded
+	if(back)
+		back.shred(bomb,shock-20,src)
+
+	if(head)
+		covered_parts |= head.flags_inv
+		head_absorbed = head.shred(bomb,shock,src)
+	if(wear_mask)
+		var/absorbed = ((covered_parts & HIDEMASK) ? head_absorbed : 0) //Check if clothing covering this part absorbed any of the shock
+		if(absorbed >= 0)
+			//Masks can be used to shield other parts, but are simplified to simply add their absorbsion to the head armor if it covers the face
+			var/mask_absorbed = wear_mask.shred(bomb,shock-absorbed,src)
+			if(wear_mask.flags_inv & HIDEFACE)
+				covered_parts |= wear_mask.flags_inv
+				if(mask_absorbed < 0) //If the mask didn't get shredded, everything else on the head is protected
+					head_absorbed = -1
+				else
+					head_absorbed += mask_absorbed
+	if(r_ear)
+		var/absorbed = ((covered_parts & HIDEEARS) ? head_absorbed : 0)
+		if(absorbed >= 0)
+			r_ear.shred(bomb,shock-absorbed,src)
+
+	if(l_ear)
+		var/absorbed = ((covered_parts & HIDEEARS) ? head_absorbed : 0)
+		if(absorbed >= 0)
+			l_ear.shred(bomb,shock-absorbed,src)
+
+	if(glasses)
+		var/absorbed = ((covered_parts & HIDEEYES) ? head_absorbed : 0)
+		if(absorbed >= 0)
+			glasses.shred(bomb,shock-absorbed,src)
+
+	if(wear_suit)
+		covered_parts |= wear_suit.flags_inv
+		suit_absorbed = wear_suit.shred(bomb,shock,src)
+	if(gloves)
+		var/absorbed = ((covered_parts & HIDEGLOVES) ? suit_absorbed : 0)
+		if(absorbed >= 0)
+			gloves.shred(bomb,shock-absorbed,src)
+	if(shoes)
+		var/absorbed = ((covered_parts & HIDESHOES) ? suit_absorbed : 0)
+		if(absorbed >= 0)
+			shoes.shred(bomb,shock-absorbed,src)
+	if(w_uniform)
+		var/absorbed = ((covered_parts & HIDEJUMPSUIT) ? suit_absorbed : 0)
+		if(absorbed >= 0)
+			w_uniform.shred(bomb,shock-20-absorbed,src)	//Uniforms are also annoying to get shredded
+
+/obj/item/proc/shred(bomb,shock,mob/living/carbon/human/Human)
+	if(flags & ABSTRACT)
+		return -1
+
+	var/shredded
+
+	if(!bomb)
+		if(burn_state != -1)
+			shredded = 1 //No heat protection, it burns
+		else
+			shredded = -1 //Heat protection = Fireproof
+
+	else if(shock > 0)
+		if(prob(max(shock-armor["bomb"],0)))
+			shredded = armor["bomb"] + 10 //It gets shredded, but it also absorbs the shock the clothes underneath would recieve by this amount
+		else
+			shredded = -1 //It survives explosion
+
+	if(shredded > 0)
+		if(Human) //Unequip if equipped
+			Human.unEquip(src)
+
+		if(bomb)
+			for(var/obj/item/Item in contents) //Empty out the contents
+				Item.loc = src.loc
+			spawn(1) //so the shreds aren't instantly deleted by the explosion
+				var/obj/effect/decal/cleanable/shreds/Shreds = new(loc)
+				Shreds.desc = "The sad remains of what used to be [src.name]."
+				qdel(src)
+		else
+			burn()
+
+	return shredded

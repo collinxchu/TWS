@@ -129,9 +129,9 @@ display round(lastgen) and plasmatank amount
 	sheet_name = sheet.name
 	RefreshParts()
 
-/obj/machinery/power/port_gen/pacman/Del()
+/obj/machinery/power/port_gen/pacman/Destroy()
 	DropFuel()
-	..()
+	return ..()
 
 /obj/machinery/power/port_gen/pacman/RefreshParts()
 	var/temp_rating = 0
@@ -194,7 +194,7 @@ display round(lastgen) and plasmatank amount
 
 	if (heat > 300)
 		overheat()
-		del(src)
+		qdel(src)
 	return
 
 /obj/machinery/power/port_gen/pacman/handleInactive()
@@ -260,7 +260,7 @@ display round(lastgen) and plasmatank amount
 
 			new_frame.state = 2
 			new_frame.icon_state = "box_1"
-			del(src)
+			qdel(src)
 
 /obj/machinery/power/port_gen/pacman/attack_hand(mob/user as mob)
 	..()

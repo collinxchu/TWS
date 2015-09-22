@@ -64,23 +64,21 @@
 				G.attackby(NG, user)
 				usr << "You add the newly-formed glass to the stack. It now contains [NG.amount] sheets."
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 	return ..()
 
 /obj/item/weapon/shard/Crossed(AM as mob|obj)
-	if(ismob(AM))
+	if(isliving(AM))
 		var/mob/M = AM
-		M << "\red <B>You step on \the [src]!</B>"
+		M << "<span class='danger'>You step on \the [src]!</span>"
 		playsound(src.loc, 'sound/effects/glass_step.ogg', 50, 1) // not sure how to handle metal shards with sounds
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
-
 			if(H.species.flags & IS_SYNTHETIC || (H.species.siemens_coefficient<0.5)) //Thick skin.
 				return
-
 			if( !H.shoes && ( !H.wear_suit || !(H.wear_suit.body_parts_covered & FEET) ) )
-				var/datum/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
+				var/obj/item/organ/external/affecting = H.get_organ(pick("l_foot", "r_foot"))
 				if(affecting.status & ORGAN_ROBOT)
 					return
 				if(affecting.take_damage(5, 0))

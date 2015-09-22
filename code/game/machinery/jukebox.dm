@@ -25,14 +25,13 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
 		new/datum/track("D`Bert", 'sound/music/title2.ogg'),
 		new/datum/track("D`Fort", 'sound/ambience/song_game.ogg'),
-		new/datum/track("Floating", 'sound/music/main.ogg'),
-		new/datum/track("Endless Space", 'sound/music/space.ogg'),
+		new/datum/track("Floating", 'sound/music/main.ogg'),,
 		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
 		new/datum/track("Scratch", 'sound/music/title1.ogg'),
 		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
 	)
 
-/obj/machinery/media/jukebox/Del()
+/obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
 	..()
 
@@ -156,7 +155,7 @@ datum/track/New(var/title_name, var/audio)
 	s.start()
 
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	del(src)
+	qdel(src)
 
 /obj/machinery/media/jukebox/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)

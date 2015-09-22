@@ -4,6 +4,10 @@
 	health = 20
 	maxHealth = 20
 
+	mob_bump_flag = SIMPLE_ANIMAL
+	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+
 	var/icon_living = ""
 	var/icon_dead = ""
 	var/icon_gib = null	//We only try to show a gibbing animation if this exists.
@@ -45,7 +49,6 @@
 	var/max_n2 = 0
 	var/unsuitable_atoms_damage = 2	//This damage is taken when atmos doesn't fit all the requirements above
 	var/speed = 0 //LETS SEE IF I CAN SET SPEEDS FOR SIMPLE MOBS WITHOUT DESTROYING EVERYTHING. Higher speed is slower, negative speed is faster
-	var/flying = 1
 
 	//LETTING SIMPLE ANIMALS ATTACK? WHAT COULD GO WRONG. Defaults to zero so Ian can still be cuddly
 	var/melee_damage_lower = 0
@@ -240,7 +243,7 @@
 			if (!(status_flags & CANPUSH))
 				return
 
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab( M, M, src )
+			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(M, src)
 
 			M.put_in_active_hand(G)
 
@@ -249,10 +252,12 @@
 			LAssailant = M
 
 			M.visible_message("\red [M] has grabbed [src] passively!")
+			M.do_attack_animation(src)
 
 		if("hurt")
 			adjustBruteLoss(harm_intent_damage)
 			M.visible_message("\red [M] [response_harm] \the [src]")
+			M.do_attack_animation(src)
 
 	return
 
@@ -275,10 +280,10 @@
 			for(var/i=0;i<actual_meat_amount;i++)
 				var/obj/item/meat = new meat_type(get_turf(src))
 				meat.name = "[src.name] [meat.name]"
-			if(small)
+			if(mob_size < MOB_SIZE_HUMAN)
 				user.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
 				new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-				del(src)
+				qdel(src)
 			else
 				user.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
 				gib()
@@ -350,7 +355,7 @@
 //Call when target overlay should be added/removed
 /mob/living/simple_animal/update_targeted()
 	if(!targeted_by && target_locked)
-		del(target_locked)
+		qdel(target_locked)
 	overlays = null
 	if (targeted_by && target_locked)
 		overlays += target_locked
@@ -377,3 +382,13 @@
 /mob/living/simple_animal/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
 	return 1
+
+/mob/living/simple_animal/handle_fire()
+	return
+
+/mob/living/simple_animal/update_fire()
+	return
+/mob/living/simple_animal/IgniteMob()
+	return
+/mob/living/simple_animal/ExtinguishMob()
+	return

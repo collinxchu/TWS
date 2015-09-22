@@ -8,7 +8,7 @@ var/global/datum/global_init/init = new ()
 	makeDatumRefLists()
 	load_configuration()
 
-	del(src)
+	qdel(src)
 
 
 /world
@@ -62,11 +62,13 @@ var/global/datum/global_init/init = new ()
 
 	//goonstation's process scheduler
 	processScheduler = new
-	processScheduler.setup()
-	processScheduler.start()
+//	processScheduler.setup()
+//	processScheduler.start()
 
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
+		processScheduler.deferSetupFor(/datum/controller/process/ticker)
+		processScheduler.setup()
 		master_controller.setup()
 
 	spawn(3000)		//so we aren't adding to the round-start lag
@@ -232,7 +234,7 @@ var/world_topic_spam_protect_time = world.timeofday
 					if(!istype(C.mob, /mob/dead))
 						log_access("AFK: [key_name(C)]")
 						C << "\red You have been inactive for more than 10 minutes and have been disconnected."
-						del(C)
+						qdel(C)
 #undef INACTIVITY_KICK
 
 

@@ -14,17 +14,42 @@
 
 /turf/simulated/floor/light
 	name = "Light floor"
-	luminosity = 5
+	light_range = 5
 	icon_state = "light_on"
-	floor_type = /obj/item/stack/tile/light
+	floor_type = new/obj/item/stack/tile/light
+	var/color_state = LIGHTFLOOR_ON
 
 	New()
+		var/obj/item/stack/tile/light/T = new /obj/item/stack/tile/light
+		T.state = color_state
+		floor_type = T
 		var/n = name //just in case commands rename it in the ..() call
+		update_icon()
 		..()
 		spawn(4)
 			if(src)
 				update_icon()
 				name = n
+
+//|| Pre-set colored lights for easier mapping
+/turf/simulated/floor/light/white
+	icon_state = "light_on-w"
+	color_state = LIGHTFLOOR_WHITE
+/turf/simulated/floor/light/red
+	icon_state = "light_on-r"
+	color_state = LIGHTFLOOR_RED
+/turf/simulated/floor/light/green
+	icon_state = "light_on-g"
+	color_state = LIGHTFLOOR_GREEN
+/turf/simulated/floor/light/yellow
+	icon_state = "light_on-y"
+	color_state = LIGHTFLOOR_YELLOW
+/turf/simulated/floor/light/blue
+	icon_state = "light_on-b"
+	color_state = LIGHTFLOOR_BLUE
+/turf/simulated/floor/light/purple
+	icon_state = "light_on-p"
+	color_state = LIGHTFLOOR_PURPLE
 
 /turf/simulated/floor/wood
 	name = "floor"
@@ -264,3 +289,58 @@
 
 /turf/simulated/floor/plating/snow/ex_act(severity)
 	return
+
+
+//|| Roads	#TODO - sometime in the future not a huge priority - handle directional icon changes in update_icon for road in-game construction as well as make damage icons
+/turf/simulated/floor/road
+	name = "Road"
+	icon = 'icons/turf/roads.dmi'
+	icon_state = "road"
+/turf/simulated/floor/road/vertical/
+	icon_state = "road1"
+/turf/simulated/floor/road/horizontal
+	icon_state = "road10"
+/turf/simulated/floor/road/vertical/east/
+	icon_state = "road3"
+/turf/simulated/floor/road/vertical/west
+	icon_state = "road2"
+/turf/simulated/floor/road/horizontal/north
+	icon_state = "road5"
+/turf/simulated/floor/road/horizontal/south
+	icon_state = "road4"
+
+//| Road corners
+/turf/simulated/floor/road/northeast
+	icon_state = "road6"
+/turf/simulated/floor/road/northwest
+	icon_state = "road7"
+/turf/simulated/floor/road/southeast
+	icon_state = "road8"
+/turf/simulated/floor/road/southwest
+	icon_state = "road9"
+
+//| Stairs
+	// - default is South, in terms of being at the top of the stairs looking down.
+/turf/simulated/floor/stairs/
+	icon_state = "ramptop"
+/turf/simulated/floor/stairs/north
+	dir = 1
+	icon_state = "ramptop"
+/turf/simulated/floor/stairs/east
+	dir = 4
+	icon_state = "ramptop"
+/turf/simulated/floor/stairs/west
+	dir = 8
+	icon_state = "ramptop"
+
+/turf/simulated/floor/stairsdark/
+	icon_state = "rampbottom"
+/turf/simulated/floor/stairsdark/north
+	dir = 1
+	icon_state = "rampbottom"
+/turf/simulated/floor/stairsdark/east
+	dir = 4
+	icon_state = "rampbottom"
+/turf/simulated/floor/stairsdark/west
+	dir = 8
+	icon_state = "rampbottom"

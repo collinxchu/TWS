@@ -142,7 +142,7 @@ var/list/ai_verbs_default = list(
 	if(!safety)//Only used by AIize() to successfully spawn an AI.
 		if (!B)//If there is no player/brain inside.
 			new/obj/structure/AIcore/deactivated(loc)//New empty terminal.
-			del(src)//Delete AI.
+			qdel(src)//Delete AI.
 			return
 		else
 			if (B.brainmob.mind)
@@ -191,8 +191,9 @@ var/list/ai_verbs_default = list(
 
 	job = "AI"
 
-/mob/living/silicon/ai/Del()
+/mob/living/silicon/ai/Destroy()
 	ai_list -= src
+	qdel(eyeobj)
 	..()
 
 /mob/living/silicon/ai/pointed(atom/A as mob|obj|turf in view())
@@ -239,7 +240,7 @@ var/list/ai_verbs_default = list(
 /obj/machinery/ai_powersupply/New(var/mob/living/silicon/ai/ai=null)
 	powered_ai = ai
 	if(isnull(powered_ai))
-		Del()
+		Destroy()
 
 	loc = powered_ai.loc
 	use_power(1) // Just incase we need to wake up the power system.
@@ -248,7 +249,7 @@ var/list/ai_verbs_default = list(
 
 /obj/machinery/ai_powersupply/process()
 	if(!powered_ai || powered_ai.stat & DEAD)
-		Del()
+		Destroy()
 	if(!powered_ai.anchored)
 		loc = powered_ai.loc
 		use_power = 0
@@ -325,8 +326,8 @@ var/list/ai_verbs_default = list(
 	set category = "AI Commands"
 	set name = "Show Alerts"
 
-	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
-	dat += "<A HREF='?src=\ref[src];mach_close=aialerts'>Close</A><BR><BR>"
+//	var/dat = "<HEAD><TITLE>Current Station Alerts</TITLE><META HTTP-EQUIV='Refresh' CONTENT='10'></HEAD><BODY>\n"
+/*	dat += "<A HREF='?src=\ref[src];mach_close=aialerts'>Close</A><BR><BR>"
 	for (var/cat in alarms)
 		dat += text("<B>[]</B><BR>\n", cat)
 		var/list/alarmlist = alarms[cat]
@@ -349,7 +350,7 @@ var/list/ai_verbs_default = list(
 		dat += "<BR>\n"
 
 	viewalerts = 1
-	src << browse(dat, "window=aialerts&can_close=0")
+	src << browse(dat, "window=aialerts&can_close=0")  #TOREMOVE*/
 
 // this verb lets the ai see the stations manifest
 /mob/living/silicon/ai/proc/ai_roster()
@@ -500,13 +501,13 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/reset_view(atom/A)
 	if(camera)
-		camera.SetLuminosity(0)
+		camera.set_light(0)
 	if(istype(A,/obj/machinery/camera))
 		camera = A
 	..()
 	if(istype(A,/obj/machinery/camera))
-		if(camera_light_on)	A.SetLuminosity(AI_CAMERA_LUMINOSITY)
-		else				A.SetLuminosity(0)
+		if(camera_light_on)	A.set_light(AI_CAMERA_LUMINOSITY)
+		else				A.set_light(0)
 
 
 /mob/living/silicon/ai/proc/switchCamera(var/obj/machinery/camera/C)
@@ -521,7 +522,7 @@ var/list/ai_verbs_default = list(
 	//machine = src
 
 	return 1
-
+/*
 /mob/living/silicon/ai/triggerAlarm(var/class, area/A, list/cameralist, var/source)
 	if (stat == 2)
 		return 1
@@ -532,7 +533,7 @@ var/list/ai_verbs_default = list(
 	for (var/obj/machinery/camera/C in cameralist)
 		cameratext += "[(cameratext == "")? "" : "|"]<A HREF=?src=\ref[src];switchcamera=\ref[C]>[C.c_tag]</A>"
 
-	queueAlarm("--- [class] alarm detected in [A.name]! ([(cameratext)? cameratext : "No Camera"])", class)
+//	queueAlarm("--- [class] alarm detected in [A.name]! ([(cameratext)? cameratext : "No Camera"])", class) #TOREMOVE
 
 	if (viewalerts) ai_alerts()
 
@@ -540,10 +541,10 @@ var/list/ai_verbs_default = list(
 	var/has_alarm = ..()
 
 	if (!has_alarm)
-		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0)
+//		queueAlarm(text("--- [] alarm in [] has been cleared.", class, A.name), class, 0) #TOREMOVE
 		if (viewalerts) ai_alerts()
 
-	return has_alarm
+	return has_alarm */
 
 /mob/living/silicon/ai/cancel_camera()
 	set category = "AI Commands"
@@ -631,7 +632,7 @@ var/list/ai_verbs_default = list(
 			input = input("Select a crew member:") as null|anything in personnel_list
 			var/icon/character_icon = personnel_list[input]
 			if(character_icon)
-				del(holo_icon)//Clear old icon so we're not storing it in memory.
+				qdel(holo_icon)//Clear old icon so we're not storing it in memory.
 				holo_icon = getHologramIcon(icon(character_icon))
 		else
 			alert("No suitable records found. Aborting.")
@@ -644,7 +645,7 @@ var/list/ai_verbs_default = list(
 		)
 		input = input("Please select a hologram:") as null|anything in icon_list
 		if(input)
-			del(holo_icon)
+			qdel(holo_icon)
 			switch(input)
 				if("default")
 					holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
@@ -677,7 +678,7 @@ var/list/ai_verbs_default = list(
 	src << "Camera lights [camera_light_on ? "activated" : "deactivated"]."
 	if(!camera_light_on)
 		if(camera)
-			camera.SetLuminosity(0)
+			camera.set_light(0)
 			camera = null
 	else
 		lightNearbyCamera()
@@ -692,20 +693,20 @@ var/list/ai_verbs_default = list(
 		if(src.camera)
 			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
 			if(camera && src.camera != camera)
-				src.camera.SetLuminosity(0)
+				src.camera.set_light(0)
 				if(!camera.light_disabled)
 					src.camera = camera
-					src.camera.SetLuminosity(AI_CAMERA_LUMINOSITY)
+					src.camera.set_light(AI_CAMERA_LUMINOSITY)
 				else
 					src.camera = null
 			else if(isnull(camera))
-				src.camera.SetLuminosity(0)
+				src.camera.set_light(0)
 				src.camera = null
 		else
 			var/obj/machinery/camera/camera = near_range_camera(src.eyeobj)
 			if(camera && !camera.light_disabled)
 				src.camera = camera
-				src.camera.SetLuminosity(AI_CAMERA_LUMINOSITY)
+				src.camera.set_light(AI_CAMERA_LUMINOSITY)
 		camera_light_on = world.timeofday + 1 * 20 // Update the light every 2 seconds.
 
 
@@ -765,6 +766,9 @@ var/list/ai_verbs_default = list(
 		src << "\red System Error - Transceiver Disabled!"
 		return 1
 	return 0
+
+/mob/living/silicon/ai/proc/is_in_chassis()
+	return istype(loc, /turf)
 
 #undef AI_CHECK_WIRELESS
 #undef AI_CHECK_RADIO

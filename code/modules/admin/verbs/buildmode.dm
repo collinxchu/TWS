@@ -8,7 +8,7 @@
 			M.client.show_popup_menus = 1
 			for(var/obj/effect/bmode/buildholder/H)
 				if(H.cl == M.client)
-					del(H)
+					qdel(H)
 		else
 			log_admin("[key_name(usr)] has entered build mode.")
 			M.client.buildmode = 1
@@ -41,6 +41,12 @@
 	dir = NORTH
 	icon = 'icons/misc/buildmode.dmi'
 	var/obj/effect/bmode/buildholder/master = null
+
+/obj/effect/bmode/Destroy()
+	if(master && master.cl)
+		master.cl.screen -= src
+	master = null
+	return ..()
 
 /obj/effect/bmode/builddir
 	icon_state = "build"
@@ -114,6 +120,19 @@
 	var/obj/effect/bmode/buildmode/buildmode = null
 	var/obj/effect/bmode/buildquit/buildquit = null
 	var/atom/movable/throw_atom = null
+
+/obj/effect/bmode/buildholder/Destroy()
+	qdel(builddir)
+	builddir = null
+	qdel(buildhelp)
+	buildhelp = null
+	qdel(buildmode)
+	buildmode = null
+	qdel(buildquit)
+	buildquit = null
+	throw_atom = null
+	cl = null
+	return ..()
 
 /obj/effect/bmode/buildmode
 	icon_state = "buildmode1"
@@ -211,7 +230,7 @@
 					T.ChangeTurf(/turf/simulated/wall)
 					return
 				else if(istype(object,/obj))
-					del(object)
+					qdel(object)
 					return
 			else if(istype(object,/turf) && pa.Find("alt") && pa.Find("left"))
 				new/obj/machinery/door/airlock(get_turf(object))
@@ -241,7 +260,7 @@
 					var/obj/A = new holder.buildmode.objholder (get_turf(object))
 					A.set_dir(holder.builddir.dir)
 			else if(pa.Find("right"))
-				if(isobj(object)) del(object)
+				if(isobj(object)) qdel(object)
 
 		if(3)
 			if(pa.Find("left")) //I cant believe this shit actually compiles.

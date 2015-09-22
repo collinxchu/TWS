@@ -174,7 +174,7 @@
 					user << "<span class='danger'>The crate's anti-tamper system activates!</span>"
 					var/turf/T = get_turf(src.loc)
 					explosion(T, -1, -1, 1, 1)
-					del(src)
+					qdel(src)
 					return
 	else
 		return ..()

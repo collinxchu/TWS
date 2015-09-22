@@ -24,7 +24,12 @@
 	min_n2 = 0
 	max_n2 = 0
 	minbodytemp = 0
+	flying = 1
 	faction = "cult"
+	mob_size = MOB_SIZE_LARGE
+	mob_swap_flags = HUMAN|SIMPLE_ANIMAL|SLIME|MONKEY
+	mob_push_flags = ALLMOBS
+
 	var/list/construct_spells = list()
 
 /mob/living/simple_animal/construct/New()
@@ -38,7 +43,7 @@
 	new /obj/item/weapon/ectoplasm (src.loc)
 	..(null,"collapses in a shattered heap.")
 	ghostize()
-	del src
+	qdel(src)
 
 
 /mob/living/simple_animal/construct/attack_generic(var/mob/user)
@@ -129,7 +134,7 @@
 	melee_damage_lower = 30
 	melee_damage_upper = 30
 	attacktext = "smashed their armoured gauntlet into"
-	mob_size = 20
+	mob_size = MOB_SIZE_LARGE
 	speed = 3
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch3.ogg'
@@ -260,7 +265,7 @@
 	speed = 5
 	wall_smash = 1
 	attack_sound = 'sound/weapons/punch4.ogg'
-	mob_size = 20
+	mob_size = MOB_SIZE_LARGE
 	var/energy = 0
 	var/max_energy = 1000
 

@@ -3,6 +3,7 @@
 	desc = "A little security robot.  He looks less than thrilled."
 	icon = 'icons/obj/aibots.dmi'
 	icon_state = "secbot0"
+	light_color = LIGHT_COLOR_PURE_RED
 	layer = 5.0
 	density = 0
 	anchored = 0
@@ -250,12 +251,14 @@ Auto Patrol: []"},
 	switch(mode)
 
 		if(SECBOT_IDLE)		// idle
+			flashing_lights() //make sure they disengage properly
 			walk_to(src,0)
 			look_for_perp()	// see if any criminals are in range
 			if(!mode && auto_patrol)	// still idle, and set to patrol
 				mode = SECBOT_START_PATROL	// switch to patrol mode
 
 		if(SECBOT_HUNT)		// hunting for perp
+			flashing_lights()
 			// if can't reach perp for long enough, go idle
 			if(src.frustration >= 8)
 		//		for(var/mob/O in hearers(src, null))
@@ -335,6 +338,7 @@ Auto Patrol: []"},
 				src.frustration = 8
 
 		if(SECBOT_PREP_ARREST)		// preparing to arrest target
+			flashing_lights() //make sure they disengage properly
 			if(src.lasercolor)
 				mode = SECBOT_IDLE
 				return
@@ -763,13 +767,24 @@ Auto Patrol: []"},
 	s.start()
 
 	new /obj/effect/decal/cleanable/blood/oil(src.loc)
-	del(src)
+	qdel(src)
 
 
 /obj/machinery/bot/secbot/proc/on_explosion(var/turf/Tsec)
 	new /obj/item/weapon/melee/baton(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
+
+
+/obj/machinery/bot/secbot/proc/flashing_lights()
+	if(mode == SECBOT_HUNT)
+		switch(light_color)
+			if(LIGHT_COLOR_PURE_RED)
+				light_color = LIGHT_COLOR_PURE_BLUE
+			if(LIGHT_COLOR_PURE_BLUE)
+				light_color = LIGHT_COLOR_PURE_RED
+	else
+		light_color = LIGHT_COLOR_PURE_RED
 
 //Secbot Construction
 
@@ -783,12 +798,12 @@ Auto Patrol: []"},
 		return
 
 	if(S.secured)
-		del(S)
+		qdel(S)
 		var/obj/item/weapon/secbot_assembly/A = new /obj/item/weapon/secbot_assembly
 		user.put_in_hands(A)
 		user << "You add the signaler to the helmet."
 		user.drop_from_inventory(src)
-		del(src)
+		qdel(src)
 	else
 		return
 
@@ -807,7 +822,7 @@ Auto Patrol: []"},
 		user << "You add the prox sensor to [src]!"
 		src.overlays += image('icons/obj/aibots.dmi', "hs_eye")
 		src.name = "helmet/signaler/prox sensor assembly"
-		del(W)
+		qdel(W)
 
 	else if(((istype(W, /obj/item/robot_parts/l_arm)) || (istype(W, /obj/item/robot_parts/r_arm))) && (src.build_step == 2))
 		user.drop_item()
@@ -815,7 +830,7 @@ Auto Patrol: []"},
 		user << "You add the robot arm to [src]!"
 		src.name = "helmet/signaler/prox sensor/robot arm assembly"
 		src.overlays += image('icons/obj/aibots.dmi', "hs_arm")
-		del(W)
+		qdel(W)
 
 	else if((istype(W, /obj/item/weapon/melee/baton)) && (src.build_step >= 3))
 		user.drop_item()
@@ -824,8 +839,8 @@ Auto Patrol: []"},
 		var/obj/machinery/bot/secbot/S = new /obj/machinery/bot/secbot
 		S.loc = get_turf(src)
 		S.name = src.created_name
-		del(W)
-		del(src)
+		qdel(W)
+		qdel(src)
 
 	else if(istype(W, /obj/item/weapon/pen))
 		var/t = copytext(stripped_input(user, "Enter new robot name", src.name, src.created_name),1,MAX_NAME_LEN)
@@ -889,7 +904,7 @@ Auto Patrol: []"},
 		pulse2.anchored = 1
 		pulse2.set_dir(pick(cardinal))
 		spawn(10)
-			pulse2.delete()
+			qdel(pulse2)
 		var/list/mob/living/carbon/targets = new
 		for(var/mob/living/carbon/C in view(12,src))
 			if(C.stat==2)

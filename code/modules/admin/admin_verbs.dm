@@ -150,8 +150,8 @@ var/list/admin_verbs_debug = list(
 	/client/proc/reload_admins,
 	/client/proc/reload_mentors,
 	/client/proc/restart_controller,
-	/client/proc/remake_distribution_map,
-	/client/proc/show_distribution_map,
+//	/client/proc/remake_distribution_map,  #TOREMOVE
+//	/client/proc/show_distribution_map,
 	/client/proc/show_plant_genes,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
@@ -374,8 +374,10 @@ var/list/admin_verbs_mentor = list(
 		var/mob/body = mob
 		var/mob/dead/observer/ghost = body.ghostize(1)
 		ghost.admin_ghosted = 1
-		if(body && !body.key)
-			body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
+		if(body)
+			body.aghosted = ghost
+			if(!body.key)
+				body.key = "@[key]"	//Haaaaaaaack. But the people have spoken. If it breaks; blame adminbus
 		feedback_add_details("admin_verb","O") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -512,7 +514,7 @@ var/list/admin_verbs_mentor = list(
 		if(C)
 			message_admins("[key_name_admin(src)] has warned [key_name_admin(C)] resulting in a [AUTOBANTIME] minute ban.")
 			C << "<font color='red'><BIG><B>You have been autobanned due to a warning by [ckey].</B></BIG><br>This is a temporary ban, it will be removed in [AUTOBANTIME] minutes."
-			del(C)
+			qdel(C)
 		else
 			message_admins("[key_name_admin(src)] has warned [warned_ckey] resulting in a [AUTOBANTIME] minute ban.")
 		AddBan(warned_ckey, D.last_id, "Autobanning due to too many formal warnings", ckey, 1, AUTOBANTIME)

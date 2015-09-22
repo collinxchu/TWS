@@ -16,6 +16,8 @@
 	pressure_resistance = 1
 	slot_flags = SLOT_HEAD
 	body_parts_covered = HEAD
+	burn_state = 0 //Burnable
+	burntime = 5
 	attack_verb = list("bapped")
 
 	var/info		//What's actually written on the paper.
@@ -55,6 +57,9 @@
 		return
 
 /obj/item/weapon/paper/update_icon()
+	if(burn_state == 1)
+		icon_state = "paper_onfire"
+		return
 	if(icon_state == "paper_talisman")
 		return
 	if(info)
@@ -291,30 +296,6 @@
 		\[hr\] : Adds a horizontal rule.
 	</BODY></HTML>"}, "window=paper_help")
 
-/obj/item/weapon/paper/proc/burnpaper(obj/item/weapon/flame/P, mob/user)
-	var/class = "<span class='warning'>"
-
-	if(P.lit && !user.restrained())
-		if(istype(P, /obj/item/weapon/flame/lighter/zippo))
-			class = "<span class='rose'>"
-
-		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
-		"[class]You hold \the [P] up to \the [src], burning it slowly.")
-
-		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
-				user.visible_message("[class][user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", \
-				"[class]You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.")
-
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
-
-				new /obj/effect/decal/cleanable/ash(src.loc)
-				del(src)
-
-			else
-				user << "\red You must hold \the [P] steady to burn \the [src]."
-
 
 /obj/item/weapon/paper/Topic(href, href_list)
 	..()
@@ -363,15 +344,20 @@
 		update_icon()
 
 
-/obj/item/weapon/paper/attackby(obj/item/weapon/P as obj, mob/user as mob)
+/obj/item/weapon/paper/attackby(obj/item/weapon/P as obj, mob/living/user as mob)
 	..()
+
+	if(burn_state == 1)
+		return
+
 	var/clown = 0
 	if(user.mind && (user.mind.assigned_role == "Clown"))
 		clown = 1
 
-	if(istype(P, /obj/item/weapon/tape_roll))
-		var/obj/item/weapon/tape_roll/tape = P
+	if(istype(P, /obj/item/tape_roll))
+		var/obj/item/tape_roll/tape = P
 		tape.stick(src, user)
+		tape.use(1)
 		return
 
 	if(istype(P, /obj/item/weapon/paper) || istype(P, /obj/item/weapon/photo))
@@ -408,7 +394,7 @@
 				h_user.r_store = B
 				h_user.update_inv_pockets()
 			else if (h_user.head == src)
-				h_user.u_equip(src)
+				h_user.unEquip(src)
 				h_user.put_in_hands(B)
 			else if (!istype(src.loc, /turf))
 				src.loc = get_turf(h_user)
@@ -464,11 +450,53 @@
 
 		user << "<span class='notice'>You stamp the paper with your rubber stamp.</span>"
 
-	else if(istype(P, /obj/item/weapon/flame))
-		burnpaper(P, user)
+	else if(is_hot(P))
+		if(user.disabilities & CLUMSY && prob(10))
+			user.visible_message("<span class='warning'>[user] accidentally ignites themselves!</span>", \
+								"<span class='userdanger'>You miss the paper and accidentally light yourself on fire!</span>")
+			user.unEquip(P)
+			user.adjust_fire_stacks(1)
+			user.IgniteMob()
+			return
+
+		if(!(in_range(user, src))) //to prevent issues as a result of telepathically lighting a paper
+			return
+
+		user.unEquip(src)
+		burn_paper(P, user)
 
 	add_fingerprint(user)
 	return
+
+/obj/item/weapon/paper/proc/burn_paper(obj/item/I, mob/user)
+	var/class = "<span class='warning'>"
+
+	if(!user.restrained())
+		if(istype(I, /obj/item/weapon/flame/lighter/zippo))
+			class = "<span class='rose'>"
+
+		user.visible_message("[class][user] holds \the [I] up to \the [src], it looks like \he's trying to burn it!", \
+		"[class]You hold \the [I] up to \the [src], burning it slowly.")
+
+		if(do_after(user, 20, 10, target = src))
+			if(user.get_active_hand() == I)
+				user.visible_message("[class]\the [src] catches on fire!")
+
+				user.unEquip(src)
+				fire_act()
+
+			else
+				user << "\red You must hold \the [I] steady to burn \the [src]."
+
+/obj/item/weapon/paper/fire_act()
+	..(0)
+	icon_state = "paper_onfire"
+	info = "[stars(info)]"
+
+
+/obj/item/weapon/paper/extinguish()
+	..()
+	update_icon()
 
 /*
  * Premade paper

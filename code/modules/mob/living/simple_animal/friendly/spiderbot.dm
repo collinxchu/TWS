@@ -5,7 +5,6 @@
 	max_co2 = 0
 	minbodytemp = 0
 	maxbodytemp = 500
-	mob_size = 5
 
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
@@ -26,6 +25,7 @@
 
 	health = 10
 	maxHealth = 10
+	mob_size = MOB_SIZE_TINY
 
 	attacktext = "shocked"
 	melee_damage_lower = 1
@@ -39,7 +39,6 @@
 	var/obj/item/held_item = null //Storage for single item they can hold.
 	speed = -1                    //Spiderbots gotta go fast.
 	//pass_flags = PASSTABLE      //Maybe griefy?
-	small = 1
 	speak_emote = list("beeps","clicks","chirps")
 
 /mob/living/simple_animal/spiderbot/attackby(var/obj/item/O as obj, var/mob/user as mob)
@@ -185,7 +184,7 @@
 		src.name = "Spider-bot"
 		update_icon()
 
-/mob/living/simple_animal/spiderbot/Del()
+/mob/living/simple_animal/spiderbot/Destroy()
 	eject_brain()
 	..()
 
@@ -210,7 +209,7 @@
 	held_item = null
 
 	gibs(loc, viruses, null, null, /obj/effect/gibspawner/robot) //TODO: use gib() or refactor spiderbots into synthetics.
-	src.Del()
+	src.Destroy()
 	return
 
 //Cannibalized from the parrot mob. ~Zuhayr

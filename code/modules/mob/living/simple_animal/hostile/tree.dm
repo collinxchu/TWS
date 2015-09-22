@@ -15,6 +15,7 @@
 	speed = -1
 	maxHealth = 250
 	health = 250
+	mob_size = MOB_SIZE_LARGE
 
 	pixel_x = -16
 
@@ -53,4 +54,4 @@
 /mob/living/simple_animal/hostile/tree/death()
 	..(null,"is hacked into pieces!")
 	new /obj/item/stack/sheet/wood(loc)
-	del(src)
+	qdel(src)

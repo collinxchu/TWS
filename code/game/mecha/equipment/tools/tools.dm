@@ -232,7 +232,7 @@
 							W.reagents.reaction(atm)
 						if(W.loc == my_target) break
 						sleep(2)
-					W.delete()
+					qdel(W)
 			return 1
 
 	get_equip_info()
@@ -291,7 +291,7 @@
 					if(do_after_cooldown(target))
 						if(disabled) return
 						chassis.spark_system.start()
-						del(target)
+						qdel(target)
 						playsound(target, 'sound/items/Deconstruct.ogg', 50, 1)
 						chassis.use_power(energy_drain)
 			if(1)
@@ -414,7 +414,7 @@
 		do_after_cooldown()
 		src = null
 		spawn(rand(150,300))
-			del(P)
+			qdel(P)
 		return
 
 /obj/item/mecha_parts/mecha_equipment/gravcatapult
@@ -634,6 +634,11 @@
 		pr_repair_droid.set_delay(equip_cooldown)
 		return
 
+	Destroy()
+		qdel(pr_repair_droid)
+		pr_repair_droid = null
+		..()
+
 	attach(obj/mecha/M as obj)
 		..()
 		droid_overlay = new(src.icon, icon_state = "repair_droid")
@@ -805,13 +810,13 @@
 			if(A)
 				var/pow_chan
 				for(var/c in list(EQUIP,ENVIRON,LIGHT))
-					if(A.master.powered(c))
+					if(A.powered(c))
 						pow_chan = c
 						break
 				if(pow_chan)
 					var/delta = min(12, ER.chassis.cell.maxcharge-cur_charge)
 					ER.chassis.give_power(delta)
-					A.master.use_power(delta*ER.coeff, pow_chan)
+					A.use_power(delta*ER.coeff, pow_chan)
 		return
 
 

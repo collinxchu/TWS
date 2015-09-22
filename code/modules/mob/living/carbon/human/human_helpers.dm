@@ -5,7 +5,7 @@
 	if(!species.has_organ["eyes"]) //No eyes, can't hurt them.
 		return 2
 	if(internal_organs_by_name["eyes"]) // Eyes are fucked, not a 'weak point'.
-		var/datum/organ/internal/I = internal_organs_by_name["eyes"]
+		var/obj/item/organ/I = internal_organs_by_name["eyes"]
 		if(I.status & ORGAN_CUT_AWAY)
 			return 2
 	if(istype(src.head, /obj/item/clothing/head))			//are they wearing something on their head

@@ -37,7 +37,7 @@
 	icon_state = "darkmatter"
 	density = 1
 	anchored = 0
-	luminosity = 4
+	light_range = 4
 
 	var/gasefficency = 0.25
 
@@ -53,7 +53,7 @@
 	var/emergency_alert = "CRYSTAL DELAMINATION IMMINENT."
 	var/explosion_point = 1000
 
-	l_color = "#8A8A00"
+	light_color = "#8A8A00"
 	var/warning_color = "#B8B800"
 	var/emergency_color = "#D9D900"
 
@@ -91,8 +91,8 @@
 	radio = new (src)
 
 
-/obj/machinery/power/supermatter/Del()
-	del radio
+/obj/machinery/power/supermatter/Destroy()
+	qdel(radio)
 	. = ..()
 
 /obj/machinery/power/supermatter/proc/explode()
@@ -111,15 +111,13 @@
 			mob.apply_effect(rads, IRRADIATE)
 	spawn(pull_time)
 		explosion(get_turf(src), explosion_power, explosion_power * 2, explosion_power * 3, explosion_power * 4, 1)
-		del src
+		qdel(src)
 		return
 
 //Changes color and luminosity of the light to these values if they were not already set
 /obj/machinery/power/supermatter/proc/shift_light(var/lum, var/clr)
-	if(l_color != clr)
-		l_color = clr
-	if(luminosity != lum)
-		SetLuminosity(lum)
+	if(lum != light_range || clr != light_color)
+		set_light(lum, l_color = clr)
 
 /obj/machinery/power/supermatter/proc/announce_warning()
 	var/integrity = damage / explosion_point
@@ -165,7 +163,7 @@
 		if(!istype(L, /turf/space) && (world.timeofday - lastwarning) >= WARNING_DELAY * 10)
 			announce_warning()
 	else
-		shift_light(4,initial(l_color))
+		shift_light(4,initial(light_color))
 	if(grav_pulling)
 		supermatter_pull()
 
@@ -309,7 +307,7 @@
 		user.dust()
 		power += 200
 	else
-		del user
+		qdel(user)
 
 	power += 200
 
@@ -370,6 +368,10 @@
 	desc = "A strangely translucent and iridescent crystal that looks like it used to be part of a larger structure. \red You get headaches just from looking at it."
 	icon_state = "darkmatter_shard"
 	base_icon_state = "darkmatter_shard"
+	light_color = "#8A8A00"
+	var/brightness = 2
+
+	set_light(brightness)
 
 	warning_point = 50
 	emergency_point = 400

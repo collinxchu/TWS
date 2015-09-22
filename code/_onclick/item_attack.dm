@@ -34,6 +34,12 @@
 	msg_admin_attack("[key_name(user)] attacked [key_name(M)] with [name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(damtype)])" )
 	/////////////////////////
 
+	// Attacking someone with a weapon while they are neck-grabbed
+	if(user.a_intent == I_HURT)
+		for(var/obj/item/weapon/grab/G in M.grabbed_by)
+			if(G.assailant == user && G.state >= GRAB_NECK)
+				M.attack_throat(src, G, user)
+
 	var/power = force
 	if(HULK in user.mutations)
 		power *= 2
@@ -50,7 +56,7 @@
 			user.visible_message("<span class='danger'>[M] has been [pick(attack_verb)] with [src] by [user]!</span>")
 		else
 			user.visible_message("<span class='danger'>[M] has been attacked with [src] by [user]!</span>")
-		
+
 		if (hitsound)
 			playsound(loc, hitsound, 50, 1, -1)
 		switch(damtype)

@@ -137,23 +137,35 @@ turf/simulated/floor/proc/update_icon()
 			if(istype(src,/turf/simulated/floor/grass) || istype(src,/turf/simulated/floor/plating/dirt || istype(src,/turf/simulated/floor/plating/dirt/deep)))
 				update_grass_overlays(1)
 	else if(is_light_floor())
-		if(get_lightfloor_on())
-			switch(get_lightfloor_state())
-				if(LIGHTFLOOR_STATE_OK)
+		var/obj/item/stack/tile/light/T = floor_type
+		if(T.on)
+			switch(T.state)
+				if(LIGHTFLOOR_ON)
 					icon_state = "light_on"
-					SetLuminosity(5)
-				if(LIGHTFLOOR_STATE_FLICKER)
-					var/num = pick("1","2","3","4")
-					icon_state = "light_on_flicker[num]"
-					SetLuminosity(5)
-				if(LIGHTFLOOR_STATE_BREAKING)
-					icon_state = "light_on_broken"
-					SetLuminosity(5)
-				if(LIGHTFLOOR_STATE_BROKEN)
+					set_light(5,null,LIGHT_COLOR_LIGHTBLUE)
+				if(LIGHTFLOOR_WHITE)
+					icon_state = "light_on-w"
+					set_light(5,null,LIGHT_COLOR_WHITE)
+				if(LIGHTFLOOR_RED)
+					icon_state = "light_on-r"
+					set_light(5,null,LIGHT_COLOR_RED)
+				if(LIGHTFLOOR_GREEN)
+					icon_state = "light_on-g"
+					set_light(5,null,LIGHT_COLOR_PURE_GREEN)
+				if(LIGHTFLOOR_YELLOW)
+					icon_state = "light_on-y"
+					set_light(5,null,"#FFFF00")
+				if(LIGHTFLOOR_BLUE)
+					icon_state = "light_on-b"
+					set_light(5,null,LIGHT_COLOR_DARKBLUE)
+				if(LIGHTFLOOR_PURPLE)
+					icon_state = "light_on-p"
+					set_light(5,null,LIGHT_COLOR_PURPLE)
+				else
 					icon_state = "light_off"
-					SetLuminosity(0)
+					set_light(0)
 		else
-			SetLuminosity(0)
+			set_light(0)
 			icon_state = "light_off"
 	else if(is_grass_floor())
 		if(!broken && !burnt)
@@ -221,11 +233,11 @@ turf/simulated/floor/proc/update_icon()
 		T = get_step(src, step_overlays[direction])
 			//| apply overlays when surrounded by grass
 		if(T && T.is_grass_floor())
-			overlays += image('icons/turf/floors.dmi', "grass_edge_[direction]", layer = 2.45) //Just above cables which are at 2.44
+			overlays += image('icons/turf/overlays.dmi', "grass_edge_[direction]", layer = 2.45) //Just above cables which are at 2.44
 			//| if src is a dirt hole, apply overlays when surrounded by dirt
 		if(istype(src, /turf/simulated/floor/plating/dirt/deep))
 			if(T.is_dirt_floor())
-				overlays += image('icons/turf/floors.dmi', "dirt_edge_[direction]", layer = 2.45) //Just above cables which are at 2.44
+				overlays += image('icons/turf/overlays.dmi', "dirt_edge_[direction]", layer = 2.45) //Just above cables which are at 2.44
 		if(istype(get_step(src, step_overlays[direction]), /turf/simulated/mineral))
 			overlays += image('icons/turf/walls.dmi', "rock_side_[direction]", layer = 2.45)
 
@@ -254,16 +266,25 @@ turf/simulated/floor/proc/update_icon()
 			return 0
 
 /turf/simulated/floor/attack_hand(mob/user as mob)
-	. = ..()
-	if(.)
+	if (is_light_floor())
+		var/obj/item/stack/tile/light/T = floor_type
+		T.on = !T.on
+		update_icon()
+	if ((!( user.canmove ) || user.restrained() || !( user.pulling )))
 		return
-
-	if(is_light_floor())
-		if(user.canmove && !user.restrained())
-			toggle_lightfloor_on()
-			update_icon()
-			return 1
-	return 0
+	if (user.pulling.anchored || !isturf(user.pulling.loc))
+		return
+	if ((user.pulling.loc != user.loc && get_dist(user, user.pulling) > 1))
+		return
+	if (ismob(user.pulling))
+		var/mob/M = user.pulling
+		var/mob/t = M.pulling
+		M.stop_pulling()
+		step(user.pulling, get_dir(user.pulling.loc, src))
+		M.start_pulling(t)
+	else
+		step(user.pulling, get_dir(user.pulling.loc, src))
+	return
 
 /turf/simulated/floor/proc/gets_drilled()
 	return
@@ -280,7 +301,7 @@ turf/simulated/floor/proc/update_icon()
 		return 0
 
 /turf/simulated/floor/is_light_floor()
-	if(ispath(floor_type, /obj/item/stack/tile/light))
+	if(istype(floor_type,/obj/item/stack/tile/light))
 		return 1
 	else
 		return 0
@@ -396,7 +417,7 @@ turf/simulated/floor/proc/update_icon()
 						FF.update_icon() //so siding get updated properly
 
 	if(!floor_type) return
-	SetLuminosity(0)
+	set_light(0)
 	floor_type = null
 	intact = 0
 	broken = 0
@@ -412,7 +433,7 @@ turf/simulated/floor/proc/update_icon()
 	broken = 0
 	burnt = 0
 	intact = 1
-	SetLuminosity(0)
+	set_light(0)
 	if(T)
 		if(istype(T,/obj/item/stack/tile/plasteel))
 			floor_type = T.type
@@ -441,12 +462,12 @@ turf/simulated/floor/proc/update_icon()
 	intact = 1
 	if(T)
 		if(istype(T,/obj/item/stack/tile/light))
-			floor_type = T.type
+			floor_type = T
 			update_icon()
 			levelupdate()
 			return
-	//if you gave a valid parameter, it won't get thisf ar.
-	floor_type = /obj/item/stack/tile/light
+	//if you gave a valid parameter, it won't get this far.
+	floor_type = new/obj/item/stack/tile/light
 
 	update_icon()
 	levelupdate()
@@ -512,10 +533,11 @@ turf/simulated/floor/proc/update_icon()
 
 	if(istype(C,/obj/item/weapon/light/bulb)) //only for light tiles
 		if(is_light_floor())
-			if(get_lightfloor_state())
+			var/obj/item/stack/tile/light/T = new floor_type(src)
+			if(T.state)
 				user.drop_item(C)
-				del(C)
-				set_lightfloor_state(0) //fixing it by bashing it with a light bulb, fun eh?
+				qdel(C)
+				T.state = C //fixing it by bashing it with a light bulb, fun eh?
 				update_icon()
 				user << "\blue You replace the light bulb."
 			else
@@ -527,12 +549,12 @@ turf/simulated/floor/proc/update_icon()
 		else
 			if(is_wood_floor())
 				user << "\red You forcefully pry off the planks, destroying them in the process."
+			else if(is_light_floor())
+				var/obj/item/stack/tile/light/L = floor_type
+				new L.type(src)
+				user << "\red You remove the [L.name]."
 			else
 				var/obj/item/I = new floor_type(src)
-				if(is_light_floor())
-					var/obj/item/stack/tile/light/L = I
-					L.on = get_lightfloor_on()
-					L.state = get_lightfloor_state()
 				user << "\red You remove the [I.name]."
 
 		make_plating()
@@ -576,14 +598,17 @@ turf/simulated/floor/proc/update_icon()
 				var/obj/item/stack/tile/T = C
 				if (T.get_amount() < 1)
 					return
-				floor_type = T.type
+				if(!istype(T, /obj/item/stack/tile/light))
+					floor_type = T.type
 				intact = 1
 				if(istype(T,/obj/item/stack/tile/dirt))
 					return
 				if(istype(T,/obj/item/stack/tile/light))
 					var/obj/item/stack/tile/light/L = T
-					set_lightfloor_state(L.state)
-					set_lightfloor_on(L.on)
+					floor_type = new /obj/item/stack/tile/light/
+					var/obj/item/stack/tile/light/F = floor_type
+					F.state = L.state
+					F.on = L.on
 				if(istype(T,/obj/item/stack/tile/grass))
 					for(var/direction in cardinal)
 						if(istype(get_step(src,direction),/turf/simulated/floor))

@@ -112,6 +112,7 @@ datum/preferences
 	// maps each organ to either null(intact), "cyborg" or "amputated"
 	// will probably not be able to do this for head and torso ;)
 	var/list/organ_data = list()
+	var/list/rlimb_data = list()
 	var/list/player_alt_titles = new()		// the default name of a job like "Medical Doctor"
 
 	var/list/flavor_texts = list()
@@ -346,7 +347,12 @@ datum/preferences
 			++ind
 			if(ind > 1)
 				dat += ", "
-			dat += "\tMechanical [organ_name] prothesis"
+			var/datum/robolimb/R
+			if(rlimb_data[name] && all_robolimbs[rlimb_data[name]])
+				R = all_robolimbs[rlimb_data[name]]
+			else
+				R = basic_robolimb
+			dat += "\t[R.company] [organ_name] prothesis"
 		else if(status == "amputated")
 			++ind
 			if(ind > 1)
@@ -1450,15 +1456,24 @@ datum/preferences
 					switch(new_state)
 						if("Normal")
 							organ_data[limb] = null
+							rlimb_data[limb] = null
 							if(third_limb)
 								organ_data[third_limb] = null
+								rlimb_data[third_limb] = null
 						if("Amputated")
 							organ_data[limb] = "amputated"
+							rlimb_data[limb] = null
 							if(second_limb)
 								organ_data[second_limb] = "amputated"
+								rlimb_data[second_limb] = null
 						if("Prothesis")
+							var/choice = input(user, "Which manufacturer do you wish to use for this limb?") as null|anything in chargen_robolimbs
+							if(!choice)
+								return
+							rlimb_data[limb] = choice
 							organ_data[limb] = "cyborg"
 							if(second_limb)
+								rlimb_data[second_limb] = choice
 								organ_data[second_limb] = "cyborg"
 							if(third_limb && organ_data[third_limb] == "amputated")
 								organ_data[third_limb] = null
@@ -1691,21 +1706,29 @@ datum/preferences
 	for(var/name in organ_data)
 
 		var/status = organ_data[name]
-		var/datum/organ/external/O = character.organs_by_name[name]
+		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
+			O.status = 0
 			if(status == "amputated")
-				O.amputated = 1
-				O.status |= ORGAN_DESTROYED
-				O.destspawn = 1
+				character.organs_by_name[O.limb_name] = null
+				character.organs -= O
+				if(O.children) // This might need to become recursive.
+					for(var/obj/item/organ/external/child in O.children)
+						character.organs_by_name[child.limb_name] = null
+						character.organs -= child
+
 			else if(status == "cyborg")
-				O.status |= ORGAN_ROBOT
+				if(rlimb_data[name])
+					O.robotize(rlimb_data[name])
+				else
+					O.robotize()
 		else
-			var/datum/organ/internal/I = character.internal_organs_by_name[name]
+			var/obj/item/organ/I = character.internal_organs_by_name[name]
 			if(I)
 				if(status == "assisted")
 					I.mechassist()
 				else if(status == "mechanical")
-					I.mechanize()
+					I.robotize()
 
 	if(underwear > underwear_m.len || underwear < 1)
 		underwear = 0 //I'm sure this is 100% unnecessary, but I'm paranoid... sue me. //HAH NOW NO MORE MAGIC CLONING UNDIES

@@ -5,7 +5,7 @@
 	name = "Light-emtter"
 	anchored = 1
 	unacidable = 1
-	luminosity = 8
+	light_range = 8
 
 /**********************Miner Lockers**************************/
 
@@ -45,7 +45,7 @@
 
 /obj/item/weapon/pickaxe
 	name = "pickaxe"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/mining.dmi'
 	icon_state = "pickaxe"
 	flags = CONDUCT
 	slot_flags = SLOT_BELT

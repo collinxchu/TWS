@@ -5,34 +5,34 @@
 		switch(place)
 			if("head")
 				if (!( target.wear_mask ))
-					del(src)
+					qdel(src)
 					return
 			if("l_hand")
 				if (!( target.l_hand ))
-					del(src)
+					qdel(src)
 					return
 			if("r_hand")
 				if (!( target.r_hand ))
-					del(src)
+					qdel(src)
 					return
 			if("back")
 				if (!( target.back ))
-					del(src)
+					qdel(src)
 					return
 			if("handcuff")
 				if (!( target.handcuffed ))
-					del(src)
+					qdel(src)
 					return
 			if("internal")
 				if ((!( (istype(target.wear_mask, /obj/item/clothing/mask) && istype(target.back, /obj/item/weapon/tank) && !( target.internal )) ) && !( target.internal )))
-					del(src)
+					qdel(src)
 					return
 
 	if (item)
 		if(isrobot(source) && place != "handcuff")
 			var/list/L = list( "syringe", "pill", "drink", "dnainjector", "fuel")
 			if(!(L.Find(place)))
-				del(src)
+				qdel(src)
 				return
 		for(var/mob/O in viewers(target, null))
 			if ((O.client && !( O.blinded )))
@@ -81,7 +81,7 @@
 				if(istype(target.wear_mask, /obj/item/clothing)&& !target.wear_mask:canremove)
 					return
 				var/obj/item/W = target.wear_mask
-				target.u_equip(W)
+				target.unEquip(W)
 				if (target.client)
 					target.client.screen -= W
 				if (W)
@@ -99,7 +99,7 @@
 		if("l_hand")
 			if (target.l_hand)
 				var/obj/item/W = target.l_hand
-				target.u_equip(W)
+				target.unEquip(W)
 				if (target.client)
 					target.client.screen -= W
 				if (W)
@@ -119,7 +119,7 @@
 		if("r_hand")
 			if (target.r_hand)
 				var/obj/item/W = target.r_hand
-				target.u_equip(W)
+				target.unEquip(W)
 				if (target.client)
 					target.client.screen -= W
 				if (W)
@@ -139,7 +139,7 @@
 		if("back")
 			if (target.back)
 				var/obj/item/W = target.back
-				target.u_equip(W)
+				target.unEquip(W)
 				if (target.client)
 					target.client.screen -= W
 				if (W)
@@ -157,7 +157,7 @@
 		if("handcuff")
 			if (target.handcuffed)
 				var/obj/item/W = target.handcuffed
-				target.u_equip(W)
+				target.unEquip(W)
 				if (target.client)
 					target.client.screen -= W
 				if (W)
@@ -189,7 +189,7 @@
 		else
 	source.regenerate_icons()
 	target.regenerate_icons()
-	del(src)
+	qdel(src)
 	return
 
 
@@ -201,7 +201,7 @@
 	if(!istype(W)) return
 
 	if(W == get_active_hand())
-		u_equip(W)
+		unEquip(W)
 
 	switch(slot)
 		if(slot_back)

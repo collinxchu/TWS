@@ -39,6 +39,7 @@
 	Changing this around would probably require a good look-over the pre-existing code.
 	*/
 	var/obj/screen/zone_sel/zone_sel = null
+	var/obj/screen/healthdoll = null
 
 	var/use_me = 1 //Allows all mobs to use the me verb by default, will have to manually specify they cannot
 	var/damageoverlaytemp = 0
@@ -48,6 +49,7 @@
 	var/attack_log = list( )
 	var/already_placed = 0.0
 	var/obj/machinery/machine = null
+	var/mob_size = MOB_SIZE_HUMAN    // Used by lockers.
 	var/other_mobs = null
 	var/memory = ""
 	var/poll_answer = 0.0
@@ -83,14 +85,17 @@
 	var/lying_prev = 0
 	var/canmove = 1
 	var/eye_stat = null//Living, potentially Carbon
+	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
+	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
 	var/lastpuke = 0
 	var/unacidable = 0
-	var/small = 0
 	var/list/pinned = list()            // List of things pinning this creature to walls (see living_defense.dm)
 	var/list/embedded = list()          // Embedded items, since simple mobs don't have organs.
 	var/list/languages = list()         // For speaking/listening.
 	var/list/speak_emote = list("says") // Verbs used when speaking. Defaults to 'say' if speak_emote is null.
 	var/emote_type = 1		// Define emote default type, 1 for seen emotes, 2 for heard emotes
+	var/facing_dir = null // Used for the ancient art of moonwalking.
+	var/flying = 0
 
 	var/name_archive //For admin things like possession
 
@@ -101,12 +106,6 @@
 	var/old_x = 0
 	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
-	var/dizziness = 0//Carbon
-	var/is_dizzy = 0
-	var/is_jittery = 0
-	var/jitteriness = 0//Carbon
-	var/is_floating = 0
-	var/floatiness = 0
 	var/charges = 0.0
 	var/nutrition = 400.0//Carbon
 
@@ -121,7 +120,7 @@
 	var/m_int = null//Living
 	var/m_intent = "run"//Living
 	var/lastKnownIP = null
-	var/obj/structure/stool/bed/buckled = null//Living
+	var/obj/buckled = null//Living
 	var/obj/item/l_hand = null//Living
 	var/obj/item/r_hand = null//Living
 	var/obj/item/weapon/back = null//Human/Monkey
@@ -141,8 +140,6 @@
 	var/in_throw_mode = 0
 
 	var/coughedtime = null
-
-	var/inertia_dir = 0
 
 	var/music_lastplayed = "null"
 
@@ -220,7 +217,13 @@
 	//SSD var, changed it up some so people can have special things happen for different mobs when SSD.
 	var/player_logged = 0
 
+
+	//Indicates if a clientless mob is actually an admin aghosting
+	var/mob/dead/observer/aghosted = null
+
 	var/turf/listed_turf = null  	//the current turf being examined in the stat panel
 	var/list/shouldnt_see = list()	//list of objects that this mob shouldn't see in the stat panel. this silliness is needed because of AI alt+click and cult blood runes
 
 	var/list/active_genes=list()
+
+	var/resize = 1 //Badminnery resize

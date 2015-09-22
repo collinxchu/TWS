@@ -3,6 +3,8 @@
 	name = "RUST Fuel Injection Control"
 	icon = 'icons/rust.dmi'
 	icon_state = "fuel"
+	light_color = LIGHT_COLOR_ORANGE
+
 	var/list/connected_injectors = list()
 	var/list/active_stages = list()
 	var/list/proceeding_stages = list()

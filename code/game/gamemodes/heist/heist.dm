@@ -111,7 +111,7 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	vox.h_style = "Short Vox Quills"
 	vox.f_style = "Shaved"
 
-	for(var/datum/organ/external/limb in vox.organs)
+	for(var/obj/item/organ/external/limb in vox.organs)
 		limb.status &= ~(ORGAN_DESTROYED | ORGAN_ROBOT)
 
 	// Keep track of their stack.
@@ -126,9 +126,9 @@ var/global/list/obj/cortical_stacks = list() //Stacks for 'leave nobody behind' 
 	if(cortical_stacks.len == 0)
 		return 0
 
-	for(var/datum/organ/internal/stack/vox/stack in cortical_stacks)
+/* 	for(var/obj/item/organ/internal/stack/vox/stack in cortical_stacks)
 		if(stack.organ_holder && get_area(stack.organ_holder) != locate(/area/shuttle/vox/station))
-			return 0
+			return 0  #TOREMOVE */
 	return 1
 
 /datum/game_mode/proc/is_raider_crew_alive()
@@ -281,6 +281,6 @@ datum/game_mode/proc/auto_declare_completion_heist()
 	var/area/skipjack = locate(/area/shuttle/vox/station)
 	for (var/mob/living/M in skipjack.contents)
 		//maybe send the player a message that they've gone home/been kidnapped? Someone responsible for vox lore should write that.
-		del(M)
+		qdel(M)
 	for (var/obj/O in skipjack.contents)
-		del(O)	//no hiding in lockers or anything
+		qdel(O)	//no hiding in lockers or anything

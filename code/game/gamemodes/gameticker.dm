@@ -44,11 +44,10 @@ var/global/datum/controller/gameticker/ticker
 	/*'sound/music/halloween/skeletons.ogg',\
 	'sound/music/halloween/halloween.ogg',\
 	'sound/music/halloween/ghosts.ogg'*/
-	'sound/music/space.ogg',\
 	'sound/music/traitor.ogg',\
 	'sound/music/title2.ogg',\
-	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
+	//'sound/music/worldserver_start.ogg'
+	)
 	do
 		pregame_timeleft = 180
 		world << "<B><FONT color='blue'>Welcome to the pre-game lobby!</FONT></B>"
@@ -96,7 +95,7 @@ var/global/datum/controller/gameticker/ticker
 		src.mode = config.pick_mode(master_mode)
 	if (!src.mode.can_start())
 		world << "<B>Unable to start [mode.name].</B> Not enough players, [mode.required_players] players needed. Reverting to pre-game lobby."
-		del(mode)
+		qdel(mode)
 		current_state = GAME_STATE_PREGAME
 		job_master.ResetOccupations()
 		return 0
@@ -105,7 +104,7 @@ var/global/datum/controller/gameticker/ticker
 	job_master.DivideOccupations() //Distribute jobs
 	var/can_continue = src.mode.pre_setup()//Setup special modes
 	if(!can_continue)
-		del(mode)
+		qdel(mode)
 		current_state = GAME_STATE_PREGAME
 		world << "<B>Error setting up [master_mode].</B> Reverting to pre-game lobby."
 		job_master.ResetOccupations()
@@ -140,7 +139,7 @@ var/global/datum/controller/gameticker/ticker
 		for(var/obj/effect/landmark/start/S in landmarks_list)
 			//Deleting Startpoints but we need the ai point to AI-ize people later
 			if (S.name != "AI")
-				del(S)
+				qdel(S)
 		world << "<FONT color='blue'><B>Enjoy the game!</B></FONT>"
 		world << sound('sound/AI/welcome.ogg') // Skie
 		//Holiday Round-start stuff	~Carn
@@ -157,8 +156,10 @@ var/global/datum/controller/gameticker/ticker
 		send2adminirc("Round has started with no admins online.")
 
 	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE
-	master_controller.process()		//Start master_controller.process()
-	lighting_controller.process()	//Start processing DynamicAreaLighting updates
+	//master_controller.process()		//Start master_controller.process()
+	//lighting_controller.process()	//Start processing DynamicAreaLighting updates
+
+	processScheduler.start()
 
 	for(var/obj/multiz/ladder/L in world) L.connect() //Lazy hackfix for ladders. TODO: move this to an actual controller. ~ Z
 
@@ -267,8 +268,8 @@ var/global/datum/controller/gameticker/ticker
 		//Otherwise if its a verb it will continue on afterwards.
 		sleep(300)
 
-		if(cinematic)	del(cinematic)		//end the cinematic
-		if(temp_buckle)	del(temp_buckle)	//release everybody
+		if(cinematic)	qdel(cinematic)		//end the cinematic
+		if(temp_buckle)	qdel(temp_buckle)	//release everybody
 		return
 
 
@@ -282,7 +283,7 @@ var/global/datum/controller/gameticker/ticker
 					continue
 				else
 					player.create_character()
-					del(player)
+					qdel(player)
 
 
 	proc/collect_minds()

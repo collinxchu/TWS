@@ -36,9 +36,10 @@
 	else
 		wires = new/datum/wires/smartfridge(src)
 
-/obj/machinery/smartfridge/Del()
-	del(wires) // qdel
-	..()
+/obj/machinery/smartfridge/Destroy()
+	qdel(wires) // qdel
+	wires = null
+	return ..()
 
 /obj/machinery/smartfridge/proc/accept_check(var/obj/item/O as obj)
 	if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/grown/) || istype(O,/obj/item/seeds/))
@@ -169,7 +170,7 @@
 			user << "<span class='notice'>\The [src] is full.</span>"
 			return 1
 		else
-			user.before_take_item(O)
+			user.remove_from_mob(O)
 			O.loc = src
 			if(item_quants[O.name])
 				item_quants[O.name]++

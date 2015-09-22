@@ -7,6 +7,9 @@
 
 
 /obj/item/weapon/paper/carbon/update_icon()
+	if(burn_state == 1)
+		icon_state = "paper_onfire"
+		return
 	if(iscopy)
 		if(info)
 			icon_state = "cpaper_words"

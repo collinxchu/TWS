@@ -280,7 +280,7 @@
 	if (closed_system && connected_port)
 		update_connected_network()
 
-	// Handle light requirements.
+/*	// Handle light requirements.
 	var/area/A = T.loc
 	if(A)
 		var/light_available
@@ -289,7 +289,7 @@
 		else
 			light_available =  5
 		if(abs(light_available - seed.ideal_light) > seed.light_tolerance)
-			health -= healthmod
+			health -= healthmod #TOREMOVE */
 
 	// Toxin levels beyond the plant's tolerance cause damage, but
 	// toxins are sucked up each tick and slowly reduce over time.
@@ -489,14 +489,14 @@
 	// Update bioluminescence.
 	if(seed)
 		if(seed.biolum)
-			SetLuminosity(round(seed.potency/10))
+			set_light(round(seed.potency/10))
 			if(seed.biolum_colour)
-				l_color = seed.biolum_colour
+				light_color = seed.biolum_colour
 			else
-				l_color = null
+				light_color = null
 			return
 
-	SetLuminosity(0)
+	set_light(0)
 	return
 
  // If a weed growth is sufficient, this proc is called.
@@ -637,7 +637,7 @@
 
 			if(!S.seed)
 				user << "The packet seems to be empty. You throw it away."
-				del(O)
+				qdel(O)
 				return
 
 			user << "You plant the [S.seed.seed_name] [S.seed.seed_noun]."
@@ -661,7 +661,7 @@
 
 				lastcycle = world.time
 
-			del(O)
+			qdel(O)
 
 			check_level_sanity()
 			update_icon()
@@ -697,7 +697,7 @@
 		weedlevel -= spray.weed_kill_str
 		user << "You spray [src] with [O]."
 		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
-		del(O)
+		qdel(O)
 
 		check_level_sanity()
 		update_icon()
@@ -718,13 +718,13 @@
 			user << "\red [src] is already occupied!"
 		else
 			user.drop_item()
-			del(O)
+			qdel(O)
 
 			var/obj/machinery/apiary/A = new(src.loc)
 			A.icon = src.icon
 			A.icon_state = src.icon_state
 			A.hydrotray_type = src.type
-			del(src)
+			qdel(src)
 	return
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_tk(mob/user as mob)
@@ -774,7 +774,7 @@
 			if(!environment) //We're in a crate or nullspace, bail out.
 				return
 
-			var/area/A = T.loc
+		/*	var/area/A = T.loc
 			var/light_available
 			if(A)
 				if(A.lighting_use_dynamic)
@@ -782,7 +782,7 @@
 				else
 					light_available =  5
 
-			usr << "The tray's sensor suite is reporting a light level of [light_available] lumens and a temperature of [environment.temperature]K."
+			usr << "The tray's sensor suite is reporting a light level of [light_available] lumens and a temperature of [environment.temperature]K." #TOREMOVE */
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid()
 	set name = "Toggle Tray Lid"
@@ -807,7 +807,7 @@
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/weapon/shovel))
 		user << "You clear up [src]!"
-		del(src)
+		qdel(src)
 	else if(istype(O,/obj/item/weapon/shovel) || istype(O,/obj/item/weapon/tank))
 		return
 	else

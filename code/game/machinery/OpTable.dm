@@ -28,12 +28,12 @@
 	switch(severity)
 		if(1.0)
 			//SN src = null
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if (prob(50))
 				//SN src = null
-				del(src)
+				qdel(src)
 				return
 		if(3.0)
 			if (prob(25))
@@ -43,14 +43,13 @@
 
 /obj/machinery/optable/blob_act()
 	if(prob(75))
-		del(src)
+		qdel(src)
 
 /obj/machinery/optable/attack_hand(mob/user as mob)
 	if (HULK in usr.mutations)
-		usr << text("\blue You destroy the table.")
-		visible_message("\red [usr] destroys the operating table!")
+		visible_message("<span class='danger'>\The [usr] destroys \the [src]!</span>")
 		src.density = 0
-		del(src)
+		qdel(src)
 	return
 
 /obj/machinery/optable/CanPass(atom/movable/mover, turf/target, height=0, air_group=0)
@@ -89,7 +88,7 @@
 	if (C == user)
 		user.visible_message("[user] climbs on the operating table.","You climb on the operating table.")
 	else
-		visible_message("\red [C] has been laid on the operating table by [user].", 3)
+		visible_message("<span class='notice'>\The [C] has been laid on \the [src] by [user].</span>", 3)
 	if (C.client)
 		C.client.perspective = EYE_PERSPECTIVE
 		C.client.eye = src
@@ -120,16 +119,16 @@
 		var/obj/item/weapon/grab/G = W
 		if(iscarbon(G.affecting) && check_table(G.affecting))
 			take_victim(G.affecting,usr)
-			del(W)
+			qdel(W)
 			return
 
 /obj/machinery/optable/proc/check_table(mob/living/carbon/patient as mob)
 	if(src.victim)
-		usr << "\blue <B>The table is already occupied!</B>"
+		usr << "<span class='warning'>\The [src] is already occupied!</span>"
 		return 0
 
 	if(patient.buckled)
-		usr << "\blue <B>Unbuckle first!</B>"
+		usr << "<span class='notice'>Unbuckle \the [patient] first!</span>"
 		return 0
 
 	return 1

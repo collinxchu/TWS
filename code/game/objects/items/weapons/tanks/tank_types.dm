@@ -103,8 +103,9 @@
 		if ((!F.status)||(F.ptank))	return
 		src.master = F
 		F.ptank = src
-		user.before_take_item(src)
+		user.unEquip(src)
 		src.loc = F
+		F.update_icon()
 	return
 
 /*

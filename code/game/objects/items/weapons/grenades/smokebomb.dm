@@ -14,8 +14,8 @@
 		src.smoke.attach(src)
 
 /obj/item/weapon/grenade/smokebomb/Destroy()
-	del(smoke)
-	..()
+	qdel(smoke)
+	return ..()
 
 /obj/item/weapon/grenade/smokebomb/prime()
 	playsound(src.loc, 'sound/effects/smoke.ogg', 50, 1, -3)
@@ -34,5 +34,5 @@
 		B.health -= damage
 		B.update_icon()
 	sleep(80)
-	del(src)
+	qdel(src)
 	return

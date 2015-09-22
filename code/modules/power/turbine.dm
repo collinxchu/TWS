@@ -30,6 +30,7 @@
 	desc = "A computer to remotely control a gas turbine"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "turbinecomp"
+	light_color = LIGHT_COLOR_PURE_BLUE
 	circuit = /obj/item/weapon/circuitboard/turbine_control
 	anchored = 1
 	density = 1

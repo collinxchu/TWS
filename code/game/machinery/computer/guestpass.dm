@@ -42,6 +42,8 @@
 /obj/machinery/computer/guestpass
 	name = "guest pass terminal"
 	icon_state = "guest"
+	light_color = "#0099FF" //cyan-light blue
+	light_power_on = 0.5
 	density = 0
 
 

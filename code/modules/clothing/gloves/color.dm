@@ -6,6 +6,7 @@
 	siemens_coefficient = 0
 	permeability_coefficient = 0.05
 	item_color="yellow"
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/gloves/fyellow                             //Cheap Chinese Crap
 	desc = "These gloves are cheap copies of the coveted gloves, no way this can end badly."
@@ -14,6 +15,7 @@
 	item_state = "ygloves"
 	siemens_coefficient = 1			//Set to a default of 1, gets overridden in New()
 	permeability_coefficient = 0.05
+	burn_state = -1 //Won't burn in fires
 
 	item_color="yellow"
 
@@ -26,6 +28,7 @@
 	icon_state = "black"
 	item_state = "bgloves"
 	item_color="brown"
+	burn_state = -1 //Won't burn in fires
 
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE

@@ -1,3 +1,7 @@
+/obj/structure/flora
+	burn_state = 0 //Burnable
+	burntime = 30
+
 //trees
 /obj/structure/flora/tree
 	name = "tree"

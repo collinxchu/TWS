@@ -76,12 +76,12 @@
 		if(1.0)
 			if(prob(50))
 				src.dump_everything() //So suits dont survive all the time
-			del(src)
+			qdel(src)
 			return
 		if(2.0)
 			if(prob(50))
 				src.dump_everything()
-				del(src)
+				qdel(src)
 			return
 		else
 			return
@@ -331,7 +331,7 @@
 		sleep(50)
 		if(src.OCCUPANT)
 			OCCUPANT.radiation += 50
-			var/datum/organ/internal/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
+			var/obj/item/organ/diona/nutrients/rad_organ = locate() in OCCUPANT.internal_organs
 			if (!rad_organ)
 				if(src.issuperUV)
 					var/burndamage = rand(28,35)
@@ -511,7 +511,7 @@
 			//for(var/obj/O in src)
 			//	O.loc = src.loc
 			src.add_fingerprint(user)
-			del(G)
+			qdel(G)
 			src.updateUsrDialog()
 			src.update_icon()
 			return
@@ -613,11 +613,12 @@
 	wires = new(src)
 	target_department = departments[1]
 	target_species = species[1]
-	if(!target_department || !target_species) del(src)
+	if(!target_department || !target_species) qdel(src)
 
-/obj/machinery/suit_cycler/Del()
-	del(wires) // qdel
+/obj/machinery/suit_cycler/Destroy()
+	qdel(wires)
 	wires = null
+	..()
 
 /obj/machinery/suit_cycler/engineering
 	name = "Engineering suit cycler"
@@ -696,7 +697,7 @@
 			src.occupant = M
 
 			src.add_fingerprint(user)
-			del(G)
+			qdel(G)
 
 			src.updateUsrDialog()
 

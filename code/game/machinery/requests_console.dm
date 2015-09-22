@@ -54,7 +54,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	var/message = "";
 	var/dpt = ""; //the department which will be receiving the message
 	var/priority = -1 ; //Priority of the message being sent
-	luminosity = 0
+	light_range = 0
 	var/datum/announcement/announcement = new
 
 /obj/machinery/requests_console/power_change()
@@ -80,37 +80,50 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 	//req_console_departments += department
 	switch(departmentType)
 		if(1)
-			if(!("[department]" in req_console_assistance))
-				req_console_assistance += department
+			req_console_assistance |= department
 		if(2)
-			if(!("[department]" in req_console_supplies))
-				req_console_supplies += department
+			req_console_supplies |= department
 		if(3)
-			if(!("[department]" in req_console_information))
-				req_console_information += department
+			req_console_information |= department
 		if(4)
-			if(!("[department]" in req_console_assistance))
-				req_console_assistance += department
-			if(!("[department]" in req_console_supplies))
-				req_console_supplies += department
+			req_console_assistance |= department
+			req_console_supplies |= department
 		if(5)
-			if(!("[department]" in req_console_assistance))
-				req_console_assistance += department
-			if(!("[department]" in req_console_information))
-				req_console_information += department
+			req_console_assistance |= department
+			req_console_information |= department
 		if(6)
-			if(!("[department]" in req_console_supplies))
-				req_console_supplies += department
-			if(!("[department]" in req_console_information))
-				req_console_information += department
+			req_console_supplies |= department
+			req_console_information |= department
 		if(7)
-			if(!("[department]" in req_console_assistance))
-				req_console_assistance += department
-			if(!("[department]" in req_console_supplies))
-				req_console_supplies += department
-			if(!("[department]" in req_console_information))
-				req_console_information += department
+			req_console_assistance |= department
+			req_console_supplies |= department
+			req_console_information |= department
 
+	set_light(1)
+
+/obj/machinery/requests_console/Destroy()
+	allConsoles -= src
+	switch(departmentType)
+		if(1)
+			req_console_assistance -= department
+		if(2)
+			req_console_supplies -= department
+		if(3)
+			req_console_information -= department
+		if(4)
+			req_console_assistance -= department
+			req_console_supplies -= department
+		if(5)
+			req_console_assistance -= department
+			req_console_information -= department
+		if(6)
+			req_console_supplies -= department
+			req_console_information -= department
+		if(7)
+			req_console_assistance -= department
+			req_console_supplies -= department
+			req_console_information -= department
+	..()
 
 /obj/machinery/requests_console/attack_hand(user as mob)
 	if(..(user))
@@ -309,7 +322,7 @@ var/list/obj/machinery/requests_console/allConsoles = list()
 								Console.messages += "<B>Message from <A href='?src=\ref[Console];write=[ckey(department)]'>[department]</A></FONT></B><BR>[message]"
 
 						screen = 6
-						Console.luminosity = 2
+						Console.set_light(1)
 				messages += "<B>Message sent to [dpt]</B><BR>[message]"
 			else
 				for (var/mob/O in hearers(4, src.loc))

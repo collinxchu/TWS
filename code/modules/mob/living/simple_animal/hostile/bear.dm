@@ -20,6 +20,7 @@
 	stop_automated_movement_when_pulled = 0
 	maxHealth = 60
 	health = 60
+	mob_size = MOB_SIZE_LARGE
 	melee_damage_lower = 20
 	melee_damage_upper = 30
 
@@ -134,7 +135,7 @@
 	if(ishuman(target_mob))
 		var/mob/living/carbon/human/H = target_mob
 		var/dam_zone = pick("chest", "l_hand", "r_hand", "l_leg", "r_leg")
-		var/datum/organ/external/affecting = H.get_organ(ran_zone(dam_zone))
+		var/obj/item/organ/external/affecting = H.get_organ(ran_zone(dam_zone))
 		H.apply_damage(damage, BRUTE, affecting, H.run_armor_check(affecting, "melee"), sharp=1, edge=1)
 		return H
 	else if(isliving(target_mob))

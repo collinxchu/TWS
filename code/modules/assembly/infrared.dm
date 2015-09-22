@@ -212,12 +212,13 @@
 		return
 	hit()
 
-/obj/effect/beam/i_beam/Del()
-	qdel(next)
-	..()
-	return
-
 /obj/effect/beam/i_beam/Destroy()
-	qdel(next)
+	if(master.first == src)
+		master.first = null
+	if(next)
+		qdel(next)
+		next = null
+	if(previous)
+		previous.next = null
+		master.last = previous
 	..()
-	return

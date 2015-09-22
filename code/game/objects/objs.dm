@@ -16,6 +16,15 @@
 	var/damtype = "brute"
 	var/force = 0
 
+	var/burn_state = -1 // -1=fireproof | 0=will burn in fires | 1=currently on fire
+	var/burntime = 10 //How long it takes to burn to ashes, in seconds
+	var/burn_world_time //What world time the object will burn up completely
+
+/obj/Destroy()
+	machines -= src //#TOREMOVE
+	processing_objects -= src
+	return ..()
+
 /obj/Topic(href, href_list, var/nowindow = 0)
 	// Calling Topic without a corresponding window open causes runtime errors
 	if(nowindow)
@@ -55,9 +64,6 @@
 		return remove_air(breath_request)
 	else
 		return null
-
-/atom/movable/proc/initialize()
-	return
 
 /obj/proc/updateUsrDialog()
 	if(in_use)
@@ -100,6 +106,9 @@
 /obj/proc/interact(mob/user)
 	return
 
+/obj/proc/container_resist()
+	return
+
 /obj/proc/update_icon()
 	return
 
@@ -139,3 +148,33 @@
 
 /obj/proc/see_emote(mob/M as mob, text, var/emote_type)
 	return
+
+/obj/storage_contents_dump_act(obj/item/weapon/storage/src_object, mob/user)
+	var/turf/T = get_turf(src)
+	return T.storage_contents_dump_act(src_object, user)
+
+/obj/fire_act(global_overlay=1)
+	if(!burn_state)
+		burn_state = 1
+		burning_objects += src
+		burn_world_time = world.time + burntime*rand(10,20)
+		if(global_overlay)
+			overlays += fire_overlay
+		set_light(2, 1, "#ED9200")
+		return 1
+
+/obj/proc/burn()
+	for(var/obj/item/Item in contents) //Empty out the contents
+		Item.loc = src.loc
+		Item.fire_act() //Set them on fire, too
+	var/obj/effect/decal/cleanable/ash/A = new(src.loc)
+	A.desc = "Looks like this used to be a [name] some time ago."
+	burning_objects -= src
+	qdel(src)
+
+/obj/proc/extinguish()
+	if(burn_state == 1)
+		burn_state = 0
+		set_light(0)
+		overlays -= fire_overlay
+		burning_objects -= src

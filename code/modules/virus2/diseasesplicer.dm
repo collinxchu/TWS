@@ -2,6 +2,7 @@
 	name = "Disease Splicer"
 	icon = 'icons/obj/computer.dmi'
 	icon_state = "crew"
+	light_color = LIGHT_COLOR_DARKBLUE
 
 	var/datum/disease2/effectholder/memorybank = null
 	var/list/species_buffer = null

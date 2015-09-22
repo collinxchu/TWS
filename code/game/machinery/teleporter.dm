@@ -2,6 +2,7 @@
 	name = "Teleporter Control Console"
 	desc = "Used to control a linked teleportation Hub and Station."
 	icon_state = "teleport"
+	light_color = LIGHT_COLOR_PURE_BLUE
 	circuit = "/obj/item/weapon/circuitboard/teleporter"
 	dir = 4
 	var/obj/item/locked = null
@@ -53,7 +54,7 @@
 			usr << "You insert the coordinates into the machine."
 			usr << "A message flashes across the screen reminding the traveller that the nuclear authentication disk is to remain on the station at all times."
 			user.drop_item()
-			del(I)
+			qdel(I)
 
 			if(C.data == "Clown Land")
 				//whoops

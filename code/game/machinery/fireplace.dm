@@ -5,7 +5,8 @@
 	icon_state = "fireplace0"
 	name = "wall-mounted fireplace"
 	desc = "A simulated fireplace that keeps the room warm and toasty. Powered by... powercells?"
-	luminosity = 5
+	light_range = 5
+	light_color = "#E09D37"
 	var/obj/item/weapon/cell/cell
 	var/on = 1
 	var/open = 0
@@ -172,7 +173,7 @@
 				env.merge(removed)
 		else
 			on = 0
-			SetLuminosity(0)
+			set_light(0)
 			update_icon()
 
 

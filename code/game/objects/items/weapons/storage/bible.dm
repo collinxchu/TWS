@@ -5,6 +5,7 @@
 	throw_speed = 1
 	throw_range = 5
 	w_class = 3.0
+	burn_state = 0 //Burnable
 	var/mob/affecting = null
 	var/deity_name = "Christ"
 
@@ -26,7 +27,7 @@
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/heal_amt = 10
-		for(var/datum/organ/external/affecting in H.organs)
+		for(var/obj/item/organ/external/affecting in H.organs)
 			if(affecting.heal_damage(heal_amt, heal_amt))
 				H.UpdateDamageIcon()
 	return

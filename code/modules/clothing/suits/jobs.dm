@@ -139,6 +139,7 @@
 	body_parts_covered = UPPER_TORSO
 
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/suit.dmi')
+	burn_state = -1 //Won't burn in fires
 
 //Lawyer
 /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket

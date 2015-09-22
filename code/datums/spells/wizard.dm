@@ -309,6 +309,8 @@
 	range = 0
 	summon_type = list(/obj/effect/forcefield)
 	summon_lifespan = 50
+	light_color = "#0000cc"
+	light_range = 2
 
 
 /obj/effect/proc_holder/spell/targeted/ethereal_jaunt/shift

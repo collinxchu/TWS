@@ -26,8 +26,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon = 'icons/turf/areas.dmi'
 	icon_state = "unknown"
 	layer = 10
+	luminosity = 1
 	mouse_opacity = 0
-	invisibility = INVISIBILITY_LIGHTING
 	var/lightswitch = 1
 
 	var/eject = null
@@ -46,11 +46,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	var/used_environ = 0
 
 	var/has_gravity = 1
-	var/list/apc = list()
+	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 	var/area/master				// master area used for power calcluations
 								// (original area before splitting due to sd_DAL)
-	var/list/related			// the other areas of the same type as this
+//	var/list/related			// the other areas of the same type as this #TOREMOVE
 //	var/list/lights				// list of all lights on this area
 	var/list/all_doors = list()		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
 	var/air_doors_activated = 0
@@ -94,18 +94,28 @@ var/list/ghostteleportlocs = list()
 	return 1
 
 /*-----------------------------------------------------------------------------*/
+/////////
+//SPACE//
+/////////
+
 /area/space
 	name = "\improper Space"
 	icon_state = "space"
 	requires_power = 1
 	always_unpowered = 1
-	lighting_use_dynamic = 1
+	lighting_use_dynamic = 0
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
-	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/space.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
+	ambience = list('sound/ambience/ambispace.ogg','sound/music/title2.ogg','sound/music/main.ogg','sound/music/traitor.ogg')
 
-/area/space/firealert()
+/area/space/atmosalert()
+	return
+
+/area/space/fire_alert()
+	return
+
+/area/space/fire_reset()
 	return
 
 /area/space/readyalert()
@@ -136,8 +146,7 @@ var/list/ghostteleportlocs = list()
 
 /area/shuttle //DO NOT TURN THE lighting_use_dynamic STUFF ON FOR SHUTTLES. IT BREAKS THINGS.
 	requires_power = 0
-	luminosity = 1
-	lighting_use_dynamic = 0
+	has_gravity = 1
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
@@ -239,14 +248,12 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Alien Shuttle Base"
 	requires_power = 1
 	luminosity = 0
-	lighting_use_dynamic = 1
 
 /area/shuttle/alien/mine
 	icon_state = "shuttle"
 	name = "\improper Alien Shuttle Mine"
 	requires_power = 1
 	luminosity = 0
-	lighting_use_dynamic = 1
 
 /area/shuttle/prison/
 	name = "\improper Prison Shuttle"
@@ -332,7 +339,6 @@ var/list/ghostteleportlocs = list()
 	name = "start area"
 	icon_state = "start"
 	requires_power = 0
-	luminosity = 1
 	lighting_use_dynamic = 0
 	has_gravity = 1
 
@@ -361,9 +367,10 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Planet"
 	icon_state = "planet"
 	unlimited_power = 1
-	lighting_use_dynamic = 0
-	luminosity = 1
+	lighting_use_dynamic = 1
+	requires_power = 0
 	power_light = 1
+	has_gravity = 1
 
 /area/planets/biezel
 	name = "\improper Biezel"
@@ -387,6 +394,7 @@ var/list/ghostteleportlocs = list()
 	unlimited_power = 1
 	luminosity = 1
 	lighting_use_dynamic = 0
+	has_gravity = 1
 
 
 /area/centcom/control
@@ -437,6 +445,7 @@ var/list/ghostteleportlocs = list()
 	icon_state = "syndie-ship"
 	requires_power = 0
 	unlimited_power = 1
+	lighting_use_dynamic = 0
 
 /area/syndicate_mothership/control
 	name = "\improper Mercenary Control Room"
@@ -452,6 +461,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Asteroid"
 	icon_state = "asteroid"
 	requires_power = 0
+	has_gravity = 1
 
 /area/asteroid/cave				// -- TLE
 	name = "\improper Asteroid - Underground"
@@ -485,6 +495,7 @@ var/list/ghostteleportlocs = list()
 	name = "\improper Thunderdome"
 	icon_state = "thunder"
 	requires_power = 0
+	has_gravity = 0
 
 /area/tdome/tdome1
 	name = "\improper Thunderdome (Team 1)"

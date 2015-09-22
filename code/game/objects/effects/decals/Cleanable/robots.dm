@@ -28,6 +28,9 @@
 			if (step_to(src, get_step(src, direction), 0))
 				break
 
+/obj/effect/decal/cleanable/blood/gibs/robot/ex_act()
+	return
+
 /obj/effect/decal/cleanable/blood/gibs/robot/limb
 	random_icon_states = list("gibarm", "gibleg")
 

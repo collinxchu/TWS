@@ -10,6 +10,7 @@
 	item_color = "black"
 	desc = "It's a plain jumpsuit. It seems to have a small dial on the wrist."
 	origin_tech = "syndicate=3"
+	burn_state = -1 //Won't burn in fires
 	var/list/clothing_choices = list()
 
 	New()

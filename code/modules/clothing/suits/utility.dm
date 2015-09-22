@@ -25,6 +25,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
+	burn_state = -1 //Not Burnable
 
 
 /obj/item/clothing/suit/fire/firefighter
@@ -52,6 +53,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES
 	body_parts_covered = HEAD|FACE|EYES
 	siemens_coefficient = 0
+	burn_state = -1 //Not Burnable
 
 
 /obj/item/clothing/suit/bomb_suit
@@ -68,6 +70,7 @@
 	heat_protection = UPPER_TORSO|LOWER_TORSO
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0
+	burn_state = -1 //Not Burnable
 
 
 /obj/item/clothing/head/bomb_hood/security
@@ -91,6 +94,7 @@
 	flags = HEADCOVERSEYES|HEADCOVERSMOUTH|BLOCKHAIR
 	body_parts_covered = HEAD|FACE|EYES
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)
+	burn_state = -1 //Not Burnable
 
 
 /obj/item/clothing/suit/radiation
@@ -106,3 +110,4 @@
 	slowdown = 1.5
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 60, rad = 100)
 	flags_inv = HIDEJUMPSUIT|HIDETAIL
+	burn_state = -1 //Not Burnable

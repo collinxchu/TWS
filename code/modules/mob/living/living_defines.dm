@@ -23,15 +23,17 @@
 
 	var/last_special = 0 //Used by the resist verb, likely used to prevent players from bypassing next_move by logging in/out.
 
-	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
-	var/incorporeal_move = 0 //0 is off, 1 is normal, 2 is for ninjas.
-
 	var/t_plasma = null
 	var/t_oxygen = null
 	var/t_sl_gas = null
 	var/t_n2 = null
 
 	var/now_pushing = null
+	var/mob_bump_flag = 0
+	var/mob_swap_flags = 0
+	var/mob_push_flags = 0
+	var/mob_always_swap = 0
+
 
 	var/cameraFollow = null
 
@@ -43,8 +45,9 @@
 
 	var/update_slimes = 1
 	var/silent = null 		// Can't talk. Value goes down every life proc.
-	var/mob_size            // Used by lockers.
 
 	var/ventcrawler = 0 //0 No vent crawling, 1 vent crawling in the nude, 2 vent crawling always
 	var/list/pipes_shown = list()  //Used by ventcrawl
 	var/last_played_vent
+
+	var/floating = 0

@@ -31,6 +31,7 @@
 	siemens_coefficient = 0.2
 
 	flags = IS_WHITELISTED | NO_SCAN | HAS_EYE_COLOR
+	dietflags = DIET_OMNI
 
 	blood_color = "#2299FC"
 	flesh_color = "#808D11"
@@ -42,13 +43,13 @@
 		)
 
 	has_organ = list(
-		"heart" =    /datum/organ/internal/heart,
-		"lungs" =    /datum/organ/internal/lungs,
-		"liver" =    /datum/organ/internal/liver,
-		"kidneys" =  /datum/organ/internal/kidney,
-		"brain" =    /datum/organ/internal/brain,
-		"eyes" =     /datum/organ/internal/eyes,
-		"stack" =    /datum/organ/internal/stack/vox
+		"heart" =    /obj/item/organ/heart,
+		"lungs" =    /obj/item/organ/lungs,
+		"liver" =    /obj/item/organ/liver,
+		"kidneys" =  /obj/item/organ/kidneys,
+		"brain" =    /obj/item/organ/brain,
+		"eyes" =     /obj/item/organ/eyes,
+		"stack" =    /obj/item/organ/stack/vox
 		)
 
 /datum/species/vox/get_random_name(var/gender)
@@ -95,3 +96,6 @@
 		/mob/living/carbon/human/proc/gut,
 		/mob/living/carbon/human/proc/commune
 		)
+
+/datum/species/vox/armalis/get_bodytype()
+	return "Vox"

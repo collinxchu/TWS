@@ -163,7 +163,7 @@ datum
 
 /* Must check the transfering of reagents and their data first. They all can point to one disease datum.
 
-			Del()
+			Destroy()
 				if(src.data["virus"])
 					var/datum/disease/D = src.data["virus"]
 					D.cure(0)
@@ -240,7 +240,7 @@ datum
 				//Put out fires.
 				var/hotspot = (locate(/obj/fire) in T)
 				if(hotspot)
-					del(hotspot)
+					qdel(hotspot)
 					if(environment)
 						environment.react() //react at the new temperature
 
@@ -252,16 +252,49 @@ datum
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
-					del(hotspot)
+					qdel(hotspot)
+				if(istype(O,/obj/item))
+					var/obj/item/Item = O
+					Item.extinguish()
 				if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/monkeycube))
 					var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
 					if(!cube.wrapped)
 						cube.Expand()
 
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(-(volume / 10))
 				if (istype(M, /mob/living/carbon/slime))
 					var/mob/living/carbon/slime/S = M
 					S.apply_water()
+				..()
+
+		water/fishwater
+			name = "Fish Water"
+			id = "fishwater"
+			description = "Smelly water from a fish tank. Gross!"
+			color = "#757547"
+
+			glass_icon_state = "glass_clear"
+			glass_name = "glass of fish water"
+			glass_desc = "This smells funny. Did you get it from a fish tank?"
+
+		water/fishwater/reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
+			if(!istype(M, /mob/living))
+				return
+			if(method == INGEST)
+				if(!M.reagents.has_reagent("fishwater")) //It's not THAT big a deal, only say it once the first time it enters the mob.
+					M << "Oh god, why did you drink that?"
+		water/fishwater/on_mob_life(var/mob/living/M as mob)
+			if(!M) M = holder.my_atom
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(prob(0.3))		// Nasty, you drank this stuff? You'll probably be okay...but there's a small chance you throw up.
+					H.vomit()
+				..()
+				return
 
 		water/holywater
 			name = "Holy Water"
@@ -358,7 +391,7 @@ datum
 					M.invisibility = 101
 					for(var/obj/item/W in M)
 						if(istype(W, /obj/item/weapon/implant))	//TODO: Carn. give implants a dropped() or something
-							del(W)
+							qdel(W)
 							continue
 						W.layer = initial(W.layer)
 						W.loc = M.loc
@@ -370,7 +403,7 @@ datum
 						M.mind.transfer_to(new_mob)
 					else
 						new_mob.key = M.key
-					del(M)
+					qdel(M)
 				..()
 				return
 
@@ -685,14 +718,14 @@ datum
 								M:antibodies |= V.antigen
 								if(prob(50))
 									M.radiation += 50 // curing it that way may kill you instead
-									var/absorbed
+									var/absorbed = 0
 									if(istype(C,/mob/living/carbon))
 										var/mob/living/carbon/H = C
-										var/datum/organ/internal/diona/nutrients/rad_organ = locate() in H.internal_organs
+										var/obj/item/organ/diona/nutrients/rad_organ = locate() in H.internal_organs
 										if(rad_organ && !rad_organ.is_broken())
 											absorbed = 1
-									if(!absorbed)
-										M.adjustToxLoss(100)
+										if(!absorbed)
+											M.adjustToxLoss(100)
 				..()
 				return
 
@@ -928,6 +961,12 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				new /obj/effect/decal/cleanable/liquid_fuel(T, volume)
 				return
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)//Splashing people with welding fuel to make them easy to ignite!)
+				if(!istype(M, /mob/living))
+					return
+				if(method == TOUCH)
+					M.adjust_fire_stacks(volume / 10)
+					return
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
 				M.adjustToxLoss(1)
@@ -944,7 +983,7 @@ datum
 
 			reaction_obj(var/obj/O, var/volume)
 				if(istype(O,/obj/effect/decal/cleanable))
-					del(O)
+					qdel(O)
 				else
 					if(O)
 						O.clean_blood()
@@ -957,7 +996,7 @@ datum
 					T.clean_blood()
 					for(var/obj/effect/decal/cleanable/C in T.contents)
 						src.reaction_obj(C, volume)
-						del(C)
+						qdel(C)
 
 					for(var/mob/living/carbon/slime/M in T)
 						M.adjustToxLoss(rand(5,10))
@@ -1296,7 +1335,7 @@ datum
 				M.eye_blind = max(M.eye_blind-5 , 0)
 				if(ishuman(M))
 					var/mob/living/carbon/human/H = M
-					var/datum/organ/internal/eyes/E = H.internal_organs_by_name["eyes"]
+					var/obj/item/organ/eyes/E = H.internal_organs_by_name["eyes"]
 					if(E && istype(E))
 						if(E.damage > 0)
 							E.damage = max(E.damage - 1, 0)
@@ -1318,7 +1357,7 @@ datum
 					var/mob/living/carbon/human/H = M
 
 					//Peridaxon heals only non-robotic organs
-					for(var/datum/organ/internal/I in H.internal_organs)
+					for(var/obj/item/organ/I in H.internal_organs)
 						if((I.damage > 0) && (I.robotic != 2))
 							I.damage = max(I.damage - 0.20, 0)
 				..()
@@ -1710,8 +1749,8 @@ datum
 				..()
 				return
 
-			Del()
-				if(holder && ismob(holder.my_atom))
+			Destroy()
+				if(holder && holder.my_atom && ismob(holder.my_atom))
 					var/mob/M = holder.my_atom
 					M.status_flags &= ~FAKEDEATH
 				..()
@@ -1767,7 +1806,7 @@ datum
 					var/turf/simulated/wall/W = T
 					if(W.rotting)
 						W.rotting = 0
-						for(var/obj/effect/E in W) if(E.name == "Wallrot") del E
+						for(var/obj/effect/E in W) if(E.name == "Wallrot") qdel(E)
 
 						for(var/mob/O in viewers(W, null))
 							O.show_message(text("\blue The fungi are completely dissolved by the solution!"), 1)
@@ -1778,9 +1817,9 @@ datum
 					alien_weeds.health -= rand(15,35) // Kills alien weeds pretty fast
 					alien_weeds.healthcheck()
 				else if(istype(O,/obj/effect/glowshroom)) //even a small amount is enough to kill it
-					del(O)
+					qdel(O)
 				else if(istype(O,/obj/effect/plantsegment))
-					if(prob(50)) del(O) //Kills kudzu too.
+					if(prob(50)) qdel(O) //Kills kudzu too.
 				else if(istype(O,/obj/machinery/portable_atmospherics/hydroponics))
 					var/obj/machinery/portable_atmospherics/hydroponics/tray = O
 
@@ -1957,7 +1996,7 @@ datum
 						if(H.head)
 							if(prob(meltprob) && !H.head.unacidable)
 								H << "<span class='danger'>Your headgear melts away but protects you from the acid!</span>"
-								del(H.head)
+								qdel(H.head)
 								H.update_inv_head(0)
 								H.update_hair(0)
 							else
@@ -1967,7 +2006,7 @@ datum
 						if(H.wear_mask)
 							if(prob(meltprob) && !H.wear_mask.unacidable)
 								H << "<span class='danger'>Your mask melts away but protects you from the acid!</span>"
-								del (H.wear_mask)
+								qdel(H.wear_mask)
 								H.update_inv_wear_mask(0)
 								H.update_hair(0)
 							else
@@ -1977,7 +2016,7 @@ datum
 						if(H.glasses) //Doesn't protect you from the acid but can melt anyways!
 							if(prob(meltprob) && !H.glasses.unacidable)
 								H << "<span class='danger'>Your glasses melts away!</span>"
-								del (H.glasses)
+								qdel(H.glasses)
 								H.update_inv_glasses(0)
 
 					else if(ismonkey(M))
@@ -1985,7 +2024,7 @@ datum
 						if(MK.wear_mask)
 							if(!MK.wear_mask.unacidable)
 								MK << "<span class='danger'>Your mask melts away but protects you from the acid!</span>"
-								del (MK.wear_mask)
+								qdel(MK.wear_mask)
 								MK.update_inv_wear_mask(0)
 							else
 								MK << "<span class='warning'>Your mask protects you from the acid.</span>"
@@ -1994,7 +2033,7 @@ datum
 					if(!M.unacidable)
 						if(istype(M, /mob/living/carbon/human) && volume >= 10)
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/external/affecting = H.get_organ("head")
+							var/obj/item/organ/external/affecting = H.get_organ("head")
 							if(affecting)
 								if(affecting.take_damage(4*toxpwr, 2*toxpwr))
 									H.UpdateDamageIcon()
@@ -2015,7 +2054,7 @@ datum
 						I.desc = "Looks like this was \an [O] some time ago."
 						for(var/mob/M in viewers(5, O))
 							M << "\red \the [O] melts."
-						del(O)
+						qdel(O)
 
 		toxin/acid/polyacid
 			name = "Polytrinic acid"
@@ -2054,6 +2093,27 @@ datum
 					M.adjustToxLoss(rand(-15, -5)))
 					M.updatehealth()
 */
+				..()
+				return
+
+		protein			// Meat-based protein, digestable by carnivores and omnivores, worthless to herbivores
+			name = "Protein"
+			id = "protein"
+			description = "Various essential proteins and fats commonly found in animal flesh and blood."
+			reagent_state = SOLID
+			nutriment_factor = 15 * REAGENTS_METABOLISM
+			color = "#664330" // rgb: 102, 67, 48
+
+			on_mob_life(var/mob/living/M as mob)
+				if(!M) M = holder.my_atom
+		//	if(!(M.mind in ticker.mode.vampires)) #TOREMOVE - we don't have them yet
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.species && H.species.dietflags && !(H.species.dietflags & DIET_HERB))	//Make sure the species has it's dietflag set, and that it is not a herbivore
+						H.nutrition += nutriment_factor	// For hunger and fatness
+						if(prob(50)) M.heal_organ_damage(1,0)
+				if(istype(M,/mob/living/simple_animal))		//Any nutrients can heal simple animals
+					if(prob(50)) M.heal_organ_damage(1,0)
 				..()
 				return
 
@@ -2390,7 +2450,7 @@ datum
 					lowertemp.temperature = max( min(lowertemp.temperature-2000,lowertemp.temperature / 2) ,0)
 					lowertemp.react()
 					T.assume_air(lowertemp)
-					del(hotspot)
+					qdel(hotspot)
 
 		enzyme
 			name = "Universal Enzyme"
@@ -3262,7 +3322,7 @@ datum
 					M:drowsyness  = max(M:drowsyness, 30)
 					if(ishuman(M))
 						var/mob/living/carbon/human/H = M
-						var/datum/organ/internal/liver/L = H.internal_organs_by_name["liver"]
+						var/obj/item/organ/liver/L = H.internal_organs_by_name["liver"]
 						if (!L)
 							H.adjustToxLoss(5)
 						else if(istype(L))
@@ -3578,13 +3638,13 @@ datum
 						if(prob(30)) M.adjustToxLoss(2)
 						if(prob(5)) if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+							var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 							if (L && istype(L))
 								L.take_damage(5, 0)
 					if (300 to INFINITY)
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
-							var/datum/organ/internal/heart/L = H.internal_organs_by_name["heart"]
+							var/obj/item/organ/heart/L = H.internal_organs_by_name["heart"]
 							if (L && istype(L))
 								L.take_damage(100, 0)
 				holder.remove_reagent(src.id, FOOD_METABOLISM)
@@ -4346,6 +4406,10 @@ datum
 					M.confused = max(M.confused+15,15)
 				..()
 				return
+
+/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
+	..()
+	holder = null
 
 // Undefine the alias for REAGENTS_EFFECT_MULTIPLER
 #undef REM

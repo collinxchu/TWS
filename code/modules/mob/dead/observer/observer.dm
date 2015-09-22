@@ -1,3 +1,5 @@
+var/list/image/ghost_darkness_images = list() //this is a list of images for things ghosts should still be able to see when they toggle darkness
+
 /mob/dead/observer
 	name = "ghost"
 	desc = "It's a g-g-g-g-ghooooost!" //jinkies!
@@ -24,6 +26,11 @@
 	var/admin_ghosted = 0
 	var/anonsay = 0
 
+	var/image/ghostimage = null //this mobs ghost image, for deleting and stuff
+	var/ghostvision = 1 //is the ghost able to see things humans can't?
+	var/seedarkness = 1
+	incorporeal_move = 1
+
 /mob/dead/observer/New(mob/body)
 	sight |= SEE_TURFS | SEE_MOBS | SEE_OBJS | SEE_SELF
 	see_invisible = SEE_INVISIBLE_OBSERVER
@@ -31,6 +38,10 @@
 	verbs += /mob/dead/observer/proc/dead_tele
 
 	stat = DEAD
+
+	ghostimage = image(src.icon,src,src.icon_state)
+	ghost_darkness_images |= ghostimage
+	updateallghostimages()
 
 	var/turf/T
 	if(ismob(body))
@@ -63,14 +74,20 @@
 		mind = body.mind	//we don't transfer the mind but we keep a reference to it.
 
 	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	loc = T
+	forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	real_name = name
 	..()
 
-
+/mob/dead/observer/Destroy()
+	if (ghostimage)
+		ghost_darkness_images -= ghostimage
+		qdel(ghostimage)
+		ghostimage = null
+		updateallghostimages()
+	return ..()
 
 /mob/dead/observer/Topic(href, href_list)
 	if (href_list["track"])
@@ -241,6 +258,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			return
 	mind.current.ajourn=0
 	mind.current.key = key
+	mind.current.aghosted = null
 	if(!admin_ghosted)
 		announce_ghost_joinleave(mind, 0, "They now occupy their body again.")
 	return 1
@@ -404,14 +422,43 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		src << "\blue Heat Capacity: [round(environment.heat_capacity(),0.1)]"
 
 
+/mob/dead/observer/verb/toggle_ghostsee()
+	set name = "Toggle Ghost Vision"
+	set desc = "Toggles your ability to see things only ghosts can see, like other ghosts"
+	set category = "Ghost"
+	ghostvision = !(ghostvision)
+	updateghostsight()
+	usr << "You [(ghostvision?"now":"no longer")] have ghost vision."
+
 /mob/dead/observer/verb/toggle_darkness()
 	set name = "Toggle Darkness"
 	set category = "Ghost"
+	seedarkness = !(seedarkness)
+	updateghostsight()
 
-	if (see_invisible == SEE_INVISIBLE_OBSERVER_NOLIGHTING)
-		see_invisible = SEE_INVISIBLE_OBSERVER
-	else
+/mob/dead/observer/proc/updateghostsight()
+	if (!seedarkness)
 		see_invisible = SEE_INVISIBLE_OBSERVER_NOLIGHTING
+	else
+		see_invisible = SEE_INVISIBLE_OBSERVER
+		if (!ghostvision)
+			see_invisible = SEE_INVISIBLE_LIVING;
+	updateghostimages()
+
+/proc/updateallghostimages()
+	for (var/mob/dead/observer/O in player_list)
+		O.updateghostimages()
+
+/mob/dead/observer/proc/updateghostimages()
+	if (!client)
+		return
+	if (seedarkness || !ghostvision)
+		client.images -= ghost_darkness_images
+	else
+		//add images for the 60inv things ghosts can normally see when darkness is enabled so they can see them now
+		client.images |= ghost_darkness_images
+		if (ghostimage)
+			client.images -= ghostimage //remove ourself
 
 /mob/dead/observer/verb/become_mouse()
 	set name = "Become mouse"
@@ -419,6 +466,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 	if(config.disable_player_mice)
 		src << "<span class='warning'>Spawning as a mouse is currently disabled.</span>"
+		return
+
+	var/turf/T = get_turf(src)
+	if(!T || (T.z in config.admin_levels))
+		src << "<span class='warning'>You may not spawn as a mouse on this Z-level.</span>"
 		return
 
 	var/mob/dead/observer/M = usr
@@ -441,8 +493,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	var/mob/living/simple_animal/mouse/host
 	var/obj/machinery/atmospherics/unary/vent_pump/vent_found
 	var/list/found_vents = list()
-	for(var/obj/machinery/atmospherics/unary/vent_pump/v in world)
-		if(!v.welded && v.z == src.z)
+	for(var/obj/machinery/atmospherics/unary/vent_pump/v in machines)
+		if(!v.welded && v.z == T.z)
 			found_vents.Add(v)
 	if(found_vents.len)
 		vent_found = pick(found_vents)
@@ -575,7 +627,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/image/I in client.images)
 		if(I.icon_state == icon)
 			iconRemoved = 1
-			del(I)
+			qdel(I)
 
 	if(!iconRemoved)
 		var/image/J = image('icons/mob/mob.dmi', loc = src, icon_state = icon)

@@ -5,6 +5,7 @@
 	name = "command and communications console"
 	desc = "Used to command and control the station. Can relay long-range communications."
 	icon_state = "comm"
+	light_color = LIGHT_COLOR_LIGHTBLUE
 	req_access = list(access_heads)
 	circuit = "/obj/item/weapon/circuitboard/communications"
 	var/prints_intercept = 1
@@ -542,7 +543,7 @@
 	frequency.post_signal(src, status_signal)
 
 
-/obj/machinery/computer/communications/Del()
+/obj/machinery/computer/communications/Destroy()
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf) && commconsole != src)
@@ -565,7 +566,7 @@
 
 	..()
 
-/obj/item/weapon/circuitboard/communications/Del()
+/obj/item/weapon/circuitboard/communications/Destroy()
 
 	for(var/obj/machinery/computer/communications/commconsole in world)
 		if(istype(commconsole.loc,/turf))

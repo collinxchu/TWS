@@ -5,6 +5,7 @@
 	//Not given any special protective value since the magic robes are full-body protection --NEO
 	siemens_coefficient = 0.8
 	body_parts_covered = 0
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/head/wizard/red
 	name = "red wizard hat"
@@ -55,6 +56,7 @@
 	allowed = list(/obj/item/weapon/teleportation_scroll)
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.8
+	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/suit/wizrobe/red
 	name = "red wizard robe"
@@ -103,6 +105,7 @@
 	item_state = "wizrobe"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 1.0
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/head/wizard/marisa/fake
 	name = "Witch Hat"
@@ -110,6 +113,7 @@
 	icon_state = "marisa"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 1.0
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/suit/wizrobe/marisa/fake
 	name = "Witch Robe"
@@ -119,4 +123,5 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 1.0
+	burn_state = 0 //Burnable
 

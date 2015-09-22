@@ -13,7 +13,7 @@ var/global/list/uneatable = list(
 	anchored = 1
 	density = 1
 	layer = 6
-	luminosity = 6
+	light_range = 6
 	unacidable = 1 //Don't comment this out.
 	use_power = 0
 	var/current_size = 1
@@ -40,14 +40,18 @@ var/global/list/uneatable = list(
 	src.energy = starting_energy
 	if(temp)
 		spawn(temp)
-			del(src)
+			qdel(src)
 	..()
+	processing_objects += src
 	for(var/obj/machinery/power/singularity_beacon/singubeacon in machines)
 		if(singubeacon.active)
 			target = singubeacon
 			break
 	return
 
+/obj/singularity/Destroy()
+	processing_objects -= src
+	..()
 
 /obj/machinery/singularity/attack_hand(mob/user as mob)
 	consume(user)
@@ -62,7 +66,7 @@ var/global/list/uneatable = list(
 	switch(severity)
 		if(1.0)
 			if(prob(25))
-				del(src)
+				qdel(src)
 				return
 			else
 				energy += 50
@@ -186,7 +190,7 @@ var/global/list/uneatable = list(
 
 /obj/machinery/singularity/proc/check_energy()
 	if(energy <= 0)
-		del(src)
+		qdel(src)
 		return 0
 	switch(energy)//Some of these numbers might need to be changed up later -Mport
 		if(1 to 199)
@@ -256,7 +260,7 @@ var/global/list/uneatable = list(
 		if(istype(A, /obj/machinery/singularity))//Welp now you did it
 			var/obj/machinery/singularity/S = A
 			src.energy += (S.energy/2)//Absorb most of it
-			del(S)
+			qdel(S)
 			var/dist = max((current_size - 2),1)
 			explosion(src.loc,(dist),(dist*2),(dist*4))
 			return//Quits here, the obj should be gone, hell we might be
@@ -268,7 +272,7 @@ var/global/list/uneatable = list(
 			O.z = 2
 		else
 			A.ex_act(1.0)
-			if(A) del(A)
+			if(A) qdel(A)
 		gain = 2
 	else if(isturf(A))
 		var/turf/T = A
@@ -463,6 +467,8 @@ var/global/list/uneatable = list(
 	// Pixel stuff centers Narsie.
 	pixel_x = -236
 	pixel_y = -256
+	light_range = 1
+	light_color = "#3e0000"
 	current_size = 12
 	move_self = 1 //Do we move on our own?
 	consume_range = 12 //How many tiles out do we eat
