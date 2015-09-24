@@ -1,7 +1,7 @@
 
 //reactor areas
 
-/area/engine
+/area/station/engine
 	icon_state = "engine"
 
 	fore

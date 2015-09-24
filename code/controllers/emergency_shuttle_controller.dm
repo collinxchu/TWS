@@ -79,7 +79,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 	evac = 1
 	emergency_shuttle_called.Announce("An emergency evacuation shuttle has been called. It will arrive in approximately [round(estimate_arrival_time()/60)] minutes.")
 	for(var/area/A in world)
-		if(istype(A, /area/hallway))
+		if(istype(A, /area/station/hallway))
 			A.readyalert()
 
 //calls the shuttle for a routine crew transfer
@@ -107,7 +107,7 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle
 		emergency_shuttle_recalled.Announce("The emergency shuttle has been recalled.")
 
 		for(var/area/A in world)
-			if(istype(A, /area/hallway))
+			if(istype(A, /area/station/hallway))
 				A.readyreset()
 		evac = 0
 	else
