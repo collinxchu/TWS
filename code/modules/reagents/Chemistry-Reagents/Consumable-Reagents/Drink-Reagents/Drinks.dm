@@ -33,7 +33,7 @@
 	name = "Lime Juice"
 	id = "limejuice"
 	description = "The sweet-sour juice of limes."
-	color = "#365E30" // rgb: 54, 94, 48
+	color = "#DDE95F" // rgb: 221, 233, 95
 
 /datum/reagent/consumable/limejuice/on_mob_life(mob/living/M)
 	if(M.getToxLoss() && prob(20))
@@ -45,7 +45,7 @@
 	name = "Carrot juice"
 	id = "carrotjuice"
 	description = "It is just like a carrot but without crunching."
-	color = "#973800" // rgb: 151, 56, 0
+	color = "#E8710D" // rgb: 232, 113, 13
 
 /datum/reagent/consumable/carrotjuice/on_mob_life(mob/living/M)
 	M.eye_blurry = max(M.eye_blurry-1 , 0)
@@ -69,13 +69,13 @@
 	name = "Grape Juice"
 	id = "grapejuice"
 	description = "It's grrrrrape!"
-	color = "#863333" // rgb: 134, 51, 51
+	color = "#660099" // rgb: 102, 0, 153
 
 /datum/reagent/consumable/grapesoda
 	name = "Grape Soda"
 	id = "grapesoda"
 	description = "Grapes made into a fine drank."
-	color = "#421C52" // rgb: 98, 57, 53
+	color = "#421C52" // rgb: 51, 0, 102
 
 /datum/reagent/consumable/grapesoda/on_mob_life(mob/living/M)
 	M.drowsyness = max(0,M.drowsyness-3)
@@ -85,7 +85,7 @@
 	name = "Poison Berry Juice"
 	id = "poisonberryjuice"
 	description = "A tasty juice blended from various kinds of very deadly and toxic berries."
-	color = "#863353" // rgb: 134, 51, 83
+	color = "#330066" // rgb: 51, 0, 102
 
 /datum/reagent/consumable/poisonberryjuice/on_mob_life(mob/living/M)
 	M.adjustToxLoss(1)
@@ -96,19 +96,19 @@
 	name = "Watermelon Juice"
 	id = "watermelonjuice"
 	description = "Delicious juice made from watermelon."
-	color = "#863333" // rgb: 134, 51, 51
+	color = "#D1606A" // rgb: 209, 96, 106
 
 /datum/reagent/consumable/lemonjuice
 	name = "Lemon Juice"
 	id = "lemonjuice"
 	description = "This juice is VERY sour."
-	color = "#863333" // rgb: 175, 175, 0
+	color = "#FFFF00" // rgb: 255, 255, 0
 
 /datum/reagent/consumable/banana
 	name = "Banana Juice"
 	id = "banana"
 	description = "The raw essence of a banana. HONK"
-	color = "#863333" // rgb: 175, 175, 0
+	color = "#FFD24A" // rgb: 255, 210, 74
 
 /datum/reagent/consumable/banana/on_mob_life(mob/living/M)
 	if( ( istype(M, /mob/living/carbon/human) && M.job in list("Clown") ) || istype(M, /mob/living/carbon/monkey) )
@@ -303,7 +303,7 @@
 	name = "Space Mountain Wind"
 	id = "spacemountainwind"
 	description = "Blows right through you like a space wind."
-	color = "#102000" // rgb: 16, 32, 0
+	color = "#A5FF90" // rgb: 165, 255, 144
 
 /datum/reagent/consumable/spacemountainwind/on_mob_life(mob/living/M)
 	M.drowsyness = max(0,M.drowsyness-7)
@@ -318,7 +318,7 @@
 	name = "Dr. Gibb"
 	id = "dr_gibb"
 	description = "A delicious blend of 42 different flavours"
-	color = "#102000" // rgb: 16, 32, 0
+	color = "800000" // rgb: 128, 0, 0
 
 /datum/reagent/consumable/dr_gibb/on_mob_life(mob/living/M)
 	M.drowsyness = max(0,M.drowsyness-6)
@@ -331,7 +331,7 @@
 	name = "Space-Up"
 	id = "space_up"
 	description = "Tastes like a hull breach in your mouth."
-	color = "#00FF00" // rgb: 0, 255, 0
+	color = "#B3D9D9" // rgb: 179, 217, 217
 
 /datum/reagent/consumable/space_up/on_mob_life(mob/living/M)
 	if (M.bodytemperature > 310)
@@ -343,7 +343,7 @@
 	name = "Lemon Lime"
 	description = "A tangy substance made of 0.5% natural citrus!"
 	id = "lemon_lime"
-	color = "#8CFF00" // rgb: 135, 255, 0
+	color = "#DDEAB0" // rgb: 221, 234, 176
 
 /datum/reagent/consumable/lemon_lime/on_mob_life(mob/living/M)
 	if (M.bodytemperature > 310)
@@ -355,7 +355,7 @@
 	name = "Soda Water"
 	id = "sodawater"
 	description = "A can of club soda. Why not make a scotch and soda?"
-	color = "#619494" // rgb: 97, 148, 148
+	color = "#B3D9D9" // rgb: 179, 217, 217
 
 /datum/reagent/consumable/sodawater/on_mob_life(mob/living/M)
 	M.dizziness = max(0,M.dizziness-5)
@@ -369,7 +369,7 @@
 	name = "Tonic Water"
 	id = "tonic"
 	description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
-	color = "#0064C8" // rgb: 0, 100, 200
+	color = "#B3D9D9" // rgb: 179, 217, 217
 
 /datum/reagent/consumable/tonic/on_mob_life(mob/living/M)
 	M.dizziness = max(0,M.dizziness-5)
@@ -385,7 +385,7 @@
 	id = "ice"
 	description = "Frozen water, your dentist wouldn't like you chewing this."
 	reagent_state = SOLID
-	color = "#619494" // rgb: 97, 148, 148
+	color = "#C0E3E9" // rgb: 192, 227, 233
 
 /datum/reagent/consumable/ice/on_mob_life(mob/living/M)
 	M.bodytemperature -= 5 * TEMPERATURE_DAMAGE_COEFFICIENT
@@ -396,7 +396,7 @@
 	name = "Lemonade"
 	description = "Oh the nostalgia..."
 	id = "lemonade"
-	color = "#FFFF00" // rgb: 255, 255, 0"
+	color = "#FFFF00" // rgb: 255, 255, 0
 
 /datum/reagent/consumable/lemonade/on_mob_life(mob/living/M)
 	if (M.bodytemperature < 310)//310 is the normal bodytemp. 310.055
@@ -433,7 +433,7 @@
 	name = "Milkshake"
 	description = "Glorious brainfreezing mixture."
 	id = "milkshake"
-	color = "#AEE5E4" // rgb" 174, 229, 228
+	color = "#DFDFDF" // rgb: 223, 223, 223
 
 	glass_center_of_mass = list("x"=16, "y"=7)
 
@@ -451,7 +451,7 @@
 	name = "Rewriter"
 	description = "The secret of the sanctuary of the Libarian..."
 	id = "rewriter"
-	color = "#485000" // rgb:72, 080, 0
+	color = "#485000" // rgb: 72, 80, 0
 
 	glass_center_of_mass = list("x"=16, "y"=9)
 
@@ -500,7 +500,7 @@
 	name = "The Doctor's Delight"
 	id = "doctorsdelight"
 	description = "A gulp a day keeps the MediBot away. That's probably for the best."
-	color = "#FF8CFF" // rgb: 255, 140, 255
+	color = "#B97CB9" // rgb: 185, 124, 185
 
 /datum/reagent/consumable/doctor_delight/on_mob_life(var/mob/living/M as mob)
 	M:nutrition += nutriment_factor
@@ -582,7 +582,7 @@
 	name = "Atomic Bomb"
 	id = "atomicbomb"
 	description = "Nuclear proliferation never tasted so good."
-	color = "#666300" // rgb: 102, 99, 0
+	color = "#F84040" // rgb: 248, 64, 64
 
 /datum/reagent/consumable/atomicbomb/on_mob_life(mob/living/M)
 	M.druggy = max(M.druggy, 50)
@@ -604,7 +604,7 @@
 	name = "Pan-Galactic Gargle Blaster"
 	id = "gargleblaster"
 	description = "Whoah, this stuff looks volatile!"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#BDA1DC" // rgb: 189, 161, 220
 
 /datum/reagent/consumable/gargle_blaster/on_mob_life(mob/living/M)
 	M.dizziness +=6
@@ -627,7 +627,7 @@
 	name = "Neurotoxin"
 	id = "neurotoxin"
 	description = "A strong neurotoxin that puts the subject into a death-like state."
-	color = "#2E2E61" // rgb: 46, 46, 97
+	color = "#7395DB" // rgb: 115, 149, 219
 
 /datum/reagent/consumable/neurotoxin/on_mob_life(mob/living/carbon/M)
 	M.weakened = max(M.weakened, 3)
@@ -651,7 +651,7 @@
 	name = "Hippie's Delight"
 	id = "hippiesdelight"
 	description = "You just don't get it maaaan."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#766FB4" // rgb: 118, 111, 180
 	nutriment_factor = 0
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 

@@ -223,7 +223,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/mug/on_reagent_change()
 	overlays.Cut()
 	if(reagents.total_volume)
-		var/image/I = image(icon, "mugoverlay")
+		var/image/I = image('icons/obj/reagentfillings.dmi', src, "mugoverlay")
 		I.color = mix_color_from_reagents(reagents.reagent_list)
 		overlays += I
 

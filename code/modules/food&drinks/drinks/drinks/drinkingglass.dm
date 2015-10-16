@@ -258,6 +258,10 @@
 				icon_state = "glass_clear"
 				name = "glass of Water"
 				desc = "The father of all refreshments."
+			if("fishwater")
+				icon_state = "glass_clear"
+				name = "glass of water"
+				desc = "This smells funny. Did you get it from a fish tank?"
 			if("spacemountainwind")
 				icon_state = "Space_mountain_wind_glass"
 				name = "glass of Space Mountain Wind"
@@ -544,7 +548,7 @@
 				desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
 			else
 				icon_state ="glass_brown"
-				var/image/I = image(icon, "glassoverlay")
+				var/image/I = image('icons/obj/reagentfillings.dmi', src, "glassoverlay")
 				I.color = mix_color_from_reagents(reagents.reagent_list)
 				overlays += I
 				name = "glass of ..what?"
@@ -576,6 +580,7 @@
 	amount_per_transfer_from_this = 15
 	volume = 15
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass/on_reagent_change()
+	overlays.Cut()
 	if (gulp_size < 15) gulp_size = 15
 	else gulp_size = max(round(reagents.total_volume / 15), 15)
 	if (reagents.reagent_list.len > 0)
@@ -589,8 +594,8 @@
 				name = "shot of water"
 				desc = "You're not sure why someone would drink this from a shot glass."
 			if("fishwater")
-				icon_state = "glass_clear"
-				name = "glass of water"
+				icon_state = "shotglassclear"
+				name = "shot of water"
 				desc = "This smells funny. Did you get it from a fish tank?"
 			if("whiskey")
 				icon_state = "shotglassbrown"
@@ -620,9 +625,9 @@
 				icon_state = "shotglassclear"
 				name = "shot of patron"
 				desc = "The good stuff. Goes great with a lime wedge."
-			if ("kahlua")
+			if ("irishcoffee")
 				icon_state = "shotglasscream"
-				name = "shot of coffee liqueur"
+				name = "shot of irish cream"
 				desc = "Doesn't look too appetizing..."
 			if ("nothing")
 				icon_state = "shotglass"
@@ -637,9 +642,11 @@
 				name = "shot of cognac"
 				desc = "You get the feeling this would piss off a rich person somewhere."
 			else
-				icon_state = "shotglassbrown"
+				var/image/I = image('icons/obj/reagentfillings.dmi', src, "shotglassoverlay")
+				I.color = mix_color_from_reagents(reagents.reagent_list)
+				overlays += I
 				name = "shot of... what?"
-				desc = "You can't really tell what's in the glass."
+				desc = "You can't really tell what it is. Drink up!"
 	else
 		icon_state = "shotglass"
 		name = "shot glass"
@@ -654,6 +661,7 @@
 	list_reagents = list("sodawater" = 50)
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/filled/cola
 	list_reagents = list("cola" = 50)
+
 /obj/item/weapon/reagent_containers/food/drinks/drinkingglass/attackby(obj/item/I, mob/user, params)
 	if(istype(I,/obj/item/weapon/reagent_containers/food/snacks/egg)) //breaking eggs
 		var/obj/item/weapon/reagent_containers/food/snacks/egg/E = I

@@ -17,7 +17,7 @@
 	name = "Ethanol"
 	id = "ethanol"
 	description = "A well-known alcohol with a variety of applications."
-	color = "#404030" // rgb: 64, 64, 48
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	nutriment_factor = 0
 	var/boozepwr = 10 //lower numbers mean the booze will have an effect faster.
 	var/total_cycles = 0 //keep track of how many total ethanol cycles to handle the mixing of boozes.
@@ -99,7 +99,7 @@
 	name = "Beer"
 	id = "beer"
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#E2E67b" // rgb: 226, 230, 123
 	nutriment_factor = 1 * REAGENTS_METABOLISM
 	boozepwr = 55
 
@@ -107,13 +107,13 @@
 	name = "Green Beer"
 	id = "greenbeer"
 	description = "An alcoholic beverage made from malted grains, hops, yeast, and water. Dyed a festive green."
-	color = "#A8E61D"
+	color = "#92CA7A" // rgb: 146, 202, 122
 
 /datum/reagent/consumable/ethanol/kahlua
 	name = "Kahlua"
 	id = "kahlua"
 	description = "A widely known, Mexican coffee-flavoured liqueur. In production since 1936!"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#1D1111" // rgb: 29, 17, 17
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/kahlua/on_mob_life(mob/living/M)
@@ -128,21 +128,21 @@
 	name = "Whiskey"
 	id = "whiskey"
 	description = "A superb and well-aged single-malt whiskey. Damn."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#AE5107" // rgb: 174, 81, 7
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/specialwhiskey
 	name = "Special Blend Whiskey"
 	id = "specialwhiskey"
 	description = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#AE5107" // rgb: 174, 81, 7
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/thirteenloko
 	name = "Thirteen Loko"
 	id = "thirteenloko"
 	description = "A potent mixture of caffeine and alcohol."
-	color = "#102000" // rgb: 16, 32, 0
+	color = "#FFAE06" // rgb: 255, 174, 6
 	nutriment_factor = 1 * REAGENTS_METABOLISM
 	boozepwr = 35
 
@@ -159,7 +159,7 @@
 	name = "Vodka"
 	id = "vodka"
 	description = "Number one drink AND fueling choice for Russians worldwide."
-	color = "#0064C8" // rgb: 0, 100, 200
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/vodka/on_mob_life(mob/living/M)
@@ -185,7 +185,7 @@
 	name = "Three Mile Island Iced Tea"
 	id = "threemileisland"
 	description = "Made for a woman, strong enough for a man."
-	color = "#666340" // rgb: 102, 99, 64
+	color = "#FF6633" // rgb: 255, 102, 51
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/threemileisland/on_mob_life(mob/living/M)
@@ -197,21 +197,21 @@
 	name = "Gin"
 	id = "gin"
 	description = "It's gin. In space. I say, good sir."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	boozepwr = 55
 
 /datum/reagent/consumable/ethanol/rum
 	name = "Rum"
 	id = "rum"
 	description = "Yohoho and all that."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#C1B97E" // rgb: 193, 185, 126
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/sake
 	name = "Sake"
 	id = "sake"
 	description = "Anime's favorite drink."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	boozepwr = 35
 
 	glass_center_of_mass = list("x"=16, "y"=12)
@@ -220,28 +220,28 @@
 	name = "Tequila"
 	id = "tequila"
 	description = "A strong and mildly flavoured, mexican produced spirit. Feeling thirsty, hombre?"
-	color = "#FFFF91" // rgb: 255, 255, 145
+	color = "#D7D9B3" // rgb: 215, 217, 179
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/vermouth
 	name = "Vermouth"
 	id = "vermouth"
 	description = "You suddenly feel a craving for a martini..."
-	color = "#91FF91" // rgb: 145, 255, 145
+	color = "#CEC797" // rgb: 206, 199, 151
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/wine
 	name = "Wine"
 	id = "wine"
 	description = "An premium alchoholic beverage made from distilled grape juice."
-	color = "#7E4043" // rgb: 126, 64, 67
+	color = "#C66570" // rgb: 198, 101, 112
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/cognac
 	name = "Cognac"
 	id = "cognac"
 	description = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
-	color = "#AB3C05" // rgb: 171, 60, 5
+	color = "#DFA866" // rgb: 223, 168, 102
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/hooch
@@ -255,14 +255,14 @@
 	name = "Ale"
 	id = "ale"
 	description = "A dark alchoholic beverage made by malted barley and yeast."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#751810" // rgb: 117, 24, 16
 	boozepwr = 55
 
 /datum/reagent/consumable/ethanol/absinthe
 	name = "Absinthe"
 	id = "absinthe"
 	description = "Watch out that the Green Fairy doesn't come for you!"
-	color = "#33EE00" // rgb: 51, 238, 0
+	color = "#8CC356" // rgb: 140, 195, 86
 	boozepwr = 25
 
 	glass_center_of_mass = list("x"=16, "y"=5)
@@ -328,28 +328,28 @@
 	name = "Goldschlager"
 	id = "goldschlager"
 	description = "100 proof cinnamon schnapps, made for alcoholic teen girls on spring break."
-	color = "#FFFF91" // rgb: 255, 255, 145
+	color = "#D9D9D9" // rgb: 217, 217, 217
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/patron
 	name = "Patron"
 	id = "patron"
 	description = "Tequila with silver in it, a favorite of alcoholic women in the club scene."
-	color = "#585840" // rgb: 88, 88, 64
+	color = "#D3D4AF" // rgb: 211, 212, 175
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/gintonic
 	name = "Gin and Tonic"
 	id = "gintonic"
 	description = "An all time classic, mild cocktail."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	boozepwr = 55
 
 /datum/reagent/consumable/ethanol/cuba_libre
 	name = "Cuba Libre"
 	id = "cubalibre"
 	description = "Rum, mixed with cola. Viva la revolution."
-	color = "#3E1B00" // rgb: 62, 27, 0
+	color = "#896167" // rgb: 137, 97, 103
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/whiskey_cola
@@ -363,63 +363,63 @@
 	name = "Classic Martini"
 	id = "martini"
 	description = "Vermouth with Gin. Not quite how 007 enjoyed it, but still delicious."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#CDDCAD" // rgb: 205, 220, 173
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/vodkamartini
 	name = "Vodka Martini"
 	id = "vodkamartini"
 	description = "Vodka with Gin. Not quite how 007 enjoyed it, but still delicious."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#CDDCAD" // rgb: 205, 220, 173
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/white_russian
 	name = "White Russian"
 	id = "whiterussian"
 	description = "That's just, like, your opinion, man..."
-	color = "#A68340" // rgb: 166, 131, 64
+	color = "#DBDCCC" // rgb: 219, 220, 204
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/screwdrivercocktail
 	name = "Screwdriver"
 	id = "screwdrivercocktail"
 	description = "Vodka, mixed with plain ol' orange juice. The result is surprisingly delicious."
-	color = "#A68310" // rgb: 166, 131, 16
+	color = "#D9B58E" // rgb: 217, 181, 142
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/booger
 	name = "Booger"
 	id = "booger"
 	description = "Ewww..."
-	color = "#8CFF8C" // rgb: 140, 255, 140
+	color = "#12F812" // rgb: 18, 248, 18
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/bloody_mary
 	name = "Bloody Mary"
 	id = "bloodymary"
 	description = "A strange yet pleasurable mixture made of vodka, tomato and lime juice. Or at least you THINK the red stuff is tomato juice."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#C17985" // rgb: 193, 121, 133
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/brave_bull
 	name = "Brave Bull"
 	id = "bravebull"
 	description = "It's just as effective as Dutch-Courage!."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#A8A099" // rgb: 168, 160, 153
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/tequila_sunrise
 	name = "Tequila Sunrise"
 	id = "tequilasunrise"
 	description = "Tequila and orange juice. Much like a Screwdriver, only Mexican~"
-	color = "#FFE48C" // rgb: 255, 228, 140
+	color = "DBB771" // rgb: 219, 183, 113
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/toxins_special
 	name = "Toxins Special"
 	id = "toxinsspecial"
 	description = "This thing is ON FIRE! CALL THE DAMN SHUTTLE!"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#8780A9" // rgb: 135, 128, 169
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/toxins_special/on_mob_life(var/mob/living/M as mob)
@@ -432,7 +432,7 @@
 	name = "Beepsky Smash"
 	id = "beepskysmash"
 	description = "Deny drinking this and prepare for THE LAW."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#808000" // rgb: 128, 128, 0
 	boozepwr = 25
 	metabolization_rate = 0.8
 
@@ -445,35 +445,35 @@
 	name = "Irish Cream"
 	id = "irishcream"
 	description = "Whiskey-imbued cream, what else would you expect from the Irish."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#DAC29C" // rgb: 218, 194, 156
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/manly_dorf
 	name = "The Manly Dorf"
 	id = "manlydorf"
 	description = "Beer and Ale, brought together in a delicious mix. Intended for true men only."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#FF9603" // rgb: 255, 150, 3
 	boozepwr = 45 //was 10, but really its only beer and ale, both weak alchoholic beverages
 
 /datum/reagent/consumable/ethanol/longislandicedtea
 	name = "Long Island Iced Tea"
 	id = "longislandicedtea"
 	description = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#FF6633" // rgb: 255, 102, 51
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/moonshine
 	name = "Moonshine"
 	id = "moonshine"
 	description = "You've really hit rock bottom now... your liver packed its bags and left last night."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/b52
 	name = "B-52"
 	id = "b52"
 	description = "Coffee, Irish Cream, and cognac. You will get bombed."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#B3732B" // rgb: 179, 115, 43
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/irishcoffee
@@ -487,7 +487,7 @@
 	name = "Margarita"
 	id = "margarita"
 	description = "On the rocks with salt on the rim. Arriba~!"
-	color = "#8CFF8C" // rgb: 140, 255, 140
+	color = "#D9E2D0" // rgb: 217, 226, 208
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/black_russian
@@ -501,14 +501,14 @@
 	name = "Manhattan"
 	id = "manhattan"
 	description = "The Detective's undercover drink of choice. He never could stomach gin..."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#FF6633" // rgb: 255, 102, 51
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/manhattan_proj
 	name = "Manhattan Project"
 	id = "manhattan_proj"
 	description = "A scientist's drink of choice, for pondering ways to blow up the station."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#FF6633" // rgb: 255, 102, 51
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/manhattan_proj/on_mob_life(mob/living/M)
@@ -520,14 +520,14 @@
 	name = "Whiskey Soda"
 	id = "whiskeysoda"
 	description = "For the more refined griffon."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#A48779" // rgb: 164, 135, 121
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/antifreeze
 	name = "Anti-freeze"
 	id = "antifreeze"
 	description = "Ultimate refreshment."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#30EFFE" // rgb: 48, 239, 254
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/antifreeze/on_mob_life(mob/living/M)
@@ -540,7 +540,7 @@
 	name = "Barefoot"
 	id = "barefoot"
 	description = "Barefoot and pregnant"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#F268C4" // rgb: 242, 104, 196
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/snowwhite
@@ -588,14 +588,14 @@
 	name = "Vodka and Tonic"
 	id = "vodkatonic"
 	description = "For when a gin and tonic isn't russian enough."
-	color = "#0064C8" // rgb: 0, 100, 200
+	color = "#CAEAF4" // rgb: 202, 234, 244
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/ginfizz
 	name = "Gin Fizz"
 	id = "ginfizz"
 	description = "Refreshingly lemony, deliciously dry."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#FFFFCC" // rgb: 255, 255, 204
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/bahama_mama
@@ -609,14 +609,14 @@
 	name = "Singulo"
 	id = "singulo"
 	description = "A blue-space beverage!"
-	color = "#2E6671" // rgb: 46, 102, 113
+	color = "#6D1007" // rgb: 109, 16, 7
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/sbiten
 	name = "Sbiten"
 	id = "sbiten"
 	description = "A spicy Vodka! Might be a little hot for the little guys!"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#D3D5B0" // rgb: 211, 213, 176
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/sbiten/on_mob_life(mob/living/M)
@@ -629,21 +629,21 @@
 	name = "Devils Kiss"
 	id = "devilskiss"
 	description = "Creepy time!"
-	color = "#A68310" // rgb: 166, 131, 16
+	color = "#F54F3D" // rgb: 245, 79, 61
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/red_mead
 	name = "Red Mead"
 	id = "red_mead"
 	description = "The true Viking drink! Even though it has a strange red color."
-	color = "#C73C00" // rgb: 199, 60, 0
+	color = "#B24542" // rgb: 178, 69, 66
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/mead
 	name = "Mead"
 	id = "mead"
 	description = "A Vikings drink, though a cheap one."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#E4C35E" // rgb: 228, 195, 94
 	nutriment_factor = 1 * REAGENTS_METABOLISM
 	boozepwr = 45
 
@@ -651,7 +651,7 @@
 	name = "Iced Beer"
 	id = "iced_beer"
 	description = "A beer which is so cold the air around it freezes."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#E2E67b" // rgb: 226, 230, 123
 	boozepwr = 55
 
 /datum/reagent/consumable/ethanol/iced_beer/on_mob_life(mob/living/M)
@@ -664,70 +664,70 @@
 	name = "Grog"
 	id = "grog"
 	description = "Watered down rum, Nanotrasen approves!"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#E3E45E" // rgb: 227, 228, 94
 	boozepwr = 90
 
 /datum/reagent/consumable/ethanol/aloe
 	name = "Aloe"
 	id = "aloe"
 	description = "So very, very, very good."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#FFFF00" // rgb: 255, 255, 0
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/andalusia
 	name = "Andalusia"
 	id = "andalusia"
 	description = "A nice, strange named drink."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#C4F268" // rgb: 196, 242, 104
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/alliescocktail
 	name = "Allies Cocktail"
 	id = "alliescocktail"
 	description = "A drink made from your allies, not as sweet as when made from your enemies."
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#3AF2F2" // rgb: 58, 242, 242
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/acid_spit
 	name = "Acid Spit"
 	id = "acidspit"
 	description = "A drink for the daring, can be deadly if incorrectly prepared!"
-	color = "#365000" // rgb: 54, 80, 0
+	color = "#8DE45E" // rgb: 141, 228, 94
 	boozepwr = 45
 
 /datum/reagent/consumable/ethanol/amasec
 	name = "Amasec"
 	id = "amasec"
 	description = "Official drink of the Nanotrasen Gun-Club!"
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#E3E45E" // rgb: 227, 228, 94
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/changelingsting
 	name = "Changeling Sting"
 	id = "changelingsting"
 	description = "You take a tiny sip and feel a burning sensation..."
-	color = "#2E6671" // rgb: 46, 102, 113
+	color = "#8DE45E" // rgb: 141, 228, 94
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/irishcarbomb
 	name = "Irish Car Bomb"
 	id = "irishcarbomb"
 	description = "Mmm, tastes like chocolate cake..."
-	color = "#2E6671" // rgb: 46, 102, 113
+	color = "#4E240B" // rgb: 78, 36, 11
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/syndicatebomb
 	name = "Syndicate Bomb"
 	id = "syndicatebomb"
 	description = "Tastes like terrorism!"
-	color = "#2E6671" // rgb: 46, 102, 113
+	color = "#E2E67b" // rgb: 226, 230, 123
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/erikasurprise
 	name = "Erika Surprise"
 	id = "erikasurprise"
 	description = "The surprise is, it's green!"
-	color = "#2E6671" // rgb: 46, 102, 113
+	color = "#5CB242" // rgb: 92, 178, 66
 	boozepwr = 35
 
 /datum/reagent/consumable/ethanol/driestmartini
@@ -735,7 +735,7 @@
 	id = "driestmartini"
 	description = "Only for the experienced. You think you see sand floating in the glass."
 	nutriment_factor = 1 * REAGENTS_METABOLISM
-	color = "#2E6671" // rgb: 46, 102, 113
+	color = "#B38F6C" // rgb: 179, 143, 108
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/bananahonk
@@ -743,7 +743,7 @@
 	id = "bananahonk"
 	description = "A drink from Clown Heaven."
 	nutriment_factor = 1 * REAGENTS_METABOLISM
-	color = "#FFFF91" // rgb: 255, 255, 140
+	color = "#DBDA73" // rgb: 219, 218, 115
 	boozepwr = 25
 
 /datum/reagent/consumable/ethanol/bananahonk/on_mob_life(mob/living/M)
@@ -757,7 +757,7 @@
 	id = "silencer"
 	description = "A drink from Mime Heaven."
 	nutriment_factor = 1 * REAGENTS_METABOLISM
-	color = "#664300" // rgb: 102, 67, 0
+	color = "#C0C0C0" // rgb: 192, 192, 192
 	boozepwr = 15
 
 /datum/reagent/consumable/ethanol/silencer/on_mob_life(mob/living/M)
@@ -770,5 +770,5 @@
 	name = "Drunken Blumpkin"
 	id = "drunkenblumpkin"
 	description = "A weird mix of whiskey and blumpkin juice."
-	color = "#1EA0FF" // rgb: 102, 67, 0
+	color = "#3399CC" // rgb: 51, 153, 204
 	boozepwr = 35
