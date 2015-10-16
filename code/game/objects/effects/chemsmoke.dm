@@ -189,7 +189,7 @@
 /datum/effect/effect/system/smoke_spread/chem/proc/spawnSmoke(var/turf/T, var/icon/I, var/dist = 1)
 	var/obj/effect/effect/smoke/chem/smoke = new(location)
 	if(chemholder.reagents.reagent_list.len)
-		chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / dist, safety = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
+		chemholder.reagents.copy_to(smoke, chemholder.reagents.total_volume / dist, no_react = 1)	//copy reagents to the smoke so mob/breathe() can handle inhaling the reagents
 	smoke.icon = I
 	smoke.layer = 6
 	smoke.set_dir(pick(cardinal))

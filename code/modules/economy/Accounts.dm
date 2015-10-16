@@ -111,3 +111,8 @@
 	for(var/datum/money_account/D in all_money_accounts)
 		if(D.account_number == account_number)
 			return D
+
+/proc/attempt_account_access_nosec(var/attempt_account_number)
+	for(var/datum/money_account/D in all_money_accounts)
+		if(D.account_number == attempt_account_number)
+			return D

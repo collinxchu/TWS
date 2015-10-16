@@ -342,7 +342,7 @@
 /obj/item/weapon/storage/box/monkeycubes
 	name = "monkey cube box"
 	desc = "Drymate brand monkey cubes. Just add water!"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "monkeycubebox"
 	storage_slots = 7
 	can_hold = list("/obj/item/weapon/reagent_containers/food/snacks/monkeycube")
@@ -467,28 +467,24 @@
 
 /obj/item/weapon/storage/box/matches
 	name = "matchbox"
-	desc = "A small box of 'Space-Proof' premium matches."
+	desc = "A small box of Almost But Not Quite Plasma Premium Matches."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "matchbox"
 	item_state = "zippo"
 	storage_slots = 10
 	w_class = 1
 	slot_flags = SLOT_BELT
-	can_hold = list("/obj/item/weapon/flame/match")
+	can_hold = list(/obj/item/weapon/match)
 
-	New()
-		..()
-		for(var/i=1; i <= storage_slots; i++)
-			new /obj/item/weapon/flame/match(src)
+/obj/item/weapon/storage/box/matches/New()
+	..()
+	for(var/i=1; i <= storage_slots; i++)
+		new /obj/item/weapon/match(src)
 
-	attackby(obj/item/weapon/flame/match/W as obj, mob/user as mob)
-		if(istype(W) && !W.lit && !W.burnt)
-			W.lit = 1
-			W.damtype = "burn"
-			W.icon_state = "match_lit"
-			processing_objects.Add(W)
-		W.update_icon()
-		return
+/obj/item/weapon/storage/box/matches/attackby(obj/item/weapon/match/W as obj, mob/user as mob, params)
+	if(istype(W, /obj/item/weapon/match))
+		W.matchignite()
+	return
 
 /obj/item/weapon/storage/box/autoinjectors
 	name = "box of injectors"

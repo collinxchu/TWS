@@ -53,6 +53,11 @@
 	origin_tech = "materials=6"
 	oretag = "diamond"
 
+/obj/item/weapon/ore/bananium
+	name = "bananium ore"
+	icon_state = "Clown ore"
+	origin_tech = "materials=4"
+
 /obj/item/weapon/ore/osmium
 	name = "raw platinum"
 	icon_state = "Platinum ore"

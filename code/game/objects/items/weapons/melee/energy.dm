@@ -55,6 +55,9 @@
 							"<span class='danger'>[user] is falling on the [src.name]! It looks like \he's trying to commit suicide.</span>")
 		return (BRUTELOSS|FIRELOSS)
 
+/obj/item/weapon/melee/energy/is_sharp()
+	return active * sharp
+
 /*
  * Energy Axe
  */
@@ -76,7 +79,7 @@
 	flags = CONDUCT | NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;combat=4"
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
-	sharp = 1
+	sharp = IS_SHARP
 	edge = 1
 
 /obj/item/weapon/melee/energy/axe/activate(mob/living/user)
@@ -111,6 +114,7 @@
 	w_class = 2
 	flags = NOSHIELD | NOBLOODY
 	origin_tech = "magnets=3;syndicate=4"
+	var/hacked = 0
 
 /obj/item/weapon/melee/energy/sword/dropped(var/mob/user)
 	..()
@@ -150,6 +154,40 @@
 	if(active)
 		return 1
 	return 0
+
+/obj/item/weapon/melee/energy/sword/attackby(obj/item/weapon/W, mob/living/user, params)
+	..()
+	if(istype(W, /obj/item/weapon/melee/energy/sword/))
+		if(W == src)
+			user << "<span class='notice'>You try to attach the end of the energy sword to... itself. You're not very smart, are you?</span>"
+			if(ishuman(user))
+				user.adjustBrainLoss(10)
+		else
+			user << "<span class='notice'>You attach the ends of the two energy swords, making a single double-bladed weapon! You're cool.</span>"
+			var/obj/item/weapon/twohanded/dualsaber/newSaber = new /obj/item/weapon/twohanded/dualsaber(user.loc)
+			if(src.hacked) // That's right, we'll only check the "original" esword.
+				newSaber.hacked = 1
+				newSaber.item_color = "rainbow"
+			user.unEquip(W)
+			user.unEquip(src)
+			qdel(W)
+			qdel(src)
+			user.put_in_hands(newSaber)
+	else if(istype(W, /obj/item/device/multitool))
+		if(hacked == 0)
+			hacked = 1
+			item_color = "rainbow"
+			user << "<span class='warning'>RNBW_ENGAGE</span>"
+			if(active)
+				icon_state = "swordrainbow"
+				// Updating overlays, copied from welder code.
+				// I tried calling attack_self twice, which looked cool, except it somehow didn't update the overlays!!
+				if(user.r_hand == src)
+					user.update_inv_r_hand(0)
+				else if(user.l_hand == src)
+					user.update_inv_l_hand(0)
+		else
+			user << "<span class='warning'>It's already fabulous!</span>"
 
 /obj/item/weapon/melee/energy/sword/pirate
 	name = "energy cutlass"

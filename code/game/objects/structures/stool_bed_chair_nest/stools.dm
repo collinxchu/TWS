@@ -5,6 +5,7 @@
 	icon_state = "stool"
 	anchored = 1.0
 	pressure_resistance = 15
+	burn_state = 0 //Burnable
 
 /obj/structure/stool/ex_act(severity)
 	switch(severity)
@@ -26,6 +27,10 @@
 		new /obj/item/stack/sheet/metal(src.loc)
 		qdel(src)
 
+/obj/structure/stool/burn()
+	..()
+	new /obj/item/stack/rods(src.loc)
+
 /obj/structure/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/wrench))
 		playsound(src.loc, 'sound/items/Ratchet.ogg', 50, 1)
@@ -41,7 +46,8 @@
 			S.origin = src
 			src.loc = S
 			H.put_in_hands(S)
-			H.visible_message("\red [H] grabs [src] from the floor!", "\red You grab [src] from the floor!")
+			H.visible_message("<span class='danger'>[H] grabs [src] from the floor!</span>",
+								"<span class='userdanger'> You grab [src] from the floor!</span>")
 
 /obj/structure/stool/bar
 	name = "bar stool"
@@ -71,17 +77,29 @@
 	w_class = 5.0
 	var/obj/structure/stool/origin = null
 
+/obj/item/weapon/stool/dropped()
+	..()
+	origin.loc = get_turf(src)
+	origin.dir = usr.dir
+	qdel(src)
+
+/obj/item/weapon/stool/throw_impact(atom/hit_atom)
+	..()
+	origin.loc = get_turf(src)
+	origin.dir = usr.dir
+	qdel(src)
+
 /obj/item/weapon/stool/attack_self(mob/user as mob)
 	..()
 	origin.loc = get_turf(src)
 	origin.dir = user.dir
 	user.unEquip(src)
-	user.visible_message("\blue [user] puts [src] down.", "\blue You put [src] down.")
+	user.visible_message("<span class='notice'>[user] puts [src] down.", "\blue You put [src] down.</span>")
 	qdel(src)
 
 /obj/item/weapon/stool/attack(mob/M as mob, mob/user as mob)
 	if (prob(5) && istype(M,/mob/living))
-		user.visible_message("\red [user] breaks [src] over [M]'s back!.")
+		user.visible_message("<span class='danger'>[user] breaks [src] over [M]'s back!.</span>")
 		user.unEquip(src)
 		var/obj/item/stack/sheet/metal/m = new/obj/item/stack/sheet/metal
 		m.loc = get_turf(src)

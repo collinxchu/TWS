@@ -17,7 +17,7 @@
 /obj/item/ashtray/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (health < 1)
 		return
-	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/cigarette) || istype(W, /obj/item/weapon/flame/match))
+	if (istype(W,/obj/item/weapon/cigbutt) || istype(W,/obj/item/clothing/mask/cigarette) || istype(W, /obj/item/weapon/match))
 		if (contents.len >= max_butts)
 			user << "This ashtray is full."
 			return
@@ -82,7 +82,7 @@
 	icon_broken  = "ashtray_bork_bl"
 	max_butts = 14
 	health = 24.0
-	matter = list("metal" = 30,"glass" = 30)
+	materials = list(MAT_METAL=30,MAT_GLASS=30)
 	empty_desc = "Cheap plastic ashtray."
 	throwforce = 3.0
 	die()
@@ -102,7 +102,7 @@
 	icon_broken  = "ashtray_bork_br"
 	max_butts = 10
 	health = 72.0
-	matter = list("metal" = 80)
+	materials = list(MAT_METAL=80)
 	empty_desc = "Massive bronze ashtray."
 	throwforce = 10.0
 
@@ -123,7 +123,7 @@
 	icon_broken  = "ashtray_bork_gl"
 	max_butts = 12
 	health = 12.0
-	matter = list("glass" = 60)
+	materials = list(MAT_GLASS=60)
 	empty_desc = "Glass ashtray. Looks fragile."
 	throwforce = 6.0
 

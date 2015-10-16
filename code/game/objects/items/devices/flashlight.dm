@@ -8,7 +8,7 @@
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
 
-	matter = list("metal" = 50,"glass" = 20)
+	materials = list(MAT_METAL=50,MAT_GLASS=20)
 
 	icon_action_button = "action_flashlight"
 	var/on = 0

@@ -8,13 +8,13 @@
 /obj/attack_hand(mob/living/user)
 	. = ..()
 	if(can_buckle && buckled_mob)
-		user_unbuckle_mob(user)
-
+		if(user_unbuckle_mob(user))
+			return 1
 /obj/MouseDrop_T(mob/living/M, mob/living/user)
 	. = ..()
 	if(can_buckle && istype(M))
-		user_buckle_mob(M, user)
-
+		if(user_buckle_mob(M, user))
+			return 1
 /obj/Destroy()
 	. = ..()
 	unbuckle_mob()
@@ -32,16 +32,20 @@
 		return 0
 
 	M.buckled = src
-	M.facing_dir = null
-	M.set_dir(dir)
-	M.update_canmove()
+	M.dir = dir
 	buckled_mob = M
+	M.update_canmove()
 	post_buckle_mob(M)
 	//M.throw_alert("buckled", new_master = src) #TOREMOVE
-	if(burn_state == 1) //Sets the mob on fire if you buckle them to a burning object
-		M.adjust_fire_stacks(1)
-		M.IgniteMob()
+
 	return 1
+
+/obj/buckle_mob(mob/living/M)
+	. = ..()
+	if(.)
+		if(burn_state == 1) //Sets the mob on fire if you buckle them to a burning atom/movableect
+			M.adjust_fire_stacks(1)
+			M.IgniteMob()
 
 /obj/proc/unbuckle_mob()
 	if(buckled_mob && buckled_mob.buckled == src)
@@ -59,12 +63,13 @@
 /obj/proc/user_buckle_mob(mob/living/M, mob/user)
 	if(!ticker)
 		user << "<span class='warning'>You can't buckle anyone in before the game starts.</span>"
+		return 0
 	if(!user.Adjacent(M) || user.restrained() || user.lying || user.stat || istype(user, /mob/living/silicon/pai))
-		return
+		return 0
 
 	if(istype(M, /mob/living/carbon/slime))
 		user << "<span class='warning'>The [M] is too squishy to buckle in.</span>"
-		return
+		return 0
 
 	add_fingerprint(user)
 	unbuckle_mob()
@@ -80,6 +85,7 @@
 				"<span class='warning'>[M.name] is buckled to [src] by [user.name]!</span>",\
 				"<span class='warning'>You are buckled to [src] by [user.name]!</span>",\
 				"<span class='italics'>You hear metal clanking.</span>")
+		return 1
 
 /obj/proc/user_unbuckle_mob(mob/user)
 	var/mob/living/M = unbuckle_mob()

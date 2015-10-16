@@ -15,24 +15,32 @@
 	levelupdate()
 
 
-/turf/simulated/proc/MakeSlippery(var/wet_setting = 1) // 1 = Water, 2 = Lube
+/turf/simulated/proc/MakeSlippery(wet_setting = TURF_WET_WATER) // 1 = Water, 2 = Lube
 	if(wet >= wet_setting)
 		return
 	wet = wet_setting
-	if(wet_setting == 1)
+	if(wet_setting == TURF_WET_WATER)
 		if(wet_overlay)
 			overlays -= wet_overlay
 			wet_overlay = null
-		wet_overlay = image('icons/effects/water.dmi', src, "wet_floor_static")
+		var/turf/simulated/floor/F = src
+		if(istype(F))
+			wet_overlay = image('icons/effects/water.dmi', src, "wet_floor_static")
+		else
+			wet_overlay = image('icons/effects/water.dmi', src, "wet_static")
 		overlays += wet_overlay
 
 	spawn(rand(790, 820)) // Purely so for visual effect
 		if(!istype(src, /turf/simulated)) //Because turfs don't get deleted, they change, adapt, transform, evolve and deform. they are one and they are all.
 			return
-		if(wet > wet_setting) return
-		wet = 0
-		if(wet_overlay)
-			overlays -= wet_overlay
+		MakeDry(wet_setting)
+
+/turf/simulated/proc/MakeDry(wet_setting = TURF_WET_WATER)
+	if(wet > wet_setting)
+		return
+	wet = TURF_DRY
+	if(wet_overlay)
+		overlays -= wet_overlay
 
 /turf/simulated/proc/AddTracks(var/typepath,var/bloodDNA,var/comingdir,var/goingdir,var/bloodcolor="#A10808")
 	var/obj/effect/decal/cleanable/blood/tracks/tracks = locate(typepath) in src
@@ -61,16 +69,10 @@
 
 		if(istype(M, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = M
-			if(istype(H.shoes, /obj/item/clothing/shoes/clown_shoes))
-				var/obj/item/clothing/shoes/clown_shoes/O = H.shoes
-				if(H.m_intent == "run")
-					if(O.footstep >= 2)
-						O.footstep = 0
-						playsound(src, "clownstep", 50, 1) // this will get annoying very fast.
-					else
-						O.footstep++
-				else
-					playsound(src, "clownstep", 20, 1)
+			if(H.shoes)
+				var/obj/item/clothing/shoes/S = H.shoes
+				if(!H.lying && !H.buckled)
+					S.step_action()  //#TOREMOVE - this stuff should be moved to the human_movement.dm under human/Move()
 
 			// Tracking blood
 			var/list/bloodDNA = null

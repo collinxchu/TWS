@@ -46,7 +46,7 @@ var/list/robot_verbs_default = list(
 
 	var/obj/item/device/radio/borg/radio = null
 	var/mob/living/silicon/ai/connected_ai = null
-	var/obj/item/weapon/cell/cell = null
+	var/obj/item/weapon/stock_parts/cell/cell = null
 	var/obj/machinery/camera/camera = null
 
 	// Components are basically robot organs.
@@ -91,7 +91,7 @@ var/list/robot_verbs_default = list(
 
 /mob/living/silicon/robot/syndicate/New()
 	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
+		cell = new /obj/item/weapon/stock_parts/cell(src)
 		cell.maxcharge = 25000
 		cell.charge = 25000
 
@@ -134,7 +134,7 @@ var/list/robot_verbs_default = list(
 		C.wrapped = new C.external_type
 
 	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
+		cell = new /obj/item/weapon/stock_parts/cell(src)
 		cell.maxcharge = 7500
 		cell.charge = 7500
 
@@ -766,7 +766,7 @@ var/list/robot_verbs_default = list(
 				opened = 1
 				updateicon()
 
-	else if (istype(W, /obj/item/weapon/cell) && opened)	// trying to put a cell inside
+	else if (istype(W, /obj/item/weapon/stock_parts/cell) && opened)	// trying to put a cell inside
 		var/datum/robot_component/C = components["power cell"]
 		if(wiresexposed)
 			user << "Close the panel first."
@@ -876,7 +876,7 @@ var/list/robot_verbs_default = list(
 					if(src.module && istype(src.module, /obj/item/weapon/robot_module/miner))
 						for(var/obj/item/weapon/pickaxe/borgdrill/D in src.module.modules)
 							qdel(D)
-						src.module.modules += new /obj/item/weapon/pickaxe/diamonddrill(src.module)
+						src.module.modules += new /obj/item/weapon/pickaxe/drill/diamonddrill(src.module)
 						src.module.rebuild()
 					updateicon()
 				else

@@ -103,7 +103,7 @@
 			update_icon()
 			return 1
 
-		else if(!cell && istype(W,/obj/item/weapon/cell))
+		else if(!cell && istype(W,/obj/item/weapon/stock_parts/cell))
 
 			user << "You jack \the [W] into \the [src]'s battery mount."
 			user.drop_from_inventory(W)

@@ -57,9 +57,6 @@ var/global/datum/global_init/init = new ()
 	// due to this list not being instantiated.
 	populate_seed_list()
 
-	// Create autolathe recipes, as above.
-	populate_lathe_recipes()
-
 	//goonstation's process scheduler
 	processScheduler = new
 //	processScheduler.setup()

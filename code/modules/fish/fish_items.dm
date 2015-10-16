@@ -1,6 +1,6 @@
 
 var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfish,
-									"clownfish" = /obj/item/weapon/bananapeel/clownfish,
+									"clownfish" = /obj/item/weapon/grown/bananapeel/clownfish,
 									"shark" = /obj/item/weapon/fish/shark,
 									"baby space carp" = /obj/item/weapon/fish/babycarp,
 									"catfish" = /obj/item/weapon/fish/catfish,
@@ -153,7 +153,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	icon_state = "teeth"
 	force = 2.0
 	throwforce = 5.0
-	matter = list()
+	materials = list()
 
 /obj/item/weapon/shard/shark_teeth/New()
 	src.pixel_x = rand(-5,5)
@@ -199,7 +199,7 @@ var/global/list/fish_items_list = list("goldfish" = /obj/item/weapon/fish/goldfi
 	hitsound = 'sound/weapons/bite.ogg'
 	force = 3
 
-/obj/item/weapon/bananapeel/clownfish
+/obj/item/weapon/grown/bananapeel/clownfish
 	name = "clown fish"
 	desc = "Even underwater, you cannot escape HONKing."
 	icon = 'icons/obj/fish_items.dmi'

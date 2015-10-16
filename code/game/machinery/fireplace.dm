@@ -7,7 +7,7 @@
 	desc = "A simulated fireplace that keeps the room warm and toasty. Powered by... powercells?"
 	light_range = 5
 	light_color = "#E09D37"
-	var/obj/item/weapon/cell/cell
+	var/obj/item/weapon/stock_parts/cell/cell
 	var/on = 1
 	var/open = 0
 	var/set_temperature = T0C + 50	//K
@@ -38,14 +38,14 @@
 
 
 /obj/machinery/fireplace/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/cell))
+	if(istype(I, /obj/item/weapon/stock_parts/cell))
 		if(open)
 			if(cell)
 				user << "There is already a power cell inside."
 				return
 			else
 				// insert cell
-				var/obj/item/weapon/cell/C = usr.get_active_hand()
+				var/obj/item/weapon/stock_parts/cell/C = usr.get_active_hand()
 				if(istype(C))
 					user.drop_item()
 					cell = C
@@ -126,7 +126,7 @@
 
 			if("cellinstall")
 				if(open && !cell)
-					var/obj/item/weapon/cell/C = usr.get_active_hand()
+					var/obj/item/weapon/stock_parts/cell/C = usr.get_active_hand()
 					if(istype(C))
 						usr.drop_item()
 						cell = C

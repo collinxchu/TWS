@@ -238,13 +238,13 @@
 /obj/item/stack/proc/get_amount()
 	return amount
 
-/obj/item/stack/proc/add_to_stacks(mob/usr as mob)
+/obj/item/stack/proc/add_to_stacks(mob/user as mob)
 	for (var/obj/item/stack/item in usr.loc)
 		if (item==src)
 			continue
 		var/transfer = src.transfer_to(item)
 		if (transfer)
-			usr << "You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s."
+			user << "<span class='notice'>You add a new [item.singular_name] to the stack. It now contains [item.amount] [item.singular_name]\s.</span>"
 		if(!amount)
 			break
 

@@ -137,7 +137,7 @@
 			return
 		last_act = world.time
 
-		playsound(user, P.drill_sound, 20, 1)
+		P.playDigSound()
 
 		//handle any archaeological finds we might uncover
 		var/fail_message
@@ -421,7 +421,7 @@
 
 	var/list/usable_tools = list(
 		/obj/item/weapon/shovel,
-		/obj/item/weapon/pickaxe/diamonddrill,
+		/obj/item/weapon/pickaxe/drill/diamonddrill,
 		/obj/item/weapon/pickaxe/drill,
 		/obj/item/weapon/pickaxe/borgdrill
 		)

@@ -65,17 +65,23 @@ h1.alert, h2.alert		{color: #000000;}
 
 /* Game Messages */
 
-.attack					{color: #ff0000;}
-.moderate				{color: #CC0000;}
-.disarm					{color: #990000;}
-.passive				{color: #660000;}
-
-.danger					{color: #ff0000;	font-weight: bold;}
+.userdanger				{color: #ff0000;	font-weight: bold; font-size: 3;}
+.danger					{color: #ff0000;}
 .warning				{color: #ff0000;	font-style: italic;}
+.announce 				{color: #228b22;	font-weight: bold;}
+.boldannounce			{color: #ff0000;	font-weight: bold;}
+.greenannounce			{color: #00ff00;	font-weight: bold;}
 .rose					{color: #ff5050;}
 .info					{color: #0000CC;}
 .notice					{color: #000099;}
-.alium					{color: #00ff00;}
+.boldnotice				{color: #000099;	font-weight: bold;}
+.adminnotice			{color: #0000ff;}
+.unconscious			{color: #0000ff;	font-weight: bold;}
+.suicide				{color: #ff5050;	font-style: italic;}
+.green					{color: #03ff39;}
+.shadowling				{color: #3b2769;}
+.cult					{color: #960000; font-weight: bold; font-size: 3;}
+.purple					{color: #5e2d79;}
 
 /* Languages */
 

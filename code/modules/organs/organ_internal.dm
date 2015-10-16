@@ -55,7 +55,7 @@
 	// Coffee is really bad for you with busted kidneys.
 	// This should probably be expanded in some way, but fucked if I know
 	// what else kidneys can process in our reagent list.
-	var/datum/reagent/coffee = locate(/datum/reagent/drink/coffee) in owner.reagents.reagent_list
+	var/datum/reagent/consumable/coffee = locate(/datum/reagent/consumable/coffee) in owner.reagents.reagent_list
 	if(coffee)
 		if(is_bruised())
 			owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
@@ -117,7 +117,7 @@
 	if(owner.life_tick % PROCESS_ACCURACY == 0)
 
 		//High toxins levels are dangerous
-		if(owner.getToxLoss() >= 60 && !owner.reagents.has_reagent("anti_toxin"))
+		if(owner.getToxLoss() >= 60 && !owner.reagents.has_reagent("antitoxin"))
 			//Healthy liver suffers on its own
 			if (src.damage < min_broken_damage)
 				src.damage += 0.2 * PROCESS_ACCURACY
@@ -128,7 +128,7 @@
 					O.damage += 0.2  * PROCESS_ACCURACY
 
 		//Detox can heal small amounts of damage
-		if (src.damage && src.damage < src.min_bruised_damage && owner.reagents.has_reagent("anti_toxin"))
+		if (src.damage && src.damage < src.min_bruised_damage && owner.reagents.has_reagent("antitoxin"))
 			src.damage -= 0.2 * PROCESS_ACCURACY
 
 		if(src.damage < 0)
@@ -141,20 +141,18 @@
 		if(is_broken())
 			filter_effect -= 2
 
-			// Do some reagent filtering/processing.
-			for(var/datum/reagent/R in owner.reagents.reagent_list)
-				// Damaged liver means some chemicals are very dangerous
-				// The liver is also responsible for clearing out alcohol and toxins.
-				// Ethanol and all drinks are bad.K
-				if(istype(R, /datum/reagent/ethanol))
-					if(filter_effect < 3)
-						owner.adjustToxLoss(0.1 * PROCESS_ACCURACY)
-					owner.reagents.remove_reagent(R.id, R.custom_metabolism*filter_effect)
-				// Can't cope with toxins at all
-				else if(istype(R, /datum/reagent/toxin))
-					if(filter_effect < 3)
-						owner.adjustToxLoss(0.3 * PROCESS_ACCURACY)
-					owner.reagents.remove_reagent(R.id, ALCOHOL_METABOLISM*filter_effect)
+		// Do some reagent filtering/processing.
+		for(var/datum/reagent/R in owner.reagents.reagent_list)
+			// Damaged liver means some chemicals are very dangerous
+			// The liver is also responsible for clearing out alcohol and toxins.
+			// Ethanol and all drinks are bad.K
+			if(istype(R, /datum/reagent/consumable/ethanol))
+				owner.reagents.remove_reagent(R.id, ALCOHOL_METABOLISM*filter_effect)
+
+			// Can't cope with toxins at all
+			else if(istype(R, /datum/reagent/toxin))
+				owner.reagents.remove_reagent(R.id, R.custom_metabolism*filter_effect)
+
 
 /obj/item/organ/appendix
 	name = "appendix"

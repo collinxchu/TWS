@@ -571,7 +571,7 @@ What a mess.*/
 /obj/machinery/computer/secure_data/proc/is_not_allowed(var/mob/user)
 	return !src.authenticated || user.stat || user.restrained() || (!in_range(src, user) && (!istype(user, /mob/living/silicon)))
 
-/obj/machinery/computer/secure_data/proc/get_photo(var/mob/user)
+obj/machinery/computer/secure_data/proc/get_photo(var/mob/user)
 	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
 		var/obj/item/weapon/photo/photo = user.get_active_hand()
 		return photo.img

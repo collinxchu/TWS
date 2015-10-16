@@ -17,7 +17,7 @@ REAGENT SCANNER
 	w_class = 2
 	item_state = "electronic"
 
-	matter = list("metal" = 150)
+	materials = list(MAT_METAL=150)
 
 	origin_tech = "magnets=1;engineering=1"
 
@@ -74,7 +74,7 @@ REAGENT SCANNER
 	w_class = 2.0
 	throw_speed = 5
 	throw_range = 10
-	matter = list("metal" = 200)
+	materials = list(MAT_METAL=200)
 	origin_tech = "magnets=1;biotech=1"
 	var/mode = 1;
 
@@ -237,7 +237,7 @@ REAGENT SCANNER
 	throw_speed = 4
 	throw_range = 20
 
-	matter = list("metal" = 30,"glass" = 20)
+	materials = list(MAT_METAL=30,MAT_GLASS=20)
 
 	origin_tech = "magnets=1;engineering=1"
 
@@ -284,7 +284,7 @@ REAGENT SCANNER
 	throw_speed = 4
 	throw_range = 20
 
-	matter = list("metal" = 30,"glass" = 20)
+	materials = list(MAT_METAL=30,MAT_GLASS=20)
 
 	origin_tech = "magnets=2;biotech=2"
 	var/details = 0
@@ -357,7 +357,7 @@ REAGENT SCANNER
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 20
-	matter = list("metal" = 30,"glass" = 20)
+	materials = list(MAT_METAL=30,MAT_GLASS=20)
 
 	origin_tech = "magnets=2;biotech=2"
 	var/details = 0
@@ -416,7 +416,7 @@ REAGENT SCANNER
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 7
-	matter = list("metal" = 30,"glass" = 20)
+	materials = list(MAT_METAL=30,MAT_GLASS=20)
 
 /obj/item/device/slime_scanner/attack(mob/living/M as mob, mob/living/user as mob)
 	if (!isslime(M))

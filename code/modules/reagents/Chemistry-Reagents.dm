@@ -1,78 +1,129 @@
 #define SOLID 1
 #define LIQUID 2
 #define GAS 3
-#define REAGENTS_OVERDOSE 30
+
 #define REM REAGENTS_EFFECT_MULTIPLIER
 
 //The reaction procs must ALWAYS set src = null, this detaches the proc from the object (the reagent)
 //so that it can continue working when the reagent is deleted while the proc is still active.
 
 
-datum
-	reagent
-		var/name = "Reagent"
-		var/id = "reagent"
-		var/description = ""
-		var/datum/reagents/holder = null
-		var/reagent_state = SOLID
-		var/list/data = null
-		var/volume = 0
-		var/nutriment_factor = 0
-		var/custom_metabolism = REAGENTS_METABOLISM
-		var/overdose = 0
-		var/overdose_dam = 1
-		var/scannable = 0 //shows up on health analyzers
-		var/glass_icon_state = null
-		var/glass_name = null
-		var/glass_desc = null
-		var/glass_center_of_mass = null
-		//var/list/viruses = list()
-		var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
+/datum/reagent
+	var/name = "Reagent"
+	var/id = "reagent"
+	var/description = ""
+	var/datum/reagents/holder = null
+	var/reagent_state = LIQUID
+	var/list/data
+	var/current_cycle = 0
+	var/volume = 0
+	var/color = "#000000" // rgb: 0, 0, 0 (does not support alpha channels - yet!)
+	var/can_synth = 1
+	var/metabolization_rate = REAGENTS_METABOLISM //how fast the reagent is metabolized by the mob
+	var/custom_metabolism = REAGENTS_METABOLISM
+	var/overrides_metab = 0
+	var/overdose_threshold = 0
+	var/addiction_threshold = 0
+	var/addiction_stage = 0
+	var/overdosed = 0 // You fucked up and this is now triggering its overdose effects, purge that shit quick.
 
-		proc
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume) //By default we have a chance to transfer some
-				if(!istype(M, /mob/living))	return 0
-				var/datum/reagent/self = src
-				src = null										  //of the reagent to the mob on TOUCHING it.
+	//Old vars - #TOREMOVE
+	var/scannable = 0 //shows up on health analyzers
+	var/glass_center_of_mass = null
 
-				if(self.holder)		//for catching rare runtimes
-					if(!istype(self.holder.my_atom, /obj/effect/effect/smoke/chem))
-						// If the chemicals are in a smoke cloud, do not try to let the chemicals "penetrate" into the mob's system (balance station 13) -- Doohl
 
-						if(method == TOUCH)
+/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
+	..()
+	holder = null
 
-							var/chance = 1
-							var/block  = 0
+/datum/reagent/proc/reaction_mob(mob/living/M, method=TOUCH, reac_volume, show_message = 1, touch_protection = 0)
+	if(!istype(M))
+		return 0
+	if(method == VAPOR) //smoke, foam, spray
+		if(M.reagents)
+			var/modifier = Clamp((1 - touch_protection), 0, 1)
+			var/amount = round(reac_volume*modifier, 0.1)
+			if(amount >= 1)
+				M.reagents.add_reagent(id, amount)
+	return 1
 
-							for(var/obj/item/clothing/C in M.get_equipped_items())
-								if(C.permeability_coefficient < chance) chance = C.permeability_coefficient
-								if(istype(C, /obj/item/clothing/suit/bio_suit))
-									// bio suits are just about completely fool-proof - Doohl
-									// kind of a hacky way of making bio suits more resistant to chemicals but w/e
-									if(prob(75))
-										block = 1
+/datum/reagent/proc/reaction_obj(obj/O, volume)
+	return
 
-								if(istype(C, /obj/item/clothing/head/bio_hood))
-									if(prob(75))
-										block = 1
+/datum/reagent/proc/reaction_turf(turf/T, volume)
+	return
 
-							chance = chance * 100
+/datum/reagent/proc/on_mob_life(mob/living/M)
+	current_cycle++
+	holder.remove_reagent(src.id, metabolization_rate * M.metabolism_efficiency) //By default it slowly disappears.
+	return
 
-							if(prob(chance) && !block)
-								if(M.reagents)
-									M.reagents.add_reagent(self.id,self.volume/2)
-				return 1
+// Called when this reagent is removed while inside a mob
+/datum/reagent/proc/on_mob_delete(mob/M)
+	return
 
-			reaction_obj(var/obj/O, var/volume) //By default we transfer a small part of the reagent to the object
-				src = null						//if it can hold reagents. nope!
-				//if(O.reagents)
-				//	O.reagents.add_reagent(id,volume/3)
-				return
+/datum/reagent/proc/on_move(mob/M)
+	return
 
-			reaction_turf(var/turf/T, var/volume)
-				src = null
-				return
+// Called after add_reagents creates a new reagent.
+/datum/reagent/proc/on_new(data)
+	return
 
+// Called when two reagents of the same are mixing.
+/datum/reagent/proc/on_merge(data)
+	return
+
+/datum/reagent/proc/on_update(atom/A)
+	return
+
+// Called every time reagent containers process.
+/datum/reagent/proc/on_tick(data)
+	return
+
+// Called when the reagent container is hit by an explosion
+/datum/reagent/proc/on_ex_act(severity)
+	return
+
+// Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
+/datum/reagent/proc/overdose_process(mob/living/M)
+	return
+
+/datum/reagent/proc/overdose_start(mob/living/M)
+	M << "<span class='userdanger'>You feel like you took too much of [name]!</span>"
+	return
+
+/datum/reagent/proc/addiction_act_stage1(mob/living/M)
+	if(prob(30))
+		M << "<span class='notice'>You feel like some [name] right about now.</span>"
+	return
+
+/datum/reagent/proc/addiction_act_stage2(mob/living/M)
+	if(prob(30))
+		M << "<span class='notice'>You feel like you need [name]. You just can't get enough.</span>"
+	return
+
+/datum/reagent/proc/addiction_act_stage3(mob/living/M)
+	if(prob(30))
+		M << "<span class='danger'>You have an intense craving for [name].</span>"
+	return
+
+/datum/reagent/proc/addiction_act_stage4(mob/living/M)
+	if(prob(30))
+		M << "<span class='boldannounce'>You're not feeling good at all! You really need some [name].</span>"
+	return
+
+/proc/pretty_string_from_reagent_list(var/list/reagent_list)
+	//Convert reagent list to a printable string for logging etc
+	var/result = "| "
+	for (var/datum/reagent/R in reagent_list)
+		result += "[R.name], [R.volume] | "
+
+	return result
+
+//OLD CHEM
+
+
+/*
 			on_mob_life(var/mob/living/M as mob, var/alien)
 				if(!istype(M, /mob/living))
 					return //Noticed runtime errors from pacid trying to damage ghosts, this should fix. --NEO
@@ -80,95 +131,8 @@ datum
 					M.adjustToxLoss(overdose_dam)
 				holder.remove_reagent(src.id, custom_metabolism) //By default it slowly disappears.
 				return
-
-			on_move(var/mob/M)
-				return
-
-			// Called after add_reagents creates a new reagent.
-			on_new(var/data)
-				return
-
-			// Called when two reagents of the same are mixing.
-			on_merge(var/data)
-				return
-
-			on_update(var/atom/A)
-				return
-
-
-
-		blood
-			data = new/list("donor"=null,"viruses"=null,"species"="Human","blood_DNA"=null,"blood_type"=null,"blood_colour"= "#A10808","resistances"=null,"trace_chem"=null, "antibodies" = null)
-			name = "Blood"
-			id = "blood"
-			reagent_state = LIQUID
-			color = "#C80000" // rgb: 200, 0, 0
-
-			glass_icon_state = "glass_red"
-			glass_name = "glass of tomato juice"
-			glass_desc = "Are you sure this is tomato juice?"
-
-			reaction_mob(var/mob/M, var/method=TOUCH, var/volume)
-				var/datum/reagent/blood/self = src
-				src = null
-				if(self.data && self.data["viruses"])
-					for(var/datum/disease/D in self.data["viruses"])
-						//var/datum/disease/virus = new D.type(0, D, 1)
-						// We don't spread.
-						if(D.spread_type == SPECIAL || D.spread_type == NON_CONTAGIOUS) continue
-
-						if(method == TOUCH)
-							M.contract_disease(D)
-						else //injected
-							M.contract_disease(D, 1, 0)
-				if(self.data && self.data["virus2"] && istype(M, /mob/living/carbon))//infecting...
-					var/list/vlist = self.data["virus2"]
-					if (vlist.len)
-						for (var/ID in vlist)
-							var/datum/disease2/disease/V = vlist[ID]
-
-							if(method == TOUCH)
-								infect_virus2(M,V.getcopy())
-							else
-								infect_virus2(M,V.getcopy(),1) //injected, force infection!
-				if(self.data && self.data["antibodies"] && istype(M, /mob/living/carbon))//... and curing
-					var/mob/living/carbon/C = M
-					C.antibodies |= self.data["antibodies"]
-
-			on_merge(var/data)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
-				return ..()
-
-			on_update(var/atom/A)
-				if(data["blood_colour"])
-					color = data["blood_colour"]
-				return ..()
-
-			reaction_turf(var/turf/simulated/T, var/volume)//splash the blood all over the place
-				if(!istype(T)) return
-				var/datum/reagent/blood/self = src
-				src = null
-				if(!(volume >= 3)) return
-
-				if(!self.data["donor"] || istype(self.data["donor"], /mob/living/carbon/human))
-					blood_splatter(T,self,1)
-				else if(istype(self.data["donor"], /mob/living/carbon/monkey))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
-					if(B) B.blood_DNA["Non-Human DNA"] = "A+"
-				else if(istype(self.data["donor"], /mob/living/carbon/alien))
-					var/obj/effect/decal/cleanable/blood/B = blood_splatter(T,self,1)
-					if(B) B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
-				return
-
-/* Must check the transfering of reagents and their data first. They all can point to one disease datum.
-
-			Destroy()
-				if(src.data["virus"])
-					var/datum/disease/D = src.data["virus"]
-					D.cure(0)
-				..()
 */
+/*
 		vaccine
 			//data must contain virus type
 			name = "Vaccine"
@@ -314,8 +278,8 @@ datum
 						for(var/mob/O in viewers(M, null))
 							O.show_message(text("\blue []'s eyes blink and become clearer.", M), 1) // So observers know it worked.
 				holder.remove_reagent(src.id, 10 * REAGENTS_METABOLISM) //high metabolism to prevent extended uncult rolls.
-				return
-
+				return */
+/*
 		lube
 			name = "Space Lube"
 			id = "lube"
@@ -406,7 +370,8 @@ datum
 					qdel(M)
 				..()
 				return
-
+*/
+/*
 		inaprovaline
 			name = "Inaprovaline"
 			id = "inaprovaline"
@@ -427,25 +392,8 @@ datum
 
 				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
 				return
-
-		space_drugs
-			name = "Space drugs"
-			id = "space_drugs"
-			description = "An illegal chemical compound used as drug."
-			reagent_state = LIQUID
-			color = "#60A584" // rgb: 96, 165, 132
-			overdose = REAGENTS_OVERDOSE
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.druggy = max(M.druggy, 15)
-				if(isturf(M.loc) && !istype(M.loc, /turf/space))
-					if(M.canmove && !M.restrained())
-						if(prob(10)) step(M, pick(cardinal))
-				if(prob(7)) M.emote(pick("twitch","drool","moan","giggle"))
-				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
-				return
-
+*/
+/*
 		serotrotium
 			name = "Serotrotium"
 			id = "serotrotium"
@@ -459,7 +407,7 @@ datum
 					if(prob(7)) M.emote(pick("twitch","drool","moan","gasp"))
 					holder.remove_reagent(src.id, 0.25 * REAGENTS_METABOLISM)
 				return
-
+*/
 /*		silicate
 			name = "Silicate"
 			id = "silicate"
@@ -495,7 +443,7 @@ datum
 							O:silicateIcon = I
 
 				return*/
-
+/*
 		oxygen
 			name = "Oxygen"
 			id = "oxygen"
@@ -662,24 +610,6 @@ datum
 				if(prob(5)) M.emote(pick("twitch","drool","moan"))
 				..()
 				return
-
-		sugar
-			name = "Sugar"
-			id = "sugar"
-			description = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
-			reagent_state = SOLID
-			color = "#FFFFFF" // rgb: 255, 255, 255
-
-			glass_icon_state = "iceglass"
-			glass_name = "glass of sugar"
-			glass_desc = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += 1*REM
-				..()
-				return
-
-
 		glycerol
 			name = "Glycerol"
 			id = "glycerol"
@@ -738,7 +668,8 @@ datum
 							new /obj/effect/decal/cleanable/greenglow(T)
 						return
 
-
+*/
+/*
 		ryetalyn
 			name = "Ryetalyn"
 			id = "ryetalyn"
@@ -834,22 +765,9 @@ datum
 				..()
 				return
 
+*/
 
-		virus_food
-			name = "Virus Food"
-			id = "virusfood"
-			description = "A mixture of water, milk, and oxygen. Virus cells can use this mixture to reproduce."
-			reagent_state = LIQUID
-			nutriment_factor = 2 * REAGENTS_METABOLISM
-			color = "#899613" // rgb: 137, 150, 19
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.nutrition += nutriment_factor*REM
-				..()
-				return
-
-		sterilizine
+/*		sterilizine
 			name = "Sterilizine"
 			id = "sterilizine"
 			description = "Sterilizes wounds in preparation for surgery."
@@ -867,7 +785,7 @@ datum
 			reaction_turf(var/turf/T, var/volume)
 				T.germ_level -= min(volume*20, T.germ_level)
 
-	/*		reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
+			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
 				src = null
 				if (method==TOUCH)
 					if(istype(M, /mob/living/carbon/human))
@@ -883,7 +801,7 @@ datum
 					..()
 					return
 	*/
-		iron
+/*		iron
 			name = "Iron"
 			id = "iron"
 			description = "Pure iron is a metal."
@@ -1029,7 +947,8 @@ datum
 							H.clean_blood(1)
 							return
 					M.clean_blood()
-
+*/
+/*
 		leporazine
 			name = "Leporazine"
 			id = "leporazine"
@@ -1047,8 +966,8 @@ datum
 					M.bodytemperature = min(310, M.bodytemperature + (40 * TEMPERATURE_DAMAGE_COEFFICIENT))
 				..()
 				return
-
-		cryptobiolin
+*/
+/*		cryptobiolin
 			name = "Cryptobiolin"
 			id = "cryptobiolin"
 			description = "Cryptobiolin causes confusion and dizzyness."
@@ -1064,8 +983,8 @@ datum
 				holder.remove_reagent(src.id, 0.5 * REAGENTS_METABOLISM)
 				..()
 				return
-
-
+*/
+/*
 		kelotane
 			name = "Kelotane"
 			id = "kelotane"
@@ -1168,9 +1087,9 @@ datum
 				..()
 				return
 
-		anti_toxin
+		antitoxin
 			name = "Dylovene"
-			id = "anti_toxin"
+			id = "antitoxin"
 			description = "Dylovene is a broad-spectrum antitoxin."
 			reagent_state = LIQUID
 			color = "#00A000" // rgb: 200, 165, 220
@@ -1471,7 +1390,7 @@ datum
 					if(35 to INFINITY)
 						M.adjustToxLoss(1)
 						M.make_dizzy(5)
-						M.make_jittery(5)
+						M.Jitter(5)
 
 				..()
 				return
@@ -1489,10 +1408,11 @@ datum
 			on_mob_life(var/mob/living/M as mob)
 				..()
 				return
+*/
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/*
 		nanites
 			name = "Nanomachines"
 			id = "nanites"
@@ -1531,13 +1451,6 @@ datum
 			reagent_state = SOLID
 			color = "#664B63" // rgb: 102, 75, 99
 
-		nicotine
-			name = "Nicotine"
-			id = "nicotine"
-			description = "A highly addictive stimulant extracted from the tobacco plant."
-			reagent_state = LIQUID
-			color = "#181818" // rgb: 24, 24, 24
-
 		ammonia
 			name = "Ammonia"
 			id = "ammonia"
@@ -1572,19 +1485,19 @@ datum
 				M.drowsyness = 0
 				M.stuttering = 0
 				M.confused = 0
-				M.reagents.remove_all_type(/datum/reagent/ethanol, 1*REM, 0, 1)
+				M.reagents.remove_all_type(/datum/reagent/consumable/ethanol, 1*REM, 0, 1)
 				..()
 				return
-
+*/
 //////////////////////////Poison stuff///////////////////////
-
+/*
 		toxin
 			name = "Toxin"
 			id = "toxin"
 			description = "A toxic chemical."
 			reagent_state = LIQUID
 			color = "#CF3600" // rgb: 207, 54, 0
-			var/toxpwr = 0.7 // Toxins are really weak, but without being treated, last very long.
+		//	var/toxpwr = 0.7 // Toxins are really weak, but without being treated, last very long.
 			custom_metabolism = 0.1
 
 			on_mob_life(var/mob/living/M as mob,var/alien)
@@ -1628,70 +1541,8 @@ datum
 				..()
 				return
 
-		toxin/plasma
-			name = "Plasma"
-			id = "plasma"
-			description = "Plasma in its liquid form."
-			reagent_state = LIQUID
-			color = "#9D14DB"
-			toxpwr = 3
 
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				holder.remove_reagent("inaprovaline", 2*REM)
-				..()
-				return
-			reaction_obj(var/obj/O, var/volume)
-				src = null
-				/*if(istype(O,/obj/item/weapon/reagent_containers/food/snacks/egg/slime))
-					var/obj/item/weapon/reagent_containers/food/snacks/egg/slime/egg = O
-					if (egg.grown)
-						egg.Hatch()*/
-				if((!O) || (!volume))	return 0
-				var/turf/the_turf = get_turf(O)
-				the_turf.assume_gas("volatile_fuel", volume, T20C)
-			reaction_turf(var/turf/T, var/volume)
-				src = null
-				T.assume_gas("volatile_fuel", volume, T20C)
-				return
-
-		toxin/lexorin
-			name = "Lexorin"
-			id = "lexorin"
-			description = "Lexorin temporarily stops respiration. Causes tissue damage."
-			reagent_state = LIQUID
-			color = "#C8A5DC" // rgb: 200, 165, 220
-			toxpwr = 0
-			overdose = REAGENTS_OVERDOSE
-
-			on_mob_life(var/mob/living/M as mob)
-				if(M.stat == 2.0)
-					return
-				if(!M) M = holder.my_atom
-				if(prob(33))
-					M.take_organ_damage(1*REM, 0)
-				M.adjustOxyLoss(3)
-				if(prob(20)) M.emote("gasp")
-				..()
-				return
-
-		toxin/slimejelly
-			name = "Slime Jelly"
-			id = "slimejelly"
-			description = "A gooey semi-liquid produced from one of the deadliest lifeforms in existence. SO REAL."
-			reagent_state = LIQUID
-			color = "#801E28" // rgb: 128, 30, 40
-			toxpwr = 0
-
-			on_mob_life(var/mob/living/M as mob)
-				if(prob(10))
-					M << "\red Your insides are burning!"
-					M.adjustToxLoss(rand(20,60)*REM)
-				else if(prob(40))
-					M.heal_organ_damage(5*REM,0)
-				..()
-				return
-
+/*
 		toxin/cyanide //Fast and Lethal
 			name = "Cyanide"
 			id = "cyanide"
@@ -1707,70 +1558,9 @@ datum
 				M.sleeping += 1
 				..()
 				return
-
-		toxin/minttoxin
-			name = "Mint Toxin"
-			id = "minttoxin"
-			description = "Useful for dealing with undesirable customers."
-			reagent_state = LIQUID
-			color = "#CF3600" // rgb: 207, 54, 0
-			toxpwr = 0
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if (FAT in M.mutations)
-					M.gib()
-				..()
-				return
-
-		toxin/carpotoxin
-			name = "Carpotoxin"
-			id = "carpotoxin"
-			description = "A deadly neurotoxin produced by the dreaded space carp."
-			reagent_state = LIQUID
-			color = "#003333" // rgb: 0, 51, 51
-			toxpwr = 2
-
-		toxin/zombiepowder
-			name = "Zombie Powder"
-			id = "zombiepowder"
-			description = "A strong neurotoxin that puts the subject into a death-like state."
-			reagent_state = SOLID
-			color = "#669900" // rgb: 102, 153, 0
-			toxpwr = 0.5
-
-			on_mob_life(var/mob/living/carbon/M as mob)
-				if(!M) M = holder.my_atom
-				M.status_flags |= FAKEDEATH
-				M.adjustOxyLoss(0.5*REM)
-				M.Weaken(10)
-				M.silent = max(M.silent, 10)
-				M.tod = worldtime2text()
-				..()
-				return
-
-			Destroy()
-				if(holder && holder.my_atom && ismob(holder.my_atom))
-					var/mob/M = holder.my_atom
-					M.status_flags &= ~FAKEDEATH
-				..()
-
-		toxin/mindbreaker
-			name = "Mindbreaker Toxin"
-			id = "mindbreaker"
-			description = "A powerful hallucinogen, it can cause fatal effects in users."
-			reagent_state = LIQUID
-			color = "#B31008" // rgb: 139, 166, 233
-			toxpwr = 0
-			custom_metabolism = 0.05
-			overdose = REAGENTS_OVERDOSE
-
-			on_mob_life(var/mob/living/M)
-				if(!M) M = holder.my_atom
-				M.hallucination += 10
-				..()
-				return
-
+*/
+*/
+/*
 		//Reagents used for plant fertilizers.
 		toxin/fertilizer
 			name = "fertilizer"
@@ -1844,7 +1634,8 @@ datum
 						if(H.dna)
 							if(H.species.flags & IS_PLANT) //plantmen take a LOT of damage
 								H.adjustToxLoss(50)
-
+*/
+/*
 		toxin/stoxin
 			name = "Soporific"
 			id = "stoxin"
@@ -1873,34 +1664,8 @@ datum
 				data++
 				..()
 				return
-
-		toxin/chloralhydrate
-			name = "Chloral Hydrate"
-			id = "chloralhydrate"
-			description = "A powerful sedative."
-			reagent_state = SOLID
-			color = "#000067" // rgb: 0, 0, 103
-			toxpwr = 1
-			custom_metabolism = 0.1 //Default 0.2
-			overdose = 15
-			overdose_dam = 5
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				if(!data) data = 1
-				data++
-				switch(data)
-					if(1)
-						M.confused += 2
-						M.drowsyness += 2
-					if(2 to 20)
-						M.Weaken(30)
-						M.eye_blurry = max(M.eye_blurry, 10)
-					if(20 to INFINITY)
-						M.sleeping = max(M.sleeping, 30)
-				..()
-				return
-
+*/
+/*
 		toxin/potassium_chloride
 			name = "Potassium Chloride"
 			id = "potassium_chloride"
@@ -2064,11 +1829,11 @@ datum
 			color = "#8E18A9" // rgb: 142, 24, 169
 			toxpwr = 2
 			meltprob = 30
-
+*/
 /////////////////////////Food Reagents////////////////////////////
 // Part of the food code. Nutriment is used instead of the old "heal_amt" code. Also is where all the food
 // 	condiments, additives, and such go.
-		nutriment
+/*		nutriment
 			name = "Nutriment"
 			id = "nutriment"
 			description = "All the vitamins, minerals, and carbohydrates the body needs in pure form."
@@ -2078,8 +1843,16 @@ datum
 
 			on_mob_life(var/mob/living/M as mob)
 				if(!M) M = holder.my_atom
-				if(prob(50)) M.heal_organ_damage(1,0)
-				M.nutrition += nutriment_factor	// For hunger and fatness
+		//	if(!(M.mind in ticker.mode.vampires)) #TOREMOVE - we don't have them yet
+				if(ishuman(M))
+					var/mob/living/carbon/human/H = M
+					if(H.species && H.species.dietflags)	//Make sure the species has it's dietflag set, and that it is not a herbivore
+						H.nutrition += nutriment_factor	// For hunger and fatness
+						if(prob(50)) M.heal_organ_damage(1,0)
+				if(istype(M,/mob/living/simple_animal))		//Any nutrients can heal simple animals
+					if(prob(50)) M.heal_organ_damage(1,0)
+				..()
+				return
 /*
 				// If overeaten - vomit and fall down
 				// Makes you feel bad but removes reagents and some effect
@@ -2093,30 +1866,9 @@ datum
 					M.adjustToxLoss(rand(-15, -5)))
 					M.updatehealth()
 */
-				..()
-				return
+*/
 
-		protein			// Meat-based protein, digestable by carnivores and omnivores, worthless to herbivores
-			name = "Protein"
-			id = "protein"
-			description = "Various essential proteins and fats commonly found in animal flesh and blood."
-			reagent_state = SOLID
-			nutriment_factor = 15 * REAGENTS_METABOLISM
-			color = "#664330" // rgb: 102, 67, 48
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-		//	if(!(M.mind in ticker.mode.vampires)) #TOREMOVE - we don't have them yet
-				if(ishuman(M))
-					var/mob/living/carbon/human/H = M
-					if(H.species && H.species.dietflags && !(H.species.dietflags & DIET_HERB))	//Make sure the species has it's dietflag set, and that it is not a herbivore
-						H.nutrition += nutriment_factor	// For hunger and fatness
-						if(prob(50)) M.heal_organ_damage(1,0)
-				if(istype(M,/mob/living/simple_animal))		//Any nutrients can heal simple animals
-					if(prob(50)) M.heal_organ_damage(1,0)
-				..()
-				return
-
+/*
 		lipozine
 			name = "Lipozine" // The anti-nutriment.
 			id = "lipozine"
@@ -2134,23 +1886,8 @@ datum
 					M.nutrition = 0
 				..()
 				return
-
-		soysauce
-			name = "Soysauce"
-			id = "soysauce"
-			description = "A salty sauce made from the soy plant."
-			reagent_state = LIQUID
-			nutriment_factor = 2 * REAGENTS_METABOLISM
-			color = "#792300" // rgb: 121, 35, 0
-
-		ketchup
-			name = "Ketchup"
-			id = "ketchup"
-			description = "Ketchup, catsup, whatever. It's tomato paste."
-			reagent_state = LIQUID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
-			color = "#731008" // rgb: 115, 16, 8
-
+*/
+/*
 		capsaicin
 			name = "Capsaicin Oil"
 			id = "capsaicin"
@@ -2185,69 +1922,6 @@ datum
 				..()
 				return
 
-		condensedcapsaicin
-			name = "Condensed Capsaicin"
-			id = "condensedcapsaicin"
-			description = "A chemical agent used for self-defense and in police work."
-			reagent_state = LIQUID
-			color = "#B31008" // rgb: 179, 16, 8
-
-			reaction_mob(var/mob/living/M, var/method=TOUCH, var/volume)
-				if(!istype(M, /mob/living))
-					return
-				if(method == TOUCH)
-					if(istype(M, /mob/living/carbon/human))
-						var/mob/living/carbon/human/victim = M
-						var/mouth_covered = 0
-						var/eyes_covered = 0
-						var/obj/item/safe_thing = null
-						if( victim.wear_mask )
-							if ( victim.wear_mask.flags & MASKCOVERSEYES )
-								eyes_covered = 1
-								safe_thing = victim.wear_mask
-							if ( victim.wear_mask.flags & MASKCOVERSMOUTH )
-								mouth_covered = 1
-								safe_thing = victim.wear_mask
-						if( victim.head )
-							if ( victim.head.flags & MASKCOVERSEYES )
-								eyes_covered = 1
-								safe_thing = victim.head
-							if ( victim.head.flags & MASKCOVERSMOUTH )
-								mouth_covered = 1
-								safe_thing = victim.head
-						if(victim.glasses)
-							eyes_covered = 1
-							if ( !safe_thing )
-								safe_thing = victim.glasses
-						if ( eyes_covered && mouth_covered )
-							victim << "\red Your [safe_thing] protects you from the pepperspray!"
-							return
-						else if ( eyes_covered )	// Reduced effects if partially protected
-							victim << "\red Your [safe_thing] protect you from most of the pepperspray!"
-							victim.eye_blurry = max(M.eye_blurry, 15)
-							victim.eye_blind = max(M.eye_blind, 5)
-							victim.Stun(5)
-							victim.Weaken(5)
-							//victim.Paralyse(10)
-							//victim.drop_item()
-							return
-						else if ( mouth_covered ) // Mouth cover is better than eye cover
-							victim << "\red Your [safe_thing] protects your face from the pepperspray!"
-							if (!(victim.species && (victim.species.flags & NO_PAIN)))
-								victim.emote("scream")
-							victim.eye_blurry = max(M.eye_blurry, 5)
-							return
-						else // Oh dear :D
-							if (!(victim.species && (victim.species.flags & NO_PAIN)))
-								victim.emote("scream")
-							victim << "\red You're sprayed directly in the eyes with pepperspray!"
-							victim.eye_blurry = max(M.eye_blurry, 25)
-							victim.eye_blind = max(M.eye_blind, 10)
-							victim.Stun(5)
-							victim.Weaken(5)
-							//victim.Paralyse(10)
-							//victim.drop_item()
-
 			on_mob_life(var/mob/living/M as mob)
 				if(!M)
 					M = holder.my_atom
@@ -2272,77 +1946,6 @@ datum
 				..()
 				return
 
-		frostoil
-			name = "Frost Oil"
-			id = "frostoil"
-			description = "A special oil that noticably chills the body. Extracted from Ice Peppers."
-			reagent_state = LIQUID
-			color = "#B31008" // rgb: 139, 166, 233
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M)
-					M = holder.my_atom
-				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
-				if(prob(1))
-					M.emote("shiver")
-				if(istype(M, /mob/living/carbon/slime))
-					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
-				holder.remove_reagent("capsaicin", 5)
-				holder.remove_reagent(src.id, FOOD_METABOLISM)
-				..()
-				return
-
-			reaction_turf(var/turf/simulated/T, var/volume)
-				for(var/mob/living/carbon/slime/M in T)
-					M.adjustToxLoss(rand(15,30))
-
-		sodiumchloride
-			name = "Table Salt"
-			id = "sodiumchloride"
-			description = "A salt made of sodium chloride. Commonly used to season food."
-			reagent_state = SOLID
-			color = "#FFFFFF" // rgb: 255,255,255
-			overdose = REAGENTS_OVERDOSE
-
-		blackpepper
-			name = "Black Pepper"
-			id = "blackpepper"
-			description = "A powder ground from peppercorns. *AAAACHOOO*"
-			reagent_state = SOLID
-			// no color (ie, black)
-
-		coco
-			name = "Coco Powder"
-			id = "coco"
-			description = "A fatty, bitter paste made from coco beans."
-			reagent_state = SOLID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
-			color = "#302000" // rgb: 48, 32, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				..()
-				return
-
-		hot_coco // there's also drink/hot_coco for whatever reason
-			name = "Hot Chocolate"
-			id = "hot_coco"
-			description = "Made with love! And cocoa beans."
-			reagent_state = LIQUID
-			nutriment_factor = 2 * REAGENTS_METABOLISM
-			color = "#403010" // rgb: 64, 48, 16
-
-			glass_icon_state  = "chocolateglass"
-			glass_name = "glass of hot chocolate"
-			glass_desc = "Made with love! And cocoa beans."
-
-			on_mob_life(var/mob/living/M as mob)
-				if (M.bodytemperature < 310)//310 is the normal bodytemp. 310.055
-					M.bodytemperature = min(310, M.bodytemperature + (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
-				M.nutrition += nutriment_factor
-				..()
-				return
-
 		psilocybin
 			name = "Psilocybin"
 			id = "psilocybin"
@@ -2361,13 +1964,13 @@ datum
 						if(prob(10)) M.emote(pick("twitch","giggle"))
 					if(5 to 10)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(10)
+						M.Jitter(10)
 						M.make_dizzy(10)
 						M.druggy = max(M.druggy, 35)
 						if(prob(20)) M.emote(pick("twitch","giggle"))
 					if (10 to INFINITY)
 						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(20)
+						M.Jitter(20)
 						M.make_dizzy(20)
 						M.druggy = max(M.druggy, 40)
 						if(prob(30)) M.emote(pick("twitch","giggle"))
@@ -2375,25 +1978,7 @@ datum
 				data++
 				..()
 				return
-
-		sprinkles
-			name = "Sprinkles"
-			id = "sprinkles"
-			description = "Multi-colored little bits of sugar, commonly found on donuts. Loved by cops."
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#FF00FF" // rgb: 255, 0, 255
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				/*if(istype(M, /mob/living/carbon/human) && M.job in list("Security Officer", "Head of Security", "Detective", "Warden"))
-					if(!M) M = holder.my_atom
-					M.heal_organ_damage(1,1)
-					M.nutrition += nutriment_factor
-					..()
-					return
-				*/
-				..()
-
+*/
 /*	//removed because of meta bullshit. this is why we can't have nice things.
 		syndicream
 			name = "Cream filling"
@@ -2413,6 +1998,7 @@ datum
 						return
 				..()
 */
+/*
 		cornoil
 			name = "Corn Oil"
 			id = "cornoil"
@@ -2451,57 +2037,7 @@ datum
 					lowertemp.react()
 					T.assume_air(lowertemp)
 					qdel(hotspot)
-
-		enzyme
-			name = "Universal Enzyme"
-			id = "enzyme"
-			description = "A universal enzyme used in the preperation of certain chemicals and foods."
-			reagent_state = LIQUID
-			color = "#365E30" // rgb: 54, 94, 48
-			overdose = REAGENTS_OVERDOSE
-
-		dry_ramen
-			name = "Dry Ramen"
-			id = "dry_ramen"
-			description = "Space age food, since August 25, 1958. Contains dried noodles, vegetables, and chemicals that boil in contact with water."
-			reagent_state = SOLID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#302000" // rgb: 48, 32, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				..()
-				return
-
-		hot_ramen
-			name = "Hot Ramen"
-			id = "hot_ramen"
-			description = "The noodles are boiled, the flavors are artificial, just like being back in school."
-			reagent_state = LIQUID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
-			color = "#302000" // rgb: 48, 32, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				if (M.bodytemperature < 310)//310 is the normal bodytemp. 310.055
-					M.bodytemperature = min(310, M.bodytemperature + (10 * TEMPERATURE_DAMAGE_COEFFICIENT))
-				..()
-				return
-
-		hell_ramen
-			name = "Hell Ramen"
-			id = "hell_ramen"
-			description = "The noodles are boiled, the flavors are artificial, just like being back in school."
-			reagent_state = LIQUID
-			nutriment_factor = 5 * REAGENTS_METABOLISM
-			color = "#302000" // rgb: 48, 32, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				M.bodytemperature += 10 * TEMPERATURE_DAMAGE_COEFFICIENT
-				..()
-				return
-
+*/
 /* We're back to flour bags
 		flour
 			name = "flour"
@@ -2522,742 +2058,6 @@ datum
 					new /obj/effect/decal/cleanable/flour(T)
 */
 
-		rice
-			name = "Rice"
-			id = "rice"
-			description = "Enjoy the great taste of nothing."
-			reagent_state = SOLID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#FFFFFF" // rgb: 0, 0, 0
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				..()
-				return
-
-		cherryjelly
-			name = "Cherry Jelly"
-			id = "cherryjelly"
-			description = "Totally the best. Only to be spread on foods with excellent lateral symmetry."
-			reagent_state = LIQUID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#801E28" // rgb: 128, 30, 40
-
-			on_mob_life(var/mob/living/M as mob)
-				M.nutrition += nutriment_factor
-				..()
-				return
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////// DRINKS BELOW, Beer is up there though, along with cola. Cap'n Pete's Cuban Spiced Rum////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		drink
-			name = "Drink"
-			id = "drink"
-			description = "Uh, some kind of drink."
-			reagent_state = LIQUID
-			nutriment_factor = 1 * REAGENTS_METABOLISM
-			color = "#E78108" // rgb: 231, 129, 8
-			var/adj_dizzy = 0
-			var/adj_drowsy = 0
-			var/adj_sleepy = 0
-			var/adj_temp = 0
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.nutrition += nutriment_factor
-				holder.remove_reagent(src.id, FOOD_METABOLISM)
-				// Drinks should be used up faster than other reagents.
-				holder.remove_reagent(src.id, FOOD_METABOLISM)
-				if (adj_dizzy) M.dizziness = max(0,M.dizziness + adj_dizzy)
-				if (adj_drowsy)	M.drowsyness = max(0,M.drowsyness + adj_drowsy)
-				if (adj_sleepy) M.sleeping = max(0,M.sleeping + adj_sleepy)
-				if (adj_temp)
-					if (M.bodytemperature < 310)//310 is the normal bodytemp. 310.055
-						M.bodytemperature = min(310, M.bodytemperature + (25 * TEMPERATURE_DAMAGE_COEFFICIENT))
-
-				..()
-				return
-
-		drink/orangejuice
-			name = "Orange juice"
-			id = "orangejuice"
-			description = "Both delicious AND rich in Vitamin C, what more do you need?"
-			color = "#E78108" // rgb: 231, 129, 8
-
-			glass_icon_state = "glass_orange"
-			glass_name = "glass of orange juice"
-			glass_desc = "Vitamins! Yay!"
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				if(M.getOxyLoss() && prob(30)) M.adjustOxyLoss(-1)
-				return
-
-		drink/tomatojuice
-			name = "Tomato Juice"
-			id = "tomatojuice"
-			description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
-			color = "#731008" // rgb: 115, 16, 8
-
-			glass_icon_state = "glass_red"
-			glass_name = "glass of tomato juice"
-			glass_desc = "Are you sure this is tomato juice?"
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				if(M.getFireLoss() && prob(20)) M.heal_organ_damage(0,1)
-				return
-
-		drink/limejuice
-			name = "Lime Juice"
-			id = "limejuice"
-			description = "The sweet-sour juice of limes."
-			color = "#365E30" // rgb: 54, 94, 48
-
-			glass_icon_state = "glass_green"
-			glass_name = "glass of lime juice"
-			glass_desc = "A glass of sweet-sour lime juice"
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				if(M.getToxLoss() && prob(20)) M.adjustToxLoss(-1*REM)
-				return
-
-		drink/carrotjuice
-			name = "Carrot juice"
-			id = "carrotjuice"
-			description = "It is just like a carrot but without crunching."
-			color = "#973800" // rgb: 151, 56, 0
-
-			glass_icon_state = "carrotjuice"
-			glass_name = "glass of carrot juice"
-			glass_desc = "It is just like a carrot but without crunching."
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.eye_blurry = max(M.eye_blurry-1 , 0)
-				M.eye_blind = max(M.eye_blind-1 , 0)
-				if(!data) data = 1
-				switch(data)
-					if(1 to 20)
-						//nothing
-					if(21 to INFINITY)
-						if (prob(data-10))
-							M.disabilities &= ~NEARSIGHTED
-				data++
-				return
-
-		drink/berryjuice
-			name = "Berry Juice"
-			id = "berryjuice"
-			description = "A delicious blend of several different kinds of berries."
-			color = "#990066" // rgb: 153, 0, 102
-
-			glass_icon_state = "berryjuice"
-			glass_name = "glass of berry juice"
-			glass_desc = "Berry juice. Or maybe it's jam. Who cares?"
-
-		drink/grapejuice
-			name = "Grape Juice"
-			id = "grapejuice"
-			description = "It's grrrrrape!"
-			color = "#863333" // rgb: 134, 51, 51
-
-			glass_icon_state = "grapejuice"
-			glass_name = "glass of grape juice"
-			glass_desc = "It's grrrrrape!"
-
-		drink/grapesoda
-			name = "Grape Soda"
-			id = "grapesoda"
-			description = "Grapes made into a fine drank."
-			color = "#421C52" // rgb: 98, 57, 53
-			adj_drowsy 	= 	-3
-
-			glass_icon_state = "gsodaglass"
-			glass_name = "glass of grape soda"
-			glass_desc = "Looks like a delicious drink!"
-
-		drink/poisonberryjuice
-			name = "Poison Berry Juice"
-			id = "poisonberryjuice"
-			description = "A tasty juice blended from various kinds of very deadly and toxic berries."
-			color = "#863353" // rgb: 134, 51, 83
-
-			glass_icon_state = "poisonberryjuice"
-			glass_name = "glass of poison berry juice"
-			glass_desc = "A glass of deadly juice."
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.adjustToxLoss(1)
-				return
-
-		drink/watermelonjuice
-			name = "Watermelon Juice"
-			id = "watermelonjuice"
-			description = "Delicious juice made from watermelon."
-			color = "#863333" // rgb: 134, 51, 51
-
-			glass_icon_state = "glass_red"
-			glass_name = "glass of watermelon juice"
-			glass_desc = "Delicious juice made from watermelon."
-
-		drink/lemonjuice
-			name = "Lemon Juice"
-			id = "lemonjuice"
-			description = "This juice is VERY sour."
-			color = "#863333" // rgb: 175, 175, 0
-
-			glass_icon_state = "lemonjuice"
-			glass_name = "glass of lemon juice"
-			glass_desc = "Sour..."
-
-		drink/banana
-			name = "Banana Juice"
-			id = "banana"
-			description = "The raw essence of a banana."
-			color = "#863333" // rgb: 175, 175, 0
-
-			glass_icon_state = "banana"
-			glass_name = "glass of banana juice"
-			glass_desc = "The raw essence of a banana. HONK!"
-
-		drink/nothing
-			name = "Nothing"
-			id = "nothing"
-			description = "Absolutely nothing."
-
-			glass_icon_state = "nothing"
-			glass_name = "glass of nothing"
-			glass_desc = "Absolutely nothing."
-
-		drink/potato_juice
-			name = "Potato Juice"
-			id = "potato"
-			description = "Juice of the potato. Bleh."
-			nutriment_factor = 2 * FOOD_METABOLISM
-			color = "#302000" // rgb: 48, 32, 0
-
-			glass_icon_state = "glass_brown"
-			glass_name = "glass of potato juice"
-			glass_desc = "Juice from a potato. Bleh."
-
-		drink/milk
-			name = "Milk"
-			id = "milk"
-			description = "An opaque white liquid produced by the mammary glands of mammals."
-			color = "#DFDFDF" // rgb: 223, 223, 223
-
-			glass_icon_state = "glass_white"
-			glass_name = "glass of milk"
-			glass_desc = "White and nutritious goodness!"
-
-			on_mob_life(var/mob/living/M as mob)
-				if(M.getBruteLoss() && prob(20)) M.heal_organ_damage(1,0)
-				holder.remove_reagent("capsaicin", 10*REAGENTS_METABOLISM)
-				..()
-				return
-
-		drink/milk/soymilk
-			name = "Soy Milk"
-			id = "soymilk"
-			description = "An opaque white liquid made from soybeans."
-			color = "#DFDFC7" // rgb: 223, 223, 199
-
-			glass_icon_state = "glass_white"
-			glass_name = "glass of soy milk"
-			glass_desc = "White and nutritious soy goodness!"
-
-		drink/milk/cream
-			name = "Cream"
-			id = "cream"
-			description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
-			color = "#DFD7AF" // rgb: 223, 215, 175
-
-			glass_icon_state = "glass_white"
-			glass_name = "glass of cream"
-			glass_desc = "Ewwww..."
-
-		drink/grenadine
-			name = "Grenadine Syrup"
-			id = "grenadine"
-			description = "Made in the modern day with proper pomegranate substitute. Who uses real fruit, anyways?"
-			color = "#FF004F" // rgb: 255, 0, 79
-
-			glass_icon_state = "grenadineglass"
-			glass_name = "glass of grenadine syrup"
-			glass_desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
-			glass_center_of_mass = list("x"=17, "y"=6)
-
-		drink/hot_coco
-			name = "Hot Chocolate"
-			id = "hot_coco"
-			description = "Made with love! And cocoa beans."
-			nutriment_factor = 2 * FOOD_METABOLISM
-			color = "#403010" // rgb: 64, 48, 16
-			adj_temp = 5
-
-			glass_icon_state = "chocolateglass"
-			glass_name = "glass of hot chocolate"
-			glass_desc = "Made with love! And cocoa beans."
-
-		drink/coffee
-			name = "Coffee"
-			id = "coffee"
-			description = "Coffee is a brewed drink prepared from roasted seeds, commonly called coffee beans, of the coffee plant."
-			color = "#482000" // rgb: 72, 32, 0
-			adj_dizzy = -5
-			adj_drowsy = -3
-			adj_sleepy = -2
-			adj_temp = 25
-
-			glass_icon_state = "hot_coffee"
-			glass_name = "cup of coffee"
-			glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.make_jittery(5)
-				if(adj_temp > 0)
-					holder.remove_reagent("frostoil", 10*REAGENTS_METABOLISM)
-
-				holder.remove_reagent(src.id, 0.1)
-
-		drink/coffee/icecoffee
-			name = "Iced Coffee"
-			id = "icecoffee"
-			description = "Coffee and ice, refreshing and cool."
-			color = "#102838" // rgb: 16, 40, 56
-			adj_temp = -5
-
-			glass_icon_state = "icedcoffeeglass"
-			glass_name = "glass of iced coffee"
-			glass_desc = "A drink to perk you up and refresh you!"
-
-		drink/coffee/soy_latte
-			name = "Soy Latte"
-			id = "soy_latte"
-			description = "A nice and tasty beverage while you are reading your hippie books."
-			color = "#664300" // rgb: 102, 67, 0
-			adj_sleepy = 0
-			adj_temp = 5
-
-			glass_icon_state = "soy_latte"
-			glass_name = "glass of soy latte"
-			glass_desc = "A nice and refrshing beverage while you are reading."
-			glass_center_of_mass = list("x"=15, "y"=9)
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.sleeping = 0
-				if(M.getBruteLoss() && prob(20)) M.heal_organ_damage(1,0)
-				return
-
-		drink/coffee/cafe_latte
-			name = "Cafe Latte"
-			id = "cafe_latte"
-			description = "A nice, strong and tasty beverage while you are reading."
-			color = "#664300" // rgb: 102, 67, 0
-			adj_sleepy = 0
-			adj_temp = 5
-
-			glass_icon_state = "cafe_latte"
-			glass_name = "glass of cafe latte"
-			glass_desc = "A nice, strong and refreshing beverage while you are reading."
-			glass_center_of_mass = list("x"=15, "y"=9)
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.sleeping = 0
-				if(M.getBruteLoss() && prob(20)) M.heal_organ_damage(1,0)
-				return
-
-		drink/tea
-			name = "Tea"
-			id = "tea"
-			description = "Tasty black tea, it has antioxidants, it's good for you!"
-			color = "#101000" // rgb: 16, 16, 0
-			adj_dizzy = -2
-			adj_drowsy = -1
-			adj_sleepy = -3
-			adj_temp = 20
-
-			glass_icon_state = "bigteacup"
-			glass_name = "cup of tea"
-			glass_desc = "Tasty black tea, it has antioxidants, it's good for you!"
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				if(M.getToxLoss() && prob(20))
-					M.adjustToxLoss(-1)
-				return
-
-		drink/tea/icetea
-			name = "Iced Tea"
-			id = "icetea"
-			description = "No relation to a certain rap artist/ actor."
-			color = "#104038" // rgb: 16, 64, 56
-			adj_temp = -5
-
-			glass_icon_state = "icedteaglass"
-			glass_name = "glass of iced tea"
-			glass_desc = "No relation to a certain rap artist/ actor."
-			glass_center_of_mass = list("x"=15, "y"=10)
-
-		drink/cold
-			name = "Cold drink"
-			adj_temp = -5
-
-		drink/cold/tonic
-			name = "Tonic Water"
-			id = "tonic"
-			description = "It tastes strange but at least the quinine keeps the Space Malaria at bay."
-			color = "#664300" // rgb: 102, 67, 0
-			adj_dizzy = -5
-			adj_drowsy = -3
-			adj_sleepy = -2
-
-			glass_icon_state = "glass_clear"
-			glass_name = "glass of tonic water"
-			glass_desc = "Quinine tastes funny, but at least it'll keep that Space Malaria away."
-
-		drink/cold/sodawater
-			name = "Soda Water"
-			id = "sodawater"
-			description = "A can of club soda. Why not make a scotch and soda?"
-			color = "#619494" // rgb: 97, 148, 148
-			adj_dizzy = -5
-			adj_drowsy = -3
-
-			glass_icon_state = "glass_clear"
-			glass_name = "glass of soda water"
-			glass_desc = "Soda water. Why not make a scotch and soda?"
-
-		drink/cold/ice
-			name = "Ice"
-			id = "ice"
-			description = "Frozen water, your dentist wouldn't like you chewing this."
-			reagent_state = SOLID
-			color = "#619494" // rgb: 97, 148, 148
-
-			glass_icon_state = "iceglass"
-			glass_name = "glass of ice"
-			glass_desc = "Generally, you're supposed to put something else in there too..."
-
-		drink/cold/space_cola
-			name = "Space Cola"
-			id = "cola"
-			description = "A refreshing beverage."
-			reagent_state = LIQUID
-			color = "#100800" // rgb: 16, 8, 0
-			adj_drowsy 	= 	-3
-
-			glass_icon_state  = "glass_brown"
-			glass_name = "glass of Space Cola"
-			glass_desc = "A glass of refreshing Space Cola"
-
-		drink/cold/nuka_cola
-			name = "Nuka Cola"
-			id = "nuka_cola"
-			description = "Cola, cola never changes."
-			color = "#100800" // rgb: 16, 8, 0
-			adj_sleepy = -2
-
-			glass_icon_state = "nuka_colaglass"
-			glass_name = "glass of Nuka-Cola"
-			glass_desc = "Don't cry, Don't raise your eye, It's only nuclear wasteland"
-			glass_center_of_mass = list("x"=16, "y"=6)
-
-			on_mob_life(var/mob/living/M as mob)
-				M.make_jittery(20)
-				M.druggy = max(M.druggy, 30)
-				M.dizziness +=5
-				M.drowsyness = 0
-				..()
-				return
-
-		drink/cold/spacemountainwind
-			name = "Mountain Wind"
-			id = "spacemountainwind"
-			description = "Blows right through you like a space wind."
-			color = "#102000" // rgb: 16, 32, 0
-			adj_drowsy = -7
-			adj_sleepy = -1
-
-			glass_icon_state = "Space_mountain_wind_glass"
-			glass_name = "glass of Space Mountain Wind"
-			glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
-
-		drink/cold/dr_gibb
-			name = "Dr. Gibb"
-			id = "dr_gibb"
-			description = "A delicious blend of 42 different flavours"
-			color = "#102000" // rgb: 16, 32, 0
-			adj_drowsy = -6
-
-			glass_icon_state = "dr_gibb_glass"
-			glass_name = "glass of Dr. Gibb"
-			glass_desc = "Dr. Gibb. Not as dangerous as the name might imply."
-
-		drink/cold/space_up
-			name = "Space-Up"
-			id = "space_up"
-			description = "Tastes like a hull breach in your mouth."
-			color = "#202800" // rgb: 32, 40, 0
-			adj_temp = -8
-
-			glass_icon_state = "space-up_glass"
-			glass_name = "glass of Space-up"
-			glass_desc = "Space-up. It helps keep your cool."
-
-		drink/cold/lemon_lime
-			name = "Lemon Lime"
-			description = "A tangy substance made of 0.5% natural citrus!"
-			id = "lemon_lime"
-			color = "#878F00" // rgb: 135, 40, 0
-			adj_temp = -8
-
-			glass_icon_state = "lemonlime"
-			glass_name = "glass of lemon lime soda"
-			glass_desc = "A tangy substance made of 0.5% natural citrus!"
-
-		drink/cold/lemonade
-			name = "Lemonade"
-			description = "Oh the nostalgia..."
-			id = "lemonade"
-			color = "#FFFF00" // rgb: 255, 255, 0
-
-			glass_icon_state = "lemonadeglass"
-			glass_name = "glass of lemonade"
-			glass_desc = "Oh the nostalgia..."
-
-		drink/cold/kiraspecial
-			name = "Kira Special"
-			description = "Long live the guy who everyone had mistaken for a girl. Baka!"
-			id = "kiraspecial"
-			color = "#CCCC99" // rgb: 204, 204, 153
-
-			glass_icon_state = "kiraspecial"
-			glass_name = "glass of Kira Special"
-			glass_desc = "Long live the guy who everyone had mistaken for a girl. Baka!"
-			glass_center_of_mass = list("x"=16, "y"=12)
-
-		drink/cold/brownstar
-			name = "Brown Star"
-			description = "It's not what it sounds like..."
-			id = "brownstar"
-			color = "#9F3400" // rgb: 159, 052, 000
-			adj_temp = - 2
-
-			glass_icon_state = "brownstar"
-			glass_name = "glass of Brown Star"
-			glass_desc = "It's not what it sounds like..."
-
-		drink/cold/milkshake
-			name = "Milkshake"
-			description = "Glorious brainfreezing mixture."
-			id = "milkshake"
-			color = "#AEE5E4" // rgb" 174, 229, 228
-			adj_temp = -9
-
-			glass_icon_state = "milkshake"
-			glass_name = "glass of milkshake"
-			glass_desc = "Glorious brainfreezing mixture."
-			glass_center_of_mass = list("x"=16, "y"=7)
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M)
-					M = holder.my_atom
-				if(prob(1))
-					M.emote("shiver")
-				M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 0)
-				if(istype(M, /mob/living/carbon/slime))
-					M.bodytemperature = max(M.bodytemperature - rand(10,20), 0)
-				holder.remove_reagent("capsaicin", 5)
-				holder.remove_reagent(src.id, FOOD_METABOLISM)
-				..()
-				return
-
-		drink/cold/rewriter
-			name = "Rewriter"
-			description = "The secret of the sanctuary of the Libarian..."
-			id = "rewriter"
-			color = "#485000" // rgb:72, 080, 0
-
-			glass_icon_state = "rewriter"
-			glass_name = "glass of Rewriter"
-			glass_desc = "The secret of the sanctuary of the Libarian..."
-			glass_center_of_mass = list("x"=16, "y"=9)
-
-			on_mob_life(var/mob/living/M as mob)
-				..()
-				M.make_jittery(5)
-				return
-
-
-		doctor_delight
-			name = "The Doctor's Delight"
-			id = "doctorsdelight"
-			description = "A gulp a day keeps the MediBot away. That's probably for the best."
-			reagent_state = LIQUID
-			color = "#FF8CFF" // rgb: 255, 140, 255
-			nutriment_factor = 1 * FOOD_METABOLISM
-
-			glass_icon_state = "doctorsdelightglass"
-			glass_name = "glass of The Doctor's Delight"
-			glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
-			glass_center_of_mass = list("x"=16, "y"=8)
-
-			on_mob_life(var/mob/living/M as mob)
-				M:nutrition += nutriment_factor
-				holder.remove_reagent(src.id, FOOD_METABOLISM)
-				if(!M) M = holder.my_atom
-				if(M:getOxyLoss() && prob(50)) M:adjustOxyLoss(-2)
-				if(M:getBruteLoss() && prob(60)) M:heal_organ_damage(2,0)
-				if(M:getFireLoss() && prob(50)) M:heal_organ_damage(0,2)
-				if(M:getToxLoss() && prob(50)) M:adjustToxLoss(-2)
-				if(M.dizziness !=0) M.dizziness = max(0,M.dizziness-15)
-				if(M.confused !=0) M.confused = max(0,M.confused - 5)
-				..()
-				return
-
-//////////////////////////////////////////////The ten friggen million reagents that get you drunk//////////////////////////////////////////////
-
-		atomicbomb
-			name = "Atomic Bomb"
-			id = "atomicbomb"
-			description = "Nuclear proliferation never tasted so good."
-			reagent_state = LIQUID
-			color = "#666300" // rgb: 102, 99, 0
-
-			glass_icon_state = "atomicbombglass"
-			glass_name = "glass of Atomic Bomb"
-			glass_desc = "Nanotrasen cannot take legal responsibility for your actions after imbibing."
-			glass_center_of_mass = list("x"=15, "y"=7)
-
-			on_mob_life(var/mob/living/M as mob)
-				M.druggy = max(M.druggy, 50)
-				M.confused = max(M.confused+2,0)
-				M.make_dizzy(10)
-				if (!M.stuttering) M.stuttering = 1
-				M.stuttering += 3
-				if(!data) data = 1
-				data++
-				switch(data)
-					if(51 to 200)
-						M.sleeping += 1
-					if(201 to INFINITY)
-						M.sleeping += 1
-						M.adjustToxLoss(2)
-				..()
-				return
-
-		gargle_blaster
-			name = "Pan-Galactic Gargle Blaster"
-			id = "gargleblaster"
-			description = "Whoah, this stuff looks volatile!"
-			reagent_state = LIQUID
-			color = "#664300" // rgb: 102, 67, 0
-
-			glass_icon_state = "gargleblasterglass"
-			glass_name = "glass of Pan-Galactic Gargle Blaster"
-			glass_desc = "Does... does this mean that Arthur and Ford are on the station? Oh joy."
-			glass_center_of_mass = list("x"=17, "y"=6)
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!data) data = 1
-				data++
-				M.dizziness +=6
-				switch(data)
-					if(15 to 45)
-						M.stuttering = max(M.stuttering+3,0)
-					if(45 to 55)
-						if (prob(50))
-							M.confused = max(M.confused+3,0)
-					if(55 to 200)
-						M.druggy = max(M.druggy, 55)
-					if(200 to INFINITY)
-						M.adjustToxLoss(2)
-				..()
-
-		neurotoxin
-			name = "Neurotoxin"
-			id = "neurotoxin"
-			description = "A strong neurotoxin that puts the subject into a death-like state."
-			reagent_state = LIQUID
-			color = "#2E2E61" // rgb: 46, 46, 97
-
-			glass_icon_state = "neurotoxinglass"
-			glass_name = "glass of Neurotoxin"
-			glass_desc = "A drink that is guaranteed to knock you silly."
-			glass_center_of_mass = list("x"=16, "y"=8)
-
-			on_mob_life(var/mob/living/carbon/M as mob)
-				if(!M) M = holder.my_atom
-				M.weakened = max(M.weakened, 3)
-				if(!data) data = 1
-				data++
-				M.dizziness +=6
-				switch(data)
-					if(15 to 45)
-						M.stuttering = max(M.stuttering+3,0)
-					if(45 to 55)
-						if (prob(50))
-							M.confused = max(M.confused+3,0)
-					if(55 to 200)
-						M.druggy = max(M.druggy, 55)
-					if(200 to INFINITY)
-						M.adjustToxLoss(2)
-				..()
-
-		hippies_delight
-			name = "Hippies' Delight"
-			id = "hippiesdelight"
-			description = "You just don't get it maaaan."
-			reagent_state = LIQUID
-			color = "#664300" // rgb: 102, 67, 0
-
-			glass_icon_state = "hippiesdelightglass"
-			glass_name = "glass of Hippie's Delight"
-			glass_desc = "A drink enjoyed by people during the 1960's."
-			glass_center_of_mass = list("x"=16, "y"=8)
-
-			on_mob_life(var/mob/living/M as mob)
-				if(!M) M = holder.my_atom
-				M.druggy = max(M.druggy, 50)
-				if(!data) data = 1
-				data++
-				switch(data)
-					if(1 to 5)
-						if (!M.stuttering) M.stuttering = 1
-						M.make_dizzy(10)
-						if(prob(10)) M.emote(pick("twitch","giggle"))
-					if(5 to 10)
-						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(20)
-						M.make_dizzy(20)
-						M.druggy = max(M.druggy, 45)
-						if(prob(20)) M.emote(pick("twitch","giggle"))
-					if (10 to 200)
-						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(40)
-						M.make_dizzy(40)
-						M.druggy = max(M.druggy, 60)
-						if(prob(30)) M.emote(pick("twitch","giggle"))
-					if(200 to INFINITY)
-						if (!M.stuttering) M.stuttering = 1
-						M.make_jittery(60)
-						M.make_dizzy(60)
-						M.druggy = max(M.druggy, 75)
-						if(prob(40)) M.emote(pick("twitch","giggle"))
-						if(prob(30)) M.adjustToxLoss(2)
-				holder.remove_reagent(src.id, 0.2)
-				..()
-				return
-
 /*boozepwr chart
 1-2 = non-toxic alcohol
 3 = medium-toxic
@@ -3265,7 +2065,7 @@ datum
 5 = potent mixes
 <6 = deadly toxic
 */
-
+/*
 		ethanol
 			name = "Ethanol" //Parent class for all alcoholic reagents.
 			id = "ethanol"
@@ -3382,7 +2182,7 @@ datum
 			glass_center_of_mass = list("x"=15, "y"=7)
 
 			on_mob_life(var/mob/living/M as mob)
-				M.make_jittery(5)
+				M.Jitter(5)
 				..()
 				return
 
@@ -3429,7 +2229,7 @@ datum
 				M:drowsyness = max(0,M:drowsyness-7)
 				if (M.bodytemperature > 310)
 					M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
-				M.make_jittery(5)
+				M.Jitter(5)
 				..()
 				return
 
@@ -3616,14 +2416,14 @@ datum
 					if(25 to 75)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 10)
-						M.make_jittery(2)
+						M.Jitter(2)
 						M.make_dizzy(2)
 						M.druggy = max(M.druggy, 45)
 						if(prob(5)) M.emote(pick("twitch","giggle"))
 					if (75 to 150)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 60)
-						M.make_jittery(4)
+						M.Jitter(4)
 						M.make_dizzy(4)
 						M.druggy = max(M.druggy, 60)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
@@ -3631,7 +2431,7 @@ datum
 					if (150 to 300)
 						if (!M.stuttering) M.stuttering = 1
 						M.hallucination = max(M.hallucination, 60)
-						M.make_jittery(4)
+						M.Jitter(4)
 						M.make_dizzy(4)
 						M.druggy = max(M.druggy, 60)
 						if(prob(10)) M.emote(pick("twitch","giggle"))
@@ -4406,10 +3206,4 @@ datum
 					M.confused = max(M.confused+15,15)
 				..()
 				return
-
-/datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
-	..()
-	holder = null
-
-// Undefine the alias for REAGENTS_EFFECT_MULTIPLER
-#undef REM
+*/

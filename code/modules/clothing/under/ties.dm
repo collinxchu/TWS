@@ -106,7 +106,7 @@
 	desc = "A bronze medal."
 	icon_state = "bronze"
 	item_color = "bronze"
-	matter = list("metal" = 1000)
+	materials = list(MAT_METAL=1000)
 	burn_state = -1 //Won't burn in fires
 
 /obj/item/clothing/tie/medal/conduct

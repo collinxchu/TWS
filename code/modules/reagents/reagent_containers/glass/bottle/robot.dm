@@ -25,9 +25,9 @@
 	desc = "A small bottle of Anti-toxins. Counters poisons, and repairs damage, a wonder drug."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle17"
-	reagent = "anti_toxin"
+	reagent = "antitoxin"
 
 	New()
 		..()
-		reagents.add_reagent("anti_toxin", 60)
+		reagents.add_reagent("antitoxin", 60)
 		return

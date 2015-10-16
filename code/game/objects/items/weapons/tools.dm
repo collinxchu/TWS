@@ -24,7 +24,7 @@
 	force = 5.0
 	throwforce = 7.0
 	w_class = 2.0
-	matter = list("metal" = 150)
+	materials = list(MAT_METAL=150)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 
@@ -44,7 +44,7 @@
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("metal" = 75)
+	materials = list(MAT_METAL=75)
 	attack_verb = list("stabbed")
 
 	suicide_act(mob/user)
@@ -102,7 +102,7 @@
 	throw_speed = 2
 	throw_range = 9
 	w_class = 2.0
-	matter = list("metal" = 80)
+	materials = list(MAT_METAL=80)
 	origin_tech = "materials=1;engineering=1"
 	attack_verb = list("pinched", "nipped")
 	sharp = 1
@@ -144,7 +144,7 @@
 	w_class = 2.0
 
 	//Cost to make in the autolathe
-	matter = list("metal" = 70, "glass" = 30)
+	materials = list(MAT_METAL=70, MAT_GLASS=30)
 
 	//R&D tech level
 	origin_tech = "engineering=1"
@@ -159,7 +159,7 @@
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R
 	R.my_atom = src
-	R.add_reagent("fuel", max_fuel)
+	R.add_reagent("welding_fuel", max_fuel)
 	return
 
 /obj/item/weapon/weldingtool/Destroy()
@@ -279,7 +279,7 @@
 
 //Returns the amount of fuel in the welder
 /obj/item/weapon/weldingtool/proc/get_fuel()
-	return reagents.get_reagent_amount("fuel")
+	return reagents.get_reagent_amount("welding_fuel")
 
 
 //Removes fuel from the welding tool. If a mob is passed, it will perform an eyecheck on the mob. This should probably be renamed to use()
@@ -287,7 +287,7 @@
 	if(!welding || !check_fuel())
 		return 0
 	if(get_fuel() >= amount)
-		reagents.remove_reagent("fuel", amount)
+		reagents.remove_reagent("welding_fuel", amount)
 		check_fuel()
 		if(M)
 			eyecheck(M)
@@ -407,21 +407,21 @@
 /obj/item/weapon/weldingtool/largetank
 	name = "industrial welding tool"
 	max_fuel = 40
-	matter = list("metal" = 70, "glass" = 60)
+	materials = list(MAT_METAL=70, MAT_GLASS=60)
 	origin_tech = "engineering=2"
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
 	max_fuel = 80
 	w_class = 3.0
-	matter = list("metal" = 70, "glass" = 120)
+	materials = list(MAT_METAL=70, MAT_GLASS=120)
 	origin_tech = "engineering=3"
 
 /obj/item/weapon/weldingtool/experimental
 	name = "experimental welding tool"
 	max_fuel = 40
 	w_class = 3.0
-	matter = list("metal" = 70, "glass" = 120)
+	materials = list(MAT_METAL=70, MAT_GLASS=120)
 	origin_tech = "engineering=4;plasmatech=3"
 	var/last_gen = 0
 
@@ -448,7 +448,7 @@
 	throwforce = 7.0
 	item_state = "crowbar"
 	w_class = 2.0
-	matter = list("metal" = 50)
+	materials = list(MAT_METAL=50)
 	origin_tech = "engineering=1"
 	attack_verb = list("attacked", "bashed", "battered", "bludgeoned", "whacked")
 

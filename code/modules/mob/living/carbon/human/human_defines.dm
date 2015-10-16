@@ -28,6 +28,7 @@
 	var/icon_update = 1 //whether icon updating shall take place
 
 	var/lip_style = null	//no lipstick by default- arguably misleading, as it could be used for general makeup
+	var/lip_color = "white"
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
@@ -88,3 +89,5 @@
 	mob_bump_flag = HUMAN
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
+
+	var/heart_attack = 0 //Whether or not they are having a heart attack

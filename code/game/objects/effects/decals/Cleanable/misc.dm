@@ -17,7 +17,7 @@
 	anchored = 1
 
 /obj/effect/decal/cleanable/ash/attack_hand(mob/user as mob)
-	user << "<span class='notice'>[src] sifts through your fingers.</span>"
+	user << "<span class='notice'>[src] sift through your fingers.</span>"
 	var/turf/simulated/floor/F = get_turf(src)
 	if (istype(F))
 		F.dirt += 4
@@ -74,15 +74,6 @@
 /obj/effect/decal/cleanable/cobweb/fire_act()
 	qdel(src)
 
-/obj/effect/decal/cleanable/molten_item
-	name = "gooey grey mass"
-	desc = "It looks like a melted... something."
-	density = 0
-	anchored = 1
-	layer = 3
-	icon = 'icons/obj/chemical.dmi'
-	icon_state = "molten"
-
 /obj/effect/decal/cleanable/cobweb/cobweb2
 	name = "cobweb"
 	desc = "Somebody should remove that."
@@ -91,6 +82,15 @@
 	layer = 3
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "cobweb2"
+
+/obj/effect/decal/cleanable/molten_item
+	name = "gooey grey mass"
+	desc = "It looks like a melted... something."
+	density = 0
+	anchored = 1
+	layer = 3
+	icon = 'icons/obj/chemical.dmi'
+	icon_state = "molten"
 
 //Vomit (sorry)
 /obj/effect/decal/cleanable/vomit

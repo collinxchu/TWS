@@ -9,7 +9,7 @@
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	matter = list("metal" = 1875)
+	materials = list(MAT_METAL=1000)
 	max_amount = 60
 	attack_verb = list("hit", "bludgeoned", "whacked")
 

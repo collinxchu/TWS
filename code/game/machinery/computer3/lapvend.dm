@@ -203,10 +203,10 @@
 		newlap.spawn_parts += (/obj/item/part/computer/networking/cable)
 	if (power == 1)
 		qdel(newlap.battery)
-		newlap.battery = new /obj/item/weapon/cell/high(newlap)
+		newlap.battery = new /obj/item/weapon/stock_parts/cell/high(newlap)
 	if (power == 2)
 		qdel(newlap.battery)
-		newlap.battery = new /obj/item/weapon/cell/super(newlap)
+		newlap.battery = new /obj/item/weapon/stock_parts/cell/super(newlap)
 
 	newlap.spawn_parts()
 
@@ -351,9 +351,9 @@
 		network = 2
 	if(istype(L.stored_computer.net,/obj/item/part/computer/networking/cable))
 		network = 3
-	if(istype(L.stored_computer.battery, /obj/item/weapon/cell/high))
+	if(istype(L.stored_computer.battery, /obj/item/weapon/stock_parts/cell/high))
 		power = 1
-	if(istype(L.stored_computer.battery, /obj/item/weapon/cell/super))
+	if(istype(L.stored_computer.battery, /obj/item/weapon/stock_parts/cell/super))
 		power = 2
 
 

@@ -16,6 +16,7 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	var/burn_point = null
 	var/burning = null
 	var/hitsound = null
+	var/throwhitsound = null
 	var/w_class = 3.0
 	var/slot_flags = 0		//This is used to determine on which slots an item can fit.
 	pass_flags = PASSTABLE
@@ -30,6 +31,8 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 
 	var/icon_action_button //If this is set, The item will make an action button on the player's HUD when picked up. The button will have the icon_action_button sprite from the screen1_action.dmi file.
 	var/action_button_name //This is the text which gets displayed on the action button. If not set it defaults to 'Use [name]'. Note that icon_action_button needs to be set in order for the action button to appear.
+
+	var/list/materials = list()
 
 	//Since any item can now be a piece of clothing, this has to be put here so all items share it.
 	var/flags_inv //This flag is used to determine when items in someone's inventory cover others. IE helmets making it so you can't see glasses, etc.
@@ -62,16 +65,31 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	*/
 	var/list/sprite_sheets_obj = null
 
+	var/list/can_be_placed_into = list(
+		/obj/structure/table,
+		/obj/structure/table/rack,
+		/obj/structure/closet,
+		/obj/item/weapon/storage,
+		/obj/structure/safe,
+		/obj/machinery/disposal,
+		/obj/machinery/r_n_d/destructive_analyzer,
+//		/obj/machinery/r_n_d/experimentor,
+		/obj/machinery/autolathe
+	)
+
+/obj/item/proc/check_allowed_items(atom/target, not_inside, target_self)
+	if(((src in target) && !target_self) || ((!istype(target.loc, /turf)) && (!istype(target, /turf)) && (not_inside)) || is_type_in_list(target, can_be_placed_into))
+		return 0
+	else
+		return 1
+
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
 
 /obj/item/Destroy()
 	if(ismob(loc))
 		var/mob/m = loc
-		m.drop_from_inventory(src)
-		m.update_inv_r_hand()
-		m.update_inv_l_hand()
-		src.loc = null
+		m.unEquip(src, 1)
 	return ..()
 
 /obj/item/ex_act(severity)
@@ -613,6 +631,9 @@ var/global/image/fire_overlay = image("icon" = 'icons/effects/fire.dmi', "icon_s
 	M.eye_blurry += rand(3,4)
 	return
 
+/obj/item/proc/is_sharp()
+	return sharp
+
 /obj/item/clean_blood()
 	. = ..()
 	if(blood_overlay)
@@ -744,6 +765,58 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
 
 	return
+
+/obj/item/singularity_pull(S, current_size)
+	spawn(0) //this is needed or multiple items will be thrown sequentially and not simultaneously
+		if(current_size >= STAGE_FOUR)
+			throw_at(S,14,3, spin=0)
+		else ..()
+
+/obj/item/acid_act(acidpwr, acid_volume)
+	. = 1
+	if(unacidable)
+		return
+
+	var/meltingpwr = acid_volume*acidpwr
+	var/melting_threshold = 100
+	if(meltingpwr <= melting_threshold) // so a single unit can't melt items. You need 5.1+ unit for fluoro and 10.1+ for sulphuric
+		return
+	for(var/V in armor)
+		if(armor[V] > 0)
+			.-- //it survives the acid...
+			break
+	if(. && prob(min(meltingpwr/10,90))) //chance to melt depends on acid power and volume.
+		var/turf/T = get_turf(src)
+		if(T)
+			var/obj/effect/decal/cleanable/molten_item/I = new (T)
+			I.pixel_x = rand(-16,16)
+			I.pixel_y = rand(-16,16)
+			I.desc = "Looks like this was \an [src] some time ago."
+		if(istype(src,/obj/item/weapon/storage))
+			var/obj/item/weapon/storage/S = src
+			S.do_quick_empty() //melted storage item drops its content.
+		qdel(src)
+	else
+		for(var/armour_value in armor) //but is weakened
+			armor[armour_value] = max(armor[armour_value]-min(acidpwr,meltingpwr/10),0)
+		if(!findtext(desc, "It looks slightly melted...")) //It looks slightly melted... It looks slightly melted... It looks slightly melted... etc.
+			desc += " It looks slightly melted..." //needs a space at the start, formatting
+
+/obj/item/throw_impact(atom/A)
+	var/itempush = 1
+	if(w_class < 4)
+		itempush = 0 //too light to push anything
+	return A.hitby(src, 0, itempush)
+
+/obj/item/throw_impact(atom/A)
+	var/itempush = 1
+	if(w_class < 4)
+		itempush = 0 //too light to push anything
+	return A.hitby(src, 0, itempush)
+
+/obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1)
+	. = ..()
+	throw_speed = initial(throw_speed) //explosions change this.
 
 /obj/item/proc/remove_item_from_storage(atom/newLoc) //please use this if you're going to snowflake an item out of a obj/item/weapon/storage
 	if(!newLoc)

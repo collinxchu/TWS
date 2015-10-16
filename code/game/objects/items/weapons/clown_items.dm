@@ -1,17 +1,10 @@
 /* Clown Items
  * Contains:
- * 		Banana Peels
  *		Soap
  *		Bike Horns
  */
 
-/*
- * Banana Peals
- */
-/obj/item/weapon/bananapeel/Crossed(AM as mob|obj)
-	if (istype(AM, /mob/living))
-		var/mob/living/M = AM
-		M.slip("the [src.name]",4)
+
 /*
  * Soap
  */
@@ -43,11 +36,40 @@
 /*
  * Bike Horns
  */
-/obj/item/weapon/bikehorn/attack_self(mob/user as mob)
-	if (spam_flag == 0)
+/obj/item/weapon/bikehorn
+	name = "bike horn"
+	desc = "A horn off of a bicycle."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "bike_horn"
+	item_state = "bike_horn"
+	hitsound = null
+	throwforce = 3
+	w_class = 1.0
+	throw_speed = 3
+	throw_range = 15
+	attack_verb = list("HONKED")
+	var/spam_flag = 0
+	var/honk_sound = 'sound/items/bikehorn.ogg'
+	var/cooldowntime = 20
+
+/obj/item/weapon/bikehorn/attack(mob/living/carbon/M, mob/living/carbon/user)
+	if(!spam_flag)
+		playsound(loc, honk_sound, 50, 1, -1) //plays instead of tap.ogg!
+	return ..()
+
+/obj/item/weapon/bikehorn/attack_self(mob/user)
+	if(!spam_flag)
 		spam_flag = 1
-		playsound(src.loc, 'sound/items/bikehorn.ogg', 50, 1)
+		playsound(src.loc, honk_sound, 50, 1)
 		src.add_fingerprint(user)
-		spawn(20)
+		spawn(cooldowntime)
 			spam_flag = 0
 	return
+
+
+/obj/item/weapon/bikehorn/airhorn
+	name = "air horn"
+	desc = "Damn son, where'd you find this?"
+	icon_state = "air_horn"
+	honk_sound = 'sound/items/AirHorn2.ogg'
+	cooldowntime = 50

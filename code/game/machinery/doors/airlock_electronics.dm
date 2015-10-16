@@ -6,7 +6,7 @@
 	icon_state = "door_electronics"
 	w_class = 2.0 //It should be tiny! -Agouri
 
-	matter = list("metal" = 50,"glass" = 50)
+	materials = list(MAT_METAL=50,MAT_GLASS=50)
 
 	req_access = list(access_engine)
 

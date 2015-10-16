@@ -219,28 +219,37 @@
 			O.layer = 5
 			O.mouse_opacity = 0
 
-/turf/simulated/wall/proc/thermitemelt(mob/user as mob)
+/turf/simulated/wall/proc/thermitemelt(mob/user)
 	if(mineral == "diamond")
 		return
+	overlays = list()
 	var/obj/effect/overlay/O = new/obj/effect/overlay( src )
 	O.name = "Thermite"
 	O.desc = "Looks hot."
 	O.icon = 'icons/effects/fire.dmi'
 	O.icon_state = "2"
 	O.anchored = 1
+	O.opacity = 1
 	O.density = 1
 	O.layer = 5
+	O.light_color = "#ED9200"
 
-	src.ChangeTurf(/turf/simulated/floor/plating)
-
-	var/turf/simulated/floor/F = src
-	F.burn_tile()
-	F.icon_state = "wall_thermite"
-	user << "<span class='warning'>The thermite starts melting through the wall.</span>"
-
-	spawn(100)
-		if(O)	qdel(O)
-//	F.sd_LumReset()		//TODO: ~Carn
+	if(thermite >= 50)
+		O.set_light(3)
+		src.ChangeTurf(/turf/simulated/floor/plating)
+		var/turf/simulated/floor/F = src
+		F.burn_tile()
+		F.add_hiddenprint(user)
+		spawn(max(100,300-thermite))
+			if(O)
+				O.set_light(0)
+				qdel(O)
+	else
+		thermite = 0
+		spawn(50)
+			if(O)
+				O.set_light(0)
+				qdel(O)
 	return
 
 /turf/simulated/wall/meteorhit(obj/M as obj)
@@ -333,11 +342,6 @@
 			if( WT.remove_fuel(0,user) )
 				thermitemelt(user)
 				return
-
-		else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
-			thermitemelt(user)
-			return
-
 		else if( istype(W, /obj/item/weapon/melee/energy/blade) )
 			var/obj/item/weapon/melee/energy/blade/EB = W
 
@@ -346,6 +350,9 @@
 			playsound(src, "sparks", 50, 1)
 			playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 
+			thermitemelt(user)
+			return
+		else if(is_hot(W))
 			thermitemelt(user)
 			return
 
@@ -403,7 +410,8 @@
 		return
 
 	//DRILLING
-	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if (istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/drill/diamonddrill/D = W
 
 		user << "<span class='notice'>You begin to drill though the wall.</span>"
 
@@ -415,6 +423,7 @@
 			return
 
 		user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
+		D.playDigSound()
 		dismantle_wall()
 		for(var/mob/O in viewers(user, 5))
 			O.show_message("<span class='warning'>The wall was drilled through by [user]!</span>", 1, "<span class='warning'>You hear the grinding of metal.</span>", 2)

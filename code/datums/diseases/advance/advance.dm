@@ -291,7 +291,7 @@ var/list/advance_cures = 	list(
 	return
 
 // Return a unique ID of the disease.
-/datum/disease/advance/proc/GetDiseaseID()
+/datum/disease/advance/GetDiseaseID()
 
 	var/list/L = list()
 	for(var/datum/symptom/S in symptoms)
@@ -367,12 +367,14 @@ var/list/advance_cures = 	list(
 			for(var/datum/disease/A in data["viruses"])
 				preserve += A.Copy()
 			R.data = data.Copy()
-		else
-			R.data = data
 		if(preserve.len)
 			R.data["viruses"] = preserve
 
 /proc/AdminCreateVirus(var/mob/user)
+
+	if(!user)
+		return
+
 	var/i = 5
 
 	var/datum/disease/advance/D = new(0, null)
@@ -382,19 +384,24 @@ var/list/advance_cures = 	list(
 	symptoms += "Done"
 	symptoms += list_symptoms.Copy()
 	do
-		var/symptom = input(user, "Choose a symptom to add ([i] remaining)", "Choose a Symptom") in symptoms
-		if(istext(symptom))
-			i = 0
-		else if(ispath(symptom))
-			var/datum/symptom/S = new symptom
-			if(!D.HasSymptom(S))
-				D.symptoms += S
-				i -= 1
+		if(user)
+			var/symptom = input(user, "Choose a symptom to add ([i] remaining)", "Choose a Symptom") in symptoms
+			if(isnull(symptom))
+				return
+			if(istext(symptom))
+				i = 0
+			else if(ispath(symptom))
+				var/datum/symptom/S = new symptom
+				if(!D.HasSymptom(S))
+					D.symptoms += S
+					i -= 1
 	while(i > 0)
 
 	if(D.symptoms.len > 0)
 
-		var/new_name = input(user, "Name your new disease.", "New Name")
+		var/new_name = stripped_input(user, "Name your new disease.", "New Name")
+		if(!new_name)
+			return
 		D.AssignName(new_name)
 		D.Refresh()
 
@@ -404,8 +411,8 @@ var/list/advance_cures = 	list(
 		for(var/mob/living/carbon/human/H in shuffle(living_mob_list))
 			if(H.z != 1)
 				continue
-			if(!H.has_disease(D))
-				H.contract_disease(D, 1)
+			if(!H.HasDisease(D))
+				H.ContractDisease(D, 1)
 				break
 
 		var/list/name_symptoms = list()

@@ -6,7 +6,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/items.dmi'
 	icon_state = "table_parts"
-	matter = list("metal" = 3750)
+	materials = list(MAT_METAL=4000)
 	flags = CONDUCT
 	attack_verb = list("slammed", "bashed", "battered", "bludgeoned", "thrashed", "whacked")
 
@@ -49,7 +49,7 @@
 	desc = "Hard table parts. Well... harder."
 	icon = 'icons/obj/items.dmi'
 	icon_state = "reinf_tableparts"
-	matter = list("metal" = 7500)
+	materials = list(MAT_METAL=8000)
 	flags = CONDUCT
 
 	stack_types = list(/obj/item/stack/sheet/metal, /obj/item/stack/rods)
@@ -95,6 +95,7 @@
 	name = "rack parts"
 	desc = "Parts of a rack."
 	icon_state = "rack_parts"
+	materials = list(MAT_METAL=2000)
 	stack_types = list(/obj/item/stack/sheet/metal)
 	build_type = /obj/structure/table/rack
 	alter_type = null

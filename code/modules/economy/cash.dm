@@ -1,8 +1,16 @@
+var/global/list/moneytypes=list(
+	/obj/item/weapon/spacecash/c1000 = 1000,
+	/obj/item/weapon/spacecash/c500  = 500, // Might get rid of this.
+	/obj/item/weapon/spacecash/c100  = 100,
+	/obj/item/weapon/spacecash/c10   = 10,
+	/obj/item/weapon/spacecash       = 1,
+)
+
 /obj/item/weapon/spacecash
 	name = "0 credits"
 	desc = "It's worth 0 credits."
 	gender = PLURAL
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/economy.dmi'
 	icon_state = "spacecash1"
 	opacity = 0
 	density = 0
@@ -54,14 +62,14 @@
 		while(sum >= i && num < 50)
 			sum -= i
 			num++
-			var/image/banknote = image('icons/obj/items.dmi', "spacecash[i]")
+			var/image/banknote = image('icons/obj/economy.dmi', "spacecash[i]")
 			var/matrix/M = matrix()
 			M.Translate(rand(-6, 6), rand(-4, 8))
 			M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
 			banknote.transform = M
 			src.overlays += banknote
 	if(num == 0) // Less than one thaler, let's just make it look like 1 for ease
-		var/image/banknote = image('icons/obj/items.dmi', "spacecash1")
+		var/image/banknote = image('icons/obj/economy.dmi', "spacecash1")
 		var/matrix/M = matrix()
 		M.Translate(rand(-6, 6), rand(-4, 8))
 		M.Turn(pick(-45, -27.5, 0, 0, 0, 0, 0, 0, 0, 27.5, 45))
@@ -162,3 +170,14 @@ proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
 	..(user)
 	if (!(user in view(2)) && user!=src.loc) return
 	user << "\blue Charge card's owner: [src.owner_name]. Credits remaining: [src.worth]."
+
+/proc/dispense_cash(var/amount, var/loc)
+	for(var/cashtype in moneytypes)
+		var/slice = moneytypes[cashtype]
+		var/dispense_count = Floor(amount/slice)
+		amount = amount % slice
+		while(dispense_count>0)
+			var/dispense_this_time = min(dispense_count,100)
+			if(dispense_this_time > 0)
+				new cashtype(loc,dispense_this_time)
+				dispense_count -= dispense_this_time

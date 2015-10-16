@@ -22,49 +22,69 @@
 /********
 * photo *
 ********/
-var/global/photo_count = 0
-
 /obj/item/weapon/photo
 	name = "photo"
 	icon = 'icons/obj/items.dmi'
 	icon_state = "photo"
 	item_state = "paper"
 	w_class = 2.0
-	var/id
 	var/icon/img	//Big photo image
 	var/scribble	//Scribble on the back.
 	var/icon/tiny
 	var/photo_size = 3
 	burn_state = 0 //Burnable
 
-/obj/item/weapon/photo/New()
-	id = photo_count++
-
 /obj/item/weapon/photo/attack_self(mob/user as mob)
 	user.examinate(src)
 
-/obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob)
+/obj/item/weapon/photo/attackby(obj/item/weapon/P as obj, mob/user as mob, params)
 	if(istype(P, /obj/item/weapon/pen) || istype(P, /obj/item/toy/crayon))
-		var/txt = sanitize(copytext(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text, 1, 128))
+		var/txt = sanitize(input(user, "What would you like to write on the back?", "Photo Writing", null)  as text)
+		txt = copytext(txt, 1, 128)
 		if(loc == user && user.stat == 0)
 			scribble = txt
+	else if(istype(P, /obj/item/weapon/lighter))
+		burnphoto(P, user)
 	..()
 
+/obj/item/weapon/photo/proc/burnphoto(obj/item/weapon/lighter/P, mob/user)
+	var/class = "<span class='warning'>"
+
+	if(P.lit && !user.restrained())
+		if(istype(P, /obj/item/weapon/lighter/zippo))
+			class = "<span class='rose'>"
+
+		user.visible_message("[class][user] holds \the [P] up to \the [src], it looks like \he's trying to burn it!", \
+		"[class]You hold \the [P] up to \the [src], burning it slowly.")
+
+		spawn(20)
+			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
+				user.visible_message("[class][user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.", \
+				"[class]You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.")
+
+				if(user.get_inactive_hand() == src)
+					user.unEquip(src)
+
+				new /obj/effect/decal/cleanable/ash(get_turf(src))
+				qdel(src)
+
+			else
+				user << "\red You must hold \the [P] steady to burn \the [src]."
+
 /obj/item/weapon/photo/examine(mob/user)
-	if(in_range(user, src))
+	if(..(user, 1) || isobserver(user))
 		show(user)
-		user << desc
 	else
 		user << "<span class='notice'>It is too far away.</span>"
 
 /obj/item/weapon/photo/proc/show(mob/user as mob)
-	user << browse_rsc(img, "tmp_photo_[id].png")
-	user << browse("<html><head><title>[name]</title></head>" \
+	usr << browse_rsc(img, "tmp_photo.png")
+	usr << browse("<html><head><title>[name]</title></head>" \
 		+ "<body style='overflow:hidden;margin:0;text-align:center'>" \
-		+ "<img src='tmp_photo_[id].png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
+		+ "<img src='tmp_photo.png' width='[64*photo_size]' style='-ms-interpolation-mode:nearest-neighbor' />" \
 		+ "[scribble ? "<br>Written on the back:<br><i>[scribble]</i>" : ""]"\
 		+ "</body></html>", "window=book;size=[64*photo_size]x[scribble ? 400 : 64*photo_size]")
-	onclose(user, "[name]")
+	onclose(usr, "[name]")
 	return
 
 /obj/item/weapon/photo/verb/rename()
@@ -72,7 +92,7 @@ var/global/photo_count = 0
 	set category = "Object"
 	set src in usr
 
-	var/n_name = sanitize(copytext(input(usr, "What would you like to label the photo?", "Photo Labelling", null)  as text, 1, MAX_NAME_LEN))
+	var/n_name = sanitize(copytext(input(usr, "What would you like to label the photo?", "Photo Labelling", name) as text, 1, MAX_MESSAGE_LEN))
 	//loc.loc check is for making possible renaming photos in clipboards
 	if(( (loc == usr || (loc.loc && loc.loc == usr)) && usr.stat == 0))
 		name = "[(n_name ? text("[n_name]") : "photo")]"
@@ -88,9 +108,8 @@ var/global/photo_count = 0
 	icon = 'icons/obj/items.dmi'
 	icon_state = "album"
 	item_state = "briefcase"
-	burn_state = 0 //Burnable
-	burntime = 5
 	can_hold = list("/obj/item/weapon/photo",)
+	burn_state = 0 //Burnable
 
 /obj/item/weapon/storage/photo_album/MouseDrop(obj/over_object as obj)
 
@@ -126,9 +145,8 @@ var/global/photo_count = 0
 	icon_state = "camera"
 	item_state = "electropack"
 	w_class = 2.0
-	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	matter = list("metal" = 2000)
+	var/list/matter = list("metal" = 2000)
 	var/pictures_max = 10
 	var/pictures_left = 10
 	var/on = 1
@@ -156,7 +174,7 @@ var/global/photo_count = 0
 	user << "You switch the camera [on ? "on" : "off"]."
 	return
 
-/obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob, params)
 	if(istype(I, /obj/item/device/camera_film))
 		if(pictures_left)
 			user << "<span class='notice'>[src] still has some film in it!</span>"
@@ -279,8 +297,8 @@ var/global/photo_count = 0
 		y_c--
 		x_c = x_c - size
 
-	var/obj/item/weapon/photo/p = createpicture(target, user, turfs, mobs, flag)
-	printpicture(user, p)
+	var/datum/picture/P = createpicture(target, user, turfs, mobs, flag)
+	printpicture(user, P)
 
 /obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
 	var/icon/photoimage = get_icon(turfs, target)
@@ -294,37 +312,177 @@ var/global/photo_count = 0
 	ic.Blend(small_img,ICON_OVERLAY, 10, 13)
 	pc.Blend(tiny_img,ICON_OVERLAY, 12, 19)
 
-	var/obj/item/weapon/photo/p = new()
-	p.name = "photo"
-	p.icon = ic
-	p.tiny = pc
-	p.img = photoimage
-	p.desc = mobs
-	p.pixel_x = rand(-10, 10)
-	p.pixel_y = rand(-10, 10)
-	p.photo_size = size
+	var/datum/picture/P = new()
+	if(istype(src,/obj/item/device/camera/digital))
+		P.fields["name"] = input(user,"Name photo:","photo")
+		P.name = P.fields["name"]//So the name is displayed on the print/delete list.
+	else
+		P.fields["name"] = "photo"
+	P.fields["author"] = user
+	P.fields["icon"] = ic
+	P.fields["tiny"] = pc
+	P.fields["img"] = photoimage
+	P.fields["desc"] = mobs
+	P.fields["pixel_x"] = rand(-10, 10)
+	P.fields["pixel_y"] = rand(-10, 10)
+	P.fields["size"] = size
 
-	return p
+	return P
 
-/obj/item/device/camera/proc/printpicture(mob/user, obj/item/weapon/photo/p)
-	p.loc = user.loc
+/obj/item/device/camera/proc/printpicture(mob/user, var/datum/picture/P)
+	var/obj/item/weapon/photo/Photo = new/obj/item/weapon/photo()
+	Photo.loc = user.loc
 	if(!user.get_inactive_hand())
-		user.put_in_inactive_hand(p)
+		user.put_in_inactive_hand(Photo)
+	Photo.construct(P)
 
-/obj/item/weapon/photo/proc/copy(var/copy_id = 0)
+/obj/item/weapon/photo/proc/construct(var/datum/picture/P)
+	name = P.fields["name"]
+	icon = P.fields["icon"]
+	tiny = P.fields["tiny"]
+	img = P.fields["img"]
+	desc = P.fields["desc"]
+	pixel_x = P.fields["pixel_x"]
+	pixel_y = P.fields["pixel_y"]
+	photo_size = P.fields["size"]
+
+/obj/item/weapon/photo/proc/copy()
 	var/obj/item/weapon/photo/p = new/obj/item/weapon/photo()
 
+	p.icon = icon(icon, icon_state)
+	p.img = icon(img)
+	p.tiny = icon(tiny)
 	p.name = name
-	p.icon = icon
-	p.tiny = tiny
-	p.img = img
 	p.desc = desc
-	p.pixel_x = pixel_x
-	p.pixel_y = pixel_y
-	p.photo_size = photo_size
 	p.scribble = scribble
 
-	if(copy_id)
-		p.id = id
-
 	return p
+
+/*****************
+* digital camera *
+******************/
+/obj/item/device/camera/digital
+	name = "digital camera"
+	desc = "A digital camera. A small screen shows there is space for 10 photos left."
+	var/list/datum/picture/saved_pictures = list()
+	pictures_left = 30
+	var/max_storage = 10
+
+/obj/item/device/camera/digital/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
+	if(!on || !pictures_left || ismob(target.loc)) return
+	captureimage(target, user, flag)
+
+	playsound(loc, pick('sound/items/polaroid1.ogg', 'sound/items/polaroid2.ogg'), 75, 1, -3)
+
+	desc = "A digital camera. A small screen shows that there are currently [saved_pictures.len] pictures stored."
+	icon_state = icon_off
+	on = 0
+	spawn(64)
+		icon_state = icon_on
+		on = 1
+
+/obj/item/device/camera/digital/captureimage(atom/target, mob/user, flag)
+	if(saved_pictures.len >= max_storage)
+		user << "<span class='notice'>Maximum photo storage capacity reached.</span>"
+		return
+	user << "Picture saved."
+	var/x_c = target.x - (size-1)/2
+	var/y_c = target.y + (size-1)/2
+	var/z_c	= target.z
+	var/list/turfs = list()
+	var/mobs = ""
+	for(var/i = 1; i <= size; i++)
+		for(var/j = 1; j <= size; j++)
+			var/turf/T = locate(x_c, y_c, z_c)
+			if(can_capture_turf(T, user))
+				turfs.Add(T)
+				mobs += get_mobs(T)
+			x_c++
+		y_c--
+		x_c = x_c - size
+
+	var/datum/picture/P = createpicture(target, user, turfs, mobs, flag)
+	saved_pictures += P
+
+/obj/item/device/camera/digital/verb/print_picture()
+	set name = "Print picture"
+	set category = "Object"
+	set src in usr
+
+	if(saved_pictures.len == 0)
+		usr << "<span class='userdanger'>No images saved.</span>"
+		return
+	if(pictures_left == 0)
+		usr << "<span class='userdanger'>There is no film left to print.</span>"
+		return
+
+	var/datum/picture/P = null
+	P = input("Select image to print:",P) as null|anything in saved_pictures
+	if(P)
+		printpicture(usr,P)
+		pictures_left --
+
+/obj/item/device/camera/digital/verb/delete_picture()
+	set name = "Delete picture"
+	set category = "Object"
+	set src in usr
+
+	if(saved_pictures.len == 0)
+		usr << "<span class='userdanger'>No images saved</span>"
+		return
+	var/datum/picture/P = null
+	P = input("Select image to delete:",P) as null|anything in saved_pictures
+	if(P)
+		saved_pictures -= P
+
+/**************
+*video camera *
+***************/
+
+/obj/item/device/videocam
+	name = "video camera"
+	icon = 'icons/obj/items.dmi'
+	desc = "video camera that can send live feed to the entertainment network."
+	icon_state = "videocam"
+	item_state = "videocam"
+	w_class = 2.0
+	slot_flags = SLOT_BELT
+	materials = list(MAT_METAL=2000)
+	var/on = 0
+	var/obj/machinery/camera/camera
+	var/icon_on = "videocam_on"
+	var/icon_off = "videocam"
+	var/canhear_range = 7
+	var/watcherslist = list()
+
+/obj/item/device/videocam/attack_self(mob/user)
+	on = !on
+	if(camera)
+		if(on==0)
+			src.icon_state = icon_off
+			camera.c_tag = null
+			camera.network = null
+		else
+			src.icon_state = icon_on
+			camera.network = list("news")
+			camera.c_tag = user.name
+	else
+
+		src.icon_state = icon_on
+		camera = new /obj/machinery/camera(src)
+		camera.network = list("news")
+		cameranet.removeCamera(camera)
+		camera.c_tag = user.name
+	user << "You switch the camera [on ? "on" : "off"]."
+
+/obj/item/device/videocam/examine(mob/user)
+	if(..(user, 1))
+		user << "This video camera can send live feeds to the entertainment network. It's [camera ? "" : "in"]active."
+
+
+/obj/item/device/videocam/hear_talk(mob/M as mob, msg)
+	if (camera && on)
+		if(get_dist(src, M) <= canhear_range)
+			talk_into(M, msg)
+		for(var/mob/living/carbon/human/H in watcherslist)
+			H.show_message(text("\blue (Newscaster) [] says, '[]'",M,msg), 1)

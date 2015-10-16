@@ -65,7 +65,9 @@
 
 			thermitemelt(user)
 			return
-
+		else if(is_hot(W))
+			thermitemelt(user)
+			return
 	else if(istype(W, /obj/item/weapon/melee/energy/blade))
 		user << "<span class='notice'>This wall is too thick to slice through. You will need to find a different path.</span>"
 		return
@@ -238,15 +240,16 @@
 //vv OK, we weren't performing a valid deconstruction step or igniting thermite,let's check the other possibilities vv
 
 	//DRILLING
-	if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
-
+	if (istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/drill/diamonddrill/D = W
 		user << "<span class='notice'>You begin to drill though the wall.</span>"
 
 		sleep(200)
-		if( !istype(src, /turf/simulated/wall/r_wall) || !user || !W || !T )	return
+		if( !istype(src, /turf/simulated/wall/r_wall) || !user || !D || !T )	return
 
-		if( user.loc == T && user.get_active_hand() == W )
+		if( user.loc == T && user.get_active_hand() == D )
 			user << "<span class='notice'>Your drill tears though the last of the reinforced plating.</span>"
+			D.playDigSound()
 			dismantle_wall()
 
 	//REPAIRING

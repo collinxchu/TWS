@@ -1,5 +1,5 @@
 #ifndef T_BOARD
-#error T_BOARD macro is not defined but we need it! 
+#error T_BOARD macro is not defined but we need it!
 #endif
 
 /obj/item/weapon/circuitboard/message_monitor
@@ -84,10 +84,14 @@
 	build_path = /obj/machinery/computer/cloning
 	origin_tech = "programming=3;biotech=3"
 
-/obj/item/weapon/circuitboard/arcade
-	name = T_BOARD("arcade machine")
-	build_path = /obj/machinery/computer/arcade
+/obj/item/weapon/circuitboard/arcade/battle
+	name = T_BOARD("Arcade Battle")
+	build_path = /obj/machinery/computer/arcade/battle
 	origin_tech = "programming=1"
+
+/obj/item/weapon/circuitboard/arcade/orion_trail
+	name = T_BOARD("Orion Trail")
+	build_path = /obj/machinery/computer/arcade/orion_trail
 
 /obj/item/weapon/circuitboard/turbine_control
 	name = T_BOARD("turbine control console")

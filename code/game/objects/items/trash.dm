@@ -79,5 +79,14 @@
 	name = "bread tube"
 	icon_state = "tastybread"
 
+/obj/item/trash/can
+	name = "crushed can"
+	icon_state = "cola"
+/obj/item/trash/gum
+	name = "chewed gum"
+	desc = "NOT free candy."
+	icon_state = "gum"
+
+
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return

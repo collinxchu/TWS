@@ -16,8 +16,8 @@
 	var/global/list/datum/recipe/available_recipes // List of the recipes you can use
 	var/global/list/acceptable_items // List of the items you can put in
 	var/global/list/acceptable_reagents // List of the reagents you can put in
-	var/global/max_n_of_items = 0
-
+	var/max_n_of_items = 10 // whatever fat fuck made this a global var needs to look at themselves in the mirror sometime
+	var/efficiency = 0
 
 // see code/modules/food/recipes_microwave.dm for recipes
 
@@ -27,8 +27,15 @@
 
 /obj/machinery/microwave/New()
 	..()
-	reagents = new/datum/reagents(100)
-	reagents.my_atom = src
+	create_reagents(100)
+	component_parts = list()
+	component_parts += new /obj/item/weapon/circuitboard/microwave(null)
+	component_parts += new /obj/item/weapon/stock_parts/micro_laser(null)
+	component_parts += new /obj/item/weapon/stock_parts/matter_bin(null)
+	component_parts += new /obj/item/weapon/stock_parts/console_screen(null)
+	component_parts += new /obj/item/stack/cable_coil(null, 2)
+	RefreshParts()
+
 	if (!available_recipes)
 		available_recipes = new
 		for (var/type in (typesof(/datum/recipe)-/datum/recipe))
@@ -47,6 +54,16 @@
 		// will also allow anything using the holder item to be microwaved into
 		// impure carbon. ~Z
 		acceptable_items |= /obj/item/weapon/holder
+
+/obj/machinery/microwave/RefreshParts()
+	var/E
+	var/max_items = 10
+	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts)
+		E += M.rating
+	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
+		max_items = 10 * M.rating
+	efficiency = E
+	max_n_of_items = max_items
 
 /*******************
 *   Item Adding

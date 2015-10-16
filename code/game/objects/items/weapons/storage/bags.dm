@@ -316,7 +316,7 @@
  */
 /obj/item/weapon/storage/bag/tray
 	name = "tray"
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/containers.dmi'
 	icon_state = "tray"
 	desc = "A metal tray to lay food on."
 	force = 5
@@ -325,10 +325,33 @@
 	throw_range = 5
 	w_class = 4
 	flags = CONDUCT
-	matter = list("metal"=3000)
+	materials = list(MAT_METAL=3000)
 	preposition = "on"
-	var/pos
-	var/rows
+	var/pos //used by overlays, controls where on the tray's x_axis the item will appear
+	var/rows //whether or not the arrange style is currently set to rows
+	burn_state = 0 //Burnable
+
+/obj/item/weapon/storage/bag/tray/fire_act()
+	if(!contents.len)
+		return
+	..()
+
+/obj/item/weapon/storage/bag/tray/burn()
+	for(var/obj/O in contents)
+		O.fire_act()
+	contents = null
+	extinguish()
+	rebuild_overlays()
+	return
+
+/obj/item/weapon/storage/bag/tray/attack_self(mob/user)
+	switch(alert(usr,"What do you want to do with \the [src]?","[src]","Dump contents","Change arrangement style", "Cancel"))
+		if("Cancel")
+			return
+		if("Dump contents")
+			return ..()
+		if("Change arrangement style")
+			change_arrangestyle()
 
 /obj/item/weapon/storage/bag/tray/attack(mob/living/M, mob/living/user)
 	..()
@@ -370,7 +393,7 @@
 
 	rebuild_overlays(1)
 
-
+//Cut the overlays and redraws them
 /obj/item/weapon/storage/bag/tray/proc/rebuild_overlays(var/rearrange)
 	overlays.Cut()
 	var/tmp
@@ -379,17 +402,17 @@
 		if(rows)
 			tmp += 4
 			if(tmp <= 8)
-				i.pixel_y = -5
+				i.pixel_y = -5 	//row 1
 				i.pixel_x = tmp - 8
 			else if(tmp <= 20)
-				i.pixel_y = -1
+				i.pixel_y = -1 	//row 2
 				i.pixel_x = tmp - 16
 			else
-				i.pixel_y = -5
+				i.pixel_y = -5 	//back to row 1
 				i.pixel_x = tmp - 20
 		else
 			tmp += 2
-			i.pixel_y =  -3
+			i.pixel_y =  -3 //roughly in the center of the tray
 			i.pixel_x = tmp - 6
 
 		if(rearrange) pos = tmp
@@ -409,26 +432,26 @@
 	if(rows)
 		pos += 4
 		if(pos <= 8)
-			i.pixel_y = -5
+			i.pixel_y = -5  //row 1
 			i.pixel_x = pos - 8
 		else if(pos <= 20)
-			i.pixel_y = -1
+			i.pixel_y = -1  //row 2
 			i.pixel_x = pos - 16
 		else
-			i.pixel_y = -5
+			i.pixel_y = -5  //back to row 1
 			i.pixel_x = pos - 20
 	else
 		pos += 2
+		i.pixel_y = -3 //roughly in the center of the tray
 		i.pixel_x = pos - 6
-		i.pixel_y = -3
 	overlays += i
 	..()
 
 /obj/item/weapon/storage/bag/tray/sushi
 	name = "sushi plate"
-	icon = 'icons/obj/food.dmi'
 	icon_state = "sushitray"
-	desc = "A rectangular ceramic plate meant to place sushi on."
+	desc = "A rectangular ceramic plate to serve sushi on."
+
 
 
 // -----------------------------

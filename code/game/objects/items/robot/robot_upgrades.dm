@@ -91,7 +91,7 @@
 /obj/item/borg/upgrade/vtec
 	name = "robotic VTEC Module"
 	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
-	construction_cost = list("metal"=80000 , "glass"=6000 , "gold"= 5000)
+	construction_cost = list("metal"=80000 , "glass"=6000 , MAT_GOLD=5000)
 	icon_state = "cyborg_upgrade2"
 	require_module = 1
 
@@ -108,7 +108,7 @@
 /obj/item/borg/upgrade/tasercooler
 	name = "robotic Rapid Taser Cooling Module"
 	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
-	construction_cost = list("metal"=80000 , "glass"=6000 , "gold"= 2000, "diamond" = 500)
+	construction_cost = list("metal"=80000 , "glass"=6000 , MAT_GOLD=2000, MAT_DIAMOND=500)
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 
@@ -143,7 +143,7 @@
 /obj/item/borg/upgrade/jetpack
 	name = "mining robot jetpack"
 	desc = "A carbon dioxide jetpack suitable for low-gravity mining operations."
-	construction_cost = list("metal"=10000,"plasma"=15000,"uranium" = 20000)
+	construction_cost = list("metal"=10000,MAT_PLASMA=15000,MAT_URANIUM=20000)
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 
@@ -165,7 +165,7 @@
 /obj/item/borg/upgrade/syndicate/
 	name = "illegal equipment module"
 	desc = "Unlocks the hidden, deadlier functions of a robot"
-	construction_cost = list("metal"=10000,"glass"=15000,"diamond" = 10000)
+	construction_cost = list("metal"=10000,"glass"=15000,MAT_DIAMOND = 10000)
 	icon_state = "cyborg_upgrade3"
 	require_module = 1
 

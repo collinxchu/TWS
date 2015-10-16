@@ -146,14 +146,15 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 		return
 
 	vessel.remove_reagent("blood",amt)
-	blood_splatter(src,src)
+	if (isturf(src.loc)) //Blood loss still happens in locker, floor stays clean
+		blood_splatter(src,src)
 
 /****************************************************
 				BLOOD TRANSFERS
 ****************************************************/
 
 //Gets blood from mob to the container, preserving all data in it.
-/mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+/mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, amount)
 
 	var/datum/reagent/B = get_blood(container.reagents)
 	if(!B) B = new /datum/reagent/blood
@@ -188,7 +189,7 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	return B
 
 //For humans, blood does not appear from blue, it comes from vessels.
-/mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+/mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, amount)
 
 	if(species && species.flags & NO_BLOOD)
 		return null
@@ -200,23 +201,32 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 	vessel.remove_reagent("blood",amount) // Removes blood if human
 
 //Transfers blood from container ot vessels
-/mob/living/carbon/proc/inject_blood(var/datum/reagent/blood/injected, var/amount)
-	if (!injected || !istype(injected))
+/mob/living/carbon/proc/inject_blood(obj/item/weapon/reagent_containers/container, amount)
+
+	var/datum/reagent/blood/injected = get_blood(container.reagents)
+
+	if(!injected)
 		return
+
 	var/list/sniffles = virus_copylist(injected.data["virus2"])
 	for(var/ID in sniffles)
 		var/datum/disease2/disease/sniffle = sniffles[ID]
 		infect_virus2(src,sniffle,1)
 	if (injected.data["antibodies"] && prob(5))
 		antibodies |= injected.data["antibodies"]
+
 	var/list/chems = list()
 	chems = params2list(injected.data["trace_chem"])
 	for(var/C in chems)
 		src.reagents.add_reagent(C, (text2num(chems[C]) / 560) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()
 
+	container.reagents.remove_reagent("blood", amount)
+
 //Transfers blood from reagents to vessel, respecting blood types compatability.
-/mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
+/mob/living/carbon/human/inject_blood(obj/item/weapon/reagent_containers/container, amount)
+
+	var/datum/reagent/blood/injected = get_blood(container.reagents)
 
 	if(species && species.flags & NO_BLOOD)
 		reagents.add_reagent("blood", amount, injected.data)
@@ -227,8 +237,10 @@ var/const/BLOOD_VOLUME_SURVIVE = 122
 
 	if (!injected || !our)
 		return
+
 	if(blood_incompatible(injected.data["blood_type"],our.data["blood_type"],injected.data["species"],our.data["species"]) )
 		reagents.add_reagent("toxin",amount * 0.5)
+		our.on_merge(injected.data) //still transfer viruses and such, even if incompatibles bloods
 		reagents.update_total()
 	else
 		vessel.add_reagent("blood", amount, injected.data)

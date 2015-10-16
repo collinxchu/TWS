@@ -204,7 +204,7 @@ BLIND     // can't see anything
 	icon = 'icons/obj/clothing/gloves.dmi'
 	siemens_coefficient = 0.50
 	var/wired = 0
-	var/obj/item/weapon/cell/cell = 0
+	var/obj/item/weapon/stock_parts/cell/cell = 0
 	var/clipped = 0
 	body_parts_covered = HANDS
 	slot_flags = SLOT_GLOVES
@@ -314,6 +314,9 @@ BLIND     // can't see anything
 	body_parts_covered = HEAD
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
+	var/mask_adjusted = 0
+	var/ignore_maskadjust = 1
+	var/adjusted_flags = null
 	sprite_sheets = list("Vox" = 'icons/mob/species/vox/masks.dmi')
 
 /obj/item/clothing/mask/update_clothing_icon()
@@ -323,6 +326,34 @@ BLIND     // can't see anything
 
 /obj/item/clothing/mask/proc/filter_air(datum/gas_mixture/air)
 	return
+
+//Proc that moves gas/breath masks out of the way
+/obj/item/clothing/mask/proc/adjustmask(var/mob/user)
+	if(!ignore_maskadjust)
+		if(!user.canmove || user.stat || user.restrained())
+			return
+		if(src.mask_adjusted == 1)
+			src.icon_state = initial(icon_state)
+			gas_transfer_coefficient = initial(gas_transfer_coefficient)
+			permeability_coefficient = initial(permeability_coefficient)
+			user << "You push \the [src] back into place."
+			src.mask_adjusted = 0
+			slot_flags = initial(slot_flags)
+		else
+			src.icon_state += "_up"
+			user << "You push \the [src] out of the way."
+			gas_transfer_coefficient = null
+			permeability_coefficient = null
+			src.mask_adjusted = 1
+			if(adjusted_flags)
+				slot_flags = adjusted_flags
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
+				if(H.internal)
+					if(H.internals)
+						H.internals.icon_state = "internal0"
+					H.internal = null
+		usr.update_inv_wear_mask()
 
 ///////////////////////////////////////////////////////////////////////
 //Shoes
@@ -546,3 +577,9 @@ BLIND     // can't see anything
 	if (hastie)
 		hastie.emp_act(severity)
 	..()
+
+/obj/item/clothing/proc/can_use(mob/user)
+	if(user && ismob(user))
+		if(!user.incapacitated())
+			return 1
+	return 0

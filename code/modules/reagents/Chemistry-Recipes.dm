@@ -15,6 +15,8 @@ datum
 		var/secondary = 0 // set to nonzero if secondary reaction
 		var/list/secondary_results = list()		//additional reagents produced by the reaction
 		var/requires_heating = 0
+		var/required_temp = 0
+		var/mix_message = "The solution begins to bubble."
 
 		proc
 			on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -74,7 +76,7 @@ datum
 			name = "Sterilizine"
 			id = "sterilizine"
 			result = "sterilizine"
-			required_reagents = list("ethanol" = 1, "anti_toxin" = 1, "chlorine" = 1)
+			required_reagents = list("ethanol" = 1, "antitoxin" = 1, "chlorine" = 1)
 			result_amount = 3
 
 		inaprovaline
@@ -84,10 +86,10 @@ datum
 			required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
 			result_amount = 3
 
-		anti_toxin
+		antitoxin
 			name = "Dylovene"
-			id = "anti_toxin"
-			result = "anti_toxin"
+			id = "antitoxin"
+			result = "antitoxin"
 			required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
 			result_amount = 3
 
@@ -180,7 +182,7 @@ datum
 			name = "Hyronalin"
 			id = "hyronalin"
 			result = "hyronalin"
-			required_reagents = list("radium" = 1, "anti_toxin" = 1)
+			required_reagents = list("radium" = 1, "antitoxin" = 1)
 			result_amount = 2
 
 		arithrazine
@@ -238,14 +240,14 @@ datum
 			name = "Tricordrazine"
 			id = "tricordrazine"
 			result = "tricordrazine"
-			required_reagents = list("inaprovaline" = 1, "anti_toxin" = 1)
+			required_reagents = list("inaprovaline" = 1, "antitoxin" = 1)
 			result_amount = 2
 
 		alkysine
 			name = "Alkysine"
 			id = "alkysine"
 			result = "alkysine"
-			required_reagents = list("chlorine" = 1, "nitrogen" = 1, "anti_toxin" = 1)
+			required_reagents = list("chlorine" = 1, "nitrogen" = 1, "antitoxin" = 1)
 			result_amount = 2
 
 		dexalin
@@ -317,14 +319,14 @@ datum
 			name = "imidazoline"
 			id = "imidazoline"
 			result = "imidazoline"
-			required_reagents = list("carbon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
+			required_reagents = list("carbon" = 1, "hydrogen" = 1, "antitoxin" = 1)
 			result_amount = 2
 
 		ethylredoxrazine
 			name = "Ethylredoxrazine"
 			id = "ethylredoxrazine"
 			result = "ethylredoxrazine"
-			required_reagents = list("oxygen" = 1, "anti_toxin" = 1, "carbon" = 1)
+			required_reagents = list("oxygen" = 1, "antitoxin" = 1, "carbon" = 1)
 			result_amount = 3
 
 		ethanoloxidation
@@ -502,7 +504,7 @@ datum
 			name = "Mindbreaker Toxin"
 			id = "mindbreaker"
 			result = "mindbreaker"
-			required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
+			required_reagents = list("silicon" = 1, "hydrogen" = 1, "antitoxin" = 1)
 			result_amount = 3
 
 		lipozine
@@ -1199,7 +1201,7 @@ datum
 			required_container = /obj/item/slime_extract/yellow
 			required_other = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
-				var/obj/item/weapon/cell/slime/P = new /obj/item/weapon/cell/slime
+				var/obj/item/weapon/stock_parts/cell/high/slime/P = new /obj/item/weapon/stock_parts/cell/high/slime
 				P.loc = get_turf(holder.my_atom)
 
 		slimeglow
@@ -1363,7 +1365,7 @@ datum
 			name = "Chocolate Bar"
 			id = "chocolate_bar"
 			result = null
-			required_reagents = list("soymilk" = 2, "coco" = 2, "sugar" = 2)
+			required_reagents = list("soymilk" = 2, "cocoa" = 2, "sugar" = 2)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
@@ -1375,7 +1377,7 @@ datum
 			name = "Chocolate Bar"
 			id = "chocolate_bar"
 			result = null
-			required_reagents = list("milk" = 2, "coco" = 2, "sugar" = 2)
+			required_reagents = list("milk" = 2, "cocoa" = 2, "sugar" = 2)
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
@@ -1387,7 +1389,7 @@ datum
 			name = "Hot Coco"
 			id = "hot_coco"
 			result = "hot_coco"
-			required_reagents = list("water" = 5, "coco" = 1)
+			required_reagents = list("water" = 5, "cocoa" = 1)
 			result_amount = 5
 
 		soysauce
@@ -1406,7 +1408,7 @@ datum
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
-				new /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel(location)
+				new /obj/item/weapon/reagent_containers/food/snacks/store/cheesewheel(location)
 				return
 
 		syntiflesh
@@ -1417,7 +1419,7 @@ datum
 			result_amount = 1
 			on_reaction(var/datum/reagents/holder, var/created_volume)
 				var/location = get_turf(holder.my_atom)
-				new /obj/item/weapon/reagent_containers/food/snacks/meat/syntiflesh(location)
+				new /obj/item/weapon/reagent_containers/food/snacks/meat/slab/synthmeat(location)
 				return
 
 		hot_ramen
@@ -1449,7 +1451,7 @@ datum
 			name = "Patron"
 			id = "patron"
 			result = "patron"
-			required_reagents = list("tequilla" = 10, "silver" = 1)
+			required_reagents = list("tequila" = 10, "silver" = 1)
 			result_amount = 10
 
 		bilk
@@ -1626,14 +1628,14 @@ datum
 			name = "Brave Bull"
 			id = "bravebull"
 			result = "bravebull"
-			required_reagents = list("tequilla" = 2, "kahlua" = 1)
+			required_reagents = list("tequila" = 2, "kahlua" = 1)
 			result_amount = 3
 
-		tequilla_sunrise
-			name = "Tequilla Sunrise"
-			id = "tequillasunrise"
-			result = "tequillasunrise"
-			required_reagents = list("tequilla" = 2, "orangejuice" = 1)
+		tequila_sunrise
+			name = "tequila Sunrise"
+			id = "tequilasunrise"
+			result = "tequilasunrise"
+			required_reagents = list("tequila" = 2, "orangejuice" = 1)
 			result_amount = 3
 
 		plasma_special
@@ -1675,7 +1677,7 @@ datum
 			name = "Hooch"
 			id = "hooch"
 			result = "hooch"
-			required_reagents = list ("sugar" = 1, "ethanol" = 2, "fuel" = 1)
+			required_reagents = list ("sugar" = 1, "ethanol" = 2, "welding_fuel" = 1)
 			result_amount = 3
 
 		irish_coffee
@@ -1703,21 +1705,21 @@ datum
 			name = "Margarita"
 			id = "margarita"
 			result = "margarita"
-			required_reagents = list("tequilla" = 2, "limejuice" = 1)
+			required_reagents = list("tequila" = 2, "limejuice" = 1)
 			result_amount = 3
 
 		longislandicedtea
 			name = "Long Island Iced Tea"
 			id = "longislandicedtea"
 			result = "longislandicedtea"
-			required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 1)
+			required_reagents = list("vodka" = 1, "gin" = 1, "tequila" = 1, "cubalibre" = 1)
 			result_amount = 4
 
 		icedtea
 			name = "Long Island Iced Tea"
 			id = "longislandicedtea"
 			result = "longislandicedtea"
-			required_reagents = list("vodka" = 1, "gin" = 1, "tequilla" = 1, "cubalibre" = 1)
+			required_reagents = list("vodka" = 1, "gin" = 1, "tequila" = 1, "cubalibre" = 1)
 			result_amount = 4
 
 		threemileisland

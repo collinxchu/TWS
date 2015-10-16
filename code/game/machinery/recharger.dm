@@ -7,9 +7,10 @@ obj/machinery/recharger
 	anchored = 1
 	use_power = 1
 	idle_power_usage = 4
-	active_power_usage = 15000	//15 kW
+	active_power_usage = 250	//15 kW
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/device/laptop, /obj/item/weapon/cell)
+
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/device/laptop, /obj/item/weapon/stock_parts/cell)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -79,7 +80,7 @@ obj/machinery/recharger/process()
 			var/obj/item/weapon/gun/energy/E = charging
 			if(!E.power_supply.fully_charged())
 				icon_state = icon_state_charging
-				E.power_supply.give(active_power_usage*CELLRATE)
+				E.power_supply.give(E.power_supply.chargerate)
 				update_use_power(2)
 			else
 				icon_state = icon_state_charged
@@ -91,7 +92,7 @@ obj/machinery/recharger/process()
 			if(B.bcell)
 				if(!B.bcell.fully_charged())
 					icon_state = icon_state_charging
-					B.bcell.give(active_power_usage*CELLRATE)
+					B.bcell.give(B.bcell.chargerate)
 					update_use_power(2)
 				else
 					icon_state = icon_state_charged
@@ -112,8 +113,8 @@ obj/machinery/recharger/process()
 				update_use_power(1)
 			return
 
-		if(istype(charging, /obj/item/weapon/cell))
-			var/obj/item/weapon/cell/C = charging
+		if(istype(charging, /obj/item/weapon/stock_parts/cell))
+			var/obj/item/weapon/stock_parts/cell/C = charging
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
 				C.give(active_power_usage*CELLRATE)

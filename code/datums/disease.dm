@@ -1,10 +1,11 @@
-#define SPECIAL -1
-#define NON_CONTAGIOUS 0
-#define BLOOD 1
-#define CONTACT_FEET 2
-#define CONTACT_HANDS 3
-#define CONTACT_GENERAL 4
-#define AIRBORNE 5
+//Spread Flags
+#define SPECIAL 1
+#define NON_CONTAGIOUS 2
+#define BLOOD 4
+#define CONTACT_FEET 8
+#define CONTACT_HANDS 16
+#define CONTACT_GENERAL 32
+#define AIRBORNE 64
 
 #define SCANNER 1
 #define PANDEMIC 2
@@ -21,10 +22,25 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 
 
 /datum/disease
+	//Flags
+	var/spread_flags = AIRBORNE
+
+	//Fluff
 	var/form = "Virus" //During medscans, what the disease is referred to as
 	var/name = "No disease"
+	var/desc = "" //description. Leave it null and this disease won't show in med records.
+	var/agent = "some microbes"
+	var/spread_text = ""
+	var/cure_text = ""
+
+	//Stages
 	var/stage = 1 //all diseases start at stage 1
-	var/max_stages = 0.0
+	var/max_stages = 0
+	var/stage_prob = 4 // probability of advancing to next stage, default 4% per check
+
+	//Other
+
+	var/list/viable_mobtypes = list() //typepaths of viable mobs
 	var/cure = null
 	var/cure_id = null// reagent.id or list containing them
 	var/cure_list = null // allows for multiple possible cure combinations
@@ -39,14 +55,10 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 	var/carrier = 0.0 //there will be a small chance that the person will be a carrier
 	var/curable = 0 //can this disease be cured? (By itself...)
 	var/list/strain_data = list() //This is passed on to infectees
-	var/stage_prob = 4		// probability of advancing to next stage, default 4% per check
-	var/agent = "some microbes"//name of the disease agent
 	var/permeability_mod = 1//permeability modifier coefficient.
-	var/desc = null//description. Leave it null and this disease won't show in med records.
 	var/severity = null//severity descr
 	var/longevity = 150//time in "ticks" the virus stays in inanimate object (blood stains, corpses, etc). In syringes, bottles and beakers it stays infinitely.
 	var/list/hidden = list(0, 0)
-	var/can_carry = 1 // If the disease allows "carriers".
 	var/age = 0 // age of the disease in the current mob
 	var/stage_minimum_age = 0 // how old the disease must be to advance per stage
 	// if hidden[1] is true, then virus is hidden from medical scanners
@@ -129,8 +141,8 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 
 	if(affected_mob.reagents != null)
 		if(affected_mob)
-			if(affected_mob.reagents.has_reagent("spaceacillin"))
-				return // Don't spread if we have spaceacillin in our system.
+			if( affected_mob.reagents.has_reagent("spaceacillin") || (affected_mob.satiety > 0 && prob(affected_mob.satiety/10)) )
+				return // Don't spread if we have spaceacillin in our system. Positive satiety makes it harder to spread the disease.
 
 	var/check_range = airborne_range//defaults to airborne - range 2
 
@@ -202,6 +214,19 @@ var/list/diseases = typesof(/datum/disease) - /datum/disease
 	return new type(process, src)
 
 
+/datum/disease/proc/GetDiseaseID()
+	return type
+
 /datum/disease/Destroy()
 	active_diseases.Remove(src)
+	return ..()
 
+/datum/disease/proc/IsSpreadByTouch()
+	if(spread_flags & CONTACT_FEET || spread_flags & CONTACT_HANDS || spread_flags & CONTACT_GENERAL)
+		return 1
+	return 0
+
+//don't use this proc directly. this should only ever be called by cure()
+/datum/disease/proc/remove_virus()
+	affected_mob.viruses -= src		//remove the datum from the list
+	//affected_mob.med_hud_set_status()	#TOREMOVE - finish updating viruses

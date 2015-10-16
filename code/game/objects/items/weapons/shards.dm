@@ -11,7 +11,7 @@
 	force = 5.0
 	throwforce = 8.0
 	item_state = "shard-glass"
-	matter = list("glass" = 3750)
+	materials = list(MAT_GLASS=3750)
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
 
 /obj/item/weapon/shard/suicide_act(mob/user)

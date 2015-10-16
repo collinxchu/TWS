@@ -60,7 +60,7 @@
 	icon_state = "gshell"
 	caliber = "shotgun"
 	projectile_type = "/obj/item/projectile/bullet"
-	matter = list("metal" = 12500)
+	materials = list(MAT_METAL=12500)
 
 
 /obj/item/ammo_casing/shotgun/blank
@@ -68,7 +68,7 @@
 	desc = "A blank shell."
 	icon_state = "blshell"
 	projectile_type = "/obj/item/projectile/bullet/chameleon"
-	matter = list("metal" = 250)
+	materials = list(MAT_METAL=250)
 
 
 /obj/item/ammo_casing/shotgun/beanbag
@@ -76,14 +76,14 @@
 	desc = "A weak beanbag shell."
 	icon_state = "bshell"
 	projectile_type = "/obj/item/projectile/bullet/weakbullet/beanbag"
-	matter = list("metal" = 500)
+	materials = list(MAT_METAL=500)
 
 /obj/item/ammo_casing/shotgun/improvised
 	name = "improvised shell"
 	desc = "An extremely weak shotgun shell with multiple small pellets made out of metal shards."
 	icon_state = "improvshell"
 //	projectile_type = /obj/item/projectile/bullet/pellet/weak
-	matter = list("metal" = 250)
+	materials = list(MAT_METAL=250)
 	//pellets = 5
 	//variance = 0.8 #TOREMOVE
 
@@ -94,7 +94,7 @@
 	propellant. It's like playing russian roulette, with a shotgun."
 	icon_state = "improvshell"
 //	projectile_type = /obj/item/projectile/bullet/pellet/random
-	matter = list("metal" = 250)
+	materials = list(MAT_METAL=250)
 	//pellets = 5
 	//variance = 1
 
@@ -158,14 +158,14 @@
 	desc = "A stunning shell."
 	icon_state = "stunshell"
 	projectile_type = "/obj/item/projectile/bullet/stunshot"
-	matter = list("metal" = 2500)
+	materials = list(MAT_METAL=2500)
 
 /obj/item/ammo_casing/shotgun/dart
 	name = "shotgun darts"
 	desc = "A dart for use in shotguns."
 	icon_state = "dart"
 	projectile_type = "/obj/item/projectile/energy/dart"
-	matter = list("metal" = 12500)
+	materials = list(MAT_METAL=12500)
 
 /obj/item/ammo_casing/a762
 	desc = "A 7.62 bullet casing."

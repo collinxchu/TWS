@@ -126,14 +126,16 @@
 		qdel(src)
 
 	//DRILLING
-	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if (istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/drill/diamonddrill/D = W
 		var/turf/T = get_turf(src)
 		if(!mineral)
 			T.ChangeTurf(/turf/simulated/wall)
 		else
 			T.ChangeTurf(text2path("/turf/simulated/wall/mineral/[mineral]"))
 		T = get_turf(src)
-		T.attackby(W,user)
+		T.attackby(D,user)
+		D.playDigSound()
 		qdel(src)
 
 	else if( istype(W, /obj/item/weapon/melee/energy/blade) )
@@ -254,7 +256,7 @@
 		qdel(src)
 
 	//DRILLING
-	else if (istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if (istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
 		var/turf/T = get_turf(src)
 		T.ChangeTurf(/turf/simulated/wall)
 		T = get_turf(src)

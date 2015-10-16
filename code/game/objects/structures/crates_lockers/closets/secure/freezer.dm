@@ -11,7 +11,7 @@
 			new /obj/item/weapon/reagent_containers/food/snacks/flour(src)
 		new /obj/item/weapon/reagent_containers/food/condiment/sugar(src)
 		for(var/i = 0, i < 3, i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/meat/monkey(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/meat/slab/monkey(src)
 		return
 
 /obj/structure/closet/secure_closet/freezer/kitchen/mining
@@ -23,7 +23,7 @@
 	New()
 		..()
 		for(var/i = 0, i < 4, i++)
-			new /obj/item/weapon/reagent_containers/food/snacks/meat/monkey(src)
+			new /obj/item/weapon/reagent_containers/food/snacks/meat/slab/monkey(src)
 		return
 
 /obj/structure/closet/secure_closet/freezer/fridge

@@ -1,9 +1,22 @@
 /*
  * Contains:
+ *		Police
  *		Security
  *		Detective
  *		Head of Security
  */
+
+/*
+ * Police
+ */
+/obj/item/clothing/under/rank/security/w_police
+	name = "police officer's jumpsuit"
+	desc = "A bulky aramid weave makes up the majority of the jumpsuit, with a layer of cotton internally for comfort. Provides robust protection."
+	icon_state = "w_police"
+	item_state = "w_police"
+	item_color = "w_police"
+	armor = list(melee = 10, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	siemens_coefficient = 0.9
 
 /*
  * Security

@@ -7,7 +7,7 @@
 	var/pointer_icon_state
 	flags = CONDUCT
 	slot_flags = SLOT_BELT
-	matter = list("metal" = 500,"glass" = 500)
+	materials = list(MAT_METAL=500,MAT_GLASS=500)
 	w_class = 2 //Increased to 2, because diodes are w_class 2. Conservation of matter.
 	origin_tech = "combat=1;magnets=2"
 	var/turf/pointer_loc

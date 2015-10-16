@@ -20,7 +20,7 @@
 	w_class = 1.0
 	throw_speed = 7
 	throw_range = 15
-	matter = list("metal" = 10)
+	materials = list(MAT_METAL=10)
 	var/colour = "black"	//what colour the ink is!
 	pressure_resistance = 2
 

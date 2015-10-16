@@ -787,15 +787,15 @@ var/list/slot_equipment_priority = list( \
 //Updates canmove, lying and icons. Could perhaps do with a rename but I can't think of anything to describe it.
 /mob/proc/update_canmove()
 	if(istype(buckled, /obj/vehicle))
-		var/obj/vehicle/V = buckled
+		//var/obj/vehicle/V = buckled
 		if(stat || weakened || paralysis || resting || sleeping || (status_flags & FAKEDEATH))
 			lying = 1
 			canmove = 0
-			//pixel_y = V.mob_offset_y - 5
+		  //pixel_y = V.mob_offset_y - 5
 		else
 			if(buckled.buckle_lying != -1) lying = buckled.buckle_lying
 			canmove = 1
-			pixel_y = V.mob_offset_y
+		//	pixel_y = V.mob_offset_y
 	else if(buckled)
 		anchored = 1
 		canmove = 0
@@ -841,6 +841,9 @@ var/list/slot_equipment_priority = list( \
 
 	return canmove
 
+/mob/proc/fall(forced)
+	drop_l_hand()
+	drop_r_hand()
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || client.moving || world.time < client.move_delay)
@@ -876,20 +879,29 @@ var/list/slot_equipment_priority = list( \
 /mob/proc/IsAdvancedToolUser()
 	return 0
 
+/mob/proc/Jitter(amount)
+	jitteriness = max(jitteriness,amount,0)
+
+/mob/proc/Dizzy(amount)
+	dizziness = max(dizziness,amount,0)
+
 /mob/proc/Stun(amount)
 	if(status_flags & CANSTUN)
 		facing_dir = null
 		stunned = max(max(stunned,amount),0) //can't go below 0, getting a low amount of stun doesn't lower your current stun
+		update_canmove()
 	return
 
 /mob/proc/SetStunned(amount) //if you REALLY need to set stun to a set amount without the whole "can't go below current stunned"
 	if(status_flags & CANSTUN)
 		stunned = max(amount,0)
+		update_canmove()
 	return
 
 /mob/proc/AdjustStunned(amount)
 	if(status_flags & CANSTUN)
 		stunned = max(stunned + amount,0)
+		update_canmove()
 	return
 
 /mob/proc/Weaken(amount)
@@ -915,43 +927,52 @@ var/list/slot_equipment_priority = list( \
 	if(status_flags & CANPARALYSE)
 		facing_dir = null
 		paralysis = max(max(paralysis,amount),0)
+		update_canmove()
 	return
 
 /mob/proc/SetParalysis(amount)
 	if(status_flags & CANPARALYSE)
 		facing_dir = null
 		paralysis = max(amount,0)
+		update_canmove()
 	return
 
 /mob/proc/AdjustParalysis(amount)
 	if(status_flags & CANPARALYSE)
 		paralysis = max(paralysis + amount,0)
+		update_canmove()
 	return
 
 /mob/proc/Sleeping(amount)
 	facing_dir = null
 	sleeping = max(max(sleeping,amount),0)
+	update_canmove()
 	return
 
 /mob/proc/SetSleeping(amount)
 	sleeping = max(amount,0)
+	update_canmove()
 	return
 
 /mob/proc/AdjustSleeping(amount)
 	sleeping = max(sleeping + amount,0)
+	update_canmove()
 	return
 
 /mob/proc/Resting(amount)
 	facing_dir = null
 	resting = max(max(resting,amount),0)
+	update_canmove()
 	return
 
 /mob/proc/SetResting(amount)
 	resting = max(amount,0)
+	update_canmove()
 	return
 
 /mob/proc/AdjustResting(amount)
 	resting = max(resting + amount,0)
+	update_canmove()
 	return
 
 /mob/proc/adjustEarDamage()
@@ -1071,6 +1092,7 @@ mob/proc/yank_out_object()
 	handle_silent()
 	handle_drugged()
 	handle_slurring()
+	handle_jittery()
 
 /mob/living/proc/handle_stunned()
 	if(stunned)
@@ -1096,6 +1118,11 @@ mob/proc/yank_out_object()
 	if(druggy)
 		druggy = max(druggy-1, 0)
 	return druggy
+
+/mob/living/proc/handle_jittery()
+	if(jitteriness)
+		do_jitter_animation(jitteriness)
+		jitteriness = max(jitteriness-1, 0)
 
 /mob/living/proc/handle_slurring()
 	if(slurring)

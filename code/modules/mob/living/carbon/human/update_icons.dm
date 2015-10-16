@@ -253,12 +253,7 @@ var/global/list/damage_icon_parts = list()
 	if(stand_icon)
 		qdel(stand_icon)
 	stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi',"blank")
-
 	var/icon_key = "[species.race_key][g][s_tone][r_skin][g_skin][b_skin]"
-	if(lip_style)
-		icon_key += "[lip_style]"
-	else
-		icon_key += "nolips"
 	var/obj/item/organ/eyes/eyes = internal_organs_by_name["eyes"]
 
 	if(eyes)
@@ -318,13 +313,22 @@ var/global/list/damage_icon_parts = list()
 			husk_over.Blend(mask, ICON_ADD)
 			base_icon.Blend(husk_over, ICON_OVERLAY)
 		human_icon_cache[icon_key] = base_icon
+
 	//END CACHED ICON GENERATION.
 	stand_icon.Blend(base_icon,ICON_OVERLAY)
+
 	//Underwear
 	if(underwear && species.flags & HAS_UNDERWEAR)
 		stand_icon.Blend(new /icon('icons/mob/human.dmi', underwear), ICON_OVERLAY)
 	if(undershirt && species.flags & HAS_UNDERWEAR)
 		stand_icon.Blend(new /icon('icons/mob/human.dmi', undershirt), ICON_OVERLAY)
+
+	if(lip_style  && species && species.flags & HAS_LIPS)
+		var/icon/lips = icon("icon"='icons/mob/human_face.dmi', "icon_state"="lips_[lip_style]_s")
+		lips.Blend(lip_color, ICON_ADD)
+
+		stand_icon.Blend(lips, ICON_OVERLAY)
+
 	if(update_icons)
 		update_icons()
 

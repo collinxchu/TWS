@@ -51,7 +51,7 @@
 	suit_overlay_active = "mounted-drill"
 	suit_overlay_inactive = "mounted-drill"
 
-	device_type = /obj/item/weapon/pickaxe/diamonddrill
+	device_type = /obj/item/weapon/pickaxe/drill/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "hardsuit anomaly scanner"
@@ -123,7 +123,7 @@
 		list("tramadol",      "tramadol",      0, 80),
 		list("dexalin plus",  "dexalinp",      0, 80),
 		list("antibiotics",   "spaceacillin",  0, 80),
-		list("antitoxins",    "anti_toxin",    0, 80),
+		list("antitoxins",    "antitoxin",    0, 80),
 		list("nutrients",     "nutriment",     0, 80),
 		list("hyronalin",     "hyronalin",     0, 80),
 		list("radium",        "radium",        0, 80)

@@ -71,6 +71,7 @@
 	name = "plastic fork"
 	desc = "Yay, no washing up to do."
 	icon_state = "pfork"
+	sharp = IS_SHARP
 
 /obj/item/weapon/kitchen/utensil/spoon
 	name = "spoon"
@@ -93,7 +94,7 @@
 	icon_state = "knife"
 	force = 10.0
 	throwforce = 10.0
-	sharp = 1
+	sharp = IS_SHARP_ACCURATE
 	edge = 1
 
 	suicide_act(mob/user)
@@ -116,7 +117,7 @@
 	icon_state = "pknife"
 	force = 1
 	throwforce = 1
-	sharp = 0
+	sharp = IS_SHARP
 	edge = 1 //for cutting pizzas
 
 /obj/item/weapon/kitchen/utensil/knife/attack(target as mob, mob/living/user as mob)
@@ -136,14 +137,14 @@
 	icon_state = "knife"
 	desc = "A general purpose Chef's Knife made by SpaceCook Incorporated. Guaranteed to stay sharp for years to come."
 	flags = CONDUCT
-	sharp = 1
+	sharp = IS_SHARP_ACCURATE
 	edge = 1
 	force = 10.0
 	w_class = 3.0
 	throwforce = 6.0
 	throw_speed = 3
 	throw_range = 6
-	matter = list("metal" = 12000)
+	materials = list(MAT_METAL=12000)
 	origin_tech = "materials=1"
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 
@@ -173,10 +174,10 @@
 	throwforce = 8.0
 	throw_speed = 3
 	throw_range = 6
-	matter = list("metal" = 12000)
+	materials = list(MAT_METAL=12000)
 	origin_tech = "materials=1"
 	attack_verb = list("cleaved", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
-	sharp = 1
+	sharp = IS_SHARP_ACCURATE
 	edge = 1
 
 /obj/item/weapon/butch/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
@@ -247,7 +248,7 @@
 	throw_range = 5
 	w_class = 3.0
 	flags = CONDUCT
-	matter = list("metal" = 3000)
+	materials = list(MAT_METAL=3000)
 	/* // NOPE
 	var/food_total= 0
 	var/burger_amt = 0

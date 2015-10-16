@@ -4,9 +4,9 @@
 	icon_state = "energy"
 	fire_sound = 'sound/weapons/Taser.ogg'
 
-	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
+	var/obj/item/weapon/stock_parts/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 100 //How much energy is needed to fire.
-	var/cell_type = "/obj/item/weapon/cell"
+	var/cell_type = "/obj/item/weapon/stock_parts/cell"
 	var/projectile_type = "/obj/item/projectile/beam/practice"
 	var/modifystate
 

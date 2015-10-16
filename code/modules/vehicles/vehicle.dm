@@ -11,15 +11,19 @@
 	density = 1
 	anchored = 1
 	animate_movement=1
-	light_power = 1.5
-	light_range = 3
+//	light_power = 1.5
+//	light_range = 3
 
 	can_buckle = 1
 	buckle_movable = 1
 	buckle_lying = 0
 
+	var/list/buckled_mobs = list()
+	var/list/action_buttons = list()
+
 	var/attack_log = null
 	var/on = 0
+	var/headlights = 0
 	var/health = 0	//do not forget to set health for your vehicle!
 	var/maxhealth = 0
 	var/fire_dam_coeff = 1.0
@@ -32,7 +36,7 @@
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 	var/fits_passenger = 0
 
-	var/obj/item/weapon/cell/cell
+	var/obj/item/weapon/stock_parts/cell/cell
 	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
 
 	var/atom/movable/load		//all vehicles can take a load, since they should all be a least drivable
@@ -48,11 +52,21 @@
 	var/passenger_offset_x = 0		//pixel_y offset for mob overlay
 	var/default_layer = OBJ_LAYER
 
+	light_power = 1.5 //for headlights
+
+	var/spam_flag = 0 //for sound effects
+	var/cooldowntime
+	var/engine_start
+	var/engine_fail
+
+
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/New()
 	..()
+	populate_action_buttons()
+	populate_verbs()
 	//spawn the cell you want in each vehicle
 
 /obj/vehicle/Move()
@@ -100,7 +114,7 @@
 	else if(istype(W, /obj/item/weapon/crowbar) && cell && open)
 		remove_cell(user)
 
-	else if(istype(W, /obj/item/weapon/cell) && !cell && open)
+	else if(istype(W, /obj/item/weapon/stock_parts/cell) && !cell && open)
 		insert_cell(W, user)
 	else if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/T = W
@@ -195,14 +209,84 @@
 	if(powered && cell.charge < charge_use)
 		return 0
 	on = 1
-	set_light(initial(light_range))
 	update_icon()
+
+	verbs -= /obj/vehicle/verb/stop_engine
+	verbs -= /obj/vehicle/verb/start_engine
+
+	if(on)
+		verbs += /obj/vehicle/verb/stop_engine
+	else
+		verbs += /obj/vehicle/verb/start_engine
+
+	for(var/obj/screen/vehicle_action/enginetoggle/A in action_buttons)
+		A.icon_state = "engine[on]"
+		A.name = "[on ? "Turn Off" : "Turn On"] Engine"
+
+	if(usr) usr.update_action_buttons()
 	return 1
 
 /obj/vehicle/proc/turn_off()
 	on = 0
-	luminosity = 0
 	update_icon()
+
+	verbs -= /obj/vehicle/verb/stop_engine
+	verbs -= /obj/vehicle/verb/start_engine
+
+	if(!on)
+		verbs += /obj/vehicle/verb/start_engine
+	else
+		verbs += /obj/vehicle/verb/stop_engine
+
+	for(var/obj/screen/vehicle_action/enginetoggle/A in action_buttons)
+		A.icon_state = "engine[on]"
+		A.name = "[on ? "Turn Off" : "Turn On"] Engine"
+
+	if(usr) usr.update_action_buttons()
+
+/obj/vehicle/proc/headlights_on()
+
+	headlights = 1
+	set_light(3)
+
+	verbs -= /obj/vehicle/verb/turn_headlights_off
+	verbs -= /obj/vehicle/verb/turn_headlights_on
+
+	if(headlights)
+		verbs += /obj/vehicle/verb/turn_headlights_off
+	else
+		verbs += /obj/vehicle/verb/turn_headlights_on
+
+	for(var/obj/screen/vehicle_action/headlightstoggle/A in action_buttons)
+		A.icon_state = "headlights[headlights]"
+		A.name = "[headlights ? "Turn Off" : "Turn On"] Headlights"
+
+	if(usr) usr.update_action_buttons()
+
+/obj/vehicle/proc/headlights_off()
+
+	headlights = 0
+	set_light(0)
+
+	verbs -= /obj/vehicle/verb/turn_headlights_off
+	verbs -= /obj/vehicle/verb/turn_headlights_on
+
+	if(!headlights)
+		verbs += /obj/vehicle/verb/turn_headlights_on
+	else
+		verbs += /obj/vehicle/verb/turn_headlights_off
+
+	for(var/obj/screen/vehicle_action/headlightstoggle/A in action_buttons)
+		A.icon_state = "headlights[headlights]"
+		A.name = "[headlights ? "Turn Off" : "Turn On"] Headlights"
+
+	if(usr) usr.update_action_buttons()
+
+/obj/vehicle/proc/swap()
+	return
+
+/obj/vehicle/proc/honk_horn()
+	playsound(src, 'sound/items/bikehorn.ogg',40,1)
 
 /obj/vehicle/proc/Emag(mob/user as mob)
 	emagged = 1
@@ -256,7 +340,7 @@
 		turn_on()
 		return
 
-/obj/vehicle/proc/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/proc/insert_cell(var/obj/item/weapon/stock_parts/cell/C, var/mob/living/carbon/human/H)
 	if(cell)
 		return
 	if(!istype(C))
@@ -318,6 +402,8 @@
 
 	if(ismob(C))
 		buckle_mob(C)
+		var/mob/M = C
+		M.update_action_buttons()
 
 	return 1
 
@@ -360,10 +446,110 @@
 
 	if(ismob(load))
 		unbuckle_mob(load)
+		var/mob/M = load
+		M.update_action_buttons()
 
 	load = null
 
 	return 1
+
+//-------------------------------------------------------
+// Verbs
+//-------------------------------------------------------
+
+/obj/vehicle/verb/turn_headlights_on()
+	set name = "Turn On Headlights"
+	set category = "Vehicle"
+	set src in oview(1)
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
+
+	headlights_on()
+
+/obj/vehicle/verb/turn_headlights_off()
+	set name = "Turn Off Headlights"
+	set category = "Vehicle"
+	set src in oview(1)
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
+
+	headlights_off()
+
+/obj/vehicle/verb/start_engine()
+	set name = "Start engine"
+	set category = "Vehicle"
+	set src in view(0)
+
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
+
+	if(on)
+		usr << "<span class='warning'>The engine is already running.</span>"
+		return
+
+	if(!spam_flag)
+		spam_flag = 1
+		cooldowntime = 30
+		turn_on()
+		if (on)
+			playsound(src.loc, engine_start, 80, 0, 44100)
+			usr << "<span class='notice'>You start [src]'s engine.</span>"
+			spawn(cooldowntime)
+				spam_flag = 0
+		else
+			if(cell.charge < charge_use)
+				usr << "<span class='warning'>[src] is out of power.</span>"
+			else
+				spam_flag = 1
+				cooldowntime = 50
+				usr << "<span class='warning'>[src]'s engine won't start.</span>"
+				playsound(src.loc, engine_fail, 80, 0, 44100)
+				spawn(cooldowntime)
+					spam_flag = 0
+
+/obj/vehicle/verb/stop_engine()
+	set name = "Stop engine"
+	set category = "Vehicle"
+	set src in view(0)
+
+	if(!istype(usr, /mob/living/carbon/human))
+		return
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
+
+	if(!on)
+		usr << "<span class='warning'>The engine is already stopped.</span>"
+		return
+
+	turn_off()
+	if (!on)
+		usr << "<span class='notice'>You stop [src]'s engine.</span>"
+
+/obj/vehicle/verb/open_trunk()
+	set name = "Trunk Open"
+	set category = "Vehicle"
+	set src in oview(1)
+	return
+/obj/vehicle/verb/close_trunk()
+	set name = "Trunk Close"
+	set category = "Vehicle"
+	set src in oview(1)
+	return
+/obj/vehicle/verb/honk()
+	set name = "Honk horn"
+	set category = "Vehicle"
+	set src in view(0)
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
+
+	honk_horn()
 
 //-------------------------------------------------------
 // Stat update procs
@@ -381,3 +567,14 @@
 		new /obj/effect/decal/cleanable/blood/oil(src.loc)
 	spawn(1) healthcheck()
 	return 1
+
+/obj/vehicle/proc/populate_action_buttons() //These come with all vehicles
+	action_buttons += new /obj/screen/vehicle_action/enginetoggle(null)
+	action_buttons += new /obj/screen/vehicle_action/headlightstoggle(null)
+	action_buttons += new /obj/screen/vehicle_action/horntoggle(null)
+
+/obj/vehicle/proc/populate_verbs()
+	verbs -= /obj/vehicle/verb/close_trunk
+	verbs -= /obj/vehicle/verb/open_trunk
+	verbs -= /obj/vehicle/verb/stop_engine
+	verbs -= /obj/vehicle/verb/turn_headlights_off

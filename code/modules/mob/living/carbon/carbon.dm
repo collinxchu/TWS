@@ -332,6 +332,7 @@
 	return
 
 /mob/living/carbon/throw_item(atom/target)
+	var/spin = 1
 	throw_mode_off()
 	if(usr.stat || !target)
 		return
@@ -344,8 +345,10 @@
 		return
 
 	if (istype(item, /obj/item/weapon/grab))
+		spin = 0
 		var/obj/item/weapon/grab/G = item
-		item = G.get_mob_if_throwable() //throw the person instead of the grab
+		item = G.throw_held() //throw the person instead of the grab
+		qdel(G)
 		if(ismob(item))
 			var/turf/start_T = get_turf(loc) //Get the start and target tile for the descriptors
 			var/turf/end_T = get_turf(target)
@@ -354,8 +357,7 @@
 				var/start_T_descriptor = "<font color='#6b5d00'>tile at [start_T.x], [start_T.y], [start_T.z] in area [get_area(start_T)]</font>"
 				var/end_T_descriptor = "<font color='#6b4400'>tile at [end_T.x], [end_T.y], [end_T.z] in area [get_area(end_T)]</font>"
 
-				M.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been thrown by [key_name(usr)] from [start_T_descriptor] with the target [end_T_descriptor]</font>")
-				usr.attack_log += text("\[[time_stamp()]\] <font color='red'>Has thrown [key_name(M)] from [start_T_descriptor] with the target [end_T_descriptor]</font>")
+				add_logs(src, M, "thrown", addition="from [start_T_descriptor] with the target [end_T_descriptor]")
 				msg_admin_attack("[key_name_admin(usr)] has thrown [key_name_admin(M)] from [start_T_descriptor] with the target [end_T_descriptor]")
 
 				if(!iscarbon(usr))
@@ -363,23 +365,19 @@
 				else
 					M.LAssailant = usr
 
-	if(!item)
-		return //Grab processing has a chance of returning null
+	if(!item) return //Grab processing has a chance of returning null
 	if(!ismob(item)) //Honk mobs don't have a dropped() proc honk
 		unEquip(item)
+
 	update_icons()
 
-	if (istype(usr, /mob/living/carbon)) //Check if a carbon mob is throwing. Modify/remove this line as required.
-		item.loc = usr.loc
-		if(src.client)
-			src.client.screen -= item
-		if(istype(item, /obj/item))
-			item:dropped(src) // let it know it's been dropped
+	if(src.client)
+		src.client.screen -= item
 
 	//actually throw it!
 	if (item)
 		item.layer = initial(item.layer)
-		src.visible_message("\red [src] has thrown [item].")
+		src.visible_message("<span class='danger'>[src] has thrown [item].</danger>")
 
 		if(!src.lastarea)
 			src.lastarea = get_area(src.loc)
@@ -395,7 +393,7 @@
 */
 
 
-		item.throw_at(target, item.throw_range, item.throw_speed, src)
+		item.throw_at(target, item.throw_range, item.throw_speed, src, spin)
 
 /mob/living/carbon/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
@@ -603,6 +601,10 @@
 	Stun(stun_duration)
 	Weaken(Floor(stun_duration/2))
 	return 1
+
+/mob/living/carbon/proc/is_mouth_covered(head_only = 0, mask_only = 0)
+	if( (!mask_only && head && (head.flags & HEADCOVERSMOUTH)) || (!head_only && wear_mask && (wear_mask.flags & MASKCOVERSMOUTH)) )
+		return 1
 
 /mob/living/carbon/check_eye_prot()
 	var/number = ..()

@@ -200,10 +200,10 @@
 	else if(istype(src.occupant,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = src.occupant
 		slab_name = H.real_name
-		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
+		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/human
 		slab_count += H.meatleft
 	else if(istype(src.occupant, /mob/living/carbon/monkey))
-		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/monkey
+		slab_type = /obj/item/weapon/reagent_containers/food/snacks/meat/slab/monkey
 
 	// Small mobs don't give as much nutrition.
 	if(src.occupant.mob_size == MOB_SIZE_TINY)

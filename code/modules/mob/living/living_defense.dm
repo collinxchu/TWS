@@ -36,7 +36,6 @@
 /mob/living/proc/getarmor(var/def_zone, var/type)
 	return 0
 
-
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 	flash_weak_pain()
 
@@ -99,47 +98,70 @@
 		O.emp_act(severity)
 	..()
 
+/proc/vol_by_throwforce_and_or_w_class(obj/item/I)
+		if(!I)
+				return 0
+		if(I.throwforce && I.w_class)
+				return Clamp((I.throwforce + I.w_class) * 5, 30, 100)// Add the item's throwforce to its weight class and multiply by 5, then clamp the value between 30 and 100
+		else if(I.w_class)
+				return Clamp(I.w_class * 8, 20, 100) // Multiply the item's weight class by 8, then clamp the value between 20 and 100
+		else
+				return 0
+
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = 5)//Standardization and logging -Sieve
-	if(istype(AM,/obj/))
-		var/obj/O = AM
+	if(istype(AM,/obj/item))
+		var/obj/item/I = AM
 		var/dtype = BRUTE
-		if(istype(O,/obj/item/weapon))
-			var/obj/item/weapon/W = O
+		var/sound_on_hit = "sound/weapons/genhit.ogg"
+		var/volume_on_hit = vol_by_throwforce_and_or_w_class(I)
+
+		if(istype(I,/obj/item/weapon))
+			var/obj/item/weapon/W = I
 			dtype = W.damtype
-		var/throw_damage = O.throwforce*(speed/5)
+			if (W.throwforce > 0) //If the weapon's throwforce is greater than zero...
+				if (W.throwhitsound) //...and throwhitsound is defined...
+					sound_on_hit = W.throwhitsound
+				else if(W.hitsound) //Otherwise, if the weapon's hitsound is defined...
+					sound_on_hit = W.throwhitsound
+
+		if(!I.throwforce)// Otherwise, if the item's throwforce is 0...
+			sound_on_hit = 'sound/weapons/throwtap.ogg'
+
+		var/throw_damage = I.throwforce*(speed/5)
 
 		var/miss_chance = 15
-		if (O.throw_source)
-			var/distance = get_dist(O.throw_source, loc)
+		if (I.throw_source)
+			var/distance = get_dist(I.throw_source, loc)
 			miss_chance = min(15*(distance-2), 0)
 
 		if (prob(miss_chance))
-			visible_message("\blue \The [O] misses [src] narrowly!")
+			visible_message("\blue \The [I] misses [src] narrowly!")
 			return
 
-		src.visible_message("\red [src] has been hit by [O].")
+		playsound(loc, sound_on_hit, volume_on_hit, 1, -1) //...play the weapon's throwhitsound.
+		src.visible_message("\red [src] has been hit by [I].")
 		var/armor = run_armor_check(null, "melee")
 
 		if(armor < 2)
-			apply_damage(throw_damage, dtype, null, armor, is_sharp(O), has_edge(O), O)
+			apply_damage(throw_damage, dtype, null, armor, is_sharp(I), has_edge(I), I)
 
-		O.throwing = 0		//it hit, so stop moving
+		I.throwing = 0		//it hit, so stop moving
 
-		if(ismob(O.thrower))
-			var/mob/M = O.thrower
+		if(ismob(I.thrower))
+			var/mob/M = I.thrower
 			var/client/assailant = M.client
 			if(assailant)
-				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a [O], thrown by [M.name] ([assailant.ckey])</font>")
-				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [O]</font>")
+				src.attack_log += text("\[[time_stamp()]\] <font color='orange'>Has been hit with a [I], thrown by [M.name] ([assailant.ckey])</font>")
+				M.attack_log += text("\[[time_stamp()]\] <font color='red'>Hit [src.name] ([src.ckey]) with a thrown [I]</font>")
 				if(!istype(src,/mob/living/simple_animal/mouse))
-					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [O], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
+					msg_admin_attack("[src.name] ([src.ckey]) was hit by a [I], thrown by [M.name] ([assailant.ckey]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 
 		// Begin BS12 momentum-transfer code.
-		if(O.throw_source && speed >= 15)
-			var/obj/item/weapon/W = O
+		if(I.throw_source && speed >= 15)
+			var/obj/item/weapon/W = I
 			var/momentum = speed/2
-			var/dir = get_dir(O.throw_source, src)
+			var/dir = get_dir(I.throw_source, src)
 
 			visible_message("\red [src] staggers under the impact!","\red You stagger under the impact!")
 			src.throw_at(get_edge_target_turf(src,dir),1,momentum)
@@ -148,17 +170,20 @@
 
 			if(W.sharp) //Projectile is suitable for pinning.
 				//Handles embedding for non-humans and simple_animals.
-				O.loc = src
-				src.embedded += O
+				I.loc = src
+				src.embedded += I
 
 				var/turf/T = near_wall(dir,2)
 
 				if(T)
 					src.loc = T
-					visible_message("<span class='warning'>[src] is pinned to the wall by [O]!</span>","<span class='warning'>You are pinned to the wall by [O]!</span>")
+					visible_message("<span class='warning'>[src] is pinned to the wall by [I]!</span>","<span class='warning'>You are pinned to the wall by [I]!</span>")
 					src.anchored = 1
-					src.pinned += O
+					src.pinned += I
 					src.verbs += /mob/proc/yank_out_object
+
+	else
+		playsound(loc, "sound/weapons/genhit.ogg", 50, 1, -1)
 
 //This is called when the mob is thrown into a dense turf
 /mob/living/proc/turf_collision(var/turf/T, var/speed)
@@ -316,3 +341,6 @@
 	src.attack_log += "\[[time_stamp()]\]<font color='orange'> Got knifed by [user.name] ([user.ckey]) with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])</font>"
 	msg_admin_attack("[key_name(user)] knifed [key_name(src)] with [W.name] (INTENT: [uppertext(user.a_intent)]) (DAMTYE: [uppertext(W.damtype)])" )
 	return
+
+/mob/living/acid_act(acidpwr, toxpwr, acid_volume)
+	take_organ_damage(min(10*toxpwr, acid_volume * toxpwr))

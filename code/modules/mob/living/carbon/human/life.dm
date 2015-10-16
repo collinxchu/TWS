@@ -85,9 +85,6 @@
 		//Disabilities
 		handle_disabilities()
 
-		//Organs and blood
-		handle_organs()
-		handle_blood()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
 		//Random events (vomiting etc)
@@ -101,6 +98,9 @@
 		update_pulling()  //#TOREMOVE - refactor Life() to go under mob/living instead
 
 		handle_shock()
+
+		//heart attack stuff
+		handle_heart()
 
 		handle_pain()
 
@@ -186,7 +186,7 @@
 						continue
 					O.show_message(text("\red <B>[src] starts having a seizure!"), 1)
 				Paralyse(10)
-				make_jittery(1000)
+				Jitter(1000)
 		if (disabilities & COUGHING)
 			if ((prob(5) && paralysis <= 1))
 				drop_item()
@@ -931,7 +931,7 @@
 			var/alien = 0
 			if(species && species.reagent_tag)
 				alien = species.reagent_tag
-			reagents.metabolize(src,alien)
+			reagents.metabolize(src, alien, can_overdose=1)
 
 			var/total_plasmaloss = 0
 			for(var/obj/item/I in src)
@@ -978,11 +978,18 @@
 			else //heal in the dark
 				heal_overall_damage(1,1)
 
-		// nutrition decrease
-		if (nutrition > 0 && stat != 2)
-			nutrition = max (0, nutrition - HUNGER_FACTOR)
-
-		if (nutrition > 450)
+		// nutrition decrease and satiety
+		if (nutrition > 0 && stat != DEAD)
+			var/hunger_rate = HUNGER_FACTOR
+			if(satiety > 0)
+				satiety--
+			if(satiety < 0)
+				satiety++
+				if(prob(round(-satiety/40)))
+					Jitter(5)
+				hunger_rate = 3 * HUNGER_FACTOR
+			nutrition = max (0, nutrition - hunger_rate)
+		if (nutrition > NUTRITION_LEVEL_FULL)
 			if(overeatduration < 600) //capped so people don't take forever to unfat
 				overeatduration++
 		else
@@ -995,6 +1002,22 @@
 				traumatic_shock++
 
 		if(!(species.flags & IS_SYNTHETIC)) handle_trace_chems()
+
+		//metabolism change
+		if(nutrition > NUTRITION_LEVEL_FAT)
+			metabolism_efficiency = 1
+		else if(nutrition > NUTRITION_LEVEL_FED && satiety > 80)
+			if(metabolism_efficiency != 1.25)
+				src << "<span class='notice'>You feel vigorous.</span>"
+				metabolism_efficiency = 1.25
+		else if(nutrition < NUTRITION_LEVEL_STARVING + 50)
+			if(metabolism_efficiency != 0.8)
+				src << "<span class='notice'>You feel sluggish.</span>"
+			metabolism_efficiency = 0.8
+		else
+			if(metabolism_efficiency == 1.25)
+				src << "<span class='notice'>You no longer feel vigorous.</span>"
+			metabolism_efficiency = 1
 
 		updatehealth()
 
@@ -1013,6 +1036,9 @@
 			silent = 0
 		else				//ALIVE. LIGHTS ARE ON
 			updatehealth()	//TODO
+			if(!in_stasis)
+				handle_organs()	//Optimized.
+				handle_blood()
 
 			if(health <= config.health_threshold_dead || (species.has_organ["brain"] && !has_brain()))
 				death()
@@ -1621,10 +1647,19 @@
 			if(R.id in heartstopper) //To avoid using fakedeath
 				temp = PULSE_NONE
 			if(R.id in cheartstopper) //Conditional heart-stoppage
-				if(R.volume >= R.overdose)
+				if(R.volume >= 20) 	  //20 is the overdose threshold for potassium chloride, the only conditional heartstopper
 					temp = PULSE_NONE
 
 		return temp
+
+
+	proc/handle_heart()
+		if(!heart_attack)
+			return
+		else
+			losebreath += 5
+			adjustOxyLoss(5)
+			adjustBruteLoss(1)
 
 /*
 	Called by life(), instead of having the individual hud items update icons each tick and check for status changes

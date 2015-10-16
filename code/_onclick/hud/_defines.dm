@@ -12,14 +12,20 @@
 	The size of the user's screen is defined by client.view (indirectly by world.view), in our case "15x15".
 	Therefore, the top right corner (except during admin shenanigans) is at "15,15"
 */
-
+/*
 //Upper left action buttons, displayed when you pick up an item that has this enabled.
 #define ui_action_slot1 "1:6,14:26"
 #define ui_action_slot2 "2:8,14:26"
 #define ui_action_slot3 "3:10,14:26"
 #define ui_action_slot4 "4:12,14:26"
 #define ui_action_slot5 "5:14,14:26"
-
+*/
+//Upper left vehicle buttons, displayed when you pick up an item that has this enabled.
+#define ui_vehicle_slot1 "1:6,14:26"
+#define ui_vehicle_slot2 "2:8,14:26"
+#define ui_vehicle_slot3 "3:10,14:26"
+#define ui_vehicle_slot4 "4:12,14:26"
+#define ui_vehicle_slot5 "5:14,14:26"
 
 //Lower left, persistant menu
 #define ui_inventory "WEST:6,SOUTH:5"

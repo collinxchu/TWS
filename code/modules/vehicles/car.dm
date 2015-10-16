@@ -15,6 +15,9 @@
 	var/obj/item/weapon/key/car/key
 	var/trunk_open = 0
 
+	engine_start = 'sound/vehicles/ignition.ogg'
+	engine_fail = 'sound/vehicles/wontstart.ogg'
+
 /obj/item/weapon/key/car
 	name = "key"
 	desc = "A keyring with a small steel key, and a yellow fob reading \"Choo Choo!\". DON'T ASK."
@@ -25,22 +28,30 @@
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
+
 /obj/vehicle/car/New()
 	..()
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/weapon/stock_parts/cell/high(src)
 	key = new(src)
-	turn_off() 		//||so engine verbs are correctly set
-	close_trunk()	//||so trunk verbs are correctly set
+	populate_action_buttons()
+	populate_verbs()
+
+/obj/vehicle/car/Destroy()
+	if(load) unload(load, "driver")
+	if(passenger) unload(passenger, "passenger")
+	if(trunk) unload(trunk, "trunk")
+	headlights_off()
+	return ..()
 
 /obj/vehicle/car/Move(var/turf/destination)
 	if(on && cell.charge < charge_use)
 		turn_off()
 		if(load)
-			load << "The engine briefly whines, then drones to a stop."
+			load << "<span class='warning'>The engine briefly whines, then drones to a stop.</span>"
 	if(on && health <= 10)
 		turn_off()
 		if(load)
-			load << "The engine makes a loud clanking noise before going quiet."
+			load << "<span class='warning'>The engine makes a loud clanking noise before going quiet.</span>"
 	if(!on)
 		return 0
 
@@ -64,11 +75,8 @@
 		return
 	..()
 
-//-------------------------------------------
-// Car procs
-//-------------------------------------------
-
 /obj/vehicle/car/Bump(atom/Obstacle)
+	if(emagged) return
 	if(!istype(Obstacle, /atom/movable))
 		return
 	var/atom/movable/A = Obstacle
@@ -77,31 +85,36 @@
 		var/turf/T = get_step(A, dir)
 		if(isturf(T))
 			A.Move(T)	//||bump things away when hit
+
 	if(istype(A, /mob/living))
 		var/mob/living/M = A
 		var/mob/living/D = load
-		visible_message("\red [src] knocks over [M]!")
+		visible_message("<span class='danger'>[src] knocks over [M]!</span>")
 		M.apply_effects(5, 5)				//||knock people down if you hit them
 		M.apply_damages(20 / move_delay)	//||and do damage according to how fast the car is going
 		if(istype(load, /mob/living/carbon/human))
-			D << "\red You hit [M]!"
+			D << "<span class='userdanger'>You hit [M]!</span>"
+			add_logs(D, M, "hit", src)
 			msg_admin_attack("[D.name] ([D.ckey]) hit [M.name] ([M.ckey]) with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 		return
 
 	if(istype(A, /obj/vehicle/car/))
 		var/obj/vehicle/car/C = A
 		var/mob/living/D = load
-		visible_message("\red [src] crashes into [C]!")
+		visible_message("<span class='danger'>[src] crashes into [C]!</span>")
 		C.take_damage(20 / move_delay)	//||and do damage according to how fast the car is going
 		src.take_damage(15 / move_delay)	//||and do damage according to how fast the car is going
-		if(istype(load, /mob/living/carbon/human))
-			D << "\red You hit [C]!"
+		if(istype(C.load, /mob/living/carbon/human))
+			var/mob/living/L = C.load
+			D << "<span class='userdanger'>You hit [C]!</span>"
+			add_logs(D, L, "hit","[load]'s [C]", src)
+			msg_admin_attack("[D.name] ([D.ckey]) hit [L.name]([L.ckey])'s \the [C] with [src]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)")
 		return
 
 	if(istype(A, /obj/structure))
 		if(istype(A, /obj/structure/barricade/wooden))
 			var/obj/structure/barricade/wooden/B = A
-			load << "\red You crash [src] into the [A]!"
+			load << "<span class='userdanger'>You crash [src] into the [A]!</span>"
 			playsound(src.loc, 'sound/effects/woodcrash.ogg', 80, 0, 11025)
 			B.dismantle()
 			src.take_damage(1)
@@ -109,7 +122,7 @@
 
 		if(istype(A, /obj/structure/window/))
 			var/obj/structure/window/W = A
-			load << "\red You drive [src] into through the [W]!"
+			load << "<span class='userdanger'>You drive [src] into through the [W]!</span>"
 			W.hit(14)
 			src.take_damage(2)
 			return
@@ -134,7 +147,7 @@
 			src.take_damage(1)
 			return
 
-		load << "\red You crash [src] into the [A]!"
+		load << "<span class='userdanger'>You crash [src] into the [A]!</span>"
 		src.take_damage(1)
 		return
 
@@ -151,6 +164,13 @@
 	spawn(1) healthcheck()
 	return 1
 
+/obj/vehicle/car/bullet_act()
+	return 	//for now return, to prevent taser shots from killing cars until projectile code is refactored
+
+//-------------------------------------------
+// Car procs
+//-------------------------------------------
+
 /obj/vehicle/car/turn_on()
 	if(!key)
 		return
@@ -159,63 +179,52 @@
 	else
 		..()
 
-		verbs -= /obj/vehicle/car/verb/stop_engine
-		verbs -= /obj/vehicle/car/verb/start_engine
-
-		if(on)
-			verbs += /obj/vehicle/car/verb/stop_engine
-		else
-			verbs += /obj/vehicle/car/verb/start_engine
-
 /obj/vehicle/car/turn_off()
 	..()
 
-	verbs -= /obj/vehicle/car/verb/stop_engine
-	verbs -= /obj/vehicle/car/verb/start_engine
+/obj/vehicle/car/proc/trunk_closed()
 
-	if(!on)
-		verbs += /obj/vehicle/car/verb/start_engine
+	trunk_open = 0
+
+	verbs -= /obj/vehicle/car/close_trunk
+	verbs -= /obj/vehicle/car/open_trunk
+	if(!trunk_open)
+		verbs += /obj/vehicle/car/open_trunk
 	else
-		verbs += /obj/vehicle/car/verb/stop_engine
+		verbs += /obj/vehicle/car/close_trunk
 
-/obj/vehicle/car/verb/open_trunk()
-	set name = "Open trunk"
-	set category = "Vehicle"
-	set src in oview(1)
+	for(var/obj/screen/vehicle_action/trunktoggle/A in action_buttons)
+		A.icon_state = "trunk[trunk_open]"
+		A.name = "[trunk_open ? "Shut" : "Open"] Trunk"
+	if(usr) usr.update_action_buttons()
 
-	trunk_open = 1
-	usr << "You pop open the trunk."
+	return 1
 
+/obj/vehicle/car/swap(mob/M)
+	if(M == load)
+		if(passenger)
+			M << "<span class='warning'>The passenger's seat is already occupied!</span>"
+			return
+		unload(M, "driver")
+		load(M, "passenger")
+		M << "<span class='notice'>You climb into the passenger's seat.</span>"
+		update_dir_car_overlays()
+		return
+	if(M == passenger)
+		unload(M, "passenger")
+		if(load)
+			M << "<span class='warning'>The driver's seat is already occupied!</span>"
+			return
+		load(M, "driver")
+		M << "<span class='notice'>You climb into the driver's seat.</span>"
+		update_dir_car_overlays()
+		return
+
+/obj/vehicle/car/headlights_on()
 	if(!key)
 		return
 	else
-
-		verbs -= /obj/vehicle/car/verb/close_trunk
-		verbs -= /obj/vehicle/car/verb/open_trunk
-
-		if(trunk_open)
-			verbs += /obj/vehicle/car/verb/close_trunk
-		else
-			verbs += /obj/vehicle/car/verb/open_trunk
-
-/obj/vehicle/car/verb/close_trunk()
-	set name = "Close trunk"
-	set category = "Vehicle"
-	set src in oview(1)
-
-	trunk_open = 0
-	usr << "You close the trunk."
-
-	verbs -= /obj/vehicle/car/verb/close_trunk
-	verbs -= /obj/vehicle/car/verb/open_trunk
-
-	if(!trunk_open)
-		verbs += /obj/vehicle/car/verb/open_trunk
-	else
-		verbs += /obj/vehicle/car/verb/close_trunk
-
-/obj/vehicle/car/proc/honk_horn()
-	playsound(src, 'sound/items/bikehorn.ogg',40,1)
+		..()
 
 //-------------------------------------------
 // Interaction procs
@@ -240,49 +249,73 @@
 	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
 	user << "Car integrity is at [health? round(100.0*health/maxhealth, 0.01) : 0]%"
 	if(trunk_open)
-		user << "The trunk has been left open."
+		user << "<span class='notice'>The trunk has been left open.</span>"
 
-/obj/vehicle/car/verb/start_engine()
+//-------------------------------------------------------
+// Verbs
+//-------------------------------------------------------
+
+/obj/vehicle/car/start_engine()
 	set name = "Start engine"
 	set category = "Vehicle"
 	set src in view(0)
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
 	if(on)
-		usr << "The engine is already running."
+		usr << "<span class='warning'>The engine is already running.</span>"
 		return
 
-	turn_on()
-	if (on)
-		usr << "You start [src]'s engine."
-	else
-		if(cell.charge < charge_use)
-			usr << "[src] is out of power."
+	if(!spam_flag)
+		spam_flag = 1
+		cooldowntime = 30
+		turn_on()
+		if (on)
+			playsound(src.loc, engine_start, 80, 0, 44100)
+			usr << "<span class='notice'>You start [src]'s engine.</span>"
+			spawn(cooldowntime)
+				spam_flag = 0
 		else
-			usr << "[src]'s engine won't start."
+			if(cell.charge < charge_use)
+				usr << "<span class='warning'>[src] is out of power.</span>"
+			else
+				spam_flag = 1
+				cooldowntime = 50
+				usr << "<span class='warning'>[src]'s engine won't start.</span>"
+				playsound(src.loc, engine_fail, 80, 0, 44100)
+				spawn(cooldowntime)
+					spam_flag = 0
 
-/obj/vehicle/car/verb/stop_engine()
+/obj/vehicle/car/stop_engine()
 	set name = "Stop engine"
 	set category = "Vehicle"
 	set src in view(0)
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
 	if(!on)
-		usr << "The engine is already stopped."
+		usr << "<span class='warning'>The engine is already stopped.</span>"
 		return
 
 	turn_off()
 	if (!on)
-		usr << "You stop [src]'s engine."
+		usr << "<span class='notice'>You stop [src]'s engine.</span>"
 
 /obj/vehicle/car/verb/remove_key()
 	set name = "Remove key"
 	set category = "Vehicle"
 	set src in view(0)
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
 
 	if(!istype(usr, /mob/living/carbon/human))
 		return
@@ -300,7 +333,61 @@
 
 	verbs -= /obj/vehicle/car/verb/remove_key
 
-/obj/vehicle/car/verb/honk()
+/obj/vehicle/car/open_trunk()
+	set name = "Trunk Open"
+	set category = "Vehicle"
+	set src in view(1)
+
+	..()
+
+	if(!key)
+		return
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return
+
+	if(!spam_flag)
+		spam_flag = 1
+		cooldowntime = 10
+		trunk_open = 1
+		usr << "<span class='notice'>You pop open the trunk.</span>"
+		playsound(src.loc, 'sound/vehicles/boot-open.ogg', 100, 0, 22050)
+		spawn(cooldowntime)
+			spam_flag = 0
+
+		verbs -= /obj/vehicle/car/close_trunk
+		verbs -= /obj/vehicle/car/open_trunk
+
+		if(trunk_open)
+			verbs += /obj/vehicle/car/close_trunk
+		else
+			verbs += /obj/vehicle/car/open_trunk
+
+		for(var/obj/screen/vehicle_action/trunktoggle/A in action_buttons)
+			A.icon_state = "trunk[trunk_open]"
+			A.name = "[trunk_open ? "Shut" : "Open"] Trunk"
+
+		if(usr) usr.update_action_buttons()
+
+/obj/vehicle/car/close_trunk()
+	set name = "Trunk Close"
+	set category = "Vehicle"
+	set src in view(1)
+	..()
+
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return 1
+
+	if(!spam_flag)
+		spam_flag = 1
+		cooldowntime = 10
+		if(trunk_closed())
+			usr << "<span class='notice'>You close the trunk.</span>"
+			playsound(src.loc, 'sound/vehicles/boot-shut.ogg', 100, 0, 22050)
+			spawn(cooldowntime)
+				spam_flag = 0
+
+/obj/vehicle/car/honk()
 	set name = "Honk horn"
 	set category = "Vehicle"
 	set src in view(0)
@@ -308,12 +395,15 @@
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+		return 1
+
 	if(!on)
-		usr << "Turn on the engine."
+		usr << "<span class='warning'>Turn on the engine.</span>"
 		return
 
 	honk_horn()
-	usr << "You honk the horn. Hmm...must be broken."
+	usr << "<span class='notice'>You honk the horn. Hmm...must be broken.</span>"
 
 
 //-------------------------------------------
@@ -322,7 +412,7 @@
 
 /obj/vehicle/car/load(var/atom/movable/C, who)
 	if(!istype(C, /mob/living/carbon/human))
-		usr << "You load [C] into the trunk."
+		usr << "<span class='notice'>You load [C] into the trunk.</span>"
 	switch(who)
 		if("driver")
 			if(load) return 0
@@ -359,10 +449,16 @@
 			trunk = C
 			trunk.loc = src
 
+	for(var/obj/screen/vehicle_action/swaptoggle/A in action_buttons) //Update the swap action button
+		if(load && passenger)
+			A.icon_state = "swap0"
+		else
+			A.icon_state = "swap1"
+
 	if(ismob(C))
 		var/mob/M = C
-		//M.buckled = src
 		buckle_mob(C)
+		buckled_mobs |= C
 		switch(who)
 			if("driver")
 				M.pixel_y = src.load_offset_y
@@ -371,6 +467,7 @@
 			if("trunk")
 				M.pixel_y = src.load_offset_y
 		M.update_canmove()
+		M.update_action_buttons()
 
 	return 1
 
@@ -427,8 +524,12 @@
 			load.layer = initial(load.layer)
 
 			if(ismob(load))
-				unbuckle_mob(load)
-
+				for(var/mob/M in buckled_mobs)
+					if(M == load)
+						buckled_mob = M
+						unbuckle_mob(load)
+						buckled_mobs -= M
+						M.update_action_buttons()
 			load = null
 		if("passenger")
 			passenger.forceMove(dest)
@@ -439,8 +540,12 @@
 			passenger.layer = initial(passenger.layer)
 
 			if(ismob(passenger))
-				unbuckle_mob(passenger)
-
+				for(var/mob/M in buckled_mobs)
+					if(M == passenger)
+						buckled_mob = M
+						unbuckle_mob(passenger)
+						buckled_mobs -= M
+						M.update_action_buttons()
 			passenger = null
 		if("trunk")
 			trunk.forceMove(dest)
@@ -452,7 +557,42 @@
 			trunk.loc = src.loc
 
 			if(ismob(trunk))
-				unbuckle_mob(trunk)
-
+				for(var/mob/M in buckled_mobs)
+					if(M == trunk)
+						buckled_mob = M
+						unbuckle_mob(trunk)
+						buckled_mobs -= M
 			trunk = null
+
+	for(var/obj/screen/vehicle_action/swaptoggle/A in action_buttons) //Update the swap action button
+		if(load && passenger)
+			A.icon_state = "swap0"
+		else
+			A.icon_state = "swap1"
+
+	user.update_action_buttons()
+
 	return 1
+
+
+//-------------------------------------------------------
+// Stat update procs
+//-------------------------------------------------------
+
+/obj/vehicle/car/populate_action_buttons()
+
+	action_buttons += new /obj/screen/vehicle_action/enginetoggle(null)
+	action_buttons += new /obj/screen/vehicle_action/headlightstoggle(null)
+	action_buttons += new /obj/screen/vehicle_action/trunktoggle(null)
+	action_buttons += new /obj/screen/vehicle_action/swaptoggle(null)
+	action_buttons += new /obj/screen/vehicle_action/horntoggle(null)
+
+//|| Ensures the verbs are properly set
+/obj/vehicle/car/populate_verbs()
+	..()
+	verbs -= /obj/vehicle/car/stop_engine
+	verbs -= /obj/vehicle/car/start_engine
+	verbs -= /obj/vehicle/car/close_trunk
+
+/obj/vehicle/car/proc/update_dir_car_overlays()
+	return

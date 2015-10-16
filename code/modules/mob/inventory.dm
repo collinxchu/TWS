@@ -130,7 +130,7 @@
 	if(I)
 		if(client)
 			client.screen -= I
-		I.loc = loc
+		I.forceMove(loc)
 		I.dropped(src)
 		if(I)
 			I.layer = initial(I.layer)

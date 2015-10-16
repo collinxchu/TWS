@@ -48,13 +48,13 @@
 	/obj/item/weapon/caution/cone,\
 	/obj/item/weapon/crowbar,\
 	/obj/item/weapon/clipboard,\
-	/obj/item/weapon/cell,\
+	/obj/item/weapon/stock_parts/cell,\
 	/obj/item/weapon/circular_saw,\
 	/obj/item/weapon/hatchet,\
 	/obj/item/weapon/handcuffs,\
 	/obj/item/weapon/hemostat,\
 	/obj/item/weapon/kitchenknife,\
-	/obj/item/weapon/flame/lighter,\
+	/obj/item/weapon/lighter,\
 	/obj/item/weapon/light/bulb,\
 	/obj/item/weapon/light/tube,\
 	/obj/item/weapon/pickaxe,\

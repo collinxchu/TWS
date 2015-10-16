@@ -5,7 +5,7 @@
 	item_state = "laser"
 	fire_sound = 'sound/weapons/Laser.ogg'
 	w_class = 3.0
-	matter = list("metal" = 2000)
+	materials = list(MAT_METAL=2000)
 	origin_tech = "combat=3;magnets=2"
 	projectile_type = /obj/item/projectile/beam
 

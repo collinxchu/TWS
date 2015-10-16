@@ -16,6 +16,10 @@
 
 	var/hanging = 0
 
+
+/obj/item/clothing/mask/breath/attack_self(var/mob/user)
+	adjustmask(user)
+
 /obj/item/clothing/mask/breath/proc/adjust_mask(mob/user)
 	if(user.canmove && !user.stat)
 		if(!src.hanging)

@@ -429,7 +429,7 @@
 	proc/handle_chemicals_in_body()
 
 		if(reagents && reagents.reagent_list.len)
-			reagents.metabolize(src)
+			reagents.metabolize(src, can_overdose=1)
 
 		if (drowsyness)
 			drowsyness--

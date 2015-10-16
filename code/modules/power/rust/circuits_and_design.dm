@@ -13,7 +13,7 @@ datum/design/rust_core_control
 	id = "rust_core_control"
 	req_tech = list("programming" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list(MAT_GLASS=2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/rust_core_control"
 
 //////////////////////////////////////
@@ -30,7 +30,7 @@ datum/design/rust_fuel_control
 	id = "rust_fuel_control"
 	req_tech = list("programming" = 4, "engineering" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20)
+	materials = list(MAT_GLASS=2000, "sacid" = 20)
 	build_path = "/obj/item/weapon/circuitboard/rust_fuel_control"
 
 //////////////////////////////////////
@@ -47,7 +47,7 @@ datum/design/rust_fuel_port
 	id = "rust_fuel_port"
 	req_tech = list("engineering" = 4, "materials" = 5)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$uranium" = 3000)
+	materials = list(MAT_GLASS=2000, "sacid" = 20, MAT_URANIUM=3000)
 	build_path = "/obj/item/weapon/module/rust_fuel_port"
 
 //////////////////////////////////////
@@ -64,7 +64,7 @@ datum/design/rust_fuel_compressor
 	id = "rust_fuel_compressor"
 	req_tech = list("materials" = 6, "plasmatech" = 4)
 	build_type = IMPRINTER
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$diamond" = 1000)
+	materials = list(MAT_GLASS=2000, "sacid" = 20, MAT_PLASMA=3000, MAT_DIAMOND=1000)
 	build_path = "/obj/item/weapon/module/rust_fuel_compressor"
 
 //////////////////////////////////////
@@ -89,8 +89,8 @@ datum/design/rust_core
 	id = "pacman"
 	req_tech = list(bluespace = 3, plasmatech = 4, magnets = 5, powerstorage = 6)
 	build_type = IMPRINTER
-	reliability_base = 79
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$diamond" = 2000)
+	//reliability_base = 79 #TOREMOVE
+	materials = list(MAT_GLASS=2000, "sacid" = 20, MAT_PLASMA=3000, MAT_DIAMOND=2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"
 
 //////////////////////////////////////
@@ -115,6 +115,6 @@ datum/design/rust_injector
 	id = "pacman"
 	req_tech = list(powerstorage = 3, engineering = 4, plasmatech = 4, materials = 6)
 	build_type = IMPRINTER
-	reliability_base = 79
-	materials = list("$glass" = 2000, "sacid" = 20, "$plasma" = 3000, "$uranium" = 2000)
+//	reliability_base = 79 #TOREMOVE
+	materials = list(MAT_GLASS=2000, "sacid" = 20, MAT_PLASMA=3000, MAT_URANIUM=2000)
 	build_path = "/obj/item/weapon/circuitboard/rust_core"

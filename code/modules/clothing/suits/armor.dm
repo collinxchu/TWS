@@ -1,4 +1,3 @@
-
 /obj/item/clothing/suit/armor
 	allowed = list(/obj/item/weapon/gun/energy,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/weapon/gun/projectile,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -27,6 +26,12 @@
 	icon_state = "armorsec"
 	item_state = "armor"
 
+/obj/item/clothing/suit/armor/vest/w_police
+	name = "police vest"
+	desc = "An aramid-kevlar weave combined with heavy metal breastplate that serves to protect the men and women of the police force."
+	icon_state = "w_policearmor"
+	item_state = "w_policearmor"
+
 /obj/item/clothing/suit/armor/vest/warden
 	name = "Warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
@@ -35,6 +40,10 @@
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
 	burn_state = 0 //Burnable
 
+/obj/item/clothing/suit/armor/vest/warden/burn()  //Burn the cloth away
+	new /obj/item/clothing/suit/armor/vest(src.loc)
+	qdel(src)
+	return
 
 /obj/item/clothing/suit/armor/riot
 	name = "Riot Suit"
@@ -47,7 +56,6 @@
 	flags_inv = HIDEJUMPSUIT
 	siemens_coefficient = 0.5
 
-
 /obj/item/clothing/suit/armor/bulletproof
 	name = "Bulletproof Vest"
 	desc = "A vest that excels in protecting the wearer against high-velocity solid projectiles."
@@ -56,6 +64,7 @@
 	blood_overlay_type = "armor"
 	armor = list(melee = 10, bullet = 80, laser = 10, energy = 10, bomb = 0, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/suit/armor/laserproof
 	name = "Ablative Armor Vest"
@@ -92,7 +101,7 @@
 	blood_overlay_type = "coat"
 	flags_inv = 0
 	body_parts_covered = UPPER_TORSO|ARMS
-
+	burn_state = 0 //Burnable
 
 /obj/item/clothing/suit/armor/det_suit
 	name = "armor"

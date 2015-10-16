@@ -6,7 +6,7 @@
 	item_state = "gun"
 	flags =  CONDUCT
 	slot_flags = SLOT_BELT
-	matter = list("metal" = 2000)
+	materials = list(MAT_METAL=2000)
 	w_class = 3.0
 	throwforce = 5
 	throw_speed = 4

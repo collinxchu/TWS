@@ -1,11 +1,11 @@
 /obj/item/weapon/paper_bundle
 	name = "paper bundle"
-	gender = PLURAL
+	gender = NEUTER
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "paper"
 	item_state = "paper"
 	throwforce = 0
-	w_class = 1.0
+	w_class = 1
 	throw_range = 2
 	throw_speed = 1
 	layer = 4
@@ -236,7 +236,7 @@
 	var/class = "<span class='warning'>"
 
 	if(!user.restrained())
-		if(istype(I, /obj/item/weapon/flame/lighter/zippo))
+		if(istype(I, /obj/item/weapon/lighter/zippo))
 			class = "<span class='rose'>"
 
 		user.visible_message("[class][user] holds \the [I] up to \the [src], it looks like \he's trying to burn it!", \

@@ -286,7 +286,7 @@
 		var/turf/tile = loc
 		loc.clean_blood()
 		for(var/obj/effect/E in tile)
-			if(istype(E,/obj/effect/rune) || istype(E,/obj/effect/decal/cleanable) || istype(E,/obj/effect/overlay))
+			if(is_cleanable(E))
 				qdel(E)
 
 /obj/machinery/shower/process()
@@ -302,7 +302,9 @@
 	is_washing = 1
 	var/turf/T = get_turf(src)
 	reagents.add_reagent("water", 2)
-	T.clean(src)
+	for(var/obj/effect/E in T)
+		if(is_cleanable(E))
+			qdel(E)
 	spawn(100)
 		is_washing = 0
 

@@ -91,7 +91,7 @@
 	var/obj/item/device/assembly_holder/rig = null
 	New()
 		..()
-		reagents.add_reagent("fuel",1000)
+		reagents.add_reagent("welding_fuel",1000)
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	if(!..(user, 2))
@@ -184,7 +184,7 @@
 		return
 
 	amount = min(amount, reagents.total_volume)
-	reagents.remove_reagent("fuel",amount)
+	reagents.remove_reagent("welding_fuel",amount)
 	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank

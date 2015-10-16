@@ -4,16 +4,19 @@
 #define DEAD		2
 
 //Bitflags defining which status effects could be or are inflicted on a mob
-#define CANSTUN		1
-#define CANWEAKEN	2
-#define CANPARALYSE	4
-#define CANPUSH		8
-#define LEAPING		16
-#define PASSEMOTES	32      //Mob has a cortical borer or holders inside of it that need to see emotes.
-#define GODMODE		4096
-#define FAKEDEATH	8192	//Replaces stuff like changeling.changeling_fakedeath
-#define DISFIGURED	16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
-#define XENO_HOST	32768	//Tracks whether we're gonna be a baby alien's mummy.
+#define CANSTUN				1
+#define CANWEAKEN			2
+#define CANPARALYSE			4
+#define CANPUSH				8
+#define LEAPING				16
+#define PASSEMOTES			32      //Mob has a cortical borer or holders inside of it that need to see emotes.
+#define IGNORESLOWDOWN		64
+#define GOTTAGOFAST			128
+#define GOTTAGOREALLYFAST	256
+#define GODMODE				4096
+#define FAKEDEATH			8192	//Replaces stuff like changeling.changeling_fakedeath
+#define DISFIGURED			16384	//I'll probably move this elsewhere if I ever get wround to writing a bitflag mob-damage system
+#define XENO_HOST			32768	//Tracks whether we're gonna be a baby alien's mummy.
 
 //Grab levels
 #define GRAB_PASSIVE	1
@@ -32,6 +35,14 @@
 #define DIET_CARN		1
 #define DIET_OMNI		2
 #define DIET_HERB		4
+
+//Nutrition levels for humans.
+#define NUTRITION_LEVEL_FAT 600
+#define NUTRITION_LEVEL_FULL 550
+#define NUTRITION_LEVEL_WELL_FED 450
+#define NUTRITION_LEVEL_FED 350
+#define NUTRITION_LEVEL_HUNGRY 250
+#define NUTRITION_LEVEL_STARVING 150
 
 /*
 	These are used Bump() code for living mobs, in the mob_bump_flag, mob_swap_flags, and mob_push_flags vars to determine whom can bump/swap with whom.

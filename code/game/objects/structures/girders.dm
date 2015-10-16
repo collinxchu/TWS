@@ -52,8 +52,10 @@
 			user << "\blue You slice apart the girder!"
 			dismantle()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if(istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
+		var/obj/item/weapon/pickaxe/drill/diamonddrill/D = W
 		user << "\blue You drill through the girder!"
+		D.playDigSound()
 		dismantle()
 
 	else if(istype(W, /obj/item/weapon/screwdriver) && state == 2 && istype(src,/obj/structure/girder/reinforced))
@@ -248,7 +250,7 @@
 			user << "\blue You slice apart the girder!"
 		dismantle()
 
-	else if(istype(W, /obj/item/weapon/pickaxe/diamonddrill))
+	else if(istype(W, /obj/item/weapon/pickaxe/drill/diamonddrill))
 		user << "\blue You drill through the girder!"
 		new /obj/effect/decal/remains/human(get_turf(src))
 		dismantle()

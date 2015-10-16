@@ -15,7 +15,7 @@
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	matter = list("glass" = 3750)
+	materials = list(MAT_GLASS=MINERAL_MATERIAL_AMOUNT)
 	origin_tech = "materials=1"
 	var/created_window = /obj/structure/window/basic
 	var/is_reinforced = 0
@@ -26,7 +26,7 @@
 	desc = "HOLY SHEET! That is a lot of glass."
 	singular_name = "glass sheet"
 	icon_state = "sheet-glass"
-	matter = null
+	materials = null
 	created_window = /obj/structure/window/basic
 	stacktype = /obj/item/stack/sheet/glass
 
@@ -143,7 +143,7 @@
 	singular_name = "reinforced glass sheet"
 	icon_state = "sheet-rglass"
 
-	matter = list("metal" = 1875,"glass" = 3750)
+	materials = list(MAT_METAL=MINERAL_MATERIAL_AMOUNT/2, MAT_GLASS=MINERAL_MATERIAL_AMOUNT)
 	origin_tech = "materials=2"
 
 	created_window = /obj/structure/window/reinforced
@@ -164,7 +164,7 @@
 	desc = "A very strong and very resistant sheet of a plasma-glass alloy."
 	singular_name = "plasma glass sheet"
 	icon_state = "sheet-plasmaglass"
-	matter = list("glass" = 7500)
+	materials = list(MAT_GLASS=MINERAL_MATERIAL_AMOUNT*2)
 	origin_tech = "materials=3;plasmatech=2"
 	created_window = /obj/structure/window/plasmabasic
 
@@ -193,7 +193,7 @@
 	desc = "plasma glass which has been reinforced with metal rods."
 	singular_name = "reinforced plasma glass sheet"
 	icon_state = "sheet-plasmarglass"
-	matter = list("glass" = 7500,"metal" = 1875)
+	materials = list(MAT_METAL=MINERAL_MATERIAL_AMOUNT/2, MAT_GLASS=MINERAL_MATERIAL_AMOUNT*2)
 
 	origin_tech = "materials=4;plasmatech=2"
 	created_window = /obj/structure/window/plasmareinforced

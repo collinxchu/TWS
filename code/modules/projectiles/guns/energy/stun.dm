@@ -6,10 +6,10 @@
 	fire_sound = 'sound/weapons/Taser.ogg'
 	charge_cost = 100
 	projectile_type = "/obj/item/projectile/beam/stun"
-	cell_type = "/obj/item/weapon/cell/crap"
+	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
 
 /obj/item/weapon/gun/energy/taser/cyborg
-	cell_type = "/obj/item/weapon/cell/secborg"
+	cell_type = "/obj/item/weapon/stock_parts/cell/secborg"
 	var/charge_tick = 0
 	var/recharge_time = 10 //Time it takes for shots to recharge (in ticks)
 
@@ -48,7 +48,7 @@
 	origin_tech = "combat=3;materials=3;powerstorage=2"
 	charge_cost = 125
 	projectile_type = "/obj/item/projectile/beam/stun"
-	cell_type = "/obj/item/weapon/cell"
+	cell_type = "/obj/item/weapon/stock_parts/cell"
 
 
 
@@ -58,12 +58,12 @@
 	icon_state = "crossbow"
 	w_class = 2.0
 	item_state = "crossbow"
-	matter = list("metal" = 2000)
+	materials = list(MAT_METAL=2000)
 	origin_tech = "combat=2;magnets=2;syndicate=5"
 	silenced = 1
 	fire_sound = 'sound/weapons/Genhit.ogg'
 	projectile_type = "/obj/item/projectile/energy/bolt"
-	cell_type = "/obj/item/weapon/cell/crap"
+	cell_type = "/obj/item/weapon/stock_parts/cell/crap"
 	var/charge_tick = 0
 
 
@@ -98,5 +98,5 @@
 	desc = "A weapon favored by mercenary infiltration teams."
 	w_class = 4.0
 	force = 10
-	matter = list("metal" = 200000)
+	materials = list(MAT_METAL=200000)
 	projectile_type = "/obj/item/projectile/energy/bolt/large"

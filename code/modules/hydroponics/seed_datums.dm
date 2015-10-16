@@ -1537,7 +1537,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/cocoapod)
 	plant_icon = "cocoapod"
 	harvest_repeat = 1
-	chems = list("nutriment" = list(1,10), "coco" = list(4,5))
+	chems = list("nutriment" = list(1,10), "cocoa" = list(4,5))
 
 	lifespan = 20
 	maturation = 5
@@ -1572,7 +1572,7 @@ proc/populate_seed_list()
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/grown/kudzupod)
 	plant_icon = "kudzu"
 	product_colour = "#96D278"
-	chems = list("nutriment" = list(1,50), "anti_toxin" = list(1,25))
+	chems = list("nutriment" = list(1,50), "antitoxin" = list(1,25))
 
 	lifespan = 20
 	maturation = 6

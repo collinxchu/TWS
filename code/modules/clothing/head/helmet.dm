@@ -14,6 +14,12 @@
 	w_class = 3
 	burn_state = -1 //Won't burn in fires
 
+/obj/item/clothing/head/helmet/w_police
+	name = "police helmet"
+	desc = "Standard issue Police helmet. Protects the head from impacts and only partially obscures vision."
+	icon_state = "w_police"
+	item_state = "w_police"
+
 /obj/item/clothing/head/helmet/warden
 	name = "warden's hat"
 	desc = "It's a special helmet issued to the Warden of a securiy force. Protects the head from impacts."

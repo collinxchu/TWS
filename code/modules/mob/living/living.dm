@@ -220,6 +220,7 @@ default behaviour is:
 /mob/living/proc/adjustBruteLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	bruteloss = min(max(bruteloss + amount, 0),(maxHealth*2))
+	//handle_regular_status_updates() //we update our health right away.
 
 /mob/living/proc/getOxyLoss()
 	return oxyloss
@@ -227,10 +228,12 @@ default behaviour is:
 /mob/living/proc/adjustOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	oxyloss = min(max(oxyloss + amount, 0),(maxHealth*2))
+	//handle_regular_status_updates()
 
 /mob/living/proc/setOxyLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	oxyloss = amount
+	//handle_regular_status_updates()
 
 /mob/living/proc/getToxLoss()
 	return toxloss
@@ -249,6 +252,7 @@ default behaviour is:
 /mob/living/proc/adjustFireLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	fireloss = min(max(fireloss + amount, 0),(maxHealth*2))
+	//handle_regular_status_updates()
 
 /mob/living/proc/getCloneLoss()
 	return cloneloss
@@ -282,6 +286,20 @@ default behaviour is:
 /mob/living/proc/setHalLoss(var/amount)
 	if(status_flags & GODMODE)	return 0	//godmode
 	halloss = amount
+
+/mob/living/proc/getStaminaLoss()
+	return staminaloss
+
+/mob/living/proc/adjustStaminaLoss(amount)
+	if(status_flags & GODMODE)	return 0
+	staminaloss = min(max(staminaloss + amount, 0),(maxHealth*2))
+
+/mob/living/proc/setStaminaLoss(amount)
+	if(status_flags & GODMODE)	return 0
+	staminaloss = amount
+
+/mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
+	flash_weak_pain()
 
 /mob/living/proc/getMaxHealth()
 	return maxHealth
@@ -419,6 +437,7 @@ default behaviour is:
 	setToxLoss(0)
 	setOxyLoss(0)
 	setCloneLoss(0)
+	setStaminaLoss(0)
 	setBrainLoss(0)
 	SetParalysis(0)
 	SetStunned(0)
@@ -437,10 +456,21 @@ default behaviour is:
 	eye_blurry = 0
 	ear_deaf = 0
 	ear_damage = 0
-	heal_overall_damage(getBruteLoss(), getFireLoss())
 
+	heal_overall_damage(1000, 1000)
+	ExtinguishMob()
 	fire_stacks = 0
-	on_fire = 0
+	suiciding = 0
+
+	if(iscarbon(src))
+		var/mob/living/carbon/C = src
+		C.handcuffed = initial(C.handcuffed)
+		for(var/obj/item/weapon/handcuffs/R in C.contents) //actually remove cuffs from inventory
+			qdel(R)
+		if(C.reagents)
+			for(var/datum/reagent/R in C.reagents.reagent_list)
+				C.reagents.clear_reagents()
+			C.reagents.addiction_list = list()
 
 	// restore all of a human's blood
 	if(ishuman(src))
@@ -726,6 +756,10 @@ default behaviour is:
 		animate(src, pixel_y = initial(pixel_y), time = 10)
 		floating = 0
 
+//used in datum/reagents/reaction() proc
+/mob/living/proc/get_permeability_protection()
+	return 0
+
 /mob/living/proc/can_use_vents()
 	return "You can't fit into that vent."
 
@@ -737,6 +771,24 @@ default behaviour is:
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
 	return 0
+
+
+/mob/living/singularity_act()
+	var/gain = 20
+	investigate_log("([key_name(src)]) has been consumed by the singularity.","singulo") //Oh that's where the clown ended up!
+	gib()
+	return(gain)
+
+/mob/living/singularity_pull(S)
+	step_towards(src,S)
+
+/mob/living/narsie_act()
+//	if(client) #TOREMOVE - new cult
+//		makeNewConstruct(/mob/living/simple_animal/construct/harvester, src, null, 1)
+//	spawn_dust()
+	gib()
+	return
+
 /* #TOREMOVE
 /mob/living/proc/get_temperature(datum/gas_mixture/environment)
 	var/loc_temp = T0C
@@ -751,9 +803,9 @@ default behaviour is:
 		var/turf/heat_turf = get_turf(src)
 		loc_temp = heat_turf.temperature
 
-	else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-		var/obj/machinery/atmospherics/unary/cryo_cell/C = loc
-		var/datum/gas_mixture/G = C.airs["a1"]
+	else if(istype(loc, /obj/machinery/atmospherics/components/unary/cryo_cell))
+		var/obj/machinery/atmospherics/components/unary/cryo_cell/C = loc
+		var/datum/gas_mixture/G = C.AIR1
 
 		if(G.total_moles() < 10)
 			loc_temp = environment.temperature

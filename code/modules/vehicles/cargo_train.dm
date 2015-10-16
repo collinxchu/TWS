@@ -13,7 +13,6 @@
 
 	var/car_limit = 3		//how many cars an engine can pull before performance degrades
 	active_engines = 1
-	var/obj/item/weapon/key/cargo_train/key
 
 /obj/item/weapon/key/cargo_train
 	name = "key"
@@ -35,12 +34,16 @@
 	load_offset_y = 4
 	mob_offset_y = 8
 
+/obj/vehicle/train/cargo/trolley/New()
+	..()
+	populate_verbs()
+
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
 /obj/vehicle/train/cargo/engine/New()
 	..()
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/weapon/stock_parts/cell/high(src)
 	key = new(src)
 	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
 	overlays += I
@@ -85,10 +88,10 @@
 	else
 		icon_state = initial(icon_state)
 
-/obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/trolley/insert_cell(var/obj/item/weapon/stock_parts/cell/C, var/mob/living/carbon/human/H)
 	return
 
-/obj/vehicle/train/cargo/engine/insert_cell(var/obj/item/weapon/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/train/cargo/engine/insert_cell(var/obj/item/weapon/stock_parts/cell/C, var/mob/living/carbon/human/H)
 	..()
 	update_stats()
 
@@ -119,24 +122,24 @@
 		..()
 		update_stats()
 
-		verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
-		verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
+		verbs -= /obj/vehicle/verb/stop_engine
+		verbs -= /obj/vehicle/verb/start_engine
 
 		if(on)
-			verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
+			verbs += /obj/vehicle/verb/stop_engine
 		else
-			verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
+			verbs += /obj/vehicle/verb/start_engine
 
 /obj/vehicle/train/cargo/engine/turn_off()
 	..()
 
-	verbs -= /obj/vehicle/train/cargo/engine/verb/stop_engine
-	verbs -= /obj/vehicle/train/cargo/engine/verb/start_engine
+	verbs -= /obj/vehicle/verb/stop_engine
+	verbs -= /obj/vehicle/verb/start_engine
 
 	if(!on)
-		verbs += /obj/vehicle/train/cargo/engine/verb/start_engine
+		verbs += /obj/vehicle/verb/start_engine
 	else
-		verbs += /obj/vehicle/train/cargo/engine/verb/stop_engine
+		verbs += /obj/vehicle/verb/stop_engine
 
 /obj/vehicle/train/cargo/RunOver(var/mob/living/carbon/human/H)
 	var/list/parts = list("head", "chest", "l_leg", "r_leg", "l_arm", "r_arm")
@@ -187,43 +190,6 @@
 
 	user << "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 	user << "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
-
-/obj/vehicle/train/cargo/engine/verb/start_engine()
-	set name = "Start engine"
-	set category = "Vehicle"
-	set src in view(0)
-
-	if(!istype(usr, /mob/living/carbon/human))
-		return
-
-	if(on)
-		usr << "The engine is already running."
-		return
-
-	turn_on()
-	if (on)
-		usr << "You start [src]'s engine."
-	else
-		if(cell.charge < charge_use)
-			usr << "[src] is out of power."
-		else
-			usr << "[src]'s engine won't start."
-
-/obj/vehicle/train/cargo/engine/verb/stop_engine()
-	set name = "Stop engine"
-	set category = "Vehicle"
-	set src in view(0)
-
-	if(!istype(usr, /mob/living/carbon/human))
-		return
-
-	if(!on)
-		usr << "The engine is already stopped."
-		return
-
-	turn_off()
-	if (!on)
-		usr << "You stop [src]'s engine."
 
 /obj/vehicle/train/cargo/engine/verb/remove_key()
 	set name = "Remove key"
@@ -362,3 +328,8 @@
 		anchored = 0
 	else
 		anchored = 1
+
+/obj/vehicle/train/cargo/trolley/populate_verbs()
+	..()
+	verbs -= /obj/vehicle/verb/turn_headlights_on
+	verbs -= /obj/vehicle/verb/turn_headlights_off

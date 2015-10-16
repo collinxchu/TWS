@@ -60,6 +60,11 @@
 	if(mRun in mutations)
 		tally = 0
 
+	if(status_flags & GOTTAGOFAST)
+		tally -= 1
+	if(status_flags & GOTTAGOREALLYFAST)
+		tally -= 2
+
 	return (tally+config.human_delay)
 
 /mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)

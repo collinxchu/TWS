@@ -446,7 +446,19 @@ its easier to just keep the beam vertical.
 	else
 		return 0
 
+/atom/proc/singularity_act()
+	return
+
+/atom/proc/singularity_pull()
+	return
+
+/atom/proc/acid_act(acidpwr, toxpwr, acid_volume)
+	return
+
 /atom/proc/emag_act()
+	return
+
+/atom/proc/narsie_act()
 	return
 
 /atom/proc/storage_contents_dump_act(obj/item/weapon/storage/src_object, mob/user)
@@ -454,3 +466,10 @@ its easier to just keep the beam vertical.
 
 //This proc is called on the location of an atom when the atom is Destroy()'d
 /atom/proc/handle_atom_del(atom/A)
+
+/atom/proc/atom_say(var/message)
+	var/atom_say_verb = "says"
+	if((!message))
+		return
+	for(var/mob/O in hearers(src, null))
+		O.show_message("<span class='game say'><span class='name'>[src]</span> [atom_say_verb], \"[message]\"</span>",2)

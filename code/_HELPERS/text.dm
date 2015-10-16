@@ -84,9 +84,14 @@
 	if(non_whitespace)		return text		//only accepts the text if it has some non-spaces
 
 // Used to get a properly sanitized input, of max_length
-/proc/stripped_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
-	var/name = input(user, message, title, default)
-	return strip_html_properly(name, max_length)
+/proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN)
+	var/name = input(user, message, title, default) as text|null
+	return trim(html_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
+
+// Used to get a properly sanitized multiline input, of max_length
+/proc/stripped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN)
+	var/name = input(user, message, title, default) as message|null
+	return html_encode(trim(name, max_length))
 
 // Used to get a trimmed, properly sanitized input, of max_length
 /proc/trim_strip_input(var/mob/user, var/message = "", var/title = "", var/default = "", var/max_length=MAX_MESSAGE_LEN)
@@ -239,6 +244,7 @@ proc/checkhtml(var/t)
 		t = "[t] "
 	return t
 
+
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
 	for (var/i = 1 to length(text))
@@ -255,7 +261,9 @@ proc/checkhtml(var/t)
 	return ""
 
 //Returns a string with reserved characters and spaces before the first word and after the last word removed.
-/proc/trim(text)
+/proc/trim(text, max_length)
+	if(max_length)
+		text = copytext(text, 1, max_length)
 	return trim_left(trim_right(text))
 
 //Returns a string with the first element of the string capitalized.

@@ -26,7 +26,7 @@
 	/* objs */
 	meat
 		input = /obj/item/weapon/reagent_containers/food/snacks/meat
-		output = /obj/item/weapon/reagent_containers/food/snacks/meatball
+		output = /obj/item/weapon/reagent_containers/food/snacks/soup/meatball
 
 	potato
 		input = /obj/item/weapon/reagent_containers/food/snacks/grown/potato
@@ -46,7 +46,7 @@
 
 	spaghetti
 		input = /obj/item/weapon/reagent_containers/food/snacks/flour
-		output = /obj/item/weapon/reagent_containers/food/snacks/spagetti
+		output = /obj/item/weapon/reagent_containers/food/snacks/spaghetti
 
 	/* mobs */
 	mob

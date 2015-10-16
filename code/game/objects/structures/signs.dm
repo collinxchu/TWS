@@ -136,9 +136,9 @@
 	icon_state = "diner"
 	light_color = "#59FF9B" //teal
 
-/obj/structure/sign/neon/bar
+/obj/structure/sign/neon/bar_alt
 	name = "bar"
-	icon_state = "bar"
+	icon_state = "bar_alt"
 	light_color = "#39FFA4" //teal
 
 /obj/structure/sign/neon/casino

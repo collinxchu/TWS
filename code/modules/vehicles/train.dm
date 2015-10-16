@@ -17,6 +17,8 @@
 	var/obj/vehicle/train/lead
 	var/obj/vehicle/train/tow
 
+	var/obj/item/weapon/key/cargo_train/key
+
 
 //-------------------------------------------
 // Standard procs

@@ -44,7 +44,7 @@
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
 	var/global/list/toxic_reagents = list(
-		"anti_toxin" =     -2,
+		"antitoxin" =     -2,
 		"toxin" =           2,
 		"fluorine" =        2.5,
 		"chlorine" =        1.5,
@@ -64,9 +64,9 @@
 		"diethylamine" =    2,
 		"nutriment" =       1,
 		"adminordrazine" =  1,
-		"eznutrient" =      1,
-		"robustharvest" =   1,
-		"left4zed" =        1
+		"eznutriment" =      1,
+		"robustharvestnutriment" =   1,
+		"left4zednutriment" =        1
 		)
 	var/global/list/weedkiller_reagents = list(
 		"fluorine" =       -4,
@@ -111,8 +111,8 @@
 		"nutriment" =      list(  0.5,  0.1,   0 ),
 		"radium" =         list( -1.5,  0,   0.2 ),
 		"adminordrazine" = list(  1,    1,   1   ),
-		"robustharvest" =  list(  0,    0.2, 0   ),
-		"left4zed" =       list(  0,    0,   0.2 )
+		"robustharvestnutriment" =  list(  0,    0.2, 0   ),
+		"left4zednutriment" =       list(  0,    0,   0.2 )
 		)
 
 	// Mutagen list specifies minimum value for the mutation to take place, rather

@@ -291,6 +291,27 @@
 
         ..(message, speaking, verb, alt_name, italics, message_range, used_radios)
 
+
+/mob/living/carbon/monkey/acid_act(acidpwr, toxpwr, acid_volume)
+	if(wear_mask)
+		if(!wear_mask.unacidable)
+			wear_mask.acid_act(acidpwr)
+			update_inv_wear_mask()
+		else
+			src << "<span class='warning'>Your mask protects you from the acid.</span>"
+		return
+
+	take_organ_damage(min(6*toxpwr, acid_volume * acidpwr/10))
+
+/mob/living/carbon/monkey/get_permeability_protection()
+	var/protection = 0
+	if(head)
+		protection = 1 - head.permeability_coefficient
+	if(wear_mask)
+		protection = max(1 - wear_mask.permeability_coefficient, protection)
+	protection = protection/7 //the rest of the body isn't covered.
+	return protection
+
 /mob/living/carbon/monkey/check_eye_prot()
 	var/number = ..()
 	if(istype(src.wear_mask, /obj/item/clothing/mask))

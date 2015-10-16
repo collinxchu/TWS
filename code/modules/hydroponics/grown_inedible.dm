@@ -166,21 +166,60 @@
 			M.Weaken(force/15)
 		M.drop_item()
 
+
+/obj/item/weapon/grown/bananapeel
+	name = "banana peel"
+	desc = "A peel from a banana."
+	icon = 'icons/obj/items.dmi'
+	icon_state = "banana_peel"
+	item_state = "banana_peel"
+	w_class = 1
+	throwforce = 0
+	throw_speed = 3
+	throw_range = 7
+
+/obj/item/weapon/grown/bananapeel/suicide_act(mob/user)
+	user.visible_message("<span class='suicide'>[user] is deliberately slipping on the [src.name]! It looks like \he's trying to commit suicide.</span>")
+	playsound(loc, 'sound/misc/slip.ogg', 50, 1, -1)
+	return (BRUTELOSS)
+
+/obj/item/weapon/grown/bananapeel/Crossed(AM as mob|obj)
+	if (istype(AM, /mob/living/carbon))
+		var/mob/living/carbon/M = AM
+		var/stun = Clamp(potency / 10, 1, 10)
+		var/weaken = Clamp(potency / 20, 0.5, 5)
+		M.slip(stun, weaken, src)
+		return 1
+
+/obj/item/weapon/grown/bananapeel/specialpeel     //used by /obj/item/clothing/shoes/clown_shoes/bananashoes.dm
+	name = "synthesized banana peel"
+	desc = "A synthetic banana peel."
+
+/obj/item/weapon/grown/bananapeel/specialpeel/Crossed(AM)
+	if(..())	qdel(src)
+
+/obj/item/weapon/grown/bananapeel/mimanapeel
+	name = "mimana peel"
+	desc = "A mimana peel."
+	icon = 'icons/obj/harvest.dmi'
+	icon_state = "mimana_peel"
+
 /obj/item/weapon/corncob
 	name = "corn cob"
 	desc = "A reminder of meals gone by."
 	icon = 'icons/obj/trash.dmi'
 	icon_state = "corncob"
 	item_state = "corncob"
-	w_class = 2.0
+	w_class = 1
 	throwforce = 0
-	throw_speed = 4
-	throw_range = 20
+	throw_speed = 3
+	throw_range = 7
 
 /obj/item/weapon/corncob/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 	if(istype(W, /obj/item/weapon/circular_saw) || istype(W, /obj/item/weapon/hatchet) || istype(W, /obj/item/weapon/kitchen/utensil/knife) || istype(W, /obj/item/weapon/kitchenknife) || istype(W, /obj/item/weapon/kitchenknife/ritual))
 		user << "<span class='notice'>You use [W] to fashion a pipe out of the corn cob!</span>"
 		new /obj/item/clothing/mask/cigarette/pipe/cobpipe (user.loc)
+		user.unEquip(src)
 		qdel(src)
 		return

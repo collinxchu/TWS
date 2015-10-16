@@ -13,10 +13,16 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	unacidable = 1//So effect are not targeted by alien acid.
 	pass_flags = PASSTABLE | PASSGRILLE
 
-/obj/effect/Destroy()
-	if(reagents)
-		reagents.delete()
-	return ..()
+/obj/effect/effect/New()
+	..()
+	if(ticker)
+		cameranet.updateVisibility(src)
+
+/obj/effect/effect/Destroy()
+	if(ticker)
+		cameranet.updateVisibility(src)
+	..()
+	return QDEL_HINT_PUTINPOOL
 
 /obj/effect/effect/water
 	name = "water"
@@ -49,18 +55,23 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	var/atom/holder
 	var/setup = 0
 
-	proc/set_up(n = 3, c = 0, turf/loc)
-		if(n > 10)
-			n = 10
-		number = n
-		cardinals = c
-		location = loc
-		setup = 1
+/datum/effect/effect/system/Destroy()
+	holder = null
+	location = null
+	return ..()
 
-	proc/attach(atom/atom)
-		holder = atom
+/datum/effect/effect/system/proc/set_up(n = 3, c = 0, turf/loc)
+	if(n > 10)
+		n = 10
+	number = n
+	cardinals = c
+	location = loc
+	setup = 1
 
-	proc/start()
+/datum/effect/effect/system/proc/attach(atom/atom)
+	holder = atom
+
+/datum/effect/effect/system/proc/start()
 
 
 /////////////////////////////////////////////
@@ -139,8 +150,7 @@ steam.start() -- spawns the effect
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-	..()
-	return
+	return ..()
 
 /obj/effect/effect/sparks/Move()
 	..()
@@ -541,7 +551,7 @@ steam.start() -- spawns the effect
 			F.create_reagents(10)
 			if (reagents)
 				for(var/datum/reagent/R in reagents.reagent_list)
-					F.reagents.add_reagent(R.id, 1, safety = 1)		//added safety check since reagents in the foam have already had a chance to react
+					F.reagents.add_reagent(R.id, 1, no_react = 1)		//added safety check since reagents in the foam have already had a chance to react
 
 // foam disolves when heated
 // except metal foams
@@ -603,9 +613,9 @@ steam.start() -- spawns the effect
 
 				if(carried_reagents)
 					for(var/id in carried_reagents)
-						F.reagents.add_reagent(id, 1, null, 1) //makes a safety call because all reagents should have already reacted anyway
+						F.reagents.add_reagent(id, 1, null, no_react = 1) //makes a safety call because all reagents should have already reacted anyway
 				else
-					F.reagents.add_reagent("water", 1, safety = 1)
+					F.reagents.add_reagent("water", 1, no_react = 1)
 
 // wall formed by metal foams
 // dense and opaque, but easy to break

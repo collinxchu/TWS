@@ -3,7 +3,7 @@
 /obj/structure/table
 	name = "table"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures/tables.dmi'
 	icon_state = "table"
 	density = 1
 	anchored = 1.0
@@ -229,21 +229,22 @@
 				if(6)
 					icon_state = "wood_tabledir3"
 		else if(istype(src,/obj/structure/table/glasstable))
+			var/obj/structure/table/glasstable/T = src
 			switch(table_type)
 				if(0)
-					icon_state = "glass_table"
+					icon_state = "[T.glasscolor]_glass_table"
 				if(1)
-					icon_state = "glass_table_1tileendtable"
+					icon_state = "[T.glasscolor]_glass_1tileendtable"
 				if(2)
-					icon_state = "glass_table_1tilethick"
+					icon_state = "[T.glasscolor]_glass_1tilethick"
 				if(3)
-					icon_state = "glass_table_dir"
+					icon_state = "[T.glasscolor]_glass_tabledir"
 				if(4)
-					icon_state = "glass_table_middle"
+					icon_state = "[T.glasscolor]_glass_middle"
 				if(5)
-					icon_state = "glass_tabledir2"
+					icon_state = "[T.glasscolor]_glass_tabledir2"
 				if(6)
-					icon_state = "glass_tabledir3"
+					icon_state = "[T.glasscolor]_glass_tabledir3"
 		else
 			switch(table_type)
 				if(0)
@@ -285,6 +286,42 @@
 	icon_state = "glass_table"
 	parts = /obj/item/weapon/shard
 	health = 50
+	var/glasscolor = ""
+
+/obj/structure/table/glasstable/black
+	name = "black glass table"
+	icon_state = "black_glass_table"
+	glasscolor = "black"
+
+/obj/structure/table/glasstable/pink
+	name = "pink glass table"
+	icon_state = "pink_glass_table"
+	glasscolor = "pink"
+
+/obj/structure/table/glasstable/purple
+	name = "purple glass table"
+	icon_state = "purple_glass_table"
+	glasscolor = "purple"
+
+/obj/structure/table/glasstable/red
+	name = "red glass table"
+	icon_state = "red_glass_table"
+	glasscolor = "red"
+
+/obj/structure/table/glasstable/orange
+	name = "orange glass table"
+	icon_state = "orange_glass_table"
+	glasscolor = "orange"
+
+/obj/structure/table/glasstable/grey
+	name = "grey glass table"
+	icon_state = "grey_glass_table"
+	glasscolor = "grey"
+
+/obj/structure/table/glasstable/green
+	name = "green glass table"
+	icon_state = "green_glass_table"
+	glasscolor = "green"
 
 /obj/structure/table/wooden/gamblingtable
 	name = "gambling table"

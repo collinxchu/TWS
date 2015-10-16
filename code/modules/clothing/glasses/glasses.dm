@@ -1,18 +1,12 @@
-
 /obj/item/clothing/glasses
 	name = "glasses"
 	icon = 'icons/obj/clothing/glasses.dmi'
-	//w_class = 2.0
-	//flags = GLASSESCOVERSEYES
-	//slot_flags = SLOT_EYES
-	//var/vision_flags = 0
-	//var/darkness_view = 0//Base human is 2
-	//var/invisa_view = 0
 	var/prescription = 0
 	var/toggleable = 0
 	var/active = 1
 	var/obj/screen/overlay = null
 	body_parts_covered = EYES
+	materials = list(MAT_GLASS = 250)
 
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable)

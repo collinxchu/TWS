@@ -384,7 +384,7 @@ var/global/list/holodeck_programs = list(
 /obj/structure/table/holotable
 	name = "table"
 	desc = "A square piece of metal standing on four metal legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures/tables.dmi'
 	icon_state = "table"
 	density = 1
 	anchored = 1.0
@@ -408,7 +408,7 @@ var/global/list/holodeck_programs = list(
 /obj/structure/table/holotable/wood
 	name = "table"
 	desc = "A square piece of wood standing on four wooden legs. It can not move."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures/tables.dmi'
 	icon_state = "wood_table"
 
 /obj/structure/holostool

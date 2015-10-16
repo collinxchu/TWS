@@ -101,7 +101,7 @@
 	else
 		..()
 
-/obj/item/weapon/shreddedp/proc/burnpaper(var/obj/item/weapon/flame/lighter/P, var/mob/user)
+/obj/item/weapon/shreddedp/proc/burnpaper(var/obj/item/weapon/lighter/P, var/mob/user)
 	if(user.restrained())
 		return
 	if(!P.lit)

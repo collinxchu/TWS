@@ -399,8 +399,46 @@
 		return
 
 	client.screen -= hud_used.item_action_list
+	client.screen -= hud_used.vehicle_action_list
+	var/ui_action_slot1 = "1:6,13:24"
+	var/ui_action_slot2 = "2:8,13:24"
+	var/ui_action_slot3 = "3:10,13:24"
+	var/ui_action_slot4 = "4:12,13:24"
+	var/ui_action_slot5 = "5:14,13:24"
+	hud_used.vehicle_action_list = list()
+	if(istype(buckled, /obj/vehicle))
+		var/obj/vehicle/V = buckled
+
+		if(src == V.trunk) //Don't show the vehicle overlay if they're in the trunk
+			return
+
+		for(var/obj/screen/vehicle_action/B in V.action_buttons)
+
+			B.icon = 'icons/mob/screen1_action.dmi'
+			B.owner = V
+			hud_used.vehicle_action_list += B
+			switch(num)
+				if(1)
+					B.screen_loc = ui_vehicle_slot1
+				if(2)
+					B.screen_loc = ui_vehicle_slot2
+				if(3)
+					B.screen_loc = ui_vehicle_slot3
+				if(4)
+					B.screen_loc = ui_vehicle_slot4
+				if(5)
+					B.screen_loc = ui_vehicle_slot5
+					break //5 slots available, so no more can be added.
+			num++
+	else
+		ui_action_slot1 = "1:6,14:26"
+		ui_action_slot2 = "2:8,14:26"
+		ui_action_slot3 = "3:10,14:26"
+		ui_action_slot4 = "4:12,14:26"
+		ui_action_slot5 = "5:14,14:26"
 
 	hud_used.item_action_list = list()
+	num = 1
 	for(var/obj/item/I in src)
 		if(I.icon_action_button)
 			var/obj/screen/item_action/A = new(hud_used)
@@ -434,6 +472,7 @@
 					break //5 slots available, so no more can be added.
 			num++
 	src.client.screen += src.hud_used.item_action_list
+	src.client.screen += src.hud_used.vehicle_action_list
 
 //Used for new human mobs created by cloning/goleming/etc.
 /mob/living/carbon/human/proc/set_cloned_appearance()

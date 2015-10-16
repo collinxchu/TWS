@@ -47,18 +47,18 @@
 	var/lastattacker = null
 	var/lastattacked = null
 	var/attack_log = list( )
-	var/already_placed = 0.0
+	var/already_placed = 0
 	var/obj/machinery/machine = null
 	var/mob_size = MOB_SIZE_HUMAN    // Used by lockers.
 	var/other_mobs = null
 	var/memory = ""
-	var/poll_answer = 0.0
+	var/poll_answer = 0
 	var/sdisabilities = 0	//Carbon
 	var/disabilities = 0	//Carbon
 	var/atom/movable/pulling = null
 	var/next_move = null
 	var/monkeyizing = null	//Carbon
-	var/other = 0.0
+	var/other = 0
 	var/hand = null
 	var/eye_blind = null	//Carbon
 	var/eye_blurry = null	//Carbon
@@ -99,21 +99,24 @@
 
 	var/name_archive //For admin things like possession
 
-	var/timeofdeath = 0.0//Living
-	var/cpr_time = 1.0//Carbon
+	var/timeofdeath = 0//Living
+	var/cpr_time = 1//Carbon
 
 	var/bodytemperature = 310.055	//98.7 F
 	var/old_x = 0
 	var/old_y = 0
 	var/drowsyness = 0.0//Carbon
+	var/dizziness = 0//Carbon
+	var/jitteriness = 0//Carbon
 	var/charges = 0.0
-	var/nutrition = 400.0//Carbon
+	var/nutrition = NUTRITION_LEVEL_FED + 50//Carbon
+	var/satiety = 0//Carbon
 
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
-	var/paralysis = 0.0
-	var/stunned = 0.0
-	var/weakened = 0.0
-	var/losebreath = 0.0//Carbon
+	var/paralysis = 0
+	var/stunned = 0
+	var/weakened = 0
+	var/losebreath = 0//Carbon
 	var/intent = null//Living
 	var/shakecamera = 0
 	var/a_intent = "help"//Living
@@ -138,6 +141,7 @@
 	var/list/mapobjs = list()
 
 	var/in_throw_mode = 0
+	throw_range = 4 //So you can't throw a mob too far
 
 	var/coughedtime = null
 
@@ -151,7 +155,7 @@
 
 
 	var/datum/dna/dna = null//Carbon
-	var/radiation = 0.0//Carbon
+	var/radiation = 0//Carbon
 
 	var/list/mutations = list() //Carbon -- Doohl
 	//see: setup.dm for list of mutations

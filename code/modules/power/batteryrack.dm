@@ -22,9 +22,9 @@
 /obj/machinery/power/smes/batteryrack/proc/add_parts()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/batteryrack
-	component_parts += new /obj/item/weapon/cell/high
-	component_parts += new /obj/item/weapon/cell/high
-	component_parts += new /obj/item/weapon/cell/high
+	component_parts += new /obj/item/weapon/stock_parts/cell/high
+	component_parts += new /obj/item/weapon/stock_parts/cell/high
+	component_parts += new /obj/item/weapon/stock_parts/cell/high
 	return
 
 
@@ -39,7 +39,7 @@
 	output_level_max = 50000 + max_level * 20000
 
 	var/C = 0
-	for(var/obj/item/weapon/cell/PC in component_parts)
+	for(var/obj/item/weapon/stock_parts/cell/PC in component_parts)
 		C += PC.maxcharge
 		cells_amount++
 	capacity = C * 40   //Basic cells are such crap. Hyper cells needed to get on normal SMES levels.
@@ -84,7 +84,7 @@
 					user << "<span class='warning'>Turn off the [src] before dismantling it.</span>"
 			else
 				user << "<span class='warning'>Better let [src] discharge before dismantling it.</span>"
-		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/cell) && (cells_amount < 5)))
+		else if ((istype(W, /obj/item/weapon/stock_parts/capacitor) && (capacitors_amount < 5)) || (istype(W, /obj/item/weapon/stock_parts/cell) && (cells_amount < 5)))
 			if (charge < (capacity / 100))
 				if (!output_attempt && !input_attempt)
 					user.drop_item()
@@ -113,9 +113,9 @@
 /obj/machinery/power/smes/batteryrack/makeshift/add_parts()
 	component_parts = list()
 	component_parts += new /obj/item/weapon/circuitboard/ghettosmes
-	component_parts += new /obj/item/weapon/cell/high
-	component_parts += new /obj/item/weapon/cell/high
-	component_parts += new /obj/item/weapon/cell/high
+	component_parts += new /obj/item/weapon/stock_parts/cell/high
+	component_parts += new /obj/item/weapon/stock_parts/cell/high
+	component_parts += new /obj/item/weapon/stock_parts/cell/high
 	return
 
 

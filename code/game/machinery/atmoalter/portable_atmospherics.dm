@@ -155,15 +155,15 @@
 	var/power_rating
 	var/power_losses
 	var/last_power_draw = 0
-	var/obj/item/weapon/cell/cell
+	var/obj/item/weapon/stock_parts/cell/cell
 
 /obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/weapon/cell))
+	if(istype(I, /obj/item/weapon/stock_parts/cell))
 		if(cell)
 			user << "There is already a power cell installed."
 			return
 
-		var/obj/item/weapon/cell/C = I
+		var/obj/item/weapon/stock_parts/cell/C = I
 
 		user.drop_item()
 		C.add_fingerprint(user)

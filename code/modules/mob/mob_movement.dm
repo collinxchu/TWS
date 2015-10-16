@@ -432,7 +432,7 @@
 
 /mob/proc/Post_Incorpmove()
 	return
-
+/* #TOREMOVE - old process_spacemove
 ///Process_Spacemove
 ///Called by /client/Move()
 ///For moving in space
@@ -457,7 +457,7 @@
 	//If not then we can reset inertia and move
 	inertia_dir = 0
 	return 1
-
+*/
 /mob/proc/Check_Dense_Object() //checks for anything to push off in the vicinity. also handles magboots on gravity-less floors tiles
 
 	var/dense_object = 0

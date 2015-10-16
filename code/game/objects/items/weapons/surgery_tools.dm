@@ -16,7 +16,7 @@
 	desc = "Retracts stuff."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "retractor"
-	matter = list("metal" = 10000, "glass" = 5000)
+	materials = list(MAT_METAL=6000, MAT_GLASS=3000)
 	flags = CONDUCT
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
@@ -29,7 +29,7 @@
 	desc = "You think you have seen this before."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "hemostat"
-	matter = list("metal" = 5000, "glass" = 2500)
+	materials = list(MAT_METAL=5000, MAT_GLASS=2500)
 	flags = CONDUCT
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
@@ -43,7 +43,7 @@
 	desc = "This stops bleeding."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "cautery"
-	matter = list("metal" = 5000, "glass" = 2500)
+	materials = list(MAT_METAL=2500, MAT_GLASS=750)
 	flags = CONDUCT
 	w_class = 2.0
 	origin_tech = "materials=1;biotech=1"
@@ -57,8 +57,8 @@
 	desc = "You can drill using this item. You dig?"
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "drill"
-	hitsound = 'sound/weapons/circsawhit.ogg'
-	matter = list("metal" = 15000, "glass" = 10000)
+	hitsound = 'sound/weapons/drill.ogg'
+	materials = list(MAT_METAL=10000, MAT_GLASS=6000)
 	flags = CONDUCT
 	force = 15.0
 	w_class = 2.0
@@ -80,15 +80,15 @@
 	icon_state = "scalpel"
 	flags = CONDUCT
 	force = 10.0
-	sharp = 1
-	edge = 1
 	w_class = 2.0
 	throwforce = 5.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("metal" = 10000, "glass" = 5000)
+	materials = list(MAT_METAL=4000, MAT_GLASS=1000)
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
+	sharp = IS_SHARP_ACCURATE
+	edge = 1
 
 	suicide_act(mob/user)
 		viewers(user) << pick("\red <b>[user] is slitting \his wrists with the [src.name]! It looks like \he's trying to commit suicide.</b>", \
@@ -134,16 +134,17 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "saw3"
 	hitsound = 'sound/weapons/circsawhit.ogg'
+	throwhitsound = 'sound/weapons/pierce.ogg'
 	flags = CONDUCT
 	force = 15.0
 	w_class = 2.0
 	throwforce = 9.0
 	throw_speed = 3
 	throw_range = 5
-	matter = list("metal" = 20000,"glass" = 10000)
+	materials = list(MAT_METAL=10000, MAT_GLASS=6000)
 	origin_tech = "materials=1;biotech=1"
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
-	sharp = 1
+	sharp = IS_SHARP
 	edge = 1
 
 //misc, formerly from code/defines/weapons.dm

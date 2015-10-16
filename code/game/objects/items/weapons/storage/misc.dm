@@ -12,7 +12,7 @@
  */
 
 /obj/item/weapon/storage/donut_box
-	icon = 'icons/obj/food.dmi'
+	icon = 'icons/obj/food/food.dmi'
 	icon_state = "donutbox"
 	name = "donut box"
 	storage_slots = 6
@@ -23,7 +23,7 @@
 /obj/item/weapon/storage/donut_box/New()
 	..()
 	for(var/i=1; i <= startswith; i++)
-		new /obj/item/weapon/reagent_containers/food/snacks/donut/normal(src)
+		new /obj/item/weapon/reagent_containers/food/snacks/donut(src)
 	update_icon()
 	return
 
@@ -31,7 +31,7 @@
 	overlays.Cut()
 	var/i = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/donut/D in contents)
-		var/image/img = image('icons/obj/food.dmi', D.overlay_state)
+		var/image/img = image('icons/obj/food/food.dmi', D.overlay_state)
 		img.pixel_x = i * 3
 		overlays += img
 		i++

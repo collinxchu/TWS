@@ -7,10 +7,15 @@
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
 	w_class = 2
+	action_button_name = "Adjust Balaclava"
+	ignore_maskadjust = 0
 	sprite_sheets = list(
 		"Tajara" = 'icons/mob/species/tajaran/helmet.dmi',
 		"Unathi" = 'icons/mob/species/unathi/helmet.dmi',
 		)
+
+/obj/item/clothing/mask/balaclava/attack_self(var/mob/user)
+	adjustmask(user)
 
 /obj/item/clothing/mask/balaclava/tactical
 	name = "green balaclava"

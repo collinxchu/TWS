@@ -173,7 +173,7 @@
 	..()
 
 /obj/machinery/party/lasermachine/Destroy()
-	turn_off()
+	turnoff()
 	return ..()
 
 /obj/machinery/party/lasermachine/attack_ai(mob/user as mob)

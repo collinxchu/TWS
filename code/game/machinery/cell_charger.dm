@@ -8,9 +8,9 @@
 	idle_power_usage = 5
 	active_power_usage = 40000	//40 kW. (this the power drawn when charging)
 	power_channel = EQUIP
-	var/obj/item/weapon/cell/charging = null
+	var/obj/item/weapon/stock_parts/cell/charging = null
 	var/chargelevel = -1
-	
+
 /obj/machinery/cell_charger/proc/updateicon()
 	icon_state = "ccharger[charging ? 1 : 0]"
 
@@ -27,11 +27,11 @@
 			chargelevel = newlevel
 	else
 		overlays.Cut()
-	
+
 /obj/machinery/cell_charger/examine(mob/user)
 	if(!..(user, 5))
 		return
-	
+
 	user << "There's [charging ? "a" : "no"] cell in the charger."
 	if(charging)
 		user << "Current charge: [charging.charge]"
@@ -40,7 +40,7 @@
 	if(stat & BROKEN)
 		return
 
-	if(istype(W, /obj/item/weapon/cell) && anchored)
+	if(istype(W, /obj/item/weapon/stock_parts/cell) && anchored)
 		if(charging)
 			user << "\red There is already a cell in the charger."
 			return
@@ -103,11 +103,11 @@
 	if((stat & (BROKEN|NOPOWER)) || !anchored)
 		update_use_power(0)
 		return
-	
+
 	if (charging && !charging.fully_charged())
 		charging.give(active_power_usage*CELLRATE)
 		update_use_power(2)
-		
+
 		updateicon()
 	else
 		update_use_power(1)
