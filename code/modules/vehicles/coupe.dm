@@ -48,51 +48,68 @@
 	if(trunk_open && !trunk)
 			//||car is empty
 		if(!load && !passenger)
-			var/utype = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "The trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "The trunk", "Cancel")
+			switch(choice)
 				if("Driver's")
 					if(G.affecting)
-						load(G.affecting, "driver")
-						update_dir_car_overlays()
+						if(!canInteract(user, G.affecting))	return
 						var/mob/M = G.affecting
-						M.loc = loc
-						user.stop_pulling()
 						qdel(G)
+						load(M, "driver")
+						update_dir_car_overlays()
 				if("Passenger's")
 					if(G.affecting)
-						load(G.affecting, "passenger")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "passenger")
 						update_dir_car_overlays()
 				if("The trunk")
 					if(G.affecting)
-						load(G.affecting, "trunk")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "trunk")
 				if("Cancel")
 					return
 			return
 			//||passenger's seat is taken
 		if(!load)
-			var/utype = alert("Which seat do you want them to take?",,"Driver's", "The trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("Which seat do you want them to take?",,"Driver's", "The trunk", "Cancel")
+			switch(choice)
 				if("Driver's")
 					if(G.affecting)
-						load(G.affecting, "driver")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "driver")
 						update_dir_car_overlays()
 				if("The trunk")
 					if(G.affecting)
-						load(G.affecting, "trunk")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "trunk")
 				if("Cancel")
 					return
 			return
 			//||driver's seat is taken
 		if(!passenger)
-			var/utype = alert("Which seat do you want them to take?",, "Passenger's", "The trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("Which seat do you want them to take?",, "Passenger's", "The trunk", "Cancel")
+			switch(choice)
 				if("Passenger's")
 					if(G.affecting)
-						load(G.affecting, "passenger")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "passenger")
 						update_dir_car_overlays()
 				if("The trunk")
 					if(G.affecting)
-						load(G.affecting, "trunk")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "trunk")
 				if("Cancel")
 					return
 			return
@@ -100,15 +117,21 @@
 	if(!trunk_open || trunk)
 			//||car is empty
 		if(!load && !passenger)
-			var/utype = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "Cancel")
-			switch(utype)
+			var/choice = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "Cancel")
+			switch(choice)
 				if("Driver's")
 					if(G.affecting)
-						load(G.affecting, "driver")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "driver")
 						update_dir_car_overlays()
 				if("Passenger's")
 					if(G.affecting)
-						load(G.affecting, "passenger")
+						if(!canInteract(user, G.affecting))	return
+						var/mob/M = G.affecting
+						qdel(G)
+						load(M, "passenger")
 						update_dir_car_overlays()
 				if("Cancel")
 					return
@@ -116,13 +139,19 @@
 			//||passenger's seat is taken
 		if(!load)
 			if(G.affecting)
-				load(G.affecting, "driver")
+				if(!canInteract(user, G.affecting))	return
+				var/mob/M = G.affecting
+				qdel(G)
+				load(M, "driver")
 				update_dir_car_overlays()
 			return
 			//||driver's seat is taken
 		if(!passenger)
 			if(G.affecting)
-				load(G.affecting, "passenger")
+				if(!canInteract(user, G.affecting))	return
+				var/mob/M = G.affecting
+				qdel(G)
+				load(M, "passenger")
 				update_dir_car_overlays()
 			return
 	if(!trunk_open)
@@ -131,10 +160,14 @@
 		usr << "<span class='warning'>There is already something in the trunk. Remove [trunk] first before loading [G.affecting] into the trunk.</span>"
 	else if(trunk_open && !trunk)
 		if(G.affecting)
-			load(G.affecting, "trunk")
+			var/mob/M = G.affecting
+			qdel(G)
+			load(M, "trunk")
+
+
 //| Mousedrop
 /obj/vehicle/car/sportscar/MouseDrop_T(var/atom/movable/C, mob/user as mob)
-	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || !user.Adjacent(C) || !istype(C) || (user == C && !user.canmove))
+	if(user.buckled || user.stat || user.restrained() || !Adjacent(user) || (!user.canmove) || !user.Adjacent(C) || !istype(C))
 		return
 	if(istype(C,/obj/vehicle/train))
 		return
@@ -143,54 +176,63 @@
 		if(trunk_open && !trunk)
 				//||car is empty
 			if(!load && !passenger)
-				var/utype = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "The trunk", "Cancel")
-				switch(utype)
+				var/choice = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "The trunk", "Cancel")
+				switch(choice)
 					if("Driver's")
+						if(!canInteract(user, C))	return
 						load(C, "driver")
 						update_dir_car_overlays()
 					if("Passenger's")
+						if(!canInteract(user, C))	return
 						load(C, "passenger")
 						update_dir_car_overlays()
 					if("The trunk")
+						if(!canInteract(user, C))	return
 						load(C, "trunk")
 					if("Cancel")
 						return
 				return
 				//||passenger's seat is taken
 			if(!load)
-				var/utype = alert("Which seat do you want them to take?",,"Driver's", "The trunk", "Cancel")
-				switch(utype)
+				var/choice = alert("Which seat do you want them to take?",,"Driver's", "The trunk", "Cancel")
+				switch(choice)
 					if("Driver's")
+						if(!canInteract(user, C))	return
 						load(C, "driver")
 						update_dir_car_overlays()
 					if("The trunk")
+						if(!canInteract(user, C))	return
 						load(C, "trunk")
 					if("Cancel")
 						return
 				return
 				//||driver's seat is taken
 			if(!passenger)
-				var/utype = alert("Which seat do you want them to take?",, "Passenger's", "The trunk", "Cancel")
-				switch(utype)
+				var/choice = alert("Which seat do you want them to take?",, "Passenger's", "The trunk", "Cancel")
+				switch(choice)
 
 					if("Passenger's")
+						if(!canInteract(user, C))	return
 						load(C, "passenger")
 						update_dir_car_overlays()
 					if("The trunk")
+						if(!canInteract(user, C))	return
 						load(C, "trunk")
 					if("Cancel")
 						return
 				return
-				//||trunk is closed
+				//||trunk is closed or full
 		if(!trunk_open || trunk)
 				//||car is empty
 			if(!load && !passenger)
-				var/utype = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "Cancel")
-				switch(utype)
+				var/choice = alert("Which seat do you want them to take?",,"Driver's", "Passenger's", "Cancel")
+				switch(choice)
 					if("Driver's")
+						if(!canInteract(user, C))	return
 						load(C, "driver")
 						update_dir_car_overlays()
 					if("Passenger's")
+						if(!canInteract(user, C))	return
 						load(C, "passenger")
 						update_dir_car_overlays()
 					if("Cancel")
@@ -198,11 +240,13 @@
 				return
 				//||passenger's seat is taken
 			if(!load)
+				if(!canInteract(user, C))	return
 				load(C, "driver")
 				update_dir_car_overlays()
 				return
 				//||driver's seat is taken
 			if(!passenger)
+				if(!canInteract(user, C))	return
 				load(C, "passenger")
 				update_dir_car_overlays()
 				return
@@ -211,12 +255,19 @@
 	else if(trunk)
 		usr << "<span class='warning'>There is already something in the trunk. Remove [trunk] first before loading [C] into the trunk.</span>"
 	else if(trunk_open && !trunk)
+		if(!canInteract(user, C))	return
 		load(C, "trunk")
+
+/obj/vehicle/car/sportscar/proc/canInteract(mob/user, atom/movable/C)
+	if(user.stat || user.restrained() || !Adjacent(user) || (!user.canmove) || (C && !user.Adjacent(C)) || (C && !istype(C)))
+		return 0
+	else
+		return 1
 
 /obj/vehicle/car/sportscar/attack_hand(mob/living/user as mob)
 	if(user.stat || user.restrained() || !Adjacent(user))
 		return 0
-	if(user != load && (user in src)) //||for handling players stuck in src
+	if(user != trunk && (user in src)) //||for handling players stuck in src
 		user.forceMove(loc)
 
 	src.add_fingerprint(user)
@@ -239,54 +290,70 @@
 			return
 			//||what happens when there is already a passenger in the car
 		if(!load && passenger && passenger != user)
-			var/utype = alert("What would you like to do?",,"Enter driver's seat", "Remove passenger", "Climb into trunk","Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Enter driver's seat", "Remove passenger", "Climb into trunk","Cancel")
+			switch(choice)
 				if("Enter driver's seat")
+					if(!canInteract(user))	return
 					load(user, "driver")
 					update_dir_car_overlays()
 				if("Remove passenger")
+					if(!canInteract(user))	return
 					remove_occupant(user, passenger, "passenger")
 				if("Climb into trunk")
+					if(!canInteract(user))	return
 					load(user, "trunk")
 				if("Cancel")
 					return
 			return
 			//||what happens when there is already a driver in the car
 		if(load && !passenger && load != user)
-			var/utype = alert("What would you like to do?",,"Enter passenger's seat", "Remove driver", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Enter passenger's seat", "Remove driver", "Climb into trunk", "Cancel")
+			switch(choice)
 				if("Enter passenger's seat")
+					if(!canInteract(user))	return
 					load(user, "passenger")
 					update_dir_car_overlays()
 				if("Remove driver")
+					if(!canInteract(user))	return
 					remove_occupant(user, load, "driver")
+				if("Climb into trunk")
+					if(!canInteract(user))	return
+					load(user, "trunk")
 				if("Cancel")
 					return
 			return
 			//||what happens when there are two people in the car
 		if(load && passenger && load != user && passenger != user)
-			var/utype = alert("What would you like to do?",,"Remove driver", "Remove passenger", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Remove driver", "Remove passenger", "Climb into trunk", "Cancel")
+			switch(choice)
 				if("Remove driver")
+					if(!canInteract(user))	return
 					remove_occupant(user, load, "driver")
 				if("Remove passenger")
+					if(!canInteract(user))	return
 					remove_occupant(user, passenger, "passenger")
+				if("Climb into trunk")
+					if(!canInteract(user))	return
+					load(user, "trunk")
 				if("Cancel")
 					return
 			return
 			//||car is empty
 		if(!load && !user.buckled && !passenger)
-			var/utype = alert("How will you ride?",,"Drive", "Passenger", "In the trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("How will you ride?",,"Drive", "Passenger", "In the trunk", "Cancel")
+			switch(choice)
 				if("Drive")
+					if(!canInteract(user))	return
 					load(user, "driver")
 					update_dir_car_overlays()
 				if("Passenger")
+					if(!canInteract(user))	return
 					load(user, "passenger")
 					update_dir_car_overlays()
 				if("In the trunk")
+					if(!canInteract(user))	return
 					load(user, "trunk")
-				if("I will not Cancel")
+				if("Cancel")
 					return
 			return
 			//|the trunk is open & full
@@ -308,56 +375,68 @@
 			return
 			//||what happens when there is already a passenger in the car
 		if(!load && passenger && passenger != user)
-			var/utype = alert("What would you like to do?",,"Enter driver's seat", "Remove passenger", "Remove from trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Enter driver's seat", "Remove passenger", "Remove from trunk", "Cancel")
+			switch(choice)
 				if("Enter driver's seat")
+					if(!canInteract(user))	return
 					load(user, "driver")
 					update_dir_car_overlays()
 				if("Remove passenger")
+					if(!canInteract(user))	return
 					remove_occupant(user, passenger, "passenger")
 				if("Remove from trunk")
+					if(!canInteract(user))	return
 					unload(trunk, "trunk")
 				if("Cancel")
 					return
 			return
 			//||what happens when there is already a driver in the car
 		if(load && !passenger && load != user)
-			var/utype = alert("What would you like to do?",,"Enter passenger's seat", "Remove driver", "Remove from trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Enter passenger's seat", "Remove driver", "Remove from trunk", "Cancel")
+			switch(choice)
 				if("Enter passenger's seat")
+					if(!canInteract(user))	return
 					load(user, "passenger")
 					update_dir_car_overlays()
 				if("Remove driver")
+					if(!canInteract(user))	return
 					remove_occupant(user, load, "driver")
 				if("Remove from trunk")
+					if(!canInteract(user))	return
 					unload(trunk, "trunk")
 				if("Cancel")
 					return
 			return
 			//||what happens when there are two people in the car
 		if(load && passenger && load != user && passenger != user)
-			var/utype = alert("What would you like to do?",,"Remove driver", "Remove passenger", "Remove from trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Remove driver", "Remove passenger", "Remove from trunk", "Cancel")
+			switch(choice)
 				if("Remove driver")
+					if(!canInteract(user))	return
 					remove_occupant(user, load, "driver")
 				if("Remove passenger")
+					if(!canInteract(user))	return
 					remove_occupant(user, passenger, "passenger")
 				if("Remove from trunk")
+					if(!canInteract(user))	return
 					unload(trunk, "trunk")
 				if("Cancel")
 					return
 			return
-			//||user is already in the driver's seat; click vehicle to exit
+			//||car is empty
 		if(!load && !user.buckled && !passenger)
-			var/utype = alert("What will you do?",,"Drive", "Be passenger", "Remove from trunk", "Cancel")
-			switch(utype)
+			var/choice = alert("What will you do?",,"Drive", "Be passenger", "Remove from trunk", "Cancel")
+			switch(choice)
 				if("Drive")
+					if(!canInteract(user))	return
 					load(user, "driver")
 					update_dir_car_overlays()
 				if("Be passenger")
+					if(!canInteract(user))	return
 					load(user, "passenger")
 					update_dir_car_overlays()
 				if("Remove from trunk")
+					if(!canInteract(user))	return
 					unload(trunk, "trunk")
 				if("Cancel")
 					return
@@ -377,51 +456,59 @@
 			return
 			//||user is already in the trunk; click vehicle to exit
 		if(trunk == user)
-			unload(user, "trunk")
+			user << "<span class='warning'>The trunk is closed! You have to force it open.</span>"
 			return
 			//||what happens when there is already a passenger in the car
 		if(!load && passenger && passenger != user)
-			var/utype = alert("What would you like to do?",,"Enter driver's seat", "Remove passenger", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Enter driver's seat", "Remove passenger", "Cancel")
+			switch(choice)
 				if("Enter driver's seat")
+					if(!canInteract(user))	return
 					load(user, "driver")
 					update_dir_car_overlays()
 				if("Remove passenger")
+					if(!canInteract(user))	return
 					remove_occupant(user, passenger, "passenger")
 				if("Cancel")
 					return
 			return
 			//||what happens when there is already a driver in the car
 		if(load && !passenger && load != user)
-			var/utype = alert("What would you like to do?",,"Enter passenger's seat", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Enter passenger's seat", "Remove driver", "Cancel")
+			switch(choice)
 				if("Enter passenger's seat")
+					if(!canInteract(user))	return
 					load(user, "passenger")
 					update_dir_car_overlays()
 				if("Remove driver")
+					if(!canInteract(user))	return
 					remove_occupant(user, load, "driver")
 				if("Cancel")
 					return
 			return
 			//||what happens when there are two people in the car
 		if(load && passenger && load != user && passenger != user)
-			var/utype = alert("What would you like to do?",,"Remove driver", "Remove passenger", "Cancel")
-			switch(utype)
+			var/choice = alert("What would you like to do?",,"Remove driver", "Remove passenger", "Cancel")
+			switch(choice)
 				if("Remove driver")
+					if(!canInteract(user))	return
 					remove_occupant(user, load, "driver")
 				if("Remove passenger")
+					if(!canInteract(user))	return
 					remove_occupant(user, passenger, "passenger")
 				if("Cancel")
 					return
 			return
 			//||car is empty
 		if(!load && !user.buckled && !passenger)
-			var/utype = alert("How will you ride?",,"Drive", "Passenger", "Cancel")
-			switch(utype)
+			var/choice = alert("How will you ride?",,"Drive", "Passenger", "Cancel")
+			switch(choice)
 				if("Drive")
+					if(!canInteract(user))	return
 					load(user, "driver")
 					update_dir_car_overlays()
 				if("Passenger")
+					if(!canInteract(user))	return
 					load(user, "passenger")
 					update_dir_car_overlays()
 				if("Cancel")

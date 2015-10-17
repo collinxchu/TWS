@@ -283,7 +283,7 @@
 /obj/structure/table/glasstable
 	name = "glass table"
 	desc = "What did I say about leaning on the glass tables? Now you need surgery."
-	icon_state = "glass_table"
+	icon_state = "_glass_table"
 	parts = /obj/item/weapon/shard
 	health = 50
 	var/glasscolor = ""

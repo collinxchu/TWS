@@ -14,6 +14,7 @@
 
 	var/obj/item/weapon/key/car/key
 	var/trunk_open = 0
+	var/trunk_welded = 0
 
 	engine_start = 'sound/vehicles/ignition.ogg'
 	engine_fail = 'sound/vehicles/wontstart.ogg'
@@ -76,7 +77,13 @@
 	..()
 
 /obj/vehicle/car/Bump(atom/Obstacle)
-	if(emagged) return
+	if(!emagged)
+		if(!bumped)
+			for(var/mob/O in hearers(1, src))
+				O.show_message("<span class='game say'><span class='name'>[src]</span> calmly chimes, \"\italic Collision detected. Powering down...\"</span>",2)
+			turn_off()
+			bumped = 1
+		return
 	if(!istype(Obstacle, /atom/movable))
 		return
 	var/atom/movable/A = Obstacle
@@ -167,6 +174,32 @@
 /obj/vehicle/car/bullet_act()
 	return 	//for now return, to prevent taser shots from killing cars until projectile code is refactored
 
+
+/obj/vehicle/car/container_resist()
+	var/mob/living/user = usr
+	var/breakout_time = 2 //2 minutes by default
+
+	if( trunk_open )
+		return  //Trunk's open, no point in resisting.
+
+	//okay, so the trunk is shut... resist!!!
+	user.changeNext_move(CLICK_CD_BREAKOUT)
+	user.last_special = world.time + CLICK_CD_BREAKOUT
+	user << "<span class='notice'>You lean against the roof of [src]'s trunk and start forcing it open. (this will take about [breakout_time] minutes.)</span>"
+	for(var/mob/O in hearers(src))
+		O << "<span class='warning'>You hear a banging sound coming from [src]'s trunk!</span>"
+	if(do_after(user,(breakout_time*60*10), target = src)) //minutes * 60seconds * 10deciseconds
+		if(!user || user.stat != CONSCIOUS || user.loc != src || trunk_open )
+			return
+		//we check after a while whether there is a point of resisting anymore and whether the user is capable of resisting
+
+		trunk_welded = 0
+		user.visible_message("<span class='danger'>[user] successfully broke out of [src]'s trunk!</span>", "<span class='notice'>You successfully break out of [src]'s trunk!</span>")
+		unload(trunk, "trunk")
+		trunk_opened()
+	else
+		user << "<span class='warning'>You fail to break out of [src]'s trunk!</span>"
+
 //-------------------------------------------
 // Car procs
 //-------------------------------------------
@@ -196,6 +229,27 @@
 	for(var/obj/screen/vehicle_action/trunktoggle/A in action_buttons)
 		A.icon_state = "trunk[trunk_open]"
 		A.name = "[trunk_open ? "Shut" : "Open"] Trunk"
+
+	if(usr) usr.update_action_buttons()
+
+	return 1
+
+/obj/vehicle/car/proc/trunk_opened()
+
+	trunk_open = 1
+
+	verbs -= /obj/vehicle/car/close_trunk
+	verbs -= /obj/vehicle/car/open_trunk
+
+	if(trunk_open)
+		verbs += /obj/vehicle/car/close_trunk
+	else
+		verbs += /obj/vehicle/car/open_trunk
+
+	for(var/obj/screen/vehicle_action/trunktoggle/A in action_buttons)
+		A.icon_state = "trunk[trunk_open]"
+		A.name = "[trunk_open ? "Shut" : "Open"] Trunk"
+
 	if(usr) usr.update_action_buttons()
 
 	return 1
@@ -337,37 +391,22 @@
 	set name = "Trunk Open"
 	set category = "Vehicle"
 	set src in view(1)
-
 	..()
 
 	if(!key)
 		return
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
-		return
+		return 1
 
 	if(!spam_flag)
 		spam_flag = 1
 		cooldowntime = 10
-		trunk_open = 1
-		usr << "<span class='notice'>You pop open the trunk.</span>"
-		playsound(src.loc, 'sound/vehicles/boot-open.ogg', 100, 0, 22050)
-		spawn(cooldowntime)
-			spam_flag = 0
-
-		verbs -= /obj/vehicle/car/close_trunk
-		verbs -= /obj/vehicle/car/open_trunk
-
-		if(trunk_open)
-			verbs += /obj/vehicle/car/close_trunk
-		else
-			verbs += /obj/vehicle/car/open_trunk
-
-		for(var/obj/screen/vehicle_action/trunktoggle/A in action_buttons)
-			A.icon_state = "trunk[trunk_open]"
-			A.name = "[trunk_open ? "Shut" : "Open"] Trunk"
-
-		if(usr) usr.update_action_buttons()
+		if(trunk_opened())
+			usr << "<span class='notice'>You pop open the trunk.</span>"
+			playsound(src.loc, 'sound/vehicles/boot-open.ogg', 100, 0, 22050)
+			spawn(cooldowntime)
+				spam_flag = 0
 
 /obj/vehicle/car/close_trunk()
 	set name = "Trunk Close"
@@ -411,6 +450,9 @@
 //-------------------------------------------
 
 /obj/vehicle/car/load(var/atom/movable/C, who)
+	if(C == src)
+		return 0
+
 	if(!istype(C, /mob/living/carbon/human))
 		usr << "<span class='notice'>You load [C] into the trunk.</span>"
 	switch(who)
@@ -448,6 +490,11 @@
 		if("trunk")
 			trunk = C
 			trunk.loc = src
+			if(ismob(trunk))
+				var/mob/M = trunk
+				if(M.client)
+					M.client.perspective = EYE_PERSPECTIVE
+					M.client.eye = src
 
 	for(var/obj/screen/vehicle_action/swaptoggle/A in action_buttons) //Update the swap action button
 		if(load && passenger)
@@ -554,7 +601,7 @@
 			trunk.pixel_x = initial(trunk.pixel_x)
 			trunk.pixel_y = initial(trunk.pixel_y)
 			trunk.layer = initial(trunk.layer)
-			trunk.loc = src.loc
+			//trunk.loc = src.loc
 
 			if(ismob(trunk))
 				for(var/mob/M in buckled_mobs)
@@ -562,8 +609,10 @@
 						buckled_mob = M
 						unbuckle_mob(trunk)
 						buckled_mobs -= M
+						if(M.client)
+							M.client.eye = M.client.mob
+							M.client.perspective = MOB_PERSPECTIVE
 			trunk = null
-
 	for(var/obj/screen/vehicle_action/swaptoggle/A in action_buttons) //Update the swap action button
 		if(load && passenger)
 			A.icon_state = "swap0"

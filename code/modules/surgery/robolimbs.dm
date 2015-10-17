@@ -34,8 +34,8 @@
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 		var/obj/item/robot_parts/L = tool
-		user.visible_message("\blue [user] has attached \the [tool] to [target].",	\
-		"\blue You have attached \the [tool] to [target].")
+		user.visible_message("<span class='notice'>[user] has attached \the [tool] to [target].</span>",	\
+		"<span class='notice'>You have attached \the [tool] to [target].</span>")
 
 		if(L.part)
 			for(var/part_name in L.part)
@@ -57,6 +57,6 @@
 		qdel(tool)
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\red [user]'s hand slips, damaging [target]'s flesh!", \
-		"\red Your hand slips, damaging [target]'s flesh!")
+		user.visible_message("<span class='danger'>[user]'s hand slips, damaging [target]'s flesh!</span>", \
+		"<span class='danger'>Your hand slips, damaging [target]'s flesh!</span>")
 		target.apply_damage(10, BRUTE, null, sharp=1)

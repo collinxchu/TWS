@@ -16,8 +16,8 @@
 		"You start attaching [tool] to [target]'s neck.")
 
 	end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\blue [user] has attached [target]'s head to the body.",	\
-		"\blue You have attached [target]'s head to the body.")
+		user.visible_message("<span class='notice'>[user] has attached [target]'s head to the body.</span>",	\
+		"<span class='notice'>You have attached [target]'s head to the body.</span>")
 		var/obj/item/organ/external/head = tool
 		user.drop_from_inventory(head)
 		head.replaced(target)
@@ -28,6 +28,6 @@
 		target.UpdateDamageIcon()
 
 	fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-		user.visible_message("\red [user]'s hand slips, damaging [target]'s neck!", \
-		"\red Your hand slips, damaging [target]'s neck!")
+		user.visible_message("<span class='danger'>[user]'s hand slips, damaging [target]'s neck!</span>", \
+		"<span class='danger'>Your hand slips, damaging [target]'s neck!</span>")
 		target.apply_damage(10, BRUTE, null, sharp=1)

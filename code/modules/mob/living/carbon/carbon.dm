@@ -478,12 +478,20 @@
 		if(do_after(src, 600, needhand = 0, target = src))
 			if(!buckled)
 				return
-			buckled.user_unbuckle_mob(src,src)
+			if(istype(buckled, /obj/vehicle))
+				var/obj/vehicle/V
+				V.unload(src)
+			else
+				buckled.user_unbuckle_mob(src,src)
 		else
 			if(src && buckled)
 				src << "<span class='warning'>You fail to unbuckle yourself!</span>"
 	else
-		buckled.user_unbuckle_mob(src,src)
+		if(istype(buckled, /obj/vehicle))
+			var/obj/vehicle/car/V
+			V.unload(src)
+		else
+			buckled.user_unbuckle_mob(src,src)
 
 /mob/living/carbon/resist_fire()
 	fire_stacks -= 5

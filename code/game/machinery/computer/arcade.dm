@@ -687,9 +687,9 @@
 						last_spaceport_action = "You failed to raid the spaceport! you lost [FU*-1] Fuel and [FO*-1] Food, AND [lost_crew] in your scramble to escape! ([FU]FI,[FO]FO,-Crew)"
 						if(emagged)
 							atom_say("WEEWOO WEEWOO, Spaceport Security en route!")
-						//	for(var/i, i<=3, i++)
-						//		var/mob/living/simple_animal/hostile/syndicate/ranged/orion/O = new/mob/living/simple_animal/hostile/syndicate/ranged/orion(get_turf(src))
-						//		O.target = usr  #TOREMOVE
+							for(var/i, i<=3, i++)
+								var/mob/living/simple_animal/hostile/syndicate/ranged/orion/O = new/mob/living/simple_animal/hostile/syndicate/ranged/orion(get_turf(src))
+								O.target = usr
 
 
 				fuel += FU

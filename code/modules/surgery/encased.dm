@@ -113,8 +113,8 @@
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-		var/msg = "<span class='danger'> [user]'s hand slips, cracking [target]'s [affected.encased]!</span>"
-		var/self_msg = "<span class='danger'> Your hand slips, cracking [target]'s  [affected.encased]</span>!"
+		var/msg = "<span class='danger'>[user]'s hand slips, cracking [target]'s [affected.encased]!</span>"
+		var/self_msg = "<span class='danger'>Your hand slips, cracking [target]'s  [affected.encased]</span>!"
 		user.visible_message(msg, self_msg)
 
 		affected.createwound(BRUISE, 20)
@@ -166,8 +166,8 @@
 			return
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
-		var/msg = "<span class='danger'> [user]'s hand slips, bending [target]'s [affected.encased] the wrong way!</span>"
-		var/self_msg = "<span class='danger'> Your hand slips, bending [target]'s [affected.encased] the wrong way!</span>"
+		var/msg = "<span class='danger'>[user]'s hand slips, bending [target]'s [affected.encased] the wrong way!</span>"
+		var/self_msg = "<span class='danger'>Your hand slips, bending [target]'s [affected.encased] the wrong way!</span>"
 		user.visible_message(msg, self_msg)
 
 		affected.createwound(BRUISE, 20)

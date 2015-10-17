@@ -282,7 +282,7 @@ var/global/list/uneatable = list(
 					continue
 				if(O.invisibility == 101)
 					src.consume(O)
-		T.ChangeTurf(/turf/space)
+		T.ChangeTurf(T.baseturf)
 		gain = 2
 	src.energy += gain
 	return
@@ -506,7 +506,7 @@ var/global/list/uneatable = list(
 					continue
 				if(O.invisibility == 101)
 					src.consume(O)
-		A:ChangeTurf(/turf/space)
+		A:ChangeTurf(A:baseturf)
 	if(last_boom + 100 < world.time && prob(5))
 		explosion(loc, -1, -1, -1, 1, 0) //Since we're not exploding everything in consume() toss out an explosion effect every now and again
 		last_boom = world.time

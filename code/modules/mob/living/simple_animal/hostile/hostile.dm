@@ -3,6 +3,7 @@
 	var/stance = HOSTILE_STANCE_IDLE	//Used to determine behavior
 	var/mob/living/target_mob
 	var/attack_same = 0
+	var/atom/target //#TOREMOVE refactor hostile NPCs
 	var/ranged = 0
 	var/rapid = 0
 	var/projectiletype

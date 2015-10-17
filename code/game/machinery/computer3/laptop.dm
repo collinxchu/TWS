@@ -186,12 +186,8 @@
 			stat &= ~NOPOWER
 
 	Destroy()
-		if(istype(loc,/obj/item/device/laptop))
-			var/obj/O = loc
-			spawn(5)
-				if(O)
-					qdel(O)
 		..()
+		return QDEL_HINT_HARDDEL_NOW // Warning: GC'ing will cause the laptop to vanish when it next closes
 
 
 	AltClick()

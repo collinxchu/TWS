@@ -50,6 +50,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		force = 3
 		hitsound = 'sound/items/welder.ogg'
 		item_state = "cigon"
+		set_light(2, 0.25, "#E38F46")
 		name = "lit match"
 		desc = "A match. This one is lit."
 		attack_verb = list("burnt","singed")
@@ -64,6 +65,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		force = initial(force)
 		icon_state = "match_burnt"
 		item_state = "cigoff"
+		set_light(0)
 		name = "burnt match"
 		desc = "A match. This one has seen better days."
 		attack_verb = null

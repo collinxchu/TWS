@@ -171,10 +171,8 @@
 	mymob.toxin.name = "toxin"
 	mymob.toxin.screen_loc = ui_toxin
 
-	mymob.internals = new /obj/screen()
+	mymob.internals = new /obj/screen/internals()
 	mymob.internals.icon = ui_style
-	mymob.internals.icon_state = "internal0"
-	mymob.internals.name = "internal"
 	mymob.internals.screen_loc = ui_internal
 
 	mymob.fire = new /obj/screen()
@@ -201,10 +199,9 @@
 	mymob.healthdoll.name = "health doll"
 	mymob.healthdoll.screen_loc = ui_healthdoll
 
-	mymob.pullin = new /obj/screen()
+	mymob.pullin = new /obj/screen/pull()
 	mymob.pullin.icon = ui_style
-	mymob.pullin.icon_state = "pull0"
-	mymob.pullin.name = "pull"
+	mymob.pullin.update_icon(mymob)
 	mymob.pullin.screen_loc = ui_pull_resist
 
 	mymob.blind = new /obj/screen()

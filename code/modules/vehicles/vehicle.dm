@@ -35,6 +35,7 @@
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 	var/fits_passenger = 0
+	var/bumped = 0 //to prevent spammage from Bump()
 
 	var/obj/item/weapon/stock_parts/cell/cell
 	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
@@ -129,8 +130,6 @@
 				user << "<span class='notice'>[src] does not need a repair.</span>"
 		else
 			user << "<span class='notice'>Unable to repair while [src] is off.</span>"
-	else if(istype(W, /obj/item/weapon/card/emag) && !emagged)
-		Emag(user)
 	else if(hasvar(W,"force") && hasvar(W,"damtype"))
 		switch(W.damtype)
 			if("fire")
@@ -193,6 +192,19 @@
 		if(was_on)
 			turn_on()
 
+/obj/vehicle/emag_act(mob/user)
+	if(locked)
+		locked = 0
+		user << "<span class='warning'>You bypass [src]'s controls.</span>"
+		return
+
+	if(emagged)
+		emagged = 0
+		user << "<span class='notice'>You silently enable [src]'s safety protocols with the cryptographic sequencer."
+	else
+		emagged = 1
+		user << "<span class='warning'>You silently disable [src]'s safety protocols with the cryptographic sequencer."
+
 /obj/vehicle/attack_ai(mob/user as mob)
 	return
 
@@ -209,6 +221,7 @@
 	if(powered && cell.charge < charge_use)
 		return 0
 	on = 1
+	bumped = 0 //for non-emagged collisions
 	update_icon()
 
 	verbs -= /obj/vehicle/verb/stop_engine
@@ -224,6 +237,7 @@
 		A.name = "[on ? "Turn Off" : "Turn On"] Engine"
 
 	if(usr) usr.update_action_buttons()
+
 	return 1
 
 /obj/vehicle/proc/turn_off()
@@ -287,13 +301,6 @@
 
 /obj/vehicle/proc/honk_horn()
 	playsound(src, 'sound/items/bikehorn.ogg',40,1)
-
-/obj/vehicle/proc/Emag(mob/user as mob)
-	emagged = 1
-
-	if(locked)
-		locked = 0
-		user << "<span class='warning'>You bypass [src]'s controls.</span>"
 
 /obj/vehicle/proc/explode()
 	src.visible_message("\red <B>[src] blows apart!</B>", 1)
@@ -460,7 +467,7 @@
 /obj/vehicle/verb/turn_headlights_on()
 	set name = "Turn On Headlights"
 	set category = "Vehicle"
-	set src in oview(1)
+	set src in oview(0)
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
 		return
@@ -470,7 +477,7 @@
 /obj/vehicle/verb/turn_headlights_off()
 	set name = "Turn Off Headlights"
 	set category = "Vehicle"
-	set src in oview(1)
+	set src in oview(0)
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
 		return

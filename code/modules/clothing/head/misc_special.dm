@@ -120,7 +120,7 @@
 /*
  * Pumpkin head
  */
-/obj/item/clothing/head/pumpkinhead
+/obj/item/clothing/head/hardhat/pumpkinhead
 	name = "carved pumpkin"
 	desc = "A jack o' lantern! Believed to ward off evil spirits."
 	icon_state = "hardhat0_pumpkin"//Could stand to be renamed
@@ -129,9 +129,25 @@
 	flags = HEADCOVERSEYES | HEADCOVERSMOUTH | BLOCKHAIR
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|EYES
+	action_button_name = "Toggle Pumpkin Light"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	brightness_on = 2
-	light_overlay = "helmet_light"
+	light_color = "#DB992E"
 	w_class = 3
+
+/obj/item/clothing/head/hardhat/reindeer
+	name = "novelty reindeer hat"
+	desc = "Some fake antlers and a very fake red nose."
+	icon_state = "hardhat0_reindeer"
+	item_state = "hardhat0_reindeer"
+	item_color = "reindeer"
+	flags_inv = 0
+	action_button_name = "Toggle Nose Light"
+	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	brightness_on = 2
+	light_color = "#DC2313"
+	light_power = 0.5
+
 
 /*
  * Kitty ears

@@ -233,19 +233,16 @@
 		src.hotkeybuttons += mymob.throw_icon
 		hud_elements |= mymob.throw_icon
 
-		mymob.pullin = new /obj/screen()
+		mymob.pullin = new /obj/screen/pull()
 		mymob.pullin.icon = ui_style
-		mymob.pullin.icon_state = "pull0"
-		mymob.pullin.name = "pull"
+		mymob.pullin.update_icon(mymob)
 		mymob.pullin.screen_loc = ui_pull_resist
 		src.hotkeybuttons += mymob.pullin
 		hud_elements |= mymob.pullin
 
 	if(hud_data.has_internals)
-		mymob.internals = new /obj/screen()
+		mymob.internals = new /obj/screen/internals()
 		mymob.internals.icon = ui_style
-		mymob.internals.icon_state = "internal0"
-		mymob.internals.name = "internal"
 		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
 

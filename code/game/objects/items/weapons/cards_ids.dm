@@ -68,6 +68,7 @@
 	icon_state = "emag"
 	item_state = "card-id"
 	origin_tech = "magnets=2;syndicate=2"
+	flags = NOBLUDGEON
 	var/uses = 10
 	// List of devices that cost a use to emag.
 	var/list/devices = list(
