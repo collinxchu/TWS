@@ -98,7 +98,7 @@
 	return trim(stripped_input(user, message, title, default, max_length))
 
 //Filters out undesirable characters from names
-/proc/reject_bad_name(var/t_in, var/allow_numbers=0, var/max_length=MAX_NAME_LEN)
+/proc/reject_bad_name(var/t_in, var/allow_numbers=0, var/max_length=MAX_NAME_LEN, var/startwithnum = 0)
 	if(!t_in || length(t_in) > max_length)
 		return //Rejects the input if it is null or if it is longer then the max length allowed
 
@@ -124,7 +124,7 @@
 
 			// 0  .. 9
 			if(48 to 57)			//Numbers
-				if(!last_char_group)		continue	//suppress at start of string
+				if(!last_char_group && !startwithnum)		continue	//suppress at start of string
 				if(!allow_numbers)			continue
 				t_out += ascii2text(ascii_char)
 				number_of_alphanumeric++

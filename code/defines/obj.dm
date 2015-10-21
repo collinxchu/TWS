@@ -69,7 +69,7 @@
 	var/list/eng = new()
 	var/list/med = new()
 	var/list/sci = new()
-	var/list/civ = new()
+	var/list/sup = new()
 	var/list/bot = new()
 	var/list/misc = new()
 	var/list/isactive = new()
@@ -118,8 +118,8 @@
 		if(real_rank in science_positions)
 			sci[name] = rank
 			department = 1
-		if(real_rank in civilian_positions)
-			civ[name] = rank
+		if(real_rank in support_positions)
+			sup[name] = rank
 			department = 1
 		if(real_rank in nonhuman_positions)
 			bot[name] = rank
@@ -151,10 +151,10 @@
 		for(name in sci)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
-	if(civ.len > 0)
-		dat += "<tr><th colspan=3>Civilian</th></tr>"
-		for(name in civ)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[civ[name]]</td><td>[isactive[name]]</td></tr>"
+	if(sup.len > 0)
+		dat += "<tr><th colspan=3>Support</th></tr>"
+		for(name in sup)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[sup[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	// in case somebody is insane and added them to the manifest, why not
 	if(bot.len > 0)
@@ -193,7 +193,7 @@ var/global/ManifestJSON
 	var/eng[0]
 	var/med[0]
 	var/sci[0]
-	var/civ[0]
+	var/sup[0]
 	var/bot[0]
 	var/misc[0]
 	for(var/datum/data/record/t in data_core.general)
@@ -234,11 +234,11 @@ var/global/ManifestJSON
 			if(depthead && sci.len != 1)
 				sci.Swap(1,sci.len)
 
-		if(real_rank in civilian_positions)
-			civ[++civ.len] = list("name" = name, "rank" = rank, "active" = isactive)
+		if(real_rank in support_positions)
+			sup[++sup.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
-			if(depthead && civ.len != 1)
-				civ.Swap(1,civ.len)
+			if(depthead && sup.len != 1)
+				sup.Swap(1,sup.len)
 
 		if(real_rank in nonhuman_positions)
 			bot[++bot.len] = list("name" = name, "rank" = rank, "active" = isactive)
@@ -254,7 +254,7 @@ var/global/ManifestJSON
 		"eng" = eng,\
 		"med" = med,\
 		"sci" = sci,\
-		"civ" = civ,\
+		"sup" = sup,\
 		"bot" = bot,\
 		"misc" = misc\
 		)

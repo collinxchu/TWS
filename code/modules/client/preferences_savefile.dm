@@ -133,9 +133,9 @@
 
 	//Jobs
 	S["alternate_option"]	>> alternate_option
-	S["job_civilian_high"]	>> job_civilian_high
-	S["job_civilian_med"]	>> job_civilian_med
-	S["job_civilian_low"]	>> job_civilian_low
+	S["job_support_high"]	>> job_support_high
+	S["job_support_med"]	>> job_support_med
+	S["job_support_low"]	>> job_support_low
 	S["job_medsci_high"]	>> job_medsci_high
 	S["job_medsci_med"]		>> job_medsci_med
 	S["job_medsci_low"]		>> job_medsci_low
@@ -221,9 +221,9 @@
 	b_type			= sanitize_text(b_type, initial(b_type))
 
 	alternate_option = sanitize_integer(alternate_option, 0, 2, initial(alternate_option))
-	job_civilian_high = sanitize_integer(job_civilian_high, 0, 65535, initial(job_civilian_high))
-	job_civilian_med = sanitize_integer(job_civilian_med, 0, 65535, initial(job_civilian_med))
-	job_civilian_low = sanitize_integer(job_civilian_low, 0, 65535, initial(job_civilian_low))
+	job_support_high = sanitize_integer(job_support_high, 0, 65535, initial(job_support_high))
+	job_support_med = sanitize_integer(job_support_med, 0, 65535, initial(job_support_med))
+	job_support_low = sanitize_integer(job_support_low, 0, 65535, initial(job_support_low))
 	job_medsci_high = sanitize_integer(job_medsci_high, 0, 65535, initial(job_medsci_high))
 	job_medsci_med = sanitize_integer(job_medsci_med, 0, 65535, initial(job_medsci_med))
 	job_medsci_low = sanitize_integer(job_medsci_low, 0, 65535, initial(job_medsci_low))
@@ -284,9 +284,9 @@
 
 	//Jobs
 	S["alternate_option"]	<< alternate_option
-	S["job_civilian_high"]	<< job_civilian_high
-	S["job_civilian_med"]	<< job_civilian_med
-	S["job_civilian_low"]	<< job_civilian_low
+	S["job_support_high"]	<< job_support_high
+	S["job_support_med"]	<< job_support_med
+	S["job_support_low"]	<< job_support_low
 	S["job_medsci_high"]	<< job_medsci_high
 	S["job_medsci_med"]		<< job_medsci_med
 	S["job_medsci_low"]		<< job_medsci_low

@@ -80,7 +80,16 @@
 	if(!emagged)
 		if(!bumped)
 			for(var/mob/O in hearers(1, src))
-				O.show_message("<span class='game say'><span class='name'>[src]</span> calmly chimes, \"\italic Collision detected. Powering down...\"</span>",2)
+				O.show_message("<span class='game say'><span class='name'>[src]</span> calmly chimes, \"\italic Imminent collision detected! Safety engaged, powering down...\"</span>",2)
+			if(passenger)
+				var/mob/living/carbon/human/H = passenger  //whiplash!
+				H.do_attack_animation(src, 0)
+				H.adjustBruteLossByPart(1,"head")
+			if(load)
+				var/mob/living/carbon/human/H = load
+				H.do_attack_animation(src, 0)
+				H.adjustBruteLossByPart(1,"head")
+				H << "<span class='warning'>Your head bangs against the dashboard!</span>"
 			turn_off()
 			bumped = 1
 		return
@@ -314,7 +323,7 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying || (usr == trunk))
 		return
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -349,7 +358,7 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying || (usr == trunk))
 		return
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -368,7 +377,7 @@
 	set category = "Vehicle"
 	set src in view(0)
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying || (usr == trunk))
 		return
 
 	if(!istype(usr, /mob/living/carbon/human))
@@ -397,7 +406,11 @@
 		return
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
-		return 1
+		return
+
+	if(usr == trunk)
+		container_resist()
+		return
 
 	if(!spam_flag)
 		spam_flag = 1
@@ -415,7 +428,7 @@
 	..()
 
 	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
-		return 1
+		return
 
 	if(!spam_flag)
 		spam_flag = 1
@@ -434,8 +447,8 @@
 	if(!istype(usr, /mob/living/carbon/human))
 		return
 
-	if(usr.stat || usr.restrained() || usr.stunned || usr.lying)
-		return 1
+	if(usr.stat || usr.restrained() || usr.stunned || usr.lying || (usr == trunk))
+		return
 
 	if(!on)
 		usr << "<span class='warning'>Turn on the engine.</span>"
@@ -619,7 +632,8 @@
 		else
 			A.icon_state = "swap1"
 
-	user.update_action_buttons()
+	if(user)
+		user.update_action_buttons()
 
 	return 1
 

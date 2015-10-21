@@ -23,7 +23,7 @@ var/global/list/special_roles = list( //keep synced with the defines BE_* in set
 
 //used for alternate_option
 #define GET_RANDOM_JOB 0
-#define BE_ASSISTANT 1
+#define BE_CIVILIAN 1
 #define RETURN_TO_LOBBY 2
 
 datum/preferences
@@ -90,9 +90,9 @@ datum/preferences
 	var/icon/preview_icon_side = null
 
 		//Jobs, uses bitflags
-	var/job_civilian_high = 0
-	var/job_civilian_med = 0
-	var/job_civilian_low = 0
+	var/job_support_high = 0
+	var/job_support_med = 0
+	var/job_support_low = 0
 
 	var/job_medsci_high = 0
 	var/job_medsci_med = 0
@@ -127,6 +127,9 @@ datum/preferences
 	var/nanotrasen_relation = "Neutral"
 
 	var/uplinklocation = "PDA"
+
+	// 0 = character settings, 1 = game preferences
+	var/current_tab = 0
 
 		// OOC Metadata:
 	var/metadata = ""
@@ -207,9 +210,10 @@ datum/preferences
 
 
 	var/HTML = "<body>"
-	HTML += "<b>Select your Skills</b><br>"
-	HTML += "Current skill level: <b>[GetSkillClass(used_skillpoints)]</b> ([used_skillpoints])<br>"
-	HTML += "<a href=\"byond://?src=\ref[user];preference=skills;preconfigured=1;\">Use preconfigured skillset</a><br>"
+	HTML += "<b><tt><center>Select your Skills</b></center><br>"
+	HTML += "<center>Current skill level: <b>[GetSkillClass(used_skillpoints)]</b> ([used_skillpoints])</center><br>"
+	HTML += "<a href=\"byond://?src=\ref[user];preference=skills;preconfigured=1;\"><center>Use preconfigured skillset</a></center><br>"
+	HTML += "<center><a href=\"byond://?src=\ref[user];preference=skills;cancel=1;\">\[Done\]</a></center><br>"
 	HTML += "<table>"
 	for(var/V in SKILLS)
 		HTML += "<tr><th colspan = 5><b>[V]</b>"
@@ -218,20 +222,24 @@ datum/preferences
 			var/level = skills[S.ID]
 			HTML += "<tr style='text-align:left;'>"
 			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;skillinfo=\ref[S]'>[S.name]</a></th>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_NONE]'><font color=[(level == SKILL_NONE) ? "red" : "black"]>\[Untrained\]</font></a></th>"
+			HTML += "<th><a class='white' a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_NONE]'><font color=[(level == SKILL_NONE) ? "red" : "black"]>\[Untrained\]</font></a></th>"
 			// secondary skills don't have an amateur level
 			if(S.secondary)
 				HTML += "<th></th>"
 			else
-				HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_BASIC]'><font color=[(level == SKILL_BASIC) ? "red" : "black"]>\[Amateur\]</font></a></th>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_ADEPT]'><font color=[(level == SKILL_ADEPT) ? "red" : "black"]>\[Trained\]</font></a></th>"
-			HTML += "<th><a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_EXPERT]'><font color=[(level == SKILL_EXPERT) ? "red" : "black"]>\[Professional\]</font></a></th>"
-			HTML += "</tr>"
+				HTML += "<th><a class='white' a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_BASIC]'><font color=[(level == SKILL_BASIC) ? "red" : "black"]>\[Amateur\]</font></a></th>"
+			HTML += "<th><a class='white' a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_ADEPT]'><font color=[(level == SKILL_ADEPT) ? "red" : "black"]>\[Trained\]</font></a></th>"
+			HTML += "<th><a class='white' a href='byond://?src=\ref[user];preference=skills;setskill=\ref[S];newvalue=[SKILL_EXPERT]'><font color=[(level == SKILL_EXPERT) ? "red" : "black"]>\[Professional\]</font></a></th>"
+			HTML += "</tr></tt>"
 	HTML += "</table>"
-	HTML += "<a href=\"byond://?src=\ref[user];preference=skills;cancel=1;\">\[Done\]</a>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=show_skills;size=600x800")
+	//user << browse(HTML, "window=show_skills;size=600x800")
+	var/datum/browser/popup = new(user, "show_skills", "<div align='center'>Skills Preferences</div>", 600, 850)
+	popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
+	return
 	return
 
 /datum/preferences/proc/ShowChoices(mob/user)
@@ -241,6 +249,11 @@ datum/preferences
 	user << browse_rsc(preview_icon_side, "previewicon2.png")
 	var/dat = "<html><body><center>"
 
+	dat += "<a href='?_src_=prefs;preference=tab;tab=0' [current_tab == 0 ? "class='linkOn'" : ""]>Character Settings</a>"
+	dat += "<a href='?_src_=prefs;preference=tab;tab=1' [current_tab == 1 ? "class='linkOn'" : ""]>Game Preferences</a>"
+	dat += "</center>"
+	dat += "<HR>"
+/*
 	if(path)
 		dat += "<center>"
 		dat += "Slot <b>[slot_name]</b> - "
@@ -251,201 +264,208 @@ datum/preferences
 
 	else
 		dat += "Please create an account to save your preferences."
+*/
 
-	dat += "</center><hr><table><tr><td width='340px' height='320px'>"
+	switch(current_tab)
+		if (0) // Character Settings#
+			dat += "<center>"
+			dat += "Slot <b>[slot_name]</b> - "
+			dat += "<a href=\"byond://?src=\ref[user];preference=open_load_dialog\">Load slot</a> - "
+			dat += "<a href=\"byond://?src=\ref[user];preference=save\">Save slot</a> - "
+			dat += "<a href=\"byond://?src=\ref[user];preference=reload\">Reload slot</a>"
+			dat += "</center>"
+			dat += "<center><h2>Occupation Choices</h2>"
+			dat += "<a href='?_src_=prefs;preference=job;task=menu'>Set Occupation Preferences</a><br></center>"
+			dat += "<h2>Identity</h2>"
+			dat += "<table width='100%'><tr><td width='72%' valign='top'>"
+			dat += "<b>Name:</b> "
+			dat += "<a href='?_src_=prefs;preference=name;task=input'><b>[real_name]</b></a><br>"
+			dat += "(<a href='?_src_=prefs;preference=name;task=random'>Random Name</A>) "
+			dat += "(<a href='?_src_=prefs;preference=name'>Always Random Name: [be_random_name ? "Yes" : "No"]</a>)"
+			dat += "<br>"
 
-	dat += "<b>Name:</b> "
-	dat += "<a href='?_src_=prefs;preference=name;task=input'><b>[real_name]</b></a><br>"
-	dat += "(<a href='?_src_=prefs;preference=name;task=random'>Random Name</A>) "
-	dat += "(<a href='?_src_=prefs;preference=name'>Always Random Name: [be_random_name ? "Yes" : "No"]</a>)"
-	dat += "<br>"
+			dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
+			dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a>"
+			dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
 
-	dat += "<b>Gender:</b> <a href='?_src_=prefs;preference=gender'><b>[gender == MALE ? "Male" : "Female"]</b></a><br>"
-	dat += "<b>Age:</b> <a href='?_src_=prefs;preference=age;task=input'>[age]</a><br>"
-	dat += "<b>Spawn Point</b>: <a href='byond://?src=\ref[user];preference=spawnpoint;task=input'>[spawnpoint]</a>"
+			dat += "<br><b>Custom Loadout:</b> "
+			var/total_cost = 0
 
-	dat += "<br>"
-	dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
-	dat += "<b>Custom UI</b>(recommended for White UI):<br>"
-	dat += "-Color: <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
-	dat += "-Alpha(transparency): <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
-	dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
-	dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
-	dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "All Speech" : "Nearest Creatures"]</b></a><br>"
-	dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "All Emotes" : "Nearest Creatures"]</b></a><br>"
-	dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "All Chatter" : "Nearest Speakers"]</b></a><br>"
+			if(!islist(gear)) gear = list()
 
-	if(config.allow_Metadata)
-		dat += "<b>OOC Notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'> Edit </a><br>"
+			if(gear && gear.len)
+				dat += "<br>"
+				for(var/i = 1; i <= gear.len; i++)
+					var/datum/gear/G = gear_datums[gear[i]]
+					if(G)
+						total_cost += G.cost
+						dat += "[gear[i]] ([G.cost] points) <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[i]'>\[remove\]</a><br>"
 
-	dat += "<br><b>Custom Loadout:</b> "
-	var/total_cost = 0
-
-	if(!islist(gear)) gear = list()
-
-	if(gear && gear.len)
-		dat += "<br>"
-		for(var/i = 1; i <= gear.len; i++)
-			var/datum/gear/G = gear_datums[gear[i]]
-			if(G)
-				total_cost += G.cost
-				dat += "[gear[i]] ([G.cost] points) <a href='byond://?src=\ref[user];preference=loadout;task=remove;gear=[i]'>\[remove\]</a><br>"
-
-		dat += "<b>Used:</b> [total_cost] points."
-	else
-		dat += "none."
-
-	if(total_cost < MAX_GEAR_COST)
-		dat += " <a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a>"
-		if(gear && gear.len)
-			dat += " <a href='byond://?src=\ref[user];preference=loadout;task=clear'>\[clear\]</a>"
-
-	dat += "<br><br><b>Occupation Choices</b><br>"
-	dat += "\t<a href='?_src_=prefs;preference=job;task=menu'><b>Set Preferences</b></a><br>"
-
-	dat += "<br><table><tr><td><b>Body</b> "
-	dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
-	dat += "<br>"
-	dat += "Species: <a href='?src=\ref[user];preference=species;task=change'>[species]</a><br>"
-	dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
-	dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
-	dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
-	//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
-	dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
-	dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
-	dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
-
-	//display limbs below
-	var/ind = 0
-	for(var/name in organ_data)
-		//world << "[ind] \ [organ_data.len]"
-		var/status = organ_data[name]
-		var/organ_name = null
-		switch(name)
-			if("l_arm")
-				organ_name = "left arm"
-			if("r_arm")
-				organ_name = "right arm"
-			if("l_leg")
-				organ_name = "left leg"
-			if("r_leg")
-				organ_name = "right leg"
-			if("l_foot")
-				organ_name = "left foot"
-			if("r_foot")
-				organ_name = "right foot"
-			if("l_hand")
-				organ_name = "left hand"
-			if("r_hand")
-				organ_name = "right hand"
-			if("heart")
-				organ_name = "heart"
-			if("eyes")
-				organ_name = "eyes"
-
-		if(status == "cyborg")
-			++ind
-			if(ind > 1)
-				dat += ", "
-			var/datum/robolimb/R
-			if(rlimb_data[name] && all_robolimbs[rlimb_data[name]])
-				R = all_robolimbs[rlimb_data[name]]
+				dat += "<b>Used:</b> [total_cost] points."
 			else
-				R = basic_robolimb
-			dat += "\t[R.company] [organ_name] prothesis"
-		else if(status == "amputated")
-			++ind
-			if(ind > 1)
-				dat += ", "
-			dat += "\tAmputated [organ_name]"
-		else if(status == "mechanical")
-			++ind
-			if(ind > 1)
-				dat += ", "
-			dat += "\tMechanical [organ_name]"
-		else if(status == "assisted")
-			++ind
-			if(ind > 1)
-				dat += ", "
-			switch(organ_name)
-				if("heart")
-					dat += "\tPacemaker-assisted [organ_name]"
-				if("voicebox") //on adding voiceboxes for speaking skrell/similar replacements
-					dat += "\tSurgically altered [organ_name]"
-				if("eyes")
-					dat += "\tRetinal overlayed [organ_name]"
-				else
-					dat += "\tMechanically assisted [organ_name]"
-	if(!ind)
-		dat += "\[...\]<br><br>"
-	else
-		dat += "<br><br>"
+				dat += "none."
 
-	if(gender == MALE)
-		dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
-	else
-		dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
+			if(total_cost < MAX_GEAR_COST)
+				dat += " <a href='byond://?src=\ref[user];preference=loadout;task=input'>\[add\]</a>"
+				if(gear && gear.len)
+					dat += " <a href='byond://?src=\ref[user];preference=loadout;task=clear'>\[clear\]</a>"
 
-	dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[undershirt_t[undershirt]]</b></a><br>"
+			dat += "<br><table><tr><td><b>Body</b> "
+			dat += "(<a href='?_src_=prefs;preference=all;task=random'>&reg;</A>)"
+			dat += "<br>"
+			dat += "Species: <a href='?src=\ref[user];preference=species;active=0'>[species]</a><br>"
+			dat += "Secondary Language:<br><a href='byond://?src=\ref[user];preference=language;task=input'>[language]</a><br>"
+			dat += "Blood Type: <a href='byond://?src=\ref[user];preference=b_type;task=input'>[b_type]</a><br>"
+			dat += "Skin Tone: <a href='?_src_=prefs;preference=s_tone;task=input'>[-s_tone + 35]/220<br></a>"
+			//dat += "Skin pattern: <a href='byond://?src=\ref[user];preference=skin_style;task=input'>Adjust</a><br>"
+			dat += "<br><b>Handicaps</b><br>"
+			dat += "Needs Glasses: <a href='?_src_=prefs;preference=disabilities'><b>[disabilities == 0 ? "No" : "Yes"]</b></a><br>"
+			dat += "Limbs: <a href='byond://?src=\ref[user];preference=limbs;task=input'>Adjust</a><br>"
+			if(species != "Slime People" && species != "Machine")
+				dat += "Internal Organs: <a href='byond://?src=\ref[user];preference=organs;task=input'>Adjust</a><br>"
 
-	dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
+			//display limbs below
+			var/ind = 0
+			for(var/name in organ_data)
+				//world << "[ind] \ [organ_data.len]"
+				var/status = organ_data[name]
+				var/organ_name = null
+				switch(name)
+					if("l_arm")
+						organ_name = "left arm"
+					if("r_arm")
+						organ_name = "right arm"
+					if("l_leg")
+						organ_name = "left leg"
+					if("r_leg")
+						organ_name = "right leg"
+					if("l_foot")
+						organ_name = "left foot"
+					if("r_foot")
+						organ_name = "right foot"
+					if("l_hand")
+						organ_name = "left hand"
+					if("r_hand")
+						organ_name = "right hand"
+					if("heart")
+						organ_name = "heart"
+					if("eyes")
+						organ_name = "eyes"
 
-	dat += "Nanotrasen Relation:<br><a href ='?_src_=prefs;preference=nt_relation;task=input'><b>[nanotrasen_relation]</b></a><br>"
+				if(status == "cyborg")
+					++ind
+					if(ind > 1)
+						dat += ", "
+					var/datum/robolimb/R
+					if(rlimb_data[name] && all_robolimbs[rlimb_data[name]])
+						R = all_robolimbs[rlimb_data[name]]
+					else
+						R = basic_robolimb
+					dat += "\t[R.company] [organ_name] prothesis"
+				else if(status == "amputated")
+					++ind
+					if(ind > 1)
+						dat += ", "
+					dat += "\tAmputated [organ_name]"
+				else if(status == "mechanical")
+					++ind
+					if(ind > 1)
+						dat += ", "
+					dat += "\tMechanical [organ_name]"
+				else if(status == "assisted")
+					++ind
+					if(ind > 1)
+						dat += ", "
+					switch(organ_name)
+						if("heart")
+							dat += "\tPacemaker-assisted [organ_name]"
+						if("voicebox") //on adding voiceboxes for speaking skrell/similar replacements
+							dat += "\tSurgically altered [organ_name]"
+						if("eyes")
+							dat += "\tRetinal overlayed [organ_name]"
+						else
+							dat += "\tMechanically assisted [organ_name]"
+			if(!ind)
+				dat += "\[...\]<br><br>"
+			else
+				dat += "<br><br>"
 
-	dat += "</td><td><b>Preview</b><br><img src=previewicon.png height=64 width=64><img src=previewicon2.png height=64 width=64></td></tr></table>"
+			if(gender == MALE)
+				dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_m[underwear]]</b></a><br>"
+			else
+				dat += "Underwear: <a href ='?_src_=prefs;preference=underwear;task=input'><b>[underwear_f[underwear]]</b></a><br>"
+			dat += "Undershirt: <a href='?_src_=prefs;preference=undershirt;task=input'><b>[undershirt_t[undershirt]]</b></a><br>"
+			dat += "Backpack Type:<br><a href ='?_src_=prefs;preference=bag;task=input'><b>[backbaglist[backbag]]</b></a><br>"
+			dat += "Nanotrasen Relation:<br><a href ='?_src_=prefs;preference=nt_relation;task=input'><b>[nanotrasen_relation]</b></a><br>"
+			dat += "</td><td><b>Preview</b><br><img src=previewicon.png height=64 width=64><img src=previewicon2.png height=64 width=64></td></tr></table>"
+			dat += "<br><b>Background Information</b><br>"
+			dat += "Home system: <a href='byond://?src=\ref[user];preference=home_system;task=input'>[home_system]</a><br/>"
+		//	dat += "Citizenship: <a href='byond://?src=\ref[user];preference=citizenship;task=input'>[citizenship]</a><br/>"
+			dat += "Faction: <a href='byond://?src=\ref[user];preference=faction;task=input'>[faction]</a><br/>"
+			dat += "Religion: <a href='byond://?src=\ref[user];preference=religion;task=input'>[religion]</a><br/>"
+			dat += "</td><td width='300px' height='300px'>"
 
-	dat += "</td><td width='300px' height='300px'>"
+			if(jobban_isbanned(user, "Records"))
+				dat += "<b>You are banned from using character records.</b><br>"
+			else
+				dat += "<b><a href=\"byond://?src=\ref[user];preference=records;task=open;\">Character Records</a></b><br>"
 
-	if(jobban_isbanned(user, "Records"))
-		dat += "<b>You are banned from using character records.</b><br>"
-	else
-		dat += "<b><a href=\"byond://?src=\ref[user];preference=records;record=1\">Character Records</a></b><br>"
+			dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
+			dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
+			dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
+			dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
+			dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
+			dat += "<br>"
 
-	dat += "<b><a href=\"byond://?src=\ref[user];preference=antagoptions;active=0\">Set Antag Options</b></a><br>"
+			var/hairname = "Hair"
+			if(species == "Machine")
+				hairname = "Frame Color"
+			dat += "<br><b>[hairname]</b><br>"
+			dat += "<a href='?_src_=prefs;preference=hair;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
+			dat += " Style: <a href='?_src_=prefs;preference=h_style;task=input'>[h_style]</a><br>"
 
-	dat += "\t<a href=\"byond://?src=\ref[user];preference=skills\"><b>Set Skills</b> (<i>[GetSkillClass(used_skillpoints)][used_skillpoints > 0 ? " [used_skillpoints]" : "0"])</i></a><br>"
+			dat += "<br><b>Facial</b><br>"
+			dat += "<a href='?_src_=prefs;preference=facial;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
+			dat += " Style: <a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a><br>"
 
-	dat += "<a href='byond://?src=\ref[user];preference=flavor_text;task=open'><b>Set Flavor Text</b></a><br>"
-	dat += "<a href='byond://?src=\ref[user];preference=flavour_text_robot;task=open'><b>Set Robot Flavour Text</b></a><br>"
+			dat += "<br><b>Eyes</b><br>"
+			dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
 
-	dat += "<a href='byond://?src=\ref[user];preference=pAI'><b>pAI Configuration</b></a><br>"
-	dat += "<br>"
+			dat += "<br><b>Body Color</b><br>"
+			dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
+			dat += "</td></tr></table><hr><center>"
 
-	dat += "<br><b>Hair</b><br>"
-	dat += "<a href='?_src_=prefs;preference=hair;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_hair, 2)][num2hex(g_hair, 2)][num2hex(b_hair)]'><tr><td>__</td></tr></table></font> "
-	dat += " Style: <a href='?_src_=prefs;preference=h_style;task=input'>[h_style]</a><br>"
+		if (1) // General Preferences
+			dat += "<table><tr><td width='340px' height='300px' valign='top'>"
+			dat += "<h2>General Settings</h2>"
+			dat += "<b>UI Style:</b> <a href='?_src_=prefs;preference=ui'><b>[UI_style]</b></a><br>"
+			dat += "<b>Custom UI settings:</b><br>"
+			dat += "<b>Color:</b> <a href='?_src_=prefs;preference=UIcolor'><b>[UI_style_color]</b></a> <table style='display:inline;' bgcolor='[UI_style_color]'><tr><td>__</td></tr></table><br>"
+			dat += "<b>Alpha (transparency):</b> <a href='?_src_=prefs;preference=UIalpha'><b>[UI_style_alpha]</b></a><br>"
+			dat += "<b>Play admin midis:</b> <a href='?_src_=prefs;preference=hear_midis'><b>[(toggles & SOUND_MIDI) ? "Yes" : "No"]</b></a><br>"
+			dat += "<b>Play lobby music:</b> <a href='?_src_=prefs;preference=lobby_music'><b>[(toggles & SOUND_LOBBY) ? "Yes" : "No"]</b></a><br>"
+			dat += "<b>Ghost ears:</b> <a href='?_src_=prefs;preference=ghost_ears'><b>[(toggles & CHAT_GHOSTEARS) ? "Nearest Creatures" : "All Speech"]</b></a><br>"
+			dat += "<b>Ghost sight:</b> <a href='?_src_=prefs;preference=ghost_sight'><b>[(toggles & CHAT_GHOSTSIGHT) ? "Nearest Creatures" : "All Emotes"]</b></a><br>"
+			dat += "<b>Ghost radio:</b> <a href='?_src_=prefs;preference=ghost_radio'><b>[(toggles & CHAT_GHOSTRADIO) ? "Nearest Speakers" : "All Chatter"]</b></a><br>"
+			if(config.allow_Metadata)
+				dat += "<b>OOC notes:</b> <a href='?_src_=prefs;preference=metadata;task=input'><b>Edit</b></a><br>"
 
-	dat += "<br><b>Facial</b><br>"
-	dat += "<a href='?_src_=prefs;preference=facial;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_facial, 2)][num2hex(g_facial, 2)][num2hex(b_facial)]'><tr><td>__</td></tr></table></font> "
-	dat += " Style: <a href='?_src_=prefs;preference=f_style;task=input'>[f_style]</a><br>"
-
-	dat += "<br><b>Eyes</b><br>"
-	dat += "<a href='?_src_=prefs;preference=eyes;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes, 2)]'><table  style='display:inline;' bgcolor='#[num2hex(r_eyes, 2)][num2hex(g_eyes, 2)][num2hex(b_eyes)]'><tr><td>__</td></tr></table></font><br>"
-
-	dat += "<br><b>Body Color</b><br>"
-	dat += "<a href='?_src_=prefs;preference=skin;task=input'>Change Color</a> <font face='fixedsys' size='3' color='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin, 2)]'><table style='display:inline;' bgcolor='#[num2hex(r_skin, 2)][num2hex(g_skin, 2)][num2hex(b_skin)]'><tr><td>__</td></tr></table></font>"
-
-	dat += "<br><br><b>Background Information</b><br>"
-	dat += "<b>Home system</b>: <a href='byond://?src=\ref[user];preference=home_system;task=input'>[home_system]</a><br/>"
-	dat += "<b>Citizenship</b>: <a href='byond://?src=\ref[user];preference=citizenship;task=input'>[citizenship]</a><br/>"
-	dat += "<b>Faction</b>: <a href='byond://?src=\ref[user];preference=faction;task=input'>[faction]</a><br/>"
-	dat += "<b>Religion</b>: <a href='byond://?src=\ref[user];preference=religion;task=input'>[religion]</a><br/>"
-
-	dat += "<br><br>"
-
-	if(jobban_isbanned(user, "Syndicate"))
-		dat += "<b>You are banned from antagonist roles.</b>"
-		src.be_special = 0
-	else
-		var/n = 0
-		for (var/i in special_roles)
-			if(special_roles[i]) //if mode is available on the server
-				if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
-					dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
-				else
-					dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
-			n++
-	dat += "</td></tr></table><hr><center>"
+			dat += "</td><td width='300px' height='300px' valign='top'>"
+			dat += "<h2>Special Role Settings</h2>"
+//				dat += "<br><br>"
+			if(jobban_isbanned(user, "Syndicate"))
+				dat += "<b>You are banned from special roles.</b>"
+				src.be_special = 0
+			else
+				var/n = 0
+				for (var/i in special_roles)
+					if(special_roles[i]) //if mode is available on the server
+						if(jobban_isbanned(user, i) || (i == "positronic brain" && jobban_isbanned(user, "AI") && jobban_isbanned(user, "Cyborg")) || (i == "pAI candidate" && jobban_isbanned(user, "pAI")))
+							dat += "<b>Be [i]:<b> <font color=red><b> \[BANNED]</b></font><br>"
+						else
+							dat += "<b>Be [i]:</b> <a href='?_src_=prefs;preference=be_special;num=[n]'><b>[src.be_special&(1<<n) ? "Yes" : "No"]</b></a><br>"
+					n++
+			dat += "</td></tr></table><hr><center>"
 
 	if(!IsGuestKey(user.key))
 		dat += "<a href='?_src_=prefs;preference=load'>Undo</a> - "
@@ -454,9 +474,11 @@ datum/preferences
 	dat += "<a href='?_src_=prefs;preference=reset_all'>Reset Setup</a>"
 	dat += "</center></body></html>"
 
-	user << browse(dat, "window=preferences;size=560x736")
+	var/datum/browser/popup = new(user, "preferences", "<div align='center'>Character Setup</div>", 640, 750)
+	popup.set_content(dat)
+	popup.open(0)
 
-/datum/preferences/proc/SetChoices(mob/user, limit = 16, list/splitJobs = list("Chief Medical Officer"), width = 550, height = 660)
+/datum/preferences/proc/SetChoices(mob/user, limit = 12, list/splitJobs = list("Civilian","Research Director","AI","Bartender"), width = 755, height = 780)
 	if(!job_master)
 		return
 
@@ -470,6 +492,8 @@ datum/preferences
 	HTML += "<tt><center>"
 	HTML += "<b>Choose occupation chances</b><br>Unavailable occupations are crossed out.<br><br>"
 	HTML += "<center><a href='?_src_=prefs;preference=job;task=close'>\[Done\]</a></center><br>" // Easier to press up here.
+	HTML += "<div align='center'>Left-click to raise an occupation preference, right-click to lower it.<br></div>"
+	HTML += "<script type='text/javascript'>function setJobPrefRedirect(level, rank) { window.location.href='?_src_=prefs;preference=job;task=setJobLevel;level=' + level + ';text=' + encodeURIComponent(rank); return false; }</script>"
 	HTML += "<table width='100%' cellpadding='1' cellspacing='0'><tr><td width='20%'>" // Table within a table for alignment, also allows you to easily add more colomns.
 	HTML += "<table width='100%' cellpadding='1' cellspacing='0'>"
 	var/index = -1
@@ -485,7 +509,7 @@ datum/preferences
 				//If the cells were broken up by a job in the splitJob list then it will fill in the rest of the cells with
 				//the last job's selection color. Creating a rather nice effect.
 				for(var/i = 0, i < (limit - index), i += 1)
-					HTML += "<tr bgcolor='[lastJob.selection_color]'><td width='60%' align='right'><a>&nbsp</a></td><td><a>&nbsp</a></td></tr>"
+					HTML += "<tr bgcolor='[lastJob.selection_color]'><td width='60%' align='right'>&nbsp</td><td>&nbsp</td></tr>"
 			HTML += "</table></td><td width='20%'><table width='100%' cellpadding='1' cellspacing='0'>"
 			index = 0
 
@@ -499,39 +523,64 @@ datum/preferences
 			var/available_in_days = job.available_in_days(user.client)
 			HTML += "<del>[rank]</del></td><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 			continue
-		if((job_civilian_low & ASSISTANT) && (rank != "Assistant"))
+		if((job_support_low & CIVILIAN) && (rank != "Civilian"))
 			HTML += "<font color=orange>[rank]</font></td><td></td></tr>"
 			continue
 		if((rank in command_positions) || (rank == "AI"))//Bold head jobs
-			HTML += "<b>[rank]</b>"
+			HTML += "<b><span class='dark'>[rank]</span></b>"
 		else
-			HTML += "[rank]"
+			HTML += "<span class='dark'>[rank]</span>"
 
 		HTML += "</td><td width='40%'>"
 
-		HTML += "<a href='?_src_=prefs;preference=job;task=input;text=[rank]'>"
+		var/prefLevelLabel = "ERROR"
+		var/prefLevelColor = "pink"
+		var/prefUpperLevel = -1 // level to assign on left click
+		var/prefLowerLevel = -1 // level to assign on right click
 
-		if(rank == "Assistant")//Assistant is special
-			if(job_civilian_low & ASSISTANT)
+		if(GetJobDepartment(job, 1) & job.flag)
+			prefLevelLabel = "High"
+			prefLevelColor = "slateblue"
+			prefUpperLevel = 4
+			prefLowerLevel = 2
+		else if(GetJobDepartment(job, 2) & job.flag)
+			prefLevelLabel = "Medium"
+			prefLevelColor = "green"
+			prefUpperLevel = 1
+			prefLowerLevel = 3
+		else if(GetJobDepartment(job, 3) & job.flag)
+			prefLevelLabel = "Low"
+			prefLevelColor = "orange"
+			prefUpperLevel = 2
+			prefLowerLevel = 4
+		else
+			prefLevelLabel = "NEVER"
+			prefLevelColor = "red"
+			prefUpperLevel = 3
+			prefLowerLevel = 1
+
+		HTML += "<a class='white' href='?_src_=prefs;preference=job;task=setJobLevel;level=[prefUpperLevel];text=[rank]' oncontextmenu='javascript:return setJobPrefRedirect([prefLowerLevel], \"[rank]\");'>"
+
+		if(rank == "Civilian")//Civilian is special
+			if(job_support_low & CIVILIAN)
 				HTML += " <font color=green>\[Yes]</font>"
 			else
 				HTML += " <font color=red>\[No]</font>"
-			if(job.alt_titles) //Blatantly cloned from a few lines down.
-				HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
+			if(job.alt_titles)
+				HTML += "<br><b><a class='white' href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></b></td></tr>"
 			HTML += "</a></td></tr>"
 			continue
 
-		if(GetJobDepartment(job, 1) & job.flag)
-			HTML += " <font color=blue>\[High]</font>"
-		else if(GetJobDepartment(job, 2) & job.flag)
-			HTML += " <font color=green>\[Medium]</font>"
-		else if(GetJobDepartment(job, 3) & job.flag)
-			HTML += " <font color=orange>\[Low]</font>"
-		else
-			HTML += " <font color=red>\[NEVER]</font>"
+		HTML += "<font color=[prefLevelColor]>[prefLevelLabel]</font>"
+
 		if(job.alt_titles)
-			HTML += "</a></td></tr><tr bgcolor='[lastJob.selection_color]'><td width='60%' align='center'><a>&nbsp</a></td><td><a href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></td></tr>"
+			HTML += "<br><b><a class='white' href=\"byond://?src=\ref[user];preference=job;task=alt_title;job=\ref[job]\">\[[GetPlayerAltTitle(job)]\]</a></b></td></tr>"
+
+
 		HTML += "</a></td></tr>"
+
+	for(var/i = 1, i < (limit - index), i += 1) // Finish the column so it is even
+		HTML += "<tr bgcolor='[lastJob.selection_color]'><td width='60%' align='right'>&nbsp</td><td>&nbsp</td></tr>"
 
 	HTML += "</td'></tr></table>"
 
@@ -539,18 +588,105 @@ datum/preferences
 
 	switch(alternate_option)
 		if(GET_RANDOM_JOB)
-			HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=green>Get random job if preferences unavailable</font></a></u></center><br>"
-		if(BE_ASSISTANT)
-			HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=red>Be assistant if preference unavailable</font></a></u></center><br>"
+			HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'>Get random job if preferences unavailable</font></a></u></center><br>"
+		if(BE_CIVILIAN)
+			HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'>Be a civilian if preferences unavailable</font></a></u></center><br>"
 		if(RETURN_TO_LOBBY)
-			HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'><font color=purple>Return to lobby if preference unavailable</font></a></u></center><br>"
+			HTML += "<center><br><u><a href='?_src_=prefs;preference=job;task=random'>Return to lobby if preferences unavailable</font></a></u></center><br>"
 
 	HTML += "<center><a href='?_src_=prefs;preference=job;task=reset'>\[Reset\]</a></center>"
 	HTML += "</tt>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=mob_occupation;size=[width]x[height]")
+	var/datum/browser/popup = new(user, "mob_occupation", "<div align='center'>Occupation Preferences</div>", width, height)
+//	popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
 	return
+
+/datum/preferences/proc/SetJobPreferenceLevel(var/datum/job/job, var/level)
+	if (!job)
+		return 0
+
+	if (level == 1) // to high
+		// remove any other job(s) set to high
+		job_support_med |= job_support_high
+		job_engsec_med |= job_engsec_high
+		job_medsci_med |= job_medsci_high
+		job_support_high = 0
+		job_engsec_high = 0
+		job_medsci_high = 0
+
+	if (job.department_flag == SUPPORT)
+		job_support_low &= ~job.flag
+		job_support_med &= ~job.flag
+		job_support_high &= ~job.flag
+
+		switch(level)
+			if (1)
+				job_support_high |= job.flag
+			if (2)
+				job_support_med |= job.flag
+			if (3)
+				job_support_low |= job.flag
+
+		return 1
+	else if (job.department_flag == ENGSEC)
+		job_engsec_low &= ~job.flag
+		job_engsec_med &= ~job.flag
+		job_engsec_high &= ~job.flag
+
+		switch(level)
+			if (1)
+				job_engsec_high |= job.flag
+			if (2)
+				job_engsec_med |= job.flag
+			if (3)
+				job_engsec_low |= job.flag
+
+		return 1
+	else if (job.department_flag == MEDSCI)
+		job_medsci_low &= ~job.flag
+		job_medsci_med &= ~job.flag
+		job_medsci_high &= ~job.flag
+
+		switch(level)
+			if (1)
+				job_medsci_high |= job.flag
+			if (2)
+				job_medsci_med |= job.flag
+			if (3)
+				job_medsci_low |= job.flag
+
+		return 1
+
+	return 0
+
+/datum/preferences/proc/UpdateJobPreference(mob/user, role, desiredLvl)
+	var/datum/job/job = job_master.GetJob(role)
+
+	if(!job)
+		user << browse(null, "window=mob_occupation")
+		ShowChoices(user)
+		return
+
+	if (!isnum(desiredLvl))
+		user << "\red UpdateJobPreference - desired level was not a number. Please notify coders!"
+		ShowChoices(user)
+		return
+
+	if(role == "Civilian")
+		if(job_support_low & job.flag)
+			job_support_low &= ~job.flag
+		else
+			job_support_low |= job.flag
+		SetChoices(user)
+		return 1
+
+	SetJobPreferenceLevel(job, desiredLvl)
+	SetChoices(user)
+
+	return 1
 
 /datum/preferences/proc/SetDisabilities(mob/user)
 	var/HTML = "<body>"
@@ -569,7 +705,11 @@ datum/preferences
 	HTML += "</center></tt>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=disabil;size=350x300")
+//	user << browse(HTML, "window=disabil;size=350x300")
+	var/datum/browser/popup = new(user, "disabil", "<div align='center'>Disabilities</div>", 350, 300)
+//	popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
 	return
 
 /datum/preferences/proc/SetRecords(mob/user)
@@ -589,20 +729,25 @@ datum/preferences
 
 	HTML += TextPreview(sec_record,40)
 
-	HTML += "<br>"
-	HTML += "<a href=\"byond://?src=\ref[user];preference=records;records=-1\">\[Done\]</a>"
+	HTML += "<br><br>"
+	HTML += "<a href=\"byond://?src=\ref[user];preference=records;task=done;\">\[Done\]</a>"
 	HTML += "</center></tt>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=records;size=350x300")
+//	user << browse(HTML, "window=records;size=350x300")
+	var/datum/browser/popup = new(user, "records", "<div align='center'>Records</div>", 350, 300)
+//	popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
 	return
 
 /datum/preferences/proc/SetSpecies(mob/user)
 	if(!species_preview || !(species_preview in all_species))
 		species_preview = "Human"
 	var/datum/species/current_species = all_species[species_preview]
-	var/dat = "<body>"
-	dat += "<center><h2>[current_species.name] \[<a href='?src=\ref[user];preference=species;task=change'>change</a>\]</h2></center><hr/>"
+	var/dat = ""
+	dat += "<body>"
+	dat += "<center><h2><a href='?src=\ref[user];preference=species;speciestask=previous;active=1';>\<</a> [current_species.name] <a href='?src=\ref[user];preference=species;speciestask=next;active=1';>\></a></h2></center><hr/>"
 	dat += "<table padding='8px'>"
 	dat += "<tr>"
 	dat += "<td width = 400>[current_species.blurb]</td>"
@@ -655,11 +800,14 @@ datum/preferences
 		else if(restricted == 2)
 			dat += "<font color='red'><b>You cannot play as this species.</br><small>This species is not available for play as a station race..</small></b></font></br>"
 	if(!restricted || check_rights(R_ADMIN, 0))
-		dat += "\[<a href='?src=\ref[user];preference=species;task=input;newspecies=[species_preview]'>select</a>\]"
+		dat += "<br><a href='?src=\ref[user];preference=species;task=input;active=1;newspecies=[species_preview]'>\[Select\]</a>"
 	dat += "</center></body>"
 
 	user << browse(null, "window=preferences")
-	user << browse(dat, "window=species;size=700x400")
+	var/datum/browser/popup = new(user, "species", "<div align='center'>Species Selection</div>", 580, 500)
+//	popup.set_window_options("can_close=0")
+	popup.set_content(dat)
+	popup.open(0)
 
 /datum/preferences/proc/SetAntagoptions(mob/user)
 	if(uplinklocation == "" || !uplinklocation)
@@ -675,7 +823,7 @@ datum/preferences
 	if(jobban_isbanned(user, "Records"))
 		HTML += "<b>You are banned from using character records.</b><br>"
 	else
-		HTML +="<b><a href=\"byond://?src=\ref[user];preference=records;task=exploitable_record\">[TextPreview(exploit_record,40)]</a></b>"
+		HTML +="<b><a href=\"byond://?src=\ref[user];preference=antagoptions;antagtask=exploitable_record;active=1\">[TextPreview(exploit_record,40)]</a></b>"
 	HTML +="<br>"
 	HTML +="<hr />"
 	HTML +="<a href='?src=\ref[user];preference=antagoptions;antagtask=done;active=1'>\[Done\]</a>"
@@ -683,7 +831,10 @@ datum/preferences
 	HTML += "</center></tt>"
 
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=antagoptions")
+	var/datum/browser/popup = new(user, "antagoptions", "<div align='center'>Antag Options</div>")
+	//popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
 	return
 
 /datum/preferences/proc/SetFlavorText(mob/user)
@@ -722,7 +873,10 @@ datum/preferences
 	HTML +="<a href='?src=\ref[user];preference=flavor_text;task=done'>\[Done\]</a>"
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=flavor_text;size=430x300")
+	var/datum/browser/popup = new(user, "flavor_text", "<div align='center'>Flavor Text</div>", 430, 320)
+//	popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
 	return
 
 /datum/preferences/proc/SetFlavourTextRobot(mob/user)
@@ -741,7 +895,10 @@ datum/preferences
 	HTML +="<a href='?src=\ref[user];preference=flavour_text_robot;task=done'>\[Done\]</a>"
 	HTML += "<tt>"
 	user << browse(null, "window=preferences")
-	user << browse(HTML, "window=flavour_text_robot;size=430x300")
+	var/datum/browser/popup = new(user, "flavour_text_robot", "<div align='center'>Robot Flavor Text</div>", 430, 380)
+	//popup.set_window_options("can_close=0")
+	popup.set_content(HTML)
+	popup.open(0)
 	return
 
 /datum/preferences/proc/GetPlayerAltTitle(datum/job/job)
@@ -764,11 +921,11 @@ datum/preferences
 		ShowChoices(user)
 		return
 
-	if(role == "Assistant")
-		if(job_civilian_low & job.flag)
-			job_civilian_low &= ~job.flag
+	if(role == "Civilian")
+		if(job_support_low & job.flag)
+			job_support_low &= ~job.flag
 		else
-			job_civilian_low |= job.flag
+			job_support_low |= job.flag
 		SetChoices(user)
 		return 1
 
@@ -785,9 +942,9 @@ datum/preferences
 	return 1
 
 /datum/preferences/proc/ResetJobs()
-	job_civilian_high = 0
-	job_civilian_med = 0
-	job_civilian_low = 0
+	job_support_high = 0
+	job_support_med = 0
+	job_support_low = 0
 
 	job_medsci_high = 0
 	job_medsci_med = 0
@@ -801,14 +958,14 @@ datum/preferences
 /datum/preferences/proc/GetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)	return 0
 	switch(job.department_flag)
-		if(CIVILIAN)
+		if(SUPPORT)
 			switch(level)
 				if(1)
-					return job_civilian_high
+					return job_support_high
 				if(2)
-					return job_civilian_med
+					return job_support_med
 				if(3)
-					return job_civilian_low
+					return job_support_low
 		if(MEDSCI)
 			switch(level)
 				if(1)
@@ -831,29 +988,29 @@ datum/preferences
 	if(!job || !level)	return 0
 	switch(level)
 		if(1)//Only one of these should ever be active at once so clear them all here
-			job_civilian_high = 0
+			job_support_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
 			return 1
 		if(2)//Set current highs to med, then reset them
-			job_civilian_med |= job_civilian_high
+			job_support_med |= job_support_high
 			job_medsci_med |= job_medsci_high
 			job_engsec_med |= job_engsec_high
-			job_civilian_high = 0
+			job_support_high = 0
 			job_medsci_high = 0
 			job_engsec_high = 0
 
 	switch(job.department_flag)
-		if(CIVILIAN)
+		if(SUPPORT)
 			switch(level)
 				if(2)
-					job_civilian_high = job.flag
-					job_civilian_med &= ~job.flag
+					job_support_high = job.flag
+					job_support_med &= ~job.flag
 				if(3)
-					job_civilian_med |= job.flag
-					job_civilian_low &= ~job.flag
+					job_support_med |= job.flag
+					job_support_low &= ~job.flag
 				else
-					job_civilian_low |= job.flag
+					job_support_low |= job.flag
 		if(MEDSCI)
 			switch(level)
 				if(2)
@@ -897,7 +1054,7 @@ datum/preferences
 				ResetJobs()
 				SetChoices(user)
 			if("random")
-				if(alternate_option == GET_RANDOM_JOB || alternate_option == BE_ASSISTANT)
+				if(alternate_option == GET_RANDOM_JOB || alternate_option == BE_CIVILIAN)
 					alternate_option += 1
 				else if(alternate_option == RETURN_TO_LOBBY)
 					alternate_option = 0
@@ -914,6 +1071,8 @@ datum/preferences
 						SetChoices(user)
 			if("input")
 				SetJob(user, href_list["text"])
+			if("setJobLevel")
+				UpdateJobPreference(user, href_list["text"], text2num(href_list["level"]))
 			else
 				SetChoices(user)
 		return 1
@@ -1047,11 +1206,13 @@ datum/preferences
 		return 1
 
 	else if(href_list["preference"] == "records")
-		if(text2num(href_list["record"]) >= 1)
+		if(href_list["task"] == "open")
 			SetRecords(user)
 			return
-		else
+		if(href_list["task"] == "done")
 			user << browse(null, "window=records")
+			ShowChoices(user)
+			return
 		if(href_list["task"] == "med_record")
 			var/medmsg = input(usr,"Set your medical notes here.","Medical Records",html_decode(med_record)) as message
 
@@ -1080,16 +1241,8 @@ datum/preferences
 
 				gen_record = genmsg
 				SetRecords(user)
-
-		if(href_list["task"] == "exploitable_record")
-			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
-
-			if(exploitmsg != null)
-				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
-				exploitmsg = html_encode(exploitmsg)
-
-				exploit_record = exploitmsg
-				SetAntagoptions(user)
+		SetRecords(user)
+		return
 
 	else if (href_list["preference"] == "antagoptions")
 		if(text2num(href_list["active"]) == 0)
@@ -1103,11 +1256,49 @@ datum/preferences
 			else
 				uplinklocation = "PDA"
 			SetAntagoptions(user)
+		if(href_list["antagtask"] == "exploitable_record")
+			var/exploitmsg = input(usr,"Set exploitable information about you here.","Exploitable Information",html_decode(exploit_record)) as message
+
+			if(exploitmsg != null)
+				exploitmsg = copytext(exploitmsg, 1, MAX_PAPER_MESSAGE_LEN)
+				exploitmsg = html_encode(exploitmsg)
+
+				exploit_record = exploitmsg
+				SetAntagoptions(user)
+			else
+				SetAntagoptions(user)
+				return
 		if (href_list["antagtask"] == "done")
 			user << browse(null, "window=antagoptions")
 			ShowChoices(user)
-		return 1
+			return
+		SetAntagoptions(user)
+		return
 
+	else if (href_list["preference"] == "species")
+		if(text2num(href_list["active"]) == 0)
+			SetSpecies(user)
+			return
+		if(href_list["speciestask"] == "next")
+			switch(species_preview)
+				if("Human")
+					species_preview = "Skrell"
+				if("Skrell")
+					species_preview = "Machine"
+				if("Machine")
+					species_preview = "Human"
+			SetSpecies(user)
+			return
+		if(href_list["speciestask"] == "previous")
+			switch(species_preview)
+				if("Human")
+					species_preview = "Machine"
+				if("Skrell")
+					species_preview = "Human"
+				if("Machine")
+					species_preview = "Skrell"
+			SetSpecies(user)
+			return
 	else if (href_list["preference"] == "loadout")
 
 		if(href_list["task"] == "input")
@@ -1159,14 +1350,6 @@ datum/preferences
 					break
 
 	switch(href_list["task"])
-		if("change")
-			if(href_list["preference"] == "species")
-				// Actual whitelist checks are handled elsewhere, this is just for accessing the preview window.
-				var/choice = input("Which species would you like to look at?") as null|anything in playable_species
-				if(!choice) return
-				species_preview = choice
-				SetSpecies(user)
-
 		if("random")
 			switch(href_list["preference"])
 				if("name")
@@ -1211,8 +1394,13 @@ datum/preferences
 			switch(href_list["preference"])
 				if("name")
 					var/raw_name = input(user, "Choose your character's name:", "Character Preference")  as text|null
+
 					if (!isnull(raw_name)) // Check to ensure that the user entered text (rather than cancel.)
-						var/new_name = reject_bad_name(raw_name)
+						var/new_name
+						if(species == "Machine")
+							new_name = reject_bad_name(raw_name, allow_numbers=1, startwithnum = 1) //IPCs can have numbers in their names
+						else
+							new_name = reject_bad_name(raw_name, allow_numbers=0)
 						if(new_name)
 							real_name = new_name
 						else
@@ -1271,6 +1459,12 @@ datum/preferences
 						b_hair = 0//hex2num(copytext(new_hair, 6, 8))
 
 						s_tone = 0
+
+						if(species == "Machine")                               //Clear internal organs for new IPCs as they shouldn't have these
+							for(var/name in organ_data)
+								var/status = organ_data[name]
+								if(status == "assisted" || status == "mechanical")
+									organ_data[name] = null
 
 				if("language")
 					var/languages_available
@@ -1624,7 +1818,9 @@ datum/preferences
 
 				if("open_load_dialog")
 					if(!IsGuestKey(user.key))
+						user << browse(null, "window=preferences")
 						open_load_dialog(user)
+						return
 
 				if("close_load_dialog")
 					close_load_dialog(user)
@@ -1632,6 +1828,9 @@ datum/preferences
 				if("changeslot")
 					load_character(text2num(href_list["num"]))
 					close_load_dialog(user)
+				if("tab")
+					if (href_list["tab"])
+						current_tab = text2num(href_list["tab"])
 
 	ShowChoices(user)
 	return 1

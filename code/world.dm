@@ -57,11 +57,10 @@ var/global/datum/global_init/init = new ()
 	// due to this list not being instantiated.
 	populate_seed_list()
 
+	populate_robolimb_list()
+
 	//goonstation's process scheduler
 	processScheduler = new
-//	processScheduler.setup()
-//	processScheduler.start()
-
 	master_controller = new /datum/controller/game_controller()
 	spawn(1)
 		processScheduler.deferSetupFor(/datum/controller/process/ticker)

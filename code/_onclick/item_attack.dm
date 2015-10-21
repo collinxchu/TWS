@@ -20,6 +20,11 @@
 /obj/item/proc/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
 	return
 
+/obj/item/proc/get_clamped_volume()
+	if(src.force && src.w_class)
+		return Clamp((src.force + src.w_class) * 4, 30, 100)// Add the item's force to its weight class and multiply by 4, then clamp the value between 30 and 100
+	else if(!src.force && src.w_class)
+		return Clamp(src.w_class * 6, 10, 100) // Multiply the item's weight class by 6, then clamp the value between 10 and 100
 
 /obj/item/proc/attack(mob/living/M as mob, mob/living/user as mob, def_zone)
 
@@ -49,7 +54,9 @@
 		var/mob/living/carbon/human/H = M
 		var/hit = H.attacked_by(src, user, def_zone)
 		if(hit && hitsound)
-			playsound(loc, hitsound, 50, 1, -1)
+			playsound(loc, hitsound, get_clamped_volume(), 1, -1)
+		else if (force == 0)//Otherwise, if the item's force is zero...
+			playsound(loc, 'sound/weapons/tap.ogg', get_clamped_volume(), 1, -1)//...play tap.ogg at get_clamped_volume()
 		return hit
 	else
 		if(attack_verb && attack_verb.len)

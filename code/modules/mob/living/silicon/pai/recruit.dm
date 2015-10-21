@@ -17,7 +17,6 @@ var/datum/paiController/paiController			// Global handler for pAI candidates
 	paiController = new /datum/paiController()
 	return 1
 
-
 /datum/paiController
 	var/inquirer = null
 	var/list/pai_candidates = list()

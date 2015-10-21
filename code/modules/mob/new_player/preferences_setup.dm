@@ -251,7 +251,7 @@ datum/preferences
 			undershirt_s = new/icon("icon" = 'icons/mob/human.dmi', "icon_state" = "undershirt[undershirt]_s")
 
 		var/icon/clothes_s = null
-		if(job_civilian_low & ASSISTANT)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
+		if(job_support_low & CIVILIAN)//This gives the preview icon clothes depending on which job(if any) is set to 'high'
 			clothes_s = new /icon('icons/mob/uniform.dmi', "grey_s")
 			clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 			if(backbag == 2)
@@ -259,8 +259,8 @@ datum/preferences
 			else if(backbag == 3 || backbag == 4)
 				clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
 
-		else if(job_civilian_high)//I hate how this looks, but there's no reason to go through this switch if it's empty
-			switch(job_civilian_high)
+		else if(job_support_high)//I hate how this looks, but there's no reason to go through this switch if it's empty
+			switch(job_support_high)
 				if(HOP)
 					clothes_s = new /icon('icons/mob/uniform.dmi', "hop_s")
 					clothes_s.Blend(new /icon('icons/mob/feet.dmi', "brown"), ICON_UNDERLAY)
@@ -660,7 +660,7 @@ datum/preferences
 						if(4)
 							clothes_s.Blend(new /icon('icons/mob/back.dmi', "satchel"), ICON_OVERLAY)
 
-				if(AI)//Gives AI and borgs assistant-wear, so they can still customize their character
+				if(AI)//Gives AI and borgs civilian-wear, so they can still customize their character
 					clothes_s = new /icon('icons/mob/uniform.dmi', "grey_s")
 					clothes_s.Blend(new /icon('icons/mob/feet.dmi', "black"), ICON_UNDERLAY)
 					clothes_s.Blend(new /icon('icons/mob/suit.dmi', "straight_jacket"), ICON_OVERLAY)

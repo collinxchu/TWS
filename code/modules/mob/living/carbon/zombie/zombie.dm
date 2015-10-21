@@ -568,7 +568,7 @@ datum/reagent/zed
 	else
 		Z.real_name = text("[] []", pick(first_names_female), pick(last_names))
 
-	//var/a = pick("Janitor", "Medical Doctor", "Assistant", "Atmospheric Technician", "Security Officer", "Botanist", "Cargo Technician")
+	//var/a = pick("Janitor", "Medical Doctor", "Civilian", "Atmospheric Technician", "Security Officer", "Botanist", "Cargo Technician")
 	//Z.Equip_Rank(a, 0)
 	//Commented out by pygmy. Reason: Triggers my anti-spawn-at-menu code. Compromising this risks server.
 	Z.loc = s.loc

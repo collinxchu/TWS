@@ -27,7 +27,7 @@ var/const/ROBOTICIST		=(1<<8)
 var/const/XENOBIOLOGIST		=(1<<9)
 
 
-var/const/CIVILIAN			=(1<<2)
+var/const/SUPPORT    		=(1<<2)
 
 var/const/HOP				=(1<<0)
 var/const/BARTENDER			=(1<<1)
@@ -42,10 +42,10 @@ var/const/LAWYER			=(1<<9)
 var/const/CHAPLAIN			=(1<<10)
 var/const/CLOWN				=(1<<11)
 var/const/MIME				=(1<<12)
-var/const/ASSISTANT			=(1<<13)
+var/const/CIVILIAN			=(1<<13)
 
 
-var/list/assistant_occupations = list(
+var/list/civilian_occupations = list(
 )
 
 
@@ -84,7 +84,7 @@ var/list/science_positions = list(
 )
 
 //BS12 EDIT
-var/list/civilian_positions = list(
+var/list/support_positions = list(
 	"Head of Personnel",
 	"Bartender",
 	"Gardener",
@@ -96,7 +96,7 @@ var/list/civilian_positions = list(
 	"Shaft Miner",
 	"Lawyer",
 	"Chaplain",
-	"Assistant"
+	"Civilian"
 )
 
 

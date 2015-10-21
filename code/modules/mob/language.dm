@@ -222,6 +222,25 @@
 	new_name += " [pick(list("the Void","the Sky","Encroaching Night","Planetsong","Starsong","the Wandering Star","the Empty Day","Daybreak","Nightfall","the Rain"))]"
 	return new_name
 
+/datum/language/trinary
+	name = "Trinary"
+	desc = "A modification of binary to allow fuzzy logic. 0 is no, 1 is maybe, 2 is yes. Credited with giving Machine People the ability to think creatively."
+	speech_verb = "states"
+	ask_verb = "queries"
+	exclaim_verb = "exclaims"
+	colour = "trinary"
+	key = "5"
+	flags = RESTRICTED | WHITELISTED
+	syllables = list("02011","01222","10100","10210","21012","02011","21200","1002","2001","0002","0012","0012","000","120","121","201","220","10","11","0")
+
+/datum/language/trinary/get_random_name()
+	var/new_name
+	if(prob(70))
+		new_name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
+	else
+		new_name = pick(ai_names)
+	return new_name
+
 /datum/language/common
 	name = "Galactic Common"
 	desc = "The common galactic tongue."

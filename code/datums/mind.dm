@@ -1232,7 +1232,7 @@ datum/mind
 //HUMAN
 /mob/living/carbon/human/mind_initialize()
 	..()
-	if(!mind.assigned_role)	mind.assigned_role = "Assistant"	//defualt
+	if(!mind.assigned_role)	mind.assigned_role = "Civilian"	//default
 
 //MONKEY
 /mob/living/carbon/monkey/mind_initialize()

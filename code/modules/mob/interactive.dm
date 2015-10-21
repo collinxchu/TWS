@@ -462,7 +462,7 @@
 /*
 /mob/living/carbon/human/interactive/proc/job2area(target)
 	var/datum/job/T = target
-	if(T.title == "Assistant")
+	if(T.title == "Civilian")
 		return /area/hallway/primary
 	if(T.title == "Captain" || T.title == "Head of Personnel")
 		return /area/bridge

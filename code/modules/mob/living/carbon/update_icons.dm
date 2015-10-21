@@ -29,3 +29,22 @@
 	if(changed)
 		animate(src, transform = ntransform, time = 2, pixel_y = final_pixel_y, dir = final_dir, easing = EASE_IN|EASE_OUT)
 		floating = 0  // If we were without gravity, the bouncing animation got stopped, so we make sure we restart it in next life().
+
+/mob/living/carbon/update_inv_handcuffed()
+	//remove_overlay(HANDCUFF_LAYER) #TOREMOVE - refactor
+	if(handcuffed)
+		drop_r_hand()
+		drop_l_hand()
+		stop_pulling()	//TODO: should be handled elsewhere
+		if(hud_used)	//hud handcuff icons
+			var/obj/screen/inventory/R = hud_used.r_hand_hud_object
+			var/obj/screen/inventory/L = hud_used.l_hand_hud_object
+			R.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="markus")
+			L.overlays += image("icon"='icons/mob/screen_gen.dmi', "icon_state"="gabrielle")
+		return 1
+	else
+		if(hud_used)
+			var/obj/screen/inventory/R = hud_used.r_hand_hud_object
+			var/obj/screen/inventory/L = hud_used.l_hand_hud_object
+			R.overlays = null
+			L.overlays = null
