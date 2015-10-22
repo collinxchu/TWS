@@ -15,11 +15,11 @@ var/global/list/limb_icon_cache = list()
 /obj/item/organ/external/proc/sync_colour_to_human(var/mob/living/carbon/human/human)
 	s_tone = null
 	s_col = null
-	if(status & ORGAN_ROBOT)
+	if(status & ORGAN_ROBOT && !(species && species.name == "Machine")) //IPCs can be colored
 		return
-	if(!isnull(human.s_tone) && (human.species.flags & HAS_SKIN_TONE))
+	if(!isnull(human.s_tone) && (human.species.bodyflags & HAS_SKIN_TONE))
 		s_tone = human.s_tone
-	if(human.species.flags & HAS_SKIN_COLOR)
+	if(human.species.bodyflags & HAS_SKIN_COLOR)
 		s_col = list(human.r_skin, human.g_skin, human.b_skin)
 
 /obj/item/organ/external/head/sync_colour_to_human(var/mob/living/carbon/human/human)
@@ -76,6 +76,9 @@ var/global/list/limb_icon_cache = list()
 	var/gender
 	if(force_icon)
 		mob_icon = new /icon(force_icon, "[icon_name]")
+		if(species && species.name == "Machine")	//snowflake for IPC's, sorry.
+			if(s_col && s_col.len >= 3)
+				mob_icon.Blend(rgb(s_col[1], s_col[2], s_col[3]), ICON_ADD)
 	else
 		if(!owner)
 			mob_icon = new /icon('icons/mob/human_races/r_human.dmi', "[icon_name][gendered_icon ? "_f" : ""]")

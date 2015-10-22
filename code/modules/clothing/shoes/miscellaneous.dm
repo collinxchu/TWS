@@ -11,7 +11,7 @@
 	desc = "A pair of brown shoes. They seem to have extra grip."
 	name = "brown shoes"
 	icon_state = "brown"
-	item_state = "brown"
+	item_state = "br_shoes"
 	permeability_coefficient = 0.05
 	flags = NOSLIP
 	origin_tech = "syndicate=3"
@@ -23,7 +23,7 @@
 /obj/item/clothing/shoes/mime
 	name = "mime shoes"
 	icon_state = "mime"
-	item_color = "mime"
+	item_state = "w_shoes"
 
 /obj/item/clothing/shoes/swat
 	name = "\improper SWAT shoes"
@@ -52,6 +52,14 @@
 	heat_protection = FEET
 	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE
 
+/obj/item/clothing/shoes/tourist
+	desc = "A pair of plain black sandals with socks. Shooebie!"
+	name = "black sandals"
+	icon_state = "tourist"
+	item_state = "tourist"
+	species_restricted = null
+	body_parts_covered = 0
+
 /obj/item/clothing/shoes/sandal
 	desc = "A pair of rather plain, wooden sandals."
 	name = "sandals"
@@ -64,6 +72,7 @@
 	desc = "A pair of magic, black shoes."
 	name = "magic shoes"
 	icon_state = "black"
+	item_state = "bl_shoes"
 	body_parts_covered = FEET
 
 /obj/item/clothing/shoes/galoshes
@@ -94,7 +103,6 @@
 	icon_state = "clown"
 	item_state = "clown_shoes"
 	slowdown = SHOES_SLOWDOWN+1
-	item_color = "clown"
 	force = 0
 	var/footstep = 1	//used for squeeks whilst walking
 	species_restricted = null
@@ -126,7 +134,6 @@
 	desc = "Nanotrasen-issue Security combat boots for combat scenarios or combat situations. All combat, all the time."
 	icon_state = "jackboots"
 	item_state = "jackboots"
-	item_color = "hosred"
 	force = 3
 	siemens_coefficient = 0.7
 	burn_state = -1 //Won't burn in fires
@@ -135,7 +142,7 @@
 	name = "winter boots"
 	desc = "Boots lined with 'synthetic' animal fur."
 	icon_state = "winterboots"
-//	item_state = "winterboots" //#TOREMOVE - inhands sprite does not exist
+//	item_state = "winterboots" #TOREMOVE - inhands sprite does not exist
 	cold_protection = FEET|LEGS
 	min_cold_protection_temperature = SHOES_MIN_TEMP_PROTECT
 	heat_protection = FEET|LEGS
@@ -151,8 +158,7 @@
 	name = "boots"
 	desc = "A pair of boots worn by the followers of Nar-Sie."
 	icon_state = "cult"
-	item_state = "cult"
-	item_color = "cult"
+	//item_state = "cult" #TOREMOVE - inhands sprite does not exist
 	force = 2
 	siemens_coefficient = 0.7
 
@@ -188,6 +194,13 @@
 	name = "laceup shoes"
 	desc = "The height of fashion, and they're pre-polished!"
 	icon_state = "laceups"
+	item_state = "bl_shoesold"
+
+/obj/item/clothing/shoes/leather
+	name = "leather shoes"
+	desc = "A sturdy pair of leather shoes."
+	icon_state = "leather"
+	item_state = "br_shoesold"
 
 /obj/item/clothing/shoes/roman
 	name = "roman sandals"
@@ -203,3 +216,13 @@
 	slowdown = SHOES_SLOWDOWN+1
 	species_restricted = null
 	burn_state = -1 //Won't burn in fires
+
+/obj/item/clothing/shoes/iceskate
+	name = "iceskating boots"
+	icon_state = "iceskate"
+	desc = "A pair of black shoes."
+
+	cold_protection = FEET
+	min_cold_protection_temperature = SHOE_MIN_COLD_PROTECTION_TEMPERATURE
+	heat_protection = FEET
+	max_heat_protection_temperature = SHOE_MAX_HEAT_PROTECTION_TEMPERATURE

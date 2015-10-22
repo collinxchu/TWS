@@ -99,6 +99,7 @@
 	var/siemens_coefficient = 1   // The lower, the thicker the skin and better the insulation.
 	var/darksight = 2             // Native darksight distance.
 	var/flags = 0                 // Various specific features.
+	var/bodyflags = 0
 	var/dietflags = 0 			  // - DIET_HERB, DIET_CARN, DIET_OMNI - allows certain foods to be digested
 	var/slowdown = 0              // Passive movement speed malus (or boost, if negative)
 	var/primitive                 // Lesser form, if any (ie. monkey for humans)

@@ -216,11 +216,11 @@ datum/preferences
 			preview_icon.Blend(temp, ICON_OVERLAY)
 
 		// Skin color
-		if(current_species && (current_species.flags & HAS_SKIN_COLOR))
+		if(current_species && (current_species.bodyflags & HAS_SKIN_COLOR))
 			preview_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
 
 		// Skin tone
-		if(current_species && (current_species.flags & HAS_SKIN_TONE))
+		if(current_species && (current_species.bodyflags & HAS_SKIN_TONE))
 			if (s_tone >= 0)
 				preview_icon.Blend(rgb(s_tone, s_tone, s_tone), ICON_ADD)
 			else

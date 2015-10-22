@@ -13,7 +13,7 @@
 							/obj/item/toy/gun								= 2,
 							/obj/item/toy/crossbow							= 2,
 							/obj/item/clothing/suit/syndicatefake			= 2,
-							/obj/item/weapon/storage/fancy/crayons			= 2,
+							/obj/item/weapon/storage/crayons				= 2,
 							/obj/item/toy/spinningtoy						= 2,
 							/obj/item/toy/prize/ripley						= 1,
 							/obj/item/toy/prize/fireripley					= 1,

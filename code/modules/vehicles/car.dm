@@ -80,16 +80,8 @@
 	if(!emagged)
 		if(!bumped)
 			for(var/mob/O in hearers(1, src))
-				O.show_message("<span class='game say'><span class='name'>[src]</span> calmly chimes, \"\italic Imminent collision detected! Safety engaged, powering down...\"</span>",2)
-			if(passenger)
-				var/mob/living/carbon/human/H = passenger  //whiplash!
-				H.do_attack_animation(src, 0)
-				H.adjustBruteLossByPart(1,"head")
-			if(load)
-				var/mob/living/carbon/human/H = load
-				H.do_attack_animation(src, 0)
-				H.adjustBruteLossByPart(1,"head")
-				H << "<span class='warning'>Your head bangs against the dashboard!</span>"
+				O.show_message("<span class='game say'><span class='name'>[src]</span> calmly chimes, \"<span class='automated'>Imminent collision detected. Safety engaged, powering down...</span>\"</span>",2)
+			stop_short()
 			turn_off()
 			bumped = 1
 		return
@@ -288,6 +280,49 @@
 		return
 	else
 		..()
+
+/obj/vehicle/car/proc/stop_short() //whiplash!
+	var/pixel_x_diff = 0
+	var/pixel_y_diff = 0
+	switch(dir)
+		if(NORTH)
+			pixel_y_diff = 10
+			pixel_x_diff = pick(-1,1)
+		if(SOUTH)
+			pixel_y_diff = -10
+			pixel_x_diff = pick(-1,1)
+		if(EAST)
+			pixel_x_diff = 10
+			pixel_y_diff = pick(-1,1)
+		if(WEST)
+			pixel_x_diff = -10
+			pixel_y_diff = pick(-1,1)
+	if(passenger && ismob(passenger))
+		var/mob/living/carbon/human/H = passenger
+		animate(H, pixel_x = passenger_offset_x + pixel_x_diff, pixel_y = passenger_offset_y + pixel_y_diff, time = 5, loop = 1, easing = ELASTIC_EASING)
+		H.adjustBruteLossByPart(3,"head")
+		H << "<span class='userdanger'>Your head bangs against the dashboard!</span>"
+		shake_camera(H, 3, 1)
+	if(load && ismob(load))
+		var/mob/living/carbon/human/H = load
+		animate(H, pixel_x = mob_offset_x + pixel_x_diff, pixel_y = mob_offset_y + pixel_y_diff, time = 5, loop = 1, easing = ELASTIC_EASING)
+		H.adjustBruteLossByPart(3,"head")
+		H << "<span class='userdanger'>Your head bangs against the dashboard!</span>"
+		shake_camera(H, 3, 1)
+	if(trunk && ismob(trunk))
+		var/mob/living/carbon/human/H = trunk
+		if(trunk_open)
+			H << "<span class='userdanger'>You fall out of the trunk!</span>"
+			H.take_overall_damage(3,0)
+			shake_camera(H, 3, 1)
+			unload(H, "trunk")
+			H.Weaken(3)
+		else
+			H << "<span class='userdanger'>Your body slams against something!</span>"
+			H.take_overall_damage(1,0)
+			shake_camera(H, 3, 1)
+			for(var/mob/O in hearers(src))
+				O << "<span class='warning'>You hear a loud thud. It sounded like it was coming from [src]'s trunk!</span>"
 
 //-------------------------------------------
 // Interaction procs
@@ -564,7 +599,7 @@
 					if(new_dir && passenger.Adjacent(new_dir))
 						options += new_dir
 				if("trunk")
-					if(new_dir && trunk.Adjacent(new_dir))
+					if(new_dir && src.Adjacent(new_dir))
 						options += new_dir
 		if(options.len)
 			dest = pick(options)

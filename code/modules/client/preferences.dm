@@ -759,8 +759,8 @@ datum/preferences
 	dat += "<small>"
 	if(current_species.flags & CAN_JOIN)
 		dat += "</br><b>Often present on human stations.</b>"
-	if(current_species.flags & IS_WHITELISTED)
-		dat += "</br><b>Whitelist restricted.</b>"
+//	if(current_species.flags & IS_WHITELISTED)
+//		dat += "</br><b>Whitelist restricted.</b>"
 	if(current_species.flags & NO_BLOOD)
 		dat += "</br><b>Does not have blood.</b>"
 	if(current_species.flags & NO_BREATHE)
@@ -773,9 +773,9 @@ datum/preferences
 		dat += "</br><b>Has excellent traction.</b>"
 	if(current_species.flags & NO_POISON)
 		dat += "</br><b>Immune to most poisons.</b>"
-	if(current_species.flags & HAS_SKIN_TONE)
+	if(current_species.bodyflags & HAS_SKIN_TONE)
 		dat += "</br><b>Has a variety of skin tones.</b>"
-	if(current_species.flags & HAS_SKIN_COLOR)
+	if(current_species.bodyflags & HAS_SKIN_COLOR)
 		dat += "</br><b>Has a variety of skin colours.</b>"
 	if(current_species.flags & HAS_EYE_COLOR)
 		dat += "</br><b>Has a variety of eye colours.</b>"
@@ -1500,8 +1500,11 @@ datum/preferences
 						b_type = new_b_type
 
 				if("hair")
-					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell")
-						var/new_hair = input(user, "Choose your character's hair colour:", "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
+					if(species == "Human" || species == "Unathi" || species == "Tajara" || species == "Skrell" || species == "Machine")
+						var/prompt = "Choose your character's hair colour:"
+						if(species == "Machine")
+							prompt = "Choose your character's frame colour:"
+						var/new_hair = input(user, prompt, "Character Preference", rgb(r_hair, g_hair, b_hair)) as color|null
 						if(new_hair)
 							r_hair = hex2num(copytext(new_hair, 2, 4))
 							g_hair = hex2num(copytext(new_hair, 4, 6))
@@ -1580,7 +1583,7 @@ datum/preferences
 						s_tone = 35 - max(min( round(new_s_tone), 220),1)
 
 				if("skin")
-					if(species == "Unathi" || species == "Tajara" || species == "Skrell")
+					if(species == "Unathi" || species == "Tajara" || species == "Skrell" || species == "Machine")
 						var/new_skin = input(user, "Choose your character's skin colour: ", "Character Preference", rgb(r_skin, g_skin, b_skin)) as color|null
 						if(new_skin)
 							r_skin = hex2num(copytext(new_skin, 2, 4))

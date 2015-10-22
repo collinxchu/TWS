@@ -914,6 +914,11 @@ var/global/list/damage_icon_parts = list()
 	overlays_standing[SURGERY_LEVEL] = total
 	if(update_icons)   update_icons()
 
+/mob/living/carbon/human/proc/force_update_limbs()
+	for(var/obj/item/organ/external/O in organs)
+		O.sync_colour_to_human(src)
+	update_body(0)
+
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
 #undef DAMAGE_LAYER

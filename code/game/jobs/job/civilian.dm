@@ -9,7 +9,6 @@
 	selection_color = "#dddddd"
 	access = list()			//See /datum/job/civilian/get_access()
 	minimal_access = list()	//See /datum/job/civilian/get_access()
-	alt_titles = list("Technical Assistant","Medical Intern","Research Assistant","Security Cadet")
 
 /datum/job/civilian/equip(var/mob/living/carbon/human/H)
 	if(!H)	return 0

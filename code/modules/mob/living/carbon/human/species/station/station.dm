@@ -10,7 +10,8 @@
 	interests, rampant cyber and bio-augmentation and secretive factions make life on most human \
 	worlds tumultous at best."
 
-	flags = CAN_JOIN | HAS_SKIN_TONE | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	flags = CAN_JOIN | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	bodyflags = HAS_SKIN_TONE
 	dietflags = DIET_OMNI
 
 /datum/species/unathi
@@ -39,7 +40,8 @@
 	heat_level_2 = 480 //Default 400
 	heat_level_3 = 1100 //Default 1000
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	bodyflags = HAS_SKIN_COLOR
 	dietflags = DIET_CARN
 
 	flesh_color = "#34AF10"
@@ -87,7 +89,8 @@
 
 	primitive = /mob/living/carbon/monkey/tajara
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_EYE_COLOR
+	bodyflags = HAS_SKIN_COLOR
 	dietflags = DIET_OMNI
 
 	flesh_color = "#AFA59E"
@@ -116,7 +119,8 @@
 	herbivores on the whole and tend to be co-operative with the other species of the galaxy, although they rarely reveal \
 	the secrets of their empire to their allies."
 
-	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR
+	flags = CAN_JOIN | IS_WHITELISTED | HAS_LIPS | HAS_UNDERWEAR
+	bodyflags = HAS_SKIN_COLOR
 	dietflags = DIET_HERB
 
 	flesh_color = "#8CD7A3"
@@ -256,7 +260,9 @@
 	synth_temp_gain = 10 //this should cause IPCs to stabilize at ~80 C in a 20 C environment.
 
 	flags = CAN_JOIN | IS_WHITELISTED | NO_BREATHE | NO_SCAN | NO_BLOOD | NO_PAIN | IS_SYNTHETIC
+	bodyflags = HAS_SKIN_COLOR
 	dietflags = 0		//IPCs can't eat, so no diet
+
 
 	blood_color = "#1F181F"
 	flesh_color = "#575757"

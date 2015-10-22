@@ -877,7 +877,7 @@ var/list/all_supply_groups = list("Operations","Security","Hospitality","Enginee
 
 /datum/supply_packs/artscrafts
 	name = "Arts and Crafts supplies"
-	contains = list(/obj/item/weapon/storage/fancy/crayons,
+	contains = list(/obj/item/weapon/storage/crayons,
 	/obj/item/device/camera,
 	/obj/item/device/camera_film,
 	/obj/item/device/camera_film,
