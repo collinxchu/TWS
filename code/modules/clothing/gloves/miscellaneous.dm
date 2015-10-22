@@ -70,8 +70,8 @@
 /obj/item/clothing/gloves/w_police
 	desc = "The latest in grip technology, these high-performance, form-fitting gloves are the pinnacle of police equipment."
 	name = "police gloves"
-	icon_state = "w_police"
-	item_state = "w_police"
+	icon_state = "w_policegloves"
+	item_state = "w_policegloves"
 	cold_protection = HANDS
 	min_cold_protection_temperature = GLOVES_MIN_COLD_PROTECTION_TEMPERATURE
 	heat_protection = HANDS

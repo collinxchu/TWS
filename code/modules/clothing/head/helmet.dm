@@ -17,8 +17,8 @@
 /obj/item/clothing/head/helmet/w_police
 	name = "police helmet"
 	desc = "Standard issue Police helmet. Protects the head from impacts and only partially obscures vision."
-	icon_state = "w_police"
-	item_state = "w_police"
+	icon_state = "w_policehelm"
+	item_state = "w_policehelm"
 
 /obj/item/clothing/head/helmet/warden
 	name = "warden's hat"
